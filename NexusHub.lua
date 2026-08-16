@@ -56,6 +56,10 @@ end
 -- 验证卡密
 local function verifyKey(key)
     if not key or key == "" then return false end
+    -- 去除前后空格 + 全部转大写
+    key = key:match("^%s*(.-)%s*$") or key
+    key = key:upper()
+    -- 同时支持 NEX- 和 nex- 前缀
     local body = key:gsub("^NEX%-", "")
     local parts = {}
     for part in body:gmatch("[^-]+") do
@@ -206,7 +210,8 @@ local function showKeyUI(onSuccess)
 
     local function doVerify()
         if verifying then return end
-        local key = KeyInput.Text
+        local key = KeyInput.Text or ""
+        key = key:match("^%s*(.-)%s*$") or key  -- 去前后空格
         if key == "" then
             StatusLabel.Text = "请输入卡密"
             StatusLabel.TextColor3 = Color3.fromRGB(255, 150, 50)
@@ -221,7 +226,10 @@ local function showKeyUI(onSuccess)
         task.spawn(function()
             task.wait(0.6) -- 模拟网络延迟
 
-            if verifyKey(key) then
+            local ok, result = pcall(verifyKey, key)
+            local isValid = ok and result
+
+            if isValid then
                 StatusLabel.Text = "激活成功！"
                 StatusLabel.TextColor3 = Color3.fromRGB(0, 255, 130)
                 VerifyBtn.Text = "成功!"
@@ -231,7 +239,7 @@ local function showKeyUI(onSuccess)
                 ScreenGui:Destroy()
                 onSuccess()
             else
-                StatusLabel.Text = "卡密无效，请检查输入"
+                StatusLabel.Text = ok and "卡密无效，请检查输入" or "验证出错: " .. tostring(result)
                 StatusLabel.TextColor3 = Color3.fromRGB(255, 70, 70)
                 VerifyBtn.Text = "激活"
                 verifying = false
