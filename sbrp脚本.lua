@@ -2297,6 +2297,16 @@ OtherTab:Button({
     end,
 })
 
+OtherTab:Button({
+    Title = "XA脚本",
+    Callback = function()
+        pcall(function()
+            loadstring(game:HttpGet("https://raw.gitcode.com/Xingtaiduan/Scripts/raw/main/Loader.lua"))()
+        end)
+        Notify("XA脚本", "已执行XA脚本", 3)
+    end,
+})
+
 --=========== 启动 ===========
 Notify("欢迎使用", "sbrp脚本", 5)
 task.wait(1)
