@@ -2275,6 +2275,19 @@ ScriptTab:Button({
     end,
 })
 
+ScriptTab:Divider()
+
+-- 圣奥里
+ScriptTab:Button({
+    Title = "圣奥里",
+    Callback = function()
+        pcall(function()
+            loadstring(game:HttpGet("https://pastebin.com/raw/3U9WtQGU"))()
+        end)
+        Notify("圣奥里", "已执行圣奥里脚本", 3)
+    end,
+})
+
 --=========== 启动 ===========
 Notify("欢迎使用", "sbrp脚本", 5)
 task.wait(1)
