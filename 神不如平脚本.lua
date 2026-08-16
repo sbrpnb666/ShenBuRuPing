@@ -1828,6 +1828,157 @@ SetTab:Button({
     end,
 })
 
+--========================================================
+-- Tab6: 脚本服务器
+--========================================================
+local ScriptTab = Window:Tab({Title = "脚本服务器", Icon = "server"})
+
+-- GitHub 仓库基础链接
+local GITHUB_RAW_BASE = "https://raw.githubusercontent.com/GGG792/RobloxAeroScripts/main/Aero%E6%9C%80%E6%96%B0%E5%90%88%E9%9B%86/"
+
+-- 脚本列表（名称 → 文件名）
+local ScriptList = {
+    {name = "8个球池经典", file = "8个球池经典.lua"},
+    {name = "99 夜", file = "99 夜.lua"},
+    {name = "Blox Fruit", file = "Blox Fruit.lua"},
+    {name = "Dungeon Hunters", file = "Dungeon Hunters.lua"},
+    {name = "GB", file = "GB.lua"},
+    {name = "chain", file = "chain.lua"},
+    {name = "po大po", file = "po大po.lua"},
+    {name = "举重模拟器", file = "举重模拟器.lua"},
+    {name = "亡命速递", file = "亡命速递.lua"},
+    {name = "保护房子不受怪物入侵", file = "保护房子不受怪物入侵.lua"},
+    {name = "像素之刃", file = "像素之刃.lua"},
+    {name = "僵尸之塔", file = "僵尸之塔.lua"},
+    {name = "僵尸生存竞技场", file = "僵尸生存竞技场.lua"},
+    {name = "克隆王国大亨", file = "克隆王国大亨.lua"},
+    {name = "决斗场", file = "决斗场.lua"},
+    {name = "刀刃球", file = "刀刃球.lua"},
+    {name = "划开大海", file = "划开大海.lua"},
+    {name = "力量传奇", file = "力量传奇.lua"},
+    {name = "南极洲探险", file = "南极洲探险.lua"},
+    {name = "启示录", file = "启示录.lua"},
+    {name = "奴才大亨", file = "奴才大亨.lua"},
+    {name = "寻找巨型鱼", file = "寻找巨型鱼.lua"},
+    {name = "平滑切片", file = "平滑切片.lua"},
+    {name = "强壮传奇", file = "强壮传奇.lua"},
+    {name = "忍者传奇", file = "忍者传奇.lua"},
+    {name = "戒网瘾中心", file = "戒网瘾中心.lua"},
+    {name = "战争机器", file = "战争机器.lua"},
+    {name = "手枪竞技场", file = "手枪竞技场.lua"},
+    {name = "撕咬之夜", file = "撕咬之夜.lua"},
+    {name = "无家可归", file = "无家可归.lua"},
+    {name = "最强战场", file = "最强战场.lua"},
+    {name = "最强的拳击模拟器", file = "最强的拳击模拟器.lua"},
+    {name = "月球增量", file = "月球增量.lua"},
+    {name = "木筏101天生存", file = "木筏101天生存.lua"},
+    {name = "极速传奇", file = "极速传奇.lua"},
+    {name = "模仿者", file = "模仿者.lua"},
+    {name = "死铁轨", file = "死铁轨.lua"},
+    {name = "每步+1 智商", file = "每步+1 智商.lua"},
+    {name = "水手碎片", file = "水手碎片.lua"},
+    {name = "汽车经销商大亨", file = "汽车经销商大亨.lua"},
+    {name = "沉默的刺客", file = "沉默的刺客.lua"},
+    {name = "滑石头RNG", file = "滑石头RNG.lua"},
+    {name = "火球训练", file = "火球训练.lua"},
+    {name = "火箭发射模拟器", file = "火箭发射模拟器.lua"},
+    {name = "犯罪", file = "犯罪.lua"},
+    {name = "生存于杀手", file = "生存于杀手.lua"},
+    {name = "画我", file = "画我.lua"},
+    {name = "监狱泵", file = "监狱泵.lua"},
+    {name = "矿井", file = "矿井.lua"},
+    {name = "砍伐树木", file = "砍伐树木.lua"},
+    {name = "破坏者谜团2", file = "破坏者谜团2.lua"},
+    {name = "种植花园", file = "种植花园.lua"},
+    {name = "竞争对手", file = "竞争对手.lua"},
+    {name = "花园地平线", file = "花园地平线.lua"},
+    {name = "血债", file = "血债.lua"},
+    {name = "血色地带", file = "血色地带.lua"},
+    {name = "训练怪兽进行破坏", file = "训练怪兽进行破坏.lua"},
+    {name = "诅咒之刃", file = "诅咒之刃.lua"},
+    {name = "超真实csgo", file = "超真实csgo.lua"},
+    {name = "超高速跑者", file = "超高速跑者.lua"},
+    {name = "迷你帝国", file = "迷你帝国.lua"},
+    {name = "造船寻宝", file = "造船寻宝.lua"},
+    {name = "金币点击器", file = "金币点击器.lua"},
+    {name = "钓鱼模拟器", file = "钓鱼模拟器.lua"},
+    {name = "闪光", file = "闪光.lua"},
+    {name = "防御", file = "防御.lua"},
+    {name = "集装箱RNG", file = "集装箱RNG.lua"},
+    {name = "餐厅大亨3", file = "餐厅大亨3.lua"},
+    {name = "鲨鱼咬", file = "鲨鱼咬.lua"},
+}
+
+-- 远程加载脚本的函数
+local function LoadRemoteScript(scriptName, fileName)
+    local url = GITHUB_RAW_BASE .. HttpService:UrlEncode(fileName)
+    Notify("正在加载", "正在获取 " .. scriptName .. " 源码...", 3)
+    local success, result = pcall(function()
+        return game:HttpGet(url)
+    end)
+    if success and result then
+        local execSuccess, execErr = pcall(function()
+            loadstring(result)()
+        end)
+        if execSuccess then
+            Notify("加载成功", scriptName .. " 已成功运行!", 3)
+        else
+            sysMsg("执行失败", tostring(execErr))
+        end
+    else
+        sysMsg("获取失败", "无法获取 " .. scriptName .. " 的源码")
+    end
+end
+
+-- 搜索框
+ScriptTab:Input({
+    Title = "搜索脚本",
+    Placeholder = "输入脚本名称搜索...",
+    Callback = function(text)
+        -- WindUI Dropdown 没有动态搜索，这里仅做提示
+        if text and #text > 0 then
+            local found = false
+            for _, s in ipairs(ScriptList) do
+                if string.find(string.lower(s.name), string.lower(text), 1, true) then
+                    found = true
+                    break
+                end
+            end
+            if not found then
+                Notify("搜索结果", "未找到匹配 '" .. text .. "' 的脚本", 3)
+            end
+        end
+    end,
+})
+
+ScriptTab:Divider()
+
+-- 为每个脚本创建一个按钮
+for i, script in ipairs(ScriptList) do
+    ScriptTab:Button({
+        Title = script.name,
+        Callback = function()
+            LoadRemoteScript(script.name, script.file)
+        end,
+    })
+end
+
+ScriptTab:Divider()
+
+-- 一键加载全部（慎用）
+ScriptTab:Button({
+    Title = "⚠️ 一键加载全部脚本（慎用）",
+    Callback = function()
+        Notify("批量加载", "开始依次加载所有脚本...", 3)
+        for i, script in ipairs(ScriptList) do
+            task.spawn(function()
+                LoadRemoteScript(script.name, script.file)
+            end)
+            task.wait(0.5)
+        end
+    end,
+})
+
 --=========== 启动 ===========
 Notify("欢迎使用", "神不如平脚本", 5)
 task.wait(1)
