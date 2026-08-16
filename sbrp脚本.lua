@@ -2287,6 +2287,16 @@ OtherTab:Button({
     end,
 })
 
+OtherTab:Button({
+    Title = "夜脚本",
+    Callback = function()
+        pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/ylt410/roblox-Script/refs/heads/main/yejiaoben"))()
+        end)
+        Notify("夜脚本", "已执行夜脚本", 3)
+    end,
+})
+
 --=========== 启动 ===========
 Notify("欢迎使用", "sbrp脚本", 5)
 task.wait(1)
