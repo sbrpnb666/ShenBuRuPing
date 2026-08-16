@@ -1848,6 +1848,22 @@ GenTab:Toggle({
     end,
 })
 
+GenTab:Divider()
+
+-- 汉化祖国人飞行
+GenTab:Toggle({
+    Title = "汉化祖国人飞行",
+    Default = false,
+    Callback = function(val)
+        if val then
+            pcall(function()
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/kongbaNB/-/refs/heads/main/祖国人汉化"))()
+            end)
+            Notify("祖国人飞行", "已执行汉化祖国人飞行", 3)
+        end
+    end,
+})
+
 --========================================================
 -- Tab5: 自瞄和子追
 --========================================================
