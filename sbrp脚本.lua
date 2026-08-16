@@ -2249,15 +2249,47 @@ ScriptTab:Input({
 
 ScriptTab:Divider()
 
--- 为每个脚本创建一个按钮
-for i, script in ipairs(ScriptList) do
-    ScriptTab:Button({
-        Title = script.name,
-        Callback = function()
-            LoadRemoteScript(script.name, script.file)
-        end,
-    })
-end
+-- 脚本下拉选择 + 执行按钮
+local selectedScript = nil
+
+local scriptDropdown = ScriptTab:Dropdown({
+    Title = "选择脚本",
+    Values = (function()
+        local names = {}
+        for _, s in ipairs(ScriptList) do
+            table.insert(names, s.name)
+        end
+        return names
+    end)(),
+    Callback = function(val) selectedScript = val end,
+})
+
+ScriptTab:Button({
+    Title = "执行选中脚本",
+    Callback = function()
+        if selectedScript then
+            for _, s in ipairs(ScriptList) do
+                if s.name == selectedScript then
+                    LoadRemoteScript(s.name, s.file)
+                    return
+                end
+            end
+        else
+            Notify("提示", "请先选择一个脚本", 3)
+        end
+    end,
+})
+
+ScriptTab:Button({
+    Title = "刷新脚本列表",
+    Callback = function()
+        local names = {}
+        for _, s in ipairs(ScriptList) do
+            table.insert(names, s.name)
+        end
+        Notify("脚本列表", "共 " .. #names .. " 个脚本", 3)
+    end,
+})
 
 ScriptTab:Divider()
 
