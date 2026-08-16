@@ -1,5 +1,5 @@
 --========================================================
--- 神不如平脚本 v5.0 (精简版)
+-- sbrp脚本 v5.0 (精简版)
 --========================================================
 
 local StarterGui = game:GetService("StarterGui")
@@ -918,7 +918,7 @@ end
 -- 创建窗口
 --========================================================
 local Window = WindUI:CreateWindow({
-    Title = "神不如平脚本",
+    Title = "sbrp脚本",
     Icon = "sparkles",
     Folder = "ShenBuRuPing",
     HideSearchBar = true,
@@ -1980,6 +1980,6 @@ ScriptTab:Button({
 })
 
 --=========== 启动 ===========
-Notify("欢迎使用", "神不如平脚本", 5)
+Notify("欢迎使用", "sbrp脚本", 5)
 task.wait(1)
-Notify("神不如平脚本", "v5.0 加载完成", 3)
+Notify("sbrp脚本", "v5.0 加载完成", 3)
