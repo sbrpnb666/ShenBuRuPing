@@ -1957,24 +1957,10 @@ AimTab:Toggle({
 })
 
 AimTab:Slider({
-    Title = "距离",
+    Title = "子追距离",
     Value = {Min = 5, Max = 100, Default = 15},
     Step = 1,
     Callback = function(val) trackDist = val end,
-})
-
-AimTab:Toggle({
-    Title = "自动飞行",
-    Default = false,
-    Callback = function(val)
-        if val then
-            trackFlyMode = true
-            Notify("子追", "子追时将自动飞行", 3)
-        else
-            trackFlyMode = false
-            Notify("子追", "子追飞行已关闭", 3)
-        end
-    end,
 })
 
 AimTab:Divider()
