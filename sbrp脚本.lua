@@ -1855,7 +1855,7 @@ local AimTab = Window:Tab({Title = "自瞄和子追", Icon = "crosshair"})
 
 -- 自瞄
 AimTab:Toggle({
-    Title = "自瞄 (Aimbot)",
+    Title = "自瞄",
     Default = false,
     Callback = function(val)
         State.Aimbot = val
@@ -1864,14 +1864,14 @@ AimTab:Toggle({
 })
 
 AimTab:Slider({
-    Title = "自瞄范围 (FOV)",
+    Title = "FOV范围",
     Value = {Min = 30, Max = 500, Default = 150},
     Step = 10,
     Callback = function(val) State.AimbotFOV = val end,
 })
 
 AimTab:Toggle({
-    Title = "显示自瞄范围圈",
+    Title = "显示范围圈",
     Default = false,
     Callback = function(val)
         State.ShowFOV = val
@@ -1880,7 +1880,7 @@ AimTab:Toggle({
 })
 
 AimTab:Toggle({
-    Title = "按住右键才自瞄 (键盘端)",
+    Title = "右键自瞄",
     Default = false,
     Callback = function(val) State.AimbotKey = val end,
 })
@@ -1894,7 +1894,7 @@ local trackDist = 15
 local trackFlyMode = false
 
 AimTab:Dropdown({
-    Title = "子追目标",
+    Title = "目标",
     Values = getPlayerList(),
     Callback = function(val) trackTarget = val end,
 })
@@ -1908,7 +1908,7 @@ AimTab:Button({
 })
 
 AimTab:Toggle({
-    Title = "通用子追 (自动跟随玩家)",
+    Title = "通用子追",
     Default = false,
     Callback = function(val)
         if val then
@@ -1957,14 +1957,14 @@ AimTab:Toggle({
 })
 
 AimTab:Slider({
-    Title = "子追距离 (保持距离)",
+    Title = "距离",
     Value = {Min = 5, Max = 100, Default = 15},
     Step = 1,
     Callback = function(val) trackDist = val end,
 })
 
 AimTab:Toggle({
-    Title = "子追时自动飞行",
+    Title = "自动飞行",
     Default = false,
     Callback = function(val)
         if val then
@@ -1983,7 +1983,7 @@ AimTab:Divider()
 -- NPC 自瞄
 --========================================================
 AimTab:Toggle({
-    Title = "通用 NPC 自瞄",
+    Title = "NPC自瞄",
     Default = false,
     Callback = function(val)
         State.NpcAimbot = val
@@ -2002,13 +2002,13 @@ local npcTrackDist = 15
 local npcTrackFlyMode = false
 
 local npcDropdown = AimTab:Dropdown({
-    Title = "NPC 子追目标",
+    Title = "NPC目标",
     Values = getNPCList(),
     Callback = function(val) npcTrackTarget = val end,
 })
 
 AimTab:Button({
-    Title = "刷新 NPC 列表",
+    Title = "刷新列表",
     Callback = function()
         local list = getNPCList()
         Notify("NPC子追", "已刷新 NPC 列表 (" .. #list .. " 个)", 3)
@@ -2016,7 +2016,7 @@ AimTab:Button({
 })
 
 AimTab:Toggle({
-    Title = "通用 NPC 子追 (自动跟随 NPC)",
+    Title = "NPC子追",
     Default = false,
     Callback = function(val)
         if val then
@@ -2059,14 +2059,14 @@ AimTab:Toggle({
 })
 
 AimTab:Slider({
-    Title = "NPC 子追距离 (保持距离)",
+    Title = "NPC子追距离",
     Value = {Min = 5, Max = 100, Default = 15},
     Step = 1,
     Callback = function(val) npcTrackDist = val end,
 })
 
 AimTab:Toggle({
-    Title = "NPC 子追时自动飞行",
+    Title = "NPC自动飞行",
     Default = false,
     Callback = function(val)
         if val then
