@@ -1,0 +1,16 @@
+-- 神不如平脚本 - 卡密列表
+-- 格式：return { "卡密1", "卡密2", ... }
+-- 生成时间: 2026-08-16
+
+return {
+    "SBP-X7K9-M2Q4-L8N3-P5W1",
+    "SBP-A3F6-R9T2-Y4B8-N7K5",
+    "SBP-Z1M5-C8H3-W6Q9-D2L4",
+    "SBP-E7J2-V5N8-X3K6-T1R9",
+    "SBP-B4G9-F2L7-M5Q3-W8C1",
+    "SBP-H6T3-K9N2-R7V4-Q1L8",
+    "SBP-D8C5-Y3M1-A6F9-J2W7",
+    "SBP-S2N7-P5K8-B3R6-T9Q4",
+    "SBP-L9W4-G1C6-V8M3-H5F2",
+    "SBP-Q3R8-T7N2-K5C9-W4L1",
+}
