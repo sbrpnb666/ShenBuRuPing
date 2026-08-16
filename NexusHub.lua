@@ -1,5 +1,5 @@
 --========================================================
--- NexusHub v1.0 (独立脚本 + 内置卡密系统)
+-- sbrp 脚本 v1.0 (独立脚本 + 内置卡密系统)
 -- 与其他脚本完全独立，互不关联
 --========================================================
 
@@ -59,8 +59,8 @@ local function verifyKey(key)
     -- 去除前后空格 + 全部转大写
     key = key:match("^%s*(.-)%s*$") or key
     key = key:upper()
-    -- 同时支持 NEX- 和 nex- 前缀
-    local body = key:gsub("^NEX%-", "")
+    -- 同时支持 SBRP- 和 sbrp- 前缀
+    local body = key:gsub("^SBRP%-", "")
     local parts = {}
     for part in body:gmatch("[^-]+") do
         table.insert(parts, part)
@@ -79,7 +79,7 @@ end
 --========================================================
 local function showKeyUI(onSuccess)
     local ScreenGui = Instance.new("ScreenGui")
-    ScreenGui.Name = "NexusHub_" .. HttpService:GenerateGUID(false)
+    ScreenGui.Name = "SBRP_" .. HttpService:GenerateGUID(false)
     ScreenGui.ResetOnSpawn = false
     ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     pcall(function() ScreenGui.Parent = game:GetService("CoreGui") end)
@@ -125,7 +125,7 @@ local function showKeyUI(onSuccess)
     Logo.Size = UDim2.new(1, 0, 0, 50)
     Logo.Position = UDim2.new(0, 0, 0, 15)
     Logo.BackgroundTransparency = 1
-    Logo.Text = "NexusHub"
+    Logo.Text = "sbrp 脚本"
     Logo.TextColor3 = Color3.fromRGB(0, 255, 170)
     Logo.Font = Enum.Font.GothamBold
     Logo.TextSize = 28
@@ -158,7 +158,7 @@ local function showKeyUI(onSuccess)
     KeyInput.Size = UDim2.new(1, -20, 1, 0)
     KeyInput.Position = UDim2.new(0, 10, 0, 0)
     KeyInput.BackgroundTransparency = 1
-    KeyInput.PlaceholderText = "输入卡密 (NEX-XXXX-XXXX-XXXX-XXXX-XXXX)"
+    KeyInput.PlaceholderText = "输入卡密 (SBRP-XXXX-XXXX-XXXX-XXXX-XXXX)"
     KeyInput.PlaceholderColor3 = Color3.fromRGB(90, 90, 100)
     KeyInput.Text = ""
     KeyInput.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -256,7 +256,7 @@ local function showKeyUI(onSuccess)
         ScreenGui:Destroy()
     end)
 
-    notify("NexusHub", "请输入卡密以激活脚本", 3)
+    notify("sbrp 脚本", "请输入卡密以激活脚本", 3)
 end
 
 --========================================================
@@ -396,7 +396,7 @@ end
 local function loadMain()
 
 --========================================================
--- 以下为神不如平脚本完整内容 (验证通过后加载)
+-- 以下为 sbrp 脚本完整内容 (验证通过后加载)
 --========================================================
 
 local StarterGui = game:GetService("StarterGui")
@@ -1315,9 +1315,9 @@ end
 -- 创建窗口
 --========================================================
 local Window = WindUI:CreateWindow({
-    Title = "神不如平脚本",
+    Title = "sbrp 脚本",
     Icon = "sparkles",
-    Folder = "ShenBuRuPing",
+    Folder = "SBRP",
     HideSearchBar = true,
 })
 
@@ -2226,9 +2226,9 @@ SetTab:Button({
 })
 
 --=========== 启动 ===========
-Notify("欢迎使用", "神不如平脚本", 5)
+Notify("欢迎使用", "sbrp 脚本", 5)
 task.wait(1)
-Notify("神不如平脚本", "v5.0 加载完成", 3)
+Notify("sbrp 脚本", "v5.0 加载完成", 3)
 
 
 end

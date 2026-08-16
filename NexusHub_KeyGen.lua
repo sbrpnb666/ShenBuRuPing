@@ -1,9 +1,9 @@
 --========================================================
--- NexusHub 卡密生成器
+-- sbrp 脚本 卡密生成器
 -- 在 Roblox 执行器里运行，按 F9 查看控制台输出
 --========================================================
 
--- 私钥 (必须和 NexusHub.lua 里的 SECRET_SEED 一致)
+-- 私钥 (必须和 sbrp 脚本里的 SECRET_SEED 一致)
 local SECRET_SEED = 48217
 
 local function hashStr(str)
@@ -37,12 +37,12 @@ local function generateKey()
     local checkCode = numToCode(checkNum, 4)
     local formatted = body:sub(1,4) .. "-" .. body:sub(5,8) .. "-" ..
                       body:sub(9,12) .. "-" .. body:sub(13,16) .. "-" .. checkCode
-    return "NEX-" .. formatted
+    return "SBRP-" .. formatted
 end
 
 -- 验证
 local function verifyKey(key)
-    local body = key:gsub("^NEX%-", "")
+    local body = key:gsub("^SBRP%-", "")
     local parts = {}
     for part in body:gmatch("[^-]+") do table.insert(parts, part) end
     if #parts ~= 5 then return false end
@@ -57,7 +57,7 @@ end
 local COUNT = 15 -- 修改数量
 
 print("========================================")
-print("  NexusHub 卡密生成器")
+print("  sbrp 脚本 卡密生成器")
 print("========================================")
 print()
 
