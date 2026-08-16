@@ -2307,6 +2307,17 @@ OtherTab:Button({
     end,
 })
 
+OtherTab:Button({
+    Title = "皮脚本",
+    Callback = function()
+        pcall(function()
+            getgenv().XiaoPi = "皮脚本QQ群1065725086"
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaopi77/xiaopi77/main/QQ1002100032-Roblox-Pi-script.lua"))()
+        end)
+        Notify("皮脚本", "已执行皮脚本", 3)
+    end,
+})
+
 --=========== 启动 ===========
 Notify("欢迎使用", "sbrp脚本", 5)
 task.wait(1)
