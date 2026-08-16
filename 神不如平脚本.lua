@@ -1030,6 +1030,44 @@ TeleTab:Button({
     end,
 })
 
+TeleTab:Divider()
+
+-- 点击传送 (工具栏道具)
+local clickTpTool = nil
+local clickTpConn = nil
+TeleTab:Toggle({
+    Title = "点击传送 (装备道具后点击地面)",
+    Default = false,
+    Callback = function(val)
+        if val then
+            -- 创建传送工具
+            clickTpTool = Instance.new("Tool")
+            clickTpTool.Name = "点击传送"
+            clickTpTool.ToolTip = "装备后点击任意位置传送"
+            clickTpTool.RequiresHandle = false
+            clickTpTool.CanBeDropped = false
+            clickTpTool.Parent = LocalPlayer:WaitForChild("Backpack")
+
+            clickTpConn = clickTpTool.Activated:Connect(function()
+                local mouse = LocalPlayer:GetMouse()
+                local r = GetRoot()
+                if r and mouse.Hit then
+                    r.CFrame = CFrame.new(mouse.Hit.Position + Vector3.new(0, 3, 0))
+                end
+            end)
+            Notify("点击传送", "已添加道具到物品栏，装备后点击任意位置传送", 4)
+        else
+            if clickTpConn then clickTpConn:Disconnect() clickTpConn = nil end
+            if clickTpTool then
+                -- 从背包和角色中移除
+                if clickTpTool.Parent then clickTpTool:Destroy() end
+                clickTpTool = nil
+            end
+            Notify("点击传送", "已关闭", 3)
+        end
+    end,
+})
+
 --========================================================
 -- Tab3: 视觉
 --========================================================
@@ -1628,6 +1666,8 @@ SetTab:Button({
         if lockHealthConn then lockHealthConn:Disconnect() end
         if antiFlingConn then antiFlingConn:Disconnect() end
         if invisibleConn then invisibleConn:Disconnect() end
+        if clickTpConn then clickTpConn:Disconnect() end
+        if clickTpTool then clickTpTool:Destroy() end
         for p in pairs(espObjects) do clearESP(p) end
         local h = GetHum()
         if h then h.WalkSpeed = 16 h.JumpPower = 50 end
