@@ -55,6 +55,7 @@ local State = {
     AimbotFOV = 150,
     AimbotKey = false,
     ShowFOV = false,
+    NpcAimbot = false,
 }
 
 --=========== 连接引用 ===========
@@ -915,6 +916,99 @@ local function stopAimbot()
 end
 
 --========================================================
+-- NPC 自瞄 & NPC 子追
+--========================================================
+local npcAimbotConn = nil
+
+-- 获取所有玩家角色的引用集合
+local function getPlayerCharSet()
+    local set = {}
+    for _, p in ipairs(Players:GetPlayers()) do
+        if p.Character then set[p.Character] = true end
+    end
+    return set
+end
+
+-- 获取 NPC 列表 (Workspace 中有 Humanoid 的非玩家模型)
+local function getNPCList()
+    local list = {}
+    local playerChars = getPlayerCharSet()
+    for _, obj in ipairs(Workspace:GetDescendants()) do
+        if obj:IsA("Model") and not playerChars[obj] then
+            local hum = obj:FindFirstChildOfClass("Humanoid")
+            local root = obj:FindFirstChild("HumanoidRootPart") or obj:FindFirstChild("Torso") or obj:FindFirstChild("UpperTorso")
+            if hum and root and hum.Health > 0 then
+                table.insert(list, obj.Name)
+            end
+        end
+    end
+    return list
+end
+
+-- 按名称找到第一个存活的 NPC 模型
+local function findNPCByName(name)
+    local playerChars = getPlayerCharSet()
+    for _, obj in ipairs(Workspace:GetDescendants()) do
+        if obj:IsA("Model") and not playerChars[obj] and obj.Name == name then
+            local hum = obj:FindFirstChildOfClass("Humanoid")
+            local root = obj:FindFirstChild("HumanoidRootPart") or obj:FindFirstChild("Torso") or obj:FindFirstChild("UpperTorso")
+            if hum and root and hum.Health > 0 then
+                return obj
+            end
+        end
+    end
+    return nil
+end
+
+-- 获取屏幕中心 FOV 范围内最近的 NPC
+local function getClosestNPC()
+    local closestN = nil
+    local shortestDist = State.AimbotFOV
+    local center = Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2)
+    local playerChars = getPlayerCharSet()
+    for _, obj in ipairs(Workspace:GetDescendants()) do
+        if obj:IsA("Model") and not playerChars[obj] then
+            local hum = obj:FindFirstChildOfClass("Humanoid")
+            local head = obj:FindFirstChild("Head")
+            if hum and head and hum.Health > 0 then
+                local screenPos, onScreen = Camera:WorldToViewportPoint(head.Position)
+                if onScreen then
+                    local dist = (Vector2.new(screenPos.X, screenPos.Y) - center).Magnitude
+                    if dist < shortestDist then
+                        shortestDist = dist
+                        closestN = obj
+                    end
+                end
+            end
+        end
+    end
+    return closestN
+end
+
+local function startNpcAimbot()
+    npcAimbotConn = RunService.RenderStepped:Connect(function()
+        if not State.NpcAimbot then return end
+        local shouldAim = true
+        if State.AimbotKey then
+            shouldAim = UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2)
+        end
+        if not shouldAim then return end
+        local target = getClosestNPC()
+        if target then
+            local head = target:FindFirstChild("Head")
+            if head then
+                local targetCF = CFrame.new(Camera.CFrame.Position, head.Position)
+                Camera.CFrame = Camera.CFrame:Lerp(targetCF, 0.15)
+            end
+        end
+    end)
+end
+
+local function stopNpcAimbot()
+    if npcAimbotConn then npcAimbotConn:Disconnect() npcAimbotConn = nil end
+end
+
+--========================================================
 -- 创建窗口
 --========================================================
 local Window = WindUI:CreateWindow({
@@ -1597,40 +1691,6 @@ GenTab:Toggle({
 
 GenTab:Divider()
 
--- 自瞄
-GenTab:Toggle({
-    Title = "自瞄 (Aimbot)",
-    Default = false,
-    Callback = function(val)
-        State.Aimbot = val
-        if val then startAimbot() else stopAimbot() end
-    end,
-})
-
-GenTab:Slider({
-    Title = "自瞄范围 (FOV)",
-    Value = {Min = 30, Max = 500, Default = 150},
-    Step = 10,
-    Callback = function(val) State.AimbotFOV = val end,
-})
-
-GenTab:Toggle({
-    Title = "显示自瞄范围圈",
-    Default = false,
-    Callback = function(val)
-        State.ShowFOV = val
-        updateFOVCircle()
-    end,
-})
-
-GenTab:Toggle({
-    Title = "按住右键才自瞄 (键盘端)",
-    Default = false,
-    Callback = function(val) State.AimbotKey = val end,
-})
-
-GenTab:Divider()
-
 -- 防甩飞 (Anchor 根部件)
 local antiFlingConn = nil
 GenTab:Toggle({
@@ -1789,7 +1849,238 @@ GenTab:Toggle({
 })
 
 --========================================================
--- Tab5: 设置
+-- Tab5: 自瞄和子追
+--========================================================
+local AimTab = Window:Tab({Title = "自瞄和子追", Icon = "crosshair"})
+
+-- 自瞄
+AimTab:Toggle({
+    Title = "自瞄 (Aimbot)",
+    Default = false,
+    Callback = function(val)
+        State.Aimbot = val
+        if val then startAimbot() else stopAimbot() end
+    end,
+})
+
+AimTab:Slider({
+    Title = "自瞄范围 (FOV)",
+    Value = {Min = 30, Max = 500, Default = 150},
+    Step = 10,
+    Callback = function(val) State.AimbotFOV = val end,
+})
+
+AimTab:Toggle({
+    Title = "显示自瞄范围圈",
+    Default = false,
+    Callback = function(val)
+        State.ShowFOV = val
+        updateFOVCircle()
+    end,
+})
+
+AimTab:Toggle({
+    Title = "按住右键才自瞄 (键盘端)",
+    Default = false,
+    Callback = function(val) State.AimbotKey = val end,
+})
+
+AimTab:Divider()
+
+-- 通用子追 (自动跟随目标玩家)
+local trackTarget = nil
+local trackConn = nil
+local trackDist = 15
+local trackFlyMode = false
+
+AimTab:Dropdown({
+    Title = "子追目标",
+    Values = getPlayerList(),
+    Callback = function(val) trackTarget = val end,
+})
+
+AimTab:Button({
+    Title = "刷新列表",
+    Callback = function()
+        local list = getPlayerList()
+        Notify("子追", "已刷新玩家列表 (" .. #list .. " 人)", 3)
+    end,
+})
+
+AimTab:Toggle({
+    Title = "通用子追 (自动跟随玩家)",
+    Default = false,
+    Callback = function(val)
+        if val then
+            if not trackTarget then
+                Notify("未选择", "请先选择子追目标", 3)
+                return
+            end
+            trackConn = RunService.Heartbeat:Connect(function()
+                local target = Players:FindFirstChild(trackTarget)
+                if target and target.Character then
+                    local tRoot = target.Character:FindFirstChild("HumanoidRootPart")
+                    local tHum = target.Character:FindFirstChildOfClass("Humanoid")
+                    local myRoot = GetRoot()
+                    local myHum = GetHum()
+                    if tRoot and tHum and tHum.Health > 0 and myRoot then
+                        local dist = (tRoot.Position - myRoot.Position).Magnitude
+                        local targetDist = trackDist
+                        -- 距离大于目标距离就靠近
+                        if dist > targetDist + 5 then
+                            local direction = (tRoot.Position - myRoot.Position).Unit
+                            local speed = dist > 50 and 3 or 1.5
+                            if trackFlyMode then speed = speed * 1.5 end
+                            myRoot.CFrame = myRoot.CFrame + direction * speed
+                        elseif dist < targetDist - 5 then
+                            -- 太近了，后退保持距离
+                            local direction = (myRoot.Position - tRoot.Position).Unit
+                            myRoot.CFrame = myRoot.CFrame + direction * 1
+                        end
+                        -- 子追时面朝目标
+                        if dist < 100 then
+                            myRoot.CFrame = CFrame.lookAt(myRoot.Position, Vector3.new(tRoot.Position.X, myRoot.Position.Y, tRoot.Position.Z))
+                        end
+                    end
+                else
+                    if not target or not target.Character then
+                        Notify("子追", "目标已离开或死亡，子追暂停", 3)
+                    end
+                end
+            end)
+            Notify("子追", "已开始子追 " .. trackTarget, 3)
+        else
+            if trackConn then trackConn:Disconnect() trackConn = nil end
+            Notify("子追", "已停止子追", 3)
+        end
+    end,
+})
+
+AimTab:Slider({
+    Title = "子追距离 (保持距离)",
+    Value = {Min = 5, Max = 100, Default = 15},
+    Step = 1,
+    Callback = function(val) trackDist = val end,
+})
+
+AimTab:Toggle({
+    Title = "子追时自动飞行",
+    Default = false,
+    Callback = function(val)
+        if val then
+            trackFlyMode = true
+            Notify("子追", "子追时将自动飞行", 3)
+        else
+            trackFlyMode = false
+            Notify("子追", "子追飞行已关闭", 3)
+        end
+    end,
+})
+
+AimTab:Divider()
+
+--========================================================
+-- NPC 自瞄
+--========================================================
+AimTab:Toggle({
+    Title = "通用 NPC 自瞄",
+    Default = false,
+    Callback = function(val)
+        State.NpcAimbot = val
+        if val then startNpcAimbot() else stopNpcAimbot() end
+    end,
+})
+
+AimTab:Divider()
+
+--========================================================
+-- NPC 子追
+--========================================================
+local npcTrackTarget = nil
+local npcTrackConn = nil
+local npcTrackDist = 15
+local npcTrackFlyMode = false
+
+local npcDropdown = AimTab:Dropdown({
+    Title = "NPC 子追目标",
+    Values = getNPCList(),
+    Callback = function(val) npcTrackTarget = val end,
+})
+
+AimTab:Button({
+    Title = "刷新 NPC 列表",
+    Callback = function()
+        local list = getNPCList()
+        Notify("NPC子追", "已刷新 NPC 列表 (" .. #list .. " 个)", 3)
+    end,
+})
+
+AimTab:Toggle({
+    Title = "通用 NPC 子追 (自动跟随 NPC)",
+    Default = false,
+    Callback = function(val)
+        if val then
+            if not npcTrackTarget then
+                Notify("未选择", "请先选择 NPC 子追目标", 3)
+                return
+            end
+            npcTrackConn = RunService.Heartbeat:Connect(function()
+                local npc = findNPCByName(npcTrackTarget)
+                if npc then
+                    local tRoot = npc:FindFirstChild("HumanoidRootPart") or npc:FindFirstChild("Torso") or npc:FindFirstChild("UpperTorso")
+                    local tHum = npc:FindFirstChildOfClass("Humanoid")
+                    local myRoot = GetRoot()
+                    if tRoot and tHum and tHum.Health > 0 and myRoot then
+                        local dist = (tRoot.Position - myRoot.Position).Magnitude
+                        local targetDist = npcTrackDist
+                        if dist > targetDist + 5 then
+                            local direction = (tRoot.Position - myRoot.Position).Unit
+                            local speed = dist > 50 and 3 or 1.5
+                            if npcTrackFlyMode then speed = speed * 1.5 end
+                            myRoot.CFrame = myRoot.CFrame + direction * speed
+                        elseif dist < targetDist - 5 then
+                            local direction = (myRoot.Position - tRoot.Position).Unit
+                            myRoot.CFrame = myRoot.CFrame + direction * 1
+                        end
+                        if dist < 100 then
+                            myRoot.CFrame = CFrame.lookAt(myRoot.Position, Vector3.new(tRoot.Position.X, myRoot.Position.Y, tRoot.Position.Z))
+                        end
+                    end
+                else
+                    Notify("NPC子追", "NPC 已消失或死亡，子追暂停", 3)
+                end
+            end)
+            Notify("NPC子追", "已开始子追 " .. npcTrackTarget, 3)
+        else
+            if npcTrackConn then npcTrackConn:Disconnect() npcTrackConn = nil end
+            Notify("NPC子追", "已停止 NPC 子追", 3)
+        end
+    end,
+})
+
+AimTab:Slider({
+    Title = "NPC 子追距离 (保持距离)",
+    Value = {Min = 5, Max = 100, Default = 15},
+    Step = 1,
+    Callback = function(val) npcTrackDist = val end,
+})
+
+AimTab:Toggle({
+    Title = "NPC 子追时自动飞行",
+    Default = false,
+    Callback = function(val)
+        if val then
+            npcTrackFlyMode = true
+            Notify("NPC子追", "NPC 子追时将自动飞行", 3)
+        else
+            npcTrackFlyMode = false
+            Notify("NPC子追", "NPC 子追飞行已关闭", 3)
+        end
+    end,
+})
+
+--========================================================
+-- Tab6: 设置
 --========================================================
 local SetTab = Window:Tab({Title = "设置", Icon = "settings"})
 
@@ -1804,6 +2095,7 @@ SetTab:Button({
     Callback = function()
         stopFlyScript()
         State.Aimbot = false stopAimbot()
+        State.NpcAimbot = false stopNpcAimbot()
         if infJumpConn then infJumpConn:Disconnect() end
         if noclipConn then noclipConn:Disconnect() end
         if antiAFKConn then antiAFKConn:Disconnect() end
@@ -1815,6 +2107,8 @@ SetTab:Button({
         if invisibleConn then invisibleConn:Disconnect() end
         if clickTpConn then clickTpConn:Disconnect() end
         if clickTpTool then clickTpTool:Destroy() end
+        if trackConn then trackConn:Disconnect() end
+        if npcTrackConn then npcTrackConn:Disconnect() end
         for _, c in ipairs(rainbowConns) do c:Disconnect() end
         for p in pairs(espObjects) do clearESP(p) end
         local h = GetHum()
