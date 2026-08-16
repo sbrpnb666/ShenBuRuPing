@@ -925,6 +925,153 @@ local Window = WindUI:CreateWindow({
 })
 
 --========================================================
+-- 彩虹边框动画
+--========================================================
+local rainbowConns = {}
+local function setupRainbowBorder()
+    -- 查找 WindUI 主窗口 Frame
+    local function findMainFrame()
+        -- 在 PlayerGui 和 CoreGui 中搜索
+        local guis = {}
+        if LocalPlayer:FindFirstChild("PlayerGui") then
+            for _, g in ipairs(LocalPlayer.PlayerGui:GetChildren()) do
+                if g:IsA("ScreenGui") then table.insert(guis, g) end
+            end
+        end
+        local coreGui = game:GetService("CoreGui")
+        for _, g in ipairs(coreGui:GetChildren()) do
+            if g:IsA("ScreenGui") then table.insert(guis, g) end
+        end
+
+        for _, gui in ipairs(guis) do
+            for _, frame in ipairs(gui:GetDescendants()) do
+                if frame:IsA("Frame") and frame.Name == "Window" then
+                    return frame
+                end
+            end
+        end
+        -- 备选：查找最大的 Frame
+        local largest = nil
+        local largestArea = 0
+        for _, gui in ipairs(guis) do
+            for _, frame in ipairs(gui:GetDescendants()) do
+                if frame:IsA("Frame") and frame.Parent and frame.Parent:IsA("ScreenGui") then
+                    local area = frame.AbsoluteSize.X * frame.AbsoluteSize.Y
+                    if area > largestArea then
+                        largestArea = area
+                        largest = frame
+                    end
+                end
+            end
+        end
+        return largest
+    end
+
+    -- 延迟一帧查找（等 WindUI 完全渲染）
+    task.defer(function()
+        local mainFrame = findMainFrame()
+        if not mainFrame then
+            task.wait(1)
+            mainFrame = findMainFrame()
+        end
+        if not mainFrame then return end
+
+        -- 创建外层彩虹边框 (UIStroke + UIGradient)
+        local outerStroke = Instance.new("UIStroke")
+        outerStroke.Name = "RainbowStrokeOuter"
+        outerStroke.Thickness = 4
+        outerStroke.Transparency = 0.1
+        outerStroke.Parent = mainFrame
+
+        local outerGrad = Instance.new("UIGradient")
+        outerGrad.Name = "RainbowGradient"
+        outerGrad.Color = ColorSequence.new({
+            ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 0)),
+            ColorSequenceKeypoint.new(0.17, Color3.fromRGB(255, 127, 0)),
+            ColorSequenceKeypoint.new(0.33, Color3.fromRGB(255, 255, 0)),
+            ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 255, 0)),
+            ColorSequenceKeypoint.new(0.67, Color3.fromRGB(0, 170, 255)),
+            ColorSequenceKeypoint.new(0.83, Color3.fromRGB(75, 0, 130)),
+            ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 0, 255)),
+        })
+        outerGrad.Rotation = 0
+        outerGrad.Parent = outerStroke
+
+        -- 创建内层彩虹边框
+        local innerStroke = Instance.new("UIStroke")
+        innerStroke.Name = "RainbowStrokeInner"
+        innerStroke.Thickness = 2
+        innerStroke.Transparency = 0.3
+        innerStroke.Parent = mainFrame
+
+        local innerGrad = Instance.new("UIGradient")
+        innerGrad.Name = "RainbowGradient2"
+        innerGrad.Color = outerGrad.Color
+        innerGrad.Rotation = 180
+        innerGrad.Parent = innerStroke
+
+        -- 创建四个边的彩色条纹 (上下左右)
+        local stripes = {}
+        local positions = {"Top", "Bottom", "Left", "Right"}
+        for _, pos in ipairs(positions) do
+            local stripe = Instance.new("Frame")
+            stripe.Name = "RainbowStripe_" .. pos
+            stripe.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            stripe.BorderSizePixel = 0
+            stripe.ZIndex = 10
+
+            local stripeGrad = Instance.new("UIGradient")
+            stripeGrad.Name = "Grad"
+            stripeGrad.Color = ColorSequence.new({
+                ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 0)),
+                ColorSequenceKeypoint.new(0.17, Color3.fromRGB(255, 127, 0)),
+                ColorSequenceKeypoint.new(0.33, Color3.fromRGB(255, 255, 0)),
+                ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 255, 0)),
+                ColorSequenceKeypoint.new(0.67, Color3.fromRGB(0, 170, 255)),
+                ColorSequenceKeypoint.new(0.83, Color3.fromRGB(75, 0, 130)),
+                ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 0, 255)),
+            })
+            stripeGrad.Parent = stripe
+
+            if pos == "Top" then
+                stripe.Size = UDim2.new(1, 0, 0, 3)
+                stripe.Position = UDim2.new(0, 0, 0, -3)
+            elseif pos == "Bottom" then
+                stripe.Size = UDim2.new(1, 0, 0, 3)
+                stripe.Position = UDim2.new(0, 0, 1, 0)
+            elseif pos == "Left" then
+                stripe.Size = UDim2.new(0, 3, 1, 0)
+                stripe.Position = UDim2.new(0, -3, 0, 0)
+            elseif pos == "Right" then
+                stripe.Size = UDim2.new(0, 3, 1, 0)
+                stripe.Position = UDim2.new(1, 0, 0, 0)
+            end
+
+            stripe.Parent = mainFrame
+            table.insert(stripes, {frame = stripe, grad = stripeGrad, pos = pos})
+        end
+
+        -- 动画：旋转渐变颜色
+        local rotOuter = 0
+        local rotInner = 180
+        local stripeRots = {0, 90, 0, 90}
+        local conn = RunService.RenderStepped:Connect(function(dt)
+            rotOuter = (rotOuter + 60 * dt) % 360
+            rotInner = (rotInner - 60 * dt) % 360
+            outerGrad.Rotation = rotOuter
+            innerGrad.Rotation = rotInner
+
+            for i, s in ipairs(stripes) do
+                s.grad.Rotation = (s.grad.Rotation + (50 + i * 10) * dt) % 360
+            end
+        end)
+        table.insert(rainbowConns, conn)
+    end)
+end
+
+setupRainbowBorder()
+
+--========================================================
 -- Tab1: 角色
 --========================================================
 local CharTab = Window:Tab({Title = "角色", Icon = "user"})
@@ -1668,6 +1815,7 @@ SetTab:Button({
         if invisibleConn then invisibleConn:Disconnect() end
         if clickTpConn then clickTpConn:Disconnect() end
         if clickTpTool then clickTpTool:Destroy() end
+        for _, c in ipairs(rainbowConns) do c:Disconnect() end
         for p in pairs(espObjects) do clearESP(p) end
         local h = GetHum()
         if h then h.WalkSpeed = 16 h.JumpPower = 50 end
