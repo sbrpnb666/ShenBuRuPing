@@ -53,7 +53,25 @@ local function numToCode(num, length)
     return result
 end
 
--- 验证卡密
+-- 获取设备唯一标识 (HWID)
+local function getHWID()
+    -- 优先使用执行器的 gethwid
+    local hwid = nil
+    pcall(function() hwid = gethwid and gethwid() end)
+    if hwid and hwid ~= "" then return hwid end
+    -- 备选：RbxAnalyticsService
+    pcall(function()
+        hwid = game:GetService("RbxAnalyticsService"):GetClientId()
+    end)
+    if hwid and hwid ~= "" then return hwid end
+    -- 最终备选：用户ID + 用户名
+    return "UID_" .. tostring(LocalPlayer.UserId)
+end
+
+-- 设备绑定文件名
+local LICENSE_FILE = "SBRP_License.dat"
+
+-- 验证卡密 (算法验证)
 local function verifyKey(key)
     if not key or key == "" then return false end
     -- 去除前后空格 + 全部转大写
@@ -72,6 +90,70 @@ local function verifyKey(key)
     local expectedCheck = numToCode(hashStr(mainBody), 4)
 
     return checkCode == expectedCheck
+end
+
+-- 检查设备绑定
+-- 返回: true=绑定正常/首次绑定, false=绑定不匹配
+-- 第二个返回值: 提示信息
+local function checkDeviceBind(key)
+    local hwid = getHWID()
+
+    -- 检查本地是否有绑定文件
+    local fileExists = false
+    pcall(function() fileExists = isfile and isfile(LICENSE_FILE) end)
+
+    if not fileExists then
+        -- 首次使用，写入绑定文件
+        -- 文件内容: 卡密|HWID (用哈希加密)
+        local bindData = key .. "|" .. hwid
+        local encoded = numToCode(hashStr(bindData), 8)
+        pcall(function()
+            writefile and writefile(LICENSE_FILE, key .. "\n" .. hwid .. "\n" .. encoded)
+        end)
+        return true, "首次绑定成功 (设备: " .. hwid:sub(1, 8) .. "...)"
+    else
+        -- 读取绑定文件
+        local content = ""
+        pcall(function() content = readfile and readfile(LICENSE_FILE) end)
+        if content == "" then
+            -- 文件读取失败，重新绑定
+            pcall(function()
+                writefile and writefile(LICENSE_FILE, key .. "\n" .. hwid .. "\n" .. "rebuilt")
+            end)
+            return true, "重新绑定成功"
+        end
+
+        -- 解析文件内容
+        local lines = {}
+        for line in content:gmatch("[^\n]+") do
+            table.insert(lines, line)
+        end
+
+        local savedKey = lines[1] or ""
+        local savedHWID = lines[2] or ""
+
+        -- 检查 HWID 是否匹配
+        if savedHWID == hwid then
+            -- 设备匹配，检查卡密是否一致
+            if savedKey == key then
+                return true, "设备验证通过"
+            else
+                -- 同设备换卡密，更新绑定
+                pcall(function()
+                    writefile and writefile(LICENSE_FILE, key .. "\n" .. hwid .. "\n" .. "updated")
+                end)
+                return true, "卡密已更新"
+            end
+        else
+            -- HWID 不匹配，卡密已绑定其他设备
+            return false, "此卡密已绑定其他设备，无法在此设备使用"
+        end
+    end
+end
+
+-- 解绑设备 (清除绑定文件)
+local function unbindDevice()
+    pcall(function() delfile and delfile(LICENSE_FILE) end)
 end
 
 --========================================================
@@ -224,13 +306,28 @@ local function showKeyUI(onSuccess)
         StatusLabel.TextColor3 = Color3.fromRGB(0, 170, 255)
 
         task.spawn(function()
-            task.wait(0.6) -- 模拟网络延迟
+            task.wait(0.6)
 
+            -- 第一步：验证卡密算法
             local ok, result = pcall(verifyKey, key)
             local isValid = ok and result
 
-            if isValid then
-                StatusLabel.Text = "激活成功！"
+            if not isValid then
+                StatusLabel.Text = ok and "卡密无效，请检查输入" or "验证出错: " .. tostring(result)
+                StatusLabel.TextColor3 = Color3.fromRGB(255, 70, 70)
+                VerifyBtn.Text = "激活"
+                verifying = false
+                return
+            end
+
+            -- 第二步：检查设备绑定
+            StatusLabel.Text = "正在验证设备..."
+            task.wait(0.3)
+
+            local bindResult, bindMessage = checkDeviceBind(key)
+
+            if bindResult then
+                StatusLabel.Text = "激活成功！" .. (bindMessage or "")
                 StatusLabel.TextColor3 = Color3.fromRGB(0, 255, 130)
                 VerifyBtn.Text = "成功!"
                 task.wait(0.8)
@@ -239,7 +336,7 @@ local function showKeyUI(onSuccess)
                 ScreenGui:Destroy()
                 onSuccess()
             else
-                StatusLabel.Text = ok and "卡密无效，请检查输入" or "验证出错: " .. tostring(result)
+                StatusLabel.Text = bindMessage or "设备验证失败"
                 StatusLabel.TextColor3 = Color3.fromRGB(255, 70, 70)
                 VerifyBtn.Text = "激活"
                 verifying = false
@@ -2194,6 +2291,22 @@ SetTab:Dropdown({
     Title = "主题",
     Values = {"Pink", "Dark", "Light", "Violet", "Ocean"},
     Callback = function(val) pcall(function() WindUI:SetTheme(val) end) end,
+})
+
+SetTab:Button({
+    Title = "解绑设备 (清除本机绑定)",
+    Callback = function()
+        unbindDevice()
+        Notify("解绑成功", "本机设备绑定已清除，下次需要重新输入卡密", 5)
+    end,
+})
+
+SetTab:Button({
+    Title = "查看本机设备ID",
+    Callback = function()
+        local hwid = getHWID()
+        Notify("设备ID", "本机HWID: " .. tostring(hwid):sub(1, 20) .. "...", 8)
+    end,
 })
 
 SetTab:Button({
