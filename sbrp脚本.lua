@@ -2261,22 +2261,6 @@ end
 
 ScriptTab:Divider()
 
--- 一键加载全部（慎用）
-ScriptTab:Button({
-    Title = "⚠️ 一键加载全部脚本（慎用）",
-    Callback = function()
-        Notify("批量加载", "开始依次加载所有脚本...", 3)
-        for i, script in ipairs(ScriptList) do
-            task.spawn(function()
-                LoadRemoteScript(script.name, script.file)
-            end)
-            task.wait(0.5)
-        end
-    end,
-})
-
-ScriptTab:Divider()
-
 -- 圣奥里
 ScriptTab:Button({
     Title = "圣奥里",
