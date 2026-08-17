@@ -56,6 +56,7 @@ local State = {
     AimbotKey = false,
     ShowFOV = false,
     NpcAimbot = false,
+    CharRotate = false,
 }
 
 --=========== 连接引用 ===========
@@ -65,6 +66,7 @@ local noclipConn = nil
 local antiKnockbackConn = nil
 local godModeConn = nil
 local lockHealthConn = nil
+local charRotateConn = nil
 
 --=========== 速度/跳跃 ===========
 local function applyWalkSpeed()
@@ -1864,6 +1866,32 @@ GenTab:Toggle({
     end,
 })
 
+GenTab:Divider()
+
+-- 人物旋转
+GenTab:Toggle({
+    Title = "人物旋转",
+    Default = false,
+    Callback = function(val)
+        State.CharRotate = val
+        if val then
+            Notify("通用", "人物旋转已开启", 3)
+            charRotateConn = RunService.Heartbeat:Connect(function()
+                local hr = GetRoot()
+                if hr then
+                    hr.CFrame = hr.CFrame * CFrame.Angles(0, math.rad(3), 0)
+                end
+            end)
+        else
+            if charRotateConn then
+                charRotateConn:Disconnect()
+                charRotateConn = nil
+            end
+            Notify("通用", "人物旋转已关闭", 3)
+        end
+    end,
+})
+
 --========================================================
 -- Tab5: 自瞄和子追
 --========================================================
@@ -2098,6 +2126,8 @@ SetTab:Button({
         stopFlyScript()
         State.Aimbot = false stopAimbot()
         State.NpcAimbot = false stopNpcAimbot()
+        State.CharRotate = false
+        if charRotateConn then charRotateConn:Disconnect() end
         if infJumpConn then infJumpConn:Disconnect() end
         if noclipConn then noclipConn:Disconnect() end
         if antiAFKConn then antiAFKConn:Disconnect() end
