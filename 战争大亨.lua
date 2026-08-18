@@ -238,153 +238,236 @@ local CombatTab = Window:Tab({
     Icon = "swords",
 })
 
-CombatTab:Section({ Title = "武器修改", TextXAlignment = "Left", TextSize = 17 })
+CombatTab:Section({ Title = "武器功能", TextXAlignment = "Left", TextSize = 17 })
 
--- 无限弹药
-CombatTab:Toggle({
-    Title = "无限弹药",
-    Default = false,
-    Callback = function(val)
-        State.InfiniteAmmo = val
-        if val then
-            Notify("武器", "已开启无限弹药", 3)
-            local ammoNames = {
-                "Ammo", "MaxAmmo", "ClipAmmo", "Magazine", "Mag", "CurrentAmmo",
-                "AmmoInClip", "AmmoInMag", "ClipSize", "MagSize", "Bullets",
-                "BulletCount", "Reserve", "StoredAmmo", "TotalAmmo",
-            }
-            local ammoKeywords = {"ammo", "mag", "bullet", "clip", "round", "reserve"}
-            Connections.InfiniteAmmo = RunService.Heartbeat:Connect(function()
-                local char = GetChar()
-                if not char then return end
-                for _, tool in ipairs(char:GetChildren()) do
-                    if tool:IsA("Tool") then
-                        -- 直接按已知名称查找
-                        for _, name in ipairs(ammoNames) do
-                            local v = tool:FindFirstChild(name)
-                            if v and v:IsA("ValueBase") then v.Value = 999 end
+-- 扫描武器信息
+CombatTab:Button({
+    Title = "扫描武器信息 (输出到通知)",
+    Callback = function()
+        local ReplicatedStorage = game:GetService("ReplicatedStorage")
+        local info = {}
+
+        -- 1. 搜索角色里的 Tool
+        local char = GetChar()
+        if char then
+            for _, tool in ipairs(char:GetChildren()) do
+                if tool:IsA("Tool") then
+                    table.insert(info, "Tool: " .. tool.Name)
+                    for _, d in ipairs(tool:GetDescendants()) do
+                        if d:IsA("RemoteEvent") or d:IsA("RemoteFunction") then
+                            table.insert(info, "  Remote: " .. d:GetFullName())
+                        elseif d:IsA("ValueBase") then
+                            table.insert(info, "  Value: " .. d.Name .. " = " .. tostring(d.Value))
                         end
-                        -- 深度搜索所有子对象，按关键词匹配
-                        for _, desc in ipairs(tool:GetDescendants()) do
-                            if desc:IsA("ValueBase") then
-                                local lowerName = string.lower(desc.Name)
-                                for _, kw in ipairs(ammoKeywords) do
-                                    if string.find(lowerName, kw) then
-                                        desc.Value = 999
-                                        break
-                                    end
-                                end
-                            end
-                        end
-                        -- 设置工具属性（attributes）
-                        pcall(function()
-                            for _, name in ipairs(ammoNames) do
-                                if tool:GetAttribute(name) ~= nil then
-                                    tool:SetAttribute(name, 999)
-                                end
-                            end
-                        end)
                     end
                 end
-            end)
-        else
-            if Connections.InfiniteAmmo then Connections.InfiniteAmmo:Disconnect() Connections.InfiniteAmmo = nil end
+            end
         end
+
+        -- 2. 搜索 Backpack
+        local bp = LocalPlayer:FindFirstChild("Backpack")
+        if bp then
+            for _, tool in ipairs(bp:GetChildren()) do
+                if tool:IsA("Tool") then
+                    table.insert(info, "Backpack Tool: " .. tool.Name)
+                end
+            end
+        end
+
+        -- 3. 搜索 ReplicatedStorage 里的 Remote
+        for _, d in ipairs(ReplicatedStorage:GetDescendants()) do
+            if d:IsA("RemoteEvent") or d:IsA("RemoteFunction") then
+                local ln = string.lower(d.Name)
+                if string.find(ln, "fire") or string.find(ln, "shoot") or string.find(ln, "weapon") or string.find(ln, "gun") or string.find(ln, "ammo") then
+                    table.insert(info, "RS Remote: " .. d:GetFullName())
+                end
+            end
+        end
+
+        -- 4. 搜索 leaderstats
+        local ls = LocalPlayer:FindFirstChild("leaderstats")
+        if ls then
+            for _, v in ipairs(ls:GetChildren()) do
+                table.insert(info, "Stat: " .. v.Name .. " = " .. tostring(v.Value))
+            end
+        end
+
+        local msg = table.concat(info, "\n")
+        if msg == "" then msg = "未找到任何武器相关信息" end
+        Notify("扫描结果", msg, 10)
     end,
 })
 
--- 无后坐力
-CombatTab:Toggle({
-    Title = "无后坐力",
-    Default = false,
-    Callback = function(val)
-        State.NoRecoil = val
-        if val then
-            Notify("武器", "已开启无后坐力", 3)
-            Connections.NoRecoil = RunService.Heartbeat:Connect(function()
-                local char = GetChar()
-                if not char then return end
-                for _, tool in ipairs(char:GetChildren()) do
-                    if tool:IsA("Tool") then
-                        local recoil = tool:FindFirstChild("Recoil") or tool:FindFirstChild("RecoilAmount")
-                        if recoil then recoil.Value = 0 end
-                        local spread = tool:FindFirstChild("Spread") or tool:FindFirstChild("HipFireSpread")
-                        if spread then spread.Value = 0 end
-                    end
-                end
-            end)
-        else
-            if Connections.NoRecoil then Connections.NoRecoil:Disconnect() Connections.NoRecoil = nil end
-        end
-    end,
-})
+CombatTab:Divider()
 
--- 自动开火
+-- 通用武器射击 (模拟点击+激活+Remote搜索)
+local weaponFire = nil
 CombatTab:Toggle({
-    Title = "自动开火",
+    Title = "自动射击 (全兼容)",
     Default = false,
     Callback = function(val)
         State.AutoFire = val
         if val then
-            Notify("武器", "已开启自动开火", 3)
-            local fireNames = {
-                "Fire", "Shoot", "ShootEvent", "FireGun", "FireWeapon",
-                "OnShoot", "OnFire", "Attack", "Click", "ShootGun",
-            }
-            local fireKeywords = {"fire", "shoot", "attack", "click", "gun"}
-            Connections.AutoFire = RunService.Heartbeat:Connect(function()
+            Notify("战斗", "自动射击已开启", 3)
+            local ReplicatedStorage = game:GetService("ReplicatedStorage")
+            local VirtualInputManager = game:GetService("VirtualInputManager")
+            local fireKeywords = {"fire", "shoot", "attack", "click", "gun", "weapon"}
+            local lastFire = 0
+
+            weaponFire = RunService.Heartbeat:Connect(function()
+                local now = tick()
+                if now - lastFire < 0.1 then return end
+                lastFire = now
+
                 local char = GetChar()
                 if not char then return end
+
+                -- 方法1: 模拟鼠标点击 (weapon activate)
                 local tool = char:FindFirstChildOfClass("Tool")
                 if tool then
-                    pcall(function()
-                        -- 方法1: 直接调用 Activate
-                        tool:Activate()
+                    pcall(function() tool:Activate() end)
+                end
 
-                        -- 方法2: 按已知名称查找 RemoteEvent/RemoteFunction
-                        for _, name in ipairs(fireNames) do
-                            local remote = tool:FindFirstChild(name)
-                            if remote then
-                                if remote:IsA("RemoteEvent") then
-                                    remote:FireServer()
-                                elseif remote:IsA("RemoteFunction") then
-                                    remote:InvokeServer()
-                                end
-                            end
-                        end
+                -- 方法2: 模拟鼠标左键点击
+                pcall(function()
+                    local mouse = LocalPlayer:GetMouse()
+                    if tool and mouse then
+                        VirtualInputManager:SendMouseButtonEvent(mouse.X, mouse.Y, 0, true, game, 1)
+                        VirtualInputManager:SendMouseButtonEvent(mouse.X, mouse.Y, 0, false, game, 1)
+                    end
+                end)
 
-                        -- 方法3: 深度搜索所有子对象，按关键词匹配
-                        for _, desc in ipairs(tool:GetDescendants()) do
+                -- 方法3: 搜索角色内 Tool 的所有 Remote
+                if tool then
+                    for _, desc in ipairs(tool:GetDescendants()) do
+                        pcall(function()
                             if desc:IsA("RemoteEvent") then
-                                local lowerName = string.lower(desc.Name)
+                                local ln = string.lower(desc.Name)
                                 for _, kw in ipairs(fireKeywords) do
-                                    if string.find(lowerName, kw) then
+                                    if string.find(ln, kw) then
                                         desc:FireServer()
                                         break
                                     end
                                 end
                             elseif desc:IsA("RemoteFunction") then
-                                local lowerName = string.lower(desc.Name)
+                                local ln = string.lower(desc.Name)
                                 for _, kw in ipairs(fireKeywords) do
-                                    if string.find(lowerName, kw) then
+                                    if string.find(ln, kw) then
                                         desc:InvokeServer()
                                         break
                                     end
                                 end
                             end
-                        end
+                        end)
+                    end
+                end
 
-                        -- 方法4: 搜索 Handle 上的 Remote
-                        local handle = tool:FindFirstChild("Handle")
-                        if handle then
-                            for _, desc in ipairs(handle:GetDescendants()) do
-                                if desc:IsA("RemoteEvent") then
-                                    local lowerName = string.lower(desc.Name)
-                                    for _, kw in ipairs(fireKeywords) do
-                                        if string.find(lowerName, kw) then
-                                            desc:FireServer()
-                                            break
+                -- 方法4: 搜索 ReplicatedStorage 里的射击 Remote
+                pcall(function()
+                    for _, desc in ipairs(ReplicatedStorage:GetDescendants()) do
+                        if desc:IsA("RemoteEvent") then
+                            local ln = string.lower(desc.Name)
+                            for _, kw in ipairs(fireKeywords) do
+                                if string.find(ln, kw) then
+                                    desc:FireServer()
+                                    break
+                                end
+                            end
+                        end
+                    end
+                end)
+            end)
+        else
+            if weaponFire then weaponFire:Disconnect() weaponFire = nil end
+            Notify("战斗", "自动射击已关闭", 3)
+        end
+    end,
+})
+
+-- 通用无限弹药 (全兼容)
+local ammoLoop = nil
+CombatTab:Toggle({
+    Title = "无限弹药 (全兼容)",
+    Default = false,
+    Callback = function(val)
+        State.InfiniteAmmo = val
+        if val then
+            Notify("战斗", "无限弹药已开启", 3)
+            local ammoKeywords = {"ammo", "mag", "bullet", "clip", "round", "reserve", "stock", "count"}
+            local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+            ammoLoop = RunService.Heartbeat:Connect(function()
+                -- 搜索角色里的 Tool
+                local char = GetChar()
+                if char then
+                    for _, tool in ipairs(char:GetChildren()) do
+                        if tool:IsA("Tool") then
+                            pcall(function()
+                                for _, desc in ipairs(tool:GetDescendants()) do
+                                    if desc:IsA("ValueBase") then
+                                        local ln = string.lower(desc.Name)
+                                        for _, kw in ipairs(ammoKeywords) do
+                                            if string.find(ln, kw) then
+                                                desc.Value = desc:IsA("IntValue") and 999 or 999
+                                                break
+                                            end
                                         end
+                                    end
+                                end
+                            end)
+                        end
+                    end
+                end
+
+                -- 搜索 Backpack 里的 Tool
+                local bp = LocalPlayer:FindFirstChild("Backpack")
+                if bp then
+                    for _, tool in ipairs(bp:GetChildren()) do
+                        if tool:IsA("Tool") then
+                            pcall(function()
+                                for _, desc in ipairs(tool:GetDescendants()) do
+                                    if desc:IsA("ValueBase") then
+                                        local ln = string.lower(desc.Name)
+                                        for _, kw in ipairs(ammoKeywords) do
+                                            if string.find(ln, kw) then
+                                                desc.Value = 999
+                                                break
+                                            end
+                                        end
+                                    end
+                                end
+                            end)
+                        end
+                    end
+                end
+
+                -- 搜索 leaderstats
+                local ls = LocalPlayer:FindFirstChild("leaderstats")
+                if ls then
+                    for _, v in ipairs(ls:GetChildren()) do
+                        if v:IsA("ValueBase") then
+                            local ln = string.lower(v.Name)
+                            for _, kw in ipairs(ammoKeywords) do
+                                if string.find(ln, kw) then
+                                    v.Value = 999
+                                    break
+                                end
+                            end
+                        end
+                    end
+                end
+
+                -- 搜索 PlayerGui 里的弹药值
+                local pg = LocalPlayer:FindFirstChild("PlayerGui")
+                if pg then
+                    pcall(function()
+                        for _, desc in ipairs(pg:GetDescendants()) do
+                            if desc:IsA("IntValue") or desc:IsA("IntValue") then
+                                local ln = string.lower(desc.Name)
+                                for _, kw in ipairs(ammoKeywords) do
+                                    if string.find(ln, kw) then
+                                        desc.Value = 999
+                                        break
                                     end
                                 end
                             end
@@ -393,7 +476,73 @@ CombatTab:Toggle({
                 end
             end)
         else
-            if Connections.AutoFire then Connections.AutoFire:Disconnect() Connections.AutoFire = nil end
+            if ammoLoop then ammoLoop:Disconnect() ammoLoop = nil end
+            Notify("战斗", "无限弹药已关闭", 3)
+        end
+    end,
+})
+
+-- 通用无后坐力 (全兼容)
+local noRecoilLoop = nil
+CombatTab:Toggle({
+    Title = "无后坐力 (全兼容)",
+    Default = false,
+    Callback = function(val)
+        State.NoRecoil = val
+        if val then
+            Notify("战斗", "无后坐力已开启", 3)
+            local recoilKeywords = {"recoil", "spread", "kick", "shake", "bloom", "deviation", "sway"}
+            local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+            noRecoilLoop = RunService.Heartbeat:Connect(function()
+                local char = GetChar()
+                if not char then return end
+
+                -- 搜索角色内 Tool
+                for _, tool in ipairs(char:GetChildren()) do
+                    if tool:IsA("Tool") then
+                        pcall(function()
+                            for _, desc in ipairs(tool:GetDescendants()) do
+                                if desc:IsA("ValueBase") then
+                                    local ln = string.lower(desc.Name)
+                                    for _, kw in ipairs(recoilKeywords) do
+                                        if string.find(ln, kw) then
+                                            desc.Value = 0
+                                            break
+                                        end
+                                    end
+                                end
+                            end
+                            -- 设置 attributes
+                            pcall(function()
+                                for _, kw in ipairs(recoilKeywords) do
+                                    if tool:GetAttribute(kw) ~= nil then
+                                        tool:SetAttribute(kw, 0)
+                                    end
+                                end
+                            end)
+                        end)
+                    end
+                end
+
+                -- 搜索 ReplicatedStorage 里的配置
+                pcall(function()
+                    for _, desc in ipairs(ReplicatedStorage:GetDescendants()) do
+                        if desc:IsA("ValueBase") then
+                            local ln = string.lower(desc.Name)
+                            for _, kw in ipairs(recoilKeywords) do
+                                if string.find(ln, kw) then
+                                    desc.Value = 0
+                                    break
+                                end
+                            end
+                        end
+                    end
+                end)
+            end)
+        else
+            if noRecoilLoop then noRecoilLoop:Disconnect() noRecoilLoop = nil end
+            Notify("战斗", "无后坐力已关闭", 3)
         end
     end,
 })
@@ -410,11 +559,11 @@ CombatTab:Toggle({
             Connections.Hitbox = RunService.Heartbeat:Connect(function()
                 for _, plr in ipairs(Players:GetPlayers()) do
                     if plr ~= LocalPlayer and plr.Character then
-                        local hum = plr.Character:FindFirstChild("HumanoidRootPart")
-                        if hum then
-                            hum.Size = Vector3.new(8, 8, 8)
-                            hum.Transparency = 0.5
-                            hum.CanCollide = false
+                        local hrp = plr.Character:FindFirstChild("HumanoidRootPart")
+                        if hrp then
+                            hrp.Size = Vector3.new(8, 8, 8)
+                            hrp.Transparency = 0.5
+                            hrp.CanCollide = false
                         end
                     end
                 end
@@ -423,11 +572,11 @@ CombatTab:Toggle({
             if Connections.Hitbox then Connections.Hitbox:Disconnect() Connections.Hitbox = nil end
             for _, plr in ipairs(Players:GetPlayers()) do
                 if plr ~= LocalPlayer and plr.Character then
-                    local hum = plr.Character:FindFirstChild("HumanoidRootPart")
-                    if hum then
-                        hum.Size = Vector3.new(2, 2, 1)
-                        hum.Transparency = 0
-                        hum.CanCollide = true
+                    local hrp = plr.Character:FindFirstChild("HumanoidRootPart")
+                    if hrp then
+                        hrp.Size = Vector3.new(2, 2, 1)
+                        hrp.Transparency = 0
+                        hrp.CanCollide = true
                     end
                 end
             end
