@@ -77,6 +77,7 @@ local State = {
     NoFallDamage = false,
     AimbotEnabled = false,
     BulletTracer = false,
+    OneHitKill = false,
 }
 
 local Connections = {}
@@ -100,6 +101,40 @@ end
 local function Notify(title, content, duration)
     WindUI:Notify({ Title = title, Content = content or "", Duration = duration or 3 })
 end
+
+--=========== 秒互动 ===========
+local function SetPromptHoldDuration(parent, duration)
+    for _, desc in ipairs(parent:GetDescendants()) do
+        if desc:IsA("ProximityPrompt") then
+            desc.HoldDuration = duration
+        end
+    end
+end
+
+local F = {
+    Active = false,
+    Connection = nil,
+    Bind = nil,
+    Enable = function()
+        F.Active = true
+        local promptService = game:GetService("ProximityPromptService")
+        F.Bind = promptService.PromptButtonHoldBegan:Connect(function(prompt)
+            prompt.HoldDuration = 0.01
+        end)
+        SetPromptHoldDuration(Workspace, 0.01)
+        F.Connection = Workspace.DescendantAdded:Connect(function(desc)
+            if desc:IsA("ProximityPrompt") and F.Active then
+                desc.HoldDuration = 0.01
+            end
+        end)
+    end,
+    Disable = function()
+        F.Active = false
+        if F.Bind then F.Bind:Disconnect(); F.Bind = nil end
+        if F.Connection then F.Connection:Disconnect(); F.Connection = nil end
+        SetPromptHoldDuration(Workspace, 0.5)
+    end
+}
 
 --=========== 自动收集现金 ===========
 local function findCashRemotes()
@@ -841,6 +876,21 @@ PlayerTab:Slider({
         if h then
             if h.UseJumpPower then h.JumpPower = val
             else h.JumpHeight = val / 10 end
+        end
+    end,
+})
+
+-- 秒互动
+PlayerTab:Toggle({
+    Title = "秒互动",
+    Default = false,
+    Callback = function(val)
+        if val then
+            F.Enable()
+            Notify("玩家", "秒互动已开启", 3)
+        else
+            F.Disable()
+            Notify("玩家", "秒互动已关闭", 3)
         end
     end,
 })
