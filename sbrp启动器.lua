@@ -108,4 +108,17 @@ Tab:Button({
     end,
 })
 
+Tab:Button({
+    Title = "力量传奇",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "力量传奇", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E5%8A%9B%E9%87%8F%E4%BC%A0%E5%A5%87.lua"))()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
+        end
+    end,
+})
+
 WindUI:Notify({ Title = "欢迎使用", Content = "启动器已加载", Duration = 3 })
