@@ -48,7 +48,7 @@ Tab:Button({
     Callback = function()
         WindUI:Notify({ Title = "正在加载", Content = "SBRP通用脚本", Duration = 3 })
         local success, errorMsg = pcall(function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/sbrp_obfuscated.lua"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/sbrp%E8%84%9A%E6%9C%AC.lua"))()
         end)
         if not success then
             WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
