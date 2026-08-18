@@ -82,4 +82,30 @@ Tab:Button({
     end,
 })
 
+Tab:Button({
+    Title = "蜂群模拟器",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "蜂群模拟器", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E8%9C%82%E7%BE%A4%E6%A8%A1%E6%8B%9F%E5%99%A8.lua"))()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
+        end
+    end,
+})
+
+Tab:Button({
+    Title = "驾驶帝国",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "驾驶帝国", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E9%A9%BE%E9%A9%B6%E5%B8%9D%E5%9B%BD.lua"))()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
+        end
+    end,
+})
+
 WindUI:Notify({ Title = "欢迎使用", Content = "启动器已加载", Duration = 3 })
