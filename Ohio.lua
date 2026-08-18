@@ -25,7 +25,7 @@ local Mouse = LocalPlayer:GetMouse()
 
 --=========== 创建主窗口 ===========
 local Window = WindUI:CreateWindow({
-    Title = "Ohio 超级脚本",
+    Title = "Ohio",
     Icon = "skull",
     Author = "Ohio Script v2.0",
     Folder = "OhioScript",
@@ -60,7 +60,7 @@ Window:Tag({
 })
 
 Window:EditOpenButton({
-    Title = "Ohio 脚本",
+    Title = "Ohio",
     Icon = "skull",
     CornerRadius = UDim.new(0, 16),
     StrokeThickness = 2,
@@ -82,6 +82,7 @@ local State = {
     InfiniteAmmo = false,
     NoRecoil = false,
     RapidFire = false,
+    OnePunch = false,
     -- 玩家
     WalkSpeed = 16,
     JumpPower = 50,
@@ -211,12 +212,12 @@ local CombatTab = Window:Tab({
     Icon = "swords",
 })
 
-CombatTab:Section({ Title = "瞄准系统", TextXAlignment = "Left", TextSize = 17 })
+CombatTab:Section({ Title = "瞄准", TextXAlignment = "Left", TextSize = 17 })
 
 -- 自瞄 (Aimbot)
 local aimbotConn = nil
 CombatTab:Toggle({
-    Title = "自瞄 (Aimbot)",
+    Title = "自动瞄准",
     Default = false,
     Callback = function(val)
         State.AimbotEnabled = val
@@ -244,7 +245,7 @@ CombatTab:Toggle({
 
 -- 自瞄 FOV
 CombatTab:Slider({
-    Title = "自瞄 FOV 范围",
+    Title = "瞄准范围",
     Value = { Min = 30, Max = 500, Default = 120 },
     Increment = 5,
     Callback = function(val)
@@ -257,7 +258,7 @@ CombatTab:Slider({
 
 -- 自瞄平滑度
 CombatTab:Slider({
-    Title = "自瞄平滑度",
+    Title = "瞄准平滑度",
     Value = { Min = 5, Max = 100, Default = 40 },
     Increment = 1,
     Callback = function(val)
@@ -268,7 +269,7 @@ CombatTab:Slider({
 -- 静默瞄准 (Silent Aim)
 local silentAimConn = nil
 CombatTab:Toggle({
-    Title = "静默瞄准 (Silent Aim)",
+    Title = "静默瞄准",
     Default = false,
     Callback = function(val)
         State.SilentAim = val
@@ -310,7 +311,7 @@ CombatTab:Divider()
 -- 触发器 (Trigger Bot)
 local triggerConn = nil
 CombatTab:Toggle({
-    Title = "触发器 (Trigger Bot)",
+    Title = "自动开火",
     Default = false,
     Callback = function(val)
         State.TriggerBot = val
@@ -348,7 +349,7 @@ CombatTab:Toggle({
 })
 
 CombatTab:Slider({
-    Title = "触发器延迟",
+    Title = "开火延迟",
     Value = { Min = 1, Max = 100, Default = 5 },
     Increment = 1,
     Callback = function(val)
@@ -360,7 +361,7 @@ CombatTab:Divider()
 
 -- Hitbox 扩大
 CombatTab:Toggle({
-    Title = "Hitbox 扩大",
+    Title = "碰撞箱放大",
     Default = false,
     Callback = function(val)
         State.HitboxExpand = val
@@ -398,7 +399,7 @@ CombatTab:Toggle({
 })
 
 CombatTab:Slider({
-    Title = "Hitbox 大小",
+    Title = "碰撞箱大小",
     Value = { Min = 2, Max = 50, Default = 10 },
     Increment = 1,
     Callback = function(val)
@@ -407,7 +408,7 @@ CombatTab:Slider({
 })
 
 CombatTab:Divider()
-CombatTab:Section({ Title = "武器增强", TextXAlignment = "Left", TextSize = 17 })
+CombatTab:Section({ Title = "武器", TextXAlignment = "Left", TextSize = 17 })
 
 -- 无限弹药
 CombatTab:Toggle({
@@ -516,7 +517,7 @@ CombatTab:Toggle({
 
 -- 快速射击
 CombatTab:Toggle({
-    Title = "快速射击 (Rapid Fire)",
+    Title = "快速射击",
     Default = false,
     Callback = function(val)
         State.RapidFire = val
@@ -536,6 +537,121 @@ CombatTab:Toggle({
         else
             if Connections.RapidFire then Connections.RapidFire:Disconnect() Connections.RapidFire = nil end
             Notify("战斗", "快速射击已关闭", 3)
+        end
+    end,
+})
+
+-- 一拳超人 (伤害x100)
+CombatTab:Toggle({
+    Title = "一拳超人 (伤害x100)",
+    Default = false,
+    Callback = function(val)
+        State.OnePunch = val
+        if val then
+            Notify("战斗", "一拳超人已开启! 伤害x100", 3)
+
+            local function boostToolDamage(tool)
+                if not tool or not tool:IsA("Tool") then return end
+                pcall(function()
+                    -- ACS 框架伤害
+                    local acs = tool:FindFirstChild("ACS_Modulo")
+                    if acs then
+                        local vars = acs:FindFirstChild("Variaveis")
+                        if vars then
+                            for _, v in ipairs(vars:GetChildren()) do
+                                local ln = string.lower(v.Name)
+                                if string.find(ln, "damage") or string.find(ln, "dmg") then
+                                    if v:IsA("NumberValue") or v:IsA("IntValue") then
+                                        v.Value = v.Value * 100
+                                    end
+                                end
+                            end
+                        end
+                    end
+
+                    -- 通用: 搜索伤害值
+                    for _, desc in ipairs(tool:GetDescendants()) do
+                        if desc:IsA("ValueBase") then
+                            local ln = string.lower(desc.Name)
+                            if string.find(ln, "damage") or string.find(ln, "dmg") then
+                                if desc:IsA("NumberValue") or desc:IsA("IntValue") then
+                                    desc.Value = desc.Value * 100
+                                end
+                            end
+                        end
+                    end
+
+                    -- Attributes 伤害
+                    for k, v in pairs(tool:GetAttributes()) do
+                        local lk = string.lower(k)
+                        if string.find(lk, "damage") or string.find(lk, "dmg") then
+                            if type(v) == "number" then
+                                tool:SetAttribute(k, v * 100)
+                            end
+                        end
+                    end
+
+                    -- Tool 的 Damage 属性
+                    if tool:FindFirstChild("Damage") then
+                        local dmg = tool.Damage
+                        if dmg:IsA("NumberValue") or dmg:IsA("IntValue") then
+                            dmg.Value = dmg.Value * 100
+                        end
+                    end
+                end)
+            end
+
+            -- 对当前武器生效
+            local char = GetChar()
+            if char then
+                for _, tool in ipairs(char:GetChildren()) do
+                    boostToolDamage(tool)
+                end
+            end
+
+            -- 持续监听新武器
+            Connections.OnePunch = RunService.Heartbeat:Connect(function()
+                if not State.OnePunch then return end
+                local c = GetChar()
+                if not c then return end
+                for _, tool in ipairs(c:GetChildren()) do
+                    if tool:IsA("Tool") then
+                        -- 检查是否已经增强过
+                        local already = tool:GetAttribute("OhioOnePunch")
+                        if not already then
+                            boostToolDamage(tool)
+                            tool:SetAttribute("OhioOnePunch", true)
+                        end
+                    end
+                end
+            end)
+
+            -- Hook namecall: 伤害相关 Remote 参数放大
+            local mt = getrawmetatable(game)
+            local oldNamecall = mt.__namecall
+            setreadonly(mt, false)
+            mt.__namecall = newcclosure(function(self, ...)
+                local method = getnamecallmethod()
+                if State.OnePunch and (method == "FireServer" or method == "InvokeServer") then
+                    local args = {...}
+                    pcall(function()
+                        for i, arg in ipairs(args) do
+                            if type(arg) == "number" then
+                                -- 放大数字参数 (伤害值)
+                                if arg > 0 and arg < 1000 then
+                                    args[i] = arg * 100
+                                end
+                            end
+                        end
+                    end)
+                    return oldNamecall(self, unpack(args))
+                end
+                return oldNamecall(self, ...)
+            end)
+            setreadonly(mt, true)
+        else
+            if Connections.OnePunch then Connections.OnePunch:Disconnect() Connections.OnePunch = nil end
+            Notify("战斗", "一拳超人已关闭", 3)
         end
     end,
 })
@@ -596,7 +712,7 @@ PlayerTab:Toggle({
 
 -- 穿墙
 PlayerTab:Toggle({
-    Title = "穿墙 (NoClip)",
+    Title = "穿墙",
     Default = false,
     Callback = function(val)
         State.Noclip = val
@@ -618,7 +734,7 @@ PlayerTab:Toggle({
 
 -- 无敌
 PlayerTab:Toggle({
-    Title = "无敌 (God Mode)",
+    Title = "无敌",
     Default = false,
     Callback = function(val)
         State.GodMode = val
@@ -679,7 +795,7 @@ PlayerTab:Divider()
 -- 飞行脚本 V3 (手机端兼容, 独立面板)
 local flyV3Loaded = false
 PlayerTab:Button({
-    Title = "飞行脚本 V3 (手机兼容)",
+    Title = "飞行 (手机版)",
     Callback = function()
         if flyV3Loaded then
             Notify("飞行", "飞行面板已打开, 请用面板上的按钮控制", 3)
@@ -698,7 +814,7 @@ local VisualTab = Window:Tab({
     Icon = "eye",
 })
 
-VisualTab:Section({ Title = "ESP 系统", TextXAlignment = "Left", TextSize = 17 })
+VisualTab:Section({ Title = "透视", TextXAlignment = "Left", TextSize = 17 })
 
 -- ESP 核心函数
 local function createESP(player)
@@ -814,7 +930,7 @@ end
 
 -- ESP 开关
 VisualTab:Toggle({
-    Title = "玩家 ESP",
+    Title = "人物透视",
     Default = false,
     Callback = function(val)
         State.ESPEnabled = val
@@ -894,25 +1010,25 @@ VisualTab:Toggle({
 })
 
 VisualTab:Toggle({
-    Title = "ESP 名字",
+    Title = "显示名字",
     Default = true,
     Callback = function(val) State.ESPNames = val end,
 })
 
 VisualTab:Toggle({
-    Title = "ESP 距离",
+    Title = "显示距离",
     Default = true,
     Callback = function(val) State.ESPDistance = val end,
 })
 
 VisualTab:Toggle({
-    Title = "ESP 血量",
+    Title = "显示血量",
     Default = true,
     Callback = function(val) State.ESPHealth = val end,
 })
 
 VisualTab:Toggle({
-    Title = "ESP 方框",
+    Title = "显示方框",
     Default = false,
     Callback = function(val) State.ESPBoxes = val end,
 })
@@ -921,7 +1037,7 @@ VisualTab:Divider()
 
 -- 追踪线 (Tracers)
 VisualTab:Toggle({
-    Title = "追踪线 (Tracers)",
+    Title = "追踪线",
     Default = false,
     Callback = function(val)
         State.Tracers = val
@@ -969,7 +1085,7 @@ VisualTab:Toggle({
 
 -- FOV 圈
 VisualTab:Toggle({
-    Title = "显示 FOV 圈",
+    Title = "显示瞄准圈",
     Default = false,
     Callback = function(val)
         State.ShowFOV = val
@@ -1013,7 +1129,7 @@ VisualTab:Section({ Title = "渲染", TextXAlignment = "Left", TextSize = 17 })
 
 -- Chams
 VisualTab:Toggle({
-    Title = "Chams (透视高亮)",
+    Title = "透视高亮",
     Default = false,
     Callback = function(val)
         State.Chams = val
@@ -1059,7 +1175,7 @@ VisualTab:Toggle({
 
 -- 全亮
 VisualTab:Toggle({
-    Title = "全亮 (Fullbright)",
+    Title = "全图高亮",
     Default = false,
     Callback = function(val)
         State.Fullbright = val
@@ -1135,7 +1251,7 @@ TeleportTab:Button({
 
 -- 传送到鼠标位置
 TeleportTab:Button({
-    Title = "传送到鼠标位置",
+    Title = "传送到触点",
     Callback = function()
         local root = GetRoot()
         if root then
@@ -1209,7 +1325,7 @@ TeleportTab:Divider()
 local clickTpConn = nil
 local tpHoldStart = nil
 TeleportTab:Toggle({
-    Title = "长按传送 (长按屏幕0.5秒)",
+    Title = "长按传送",
     Default = false,
     Callback = function(val)
         if val then
@@ -1312,7 +1428,7 @@ EconomyTab:Section({ Title = "刷钱", TextXAlignment = "Left", TextSize = 17 })
 
 -- 刷钱 (搜索 Remote)
 EconomyTab:Button({
-    Title = "扫描所有经济 Remote",
+    Title = "扫描给钱接口",
     Callback = function()
         local results = {}
         for _, obj in ipairs(ReplicatedStorage:GetDescendants()) do
@@ -1330,7 +1446,7 @@ EconomyTab:Button({
 })
 
 EconomyTab:Button({
-    Title = "尝试触发所有给钱 Remote",
+    Title = "尝试刷钱",
     Callback = function()
         local count = 0
         for _, obj in ipairs(ReplicatedStorage:GetDescendants()) do
@@ -1363,11 +1479,11 @@ local MiscTab = Window:Tab({
     Icon = "settings",
 })
 
-MiscTab:Section({ Title = "实用工具", TextXAlignment = "Left", TextSize = 17 })
+MiscTab:Section({ Title = "工具", TextXAlignment = "Left", TextSize = 17 })
 
 -- 防挂机
 MiscTab:Toggle({
-    Title = "防挂机 (Anti AFK)",
+    Title = "防挂机",
     Default = false,
     Callback = function(val)
         State.AntiAFK = val
@@ -1387,7 +1503,7 @@ MiscTab:Toggle({
 
 -- FPS 加速
 MiscTab:Toggle({
-    Title = "FPS 加速",
+    Title = "画质提速",
     Default = false,
     Callback = function(val)
         State.FPSBoost = val
@@ -1430,7 +1546,7 @@ MiscTab:Divider()
 
 -- 服务器跳转
 MiscTab:Button({
-    Title = "跳转到新服务器",
+    Title = "换服",
     Callback = function()
         Notify("实用", "正在跳转服务器...", 3)
         local placeId = game.PlaceId
@@ -1440,7 +1556,7 @@ MiscTab:Button({
 
 -- 复制服务器ID
 MiscTab:Button({
-    Title = "复制服务器 ID",
+    Title = "复制服务器号",
     Callback = function()
         local jobId = game.JobId
         if setclipboard then
