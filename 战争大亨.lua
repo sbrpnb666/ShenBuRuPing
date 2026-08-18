@@ -248,15 +248,42 @@ CombatTab:Toggle({
         State.InfiniteAmmo = val
         if val then
             Notify("武器", "已开启无限弹药", 3)
+            local ammoNames = {
+                "Ammo", "MaxAmmo", "ClipAmmo", "Magazine", "Mag", "CurrentAmmo",
+                "AmmoInClip", "AmmoInMag", "ClipSize", "MagSize", "Bullets",
+                "BulletCount", "Reserve", "StoredAmmo", "TotalAmmo",
+            }
+            local ammoKeywords = {"ammo", "mag", "bullet", "clip", "round", "reserve"}
             Connections.InfiniteAmmo = RunService.Heartbeat:Connect(function()
                 local char = GetChar()
                 if not char then return end
                 for _, tool in ipairs(char:GetChildren()) do
                     if tool:IsA("Tool") then
-                        local ammo = tool:FindFirstChild("Ammo") or tool:FindFirstChild("MaxAmmo") or tool:FindFirstChild("ClipAmmo")
-                        if ammo then ammo.Value = 999 end
-                        local mag = tool:FindFirstChild("Magazine") or tool:FindFirstChild("Mag")
-                        if mag and mag:IsA("IntValue") then mag.Value = 999 end
+                        -- 直接按已知名称查找
+                        for _, name in ipairs(ammoNames) do
+                            local v = tool:FindFirstChild(name)
+                            if v and v:IsA("ValueBase") then v.Value = 999 end
+                        end
+                        -- 深度搜索所有子对象，按关键词匹配
+                        for _, desc in ipairs(tool:GetDescendants()) do
+                            if desc:IsA("ValueBase") then
+                                local lowerName = string.lower(desc.Name)
+                                for _, kw in ipairs(ammoKeywords) do
+                                    if string.find(lowerName, kw) then
+                                        desc.Value = 999
+                                        break
+                                    end
+                                end
+                            end
+                        end
+                        -- 设置工具属性（attributes）
+                        pcall(function()
+                            for _, name in ipairs(ammoNames) do
+                                if tool:GetAttribute(name) ~= nil then
+                                    tool:SetAttribute(name, 999)
+                                end
+                            end
+                        end)
                     end
                 end
             end)
@@ -300,18 +327,67 @@ CombatTab:Toggle({
         State.AutoFire = val
         if val then
             Notify("武器", "已开启自动开火", 3)
+            local fireNames = {
+                "Fire", "Shoot", "ShootEvent", "FireGun", "FireWeapon",
+                "OnShoot", "OnFire", "Attack", "Click", "ShootGun",
+            }
+            local fireKeywords = {"fire", "shoot", "attack", "click", "gun"}
             Connections.AutoFire = RunService.Heartbeat:Connect(function()
                 local char = GetChar()
                 if not char then return end
                 local tool = char:FindFirstChildOfClass("Tool")
                 if tool then
                     pcall(function()
-                        if tool:FindFirstChild("Handle") then
-                            tool.Handle:FireServer()
+                        -- 方法1: 直接调用 Activate
+                        tool:Activate()
+
+                        -- 方法2: 按已知名称查找 RemoteEvent/RemoteFunction
+                        for _, name in ipairs(fireNames) do
+                            local remote = tool:FindFirstChild(name)
+                            if remote then
+                                if remote:IsA("RemoteEvent") then
+                                    remote:FireServer()
+                                elseif remote:IsA("RemoteFunction") then
+                                    remote:InvokeServer()
+                                end
+                            end
                         end
-                        local fireRemote = tool:FindFirstChild("Fire") or tool:FindFirstChild("Shoot")
-                        if fireRemote and fireRemote:IsA("RemoteEvent") then
-                            fireRemote:FireServer()
+
+                        -- 方法3: 深度搜索所有子对象，按关键词匹配
+                        for _, desc in ipairs(tool:GetDescendants()) do
+                            if desc:IsA("RemoteEvent") then
+                                local lowerName = string.lower(desc.Name)
+                                for _, kw in ipairs(fireKeywords) do
+                                    if string.find(lowerName, kw) then
+                                        desc:FireServer()
+                                        break
+                                    end
+                                end
+                            elseif desc:IsA("RemoteFunction") then
+                                local lowerName = string.lower(desc.Name)
+                                for _, kw in ipairs(fireKeywords) do
+                                    if string.find(lowerName, kw) then
+                                        desc:InvokeServer()
+                                        break
+                                    end
+                                end
+                            end
+                        end
+
+                        -- 方法4: 搜索 Handle 上的 Remote
+                        local handle = tool:FindFirstChild("Handle")
+                        if handle then
+                            for _, desc in ipairs(handle:GetDescendants()) do
+                                if desc:IsA("RemoteEvent") then
+                                    local lowerName = string.lower(desc.Name)
+                                    for _, kw in ipairs(fireKeywords) do
+                                        if string.find(lowerName, kw) then
+                                            desc:FireServer()
+                                            break
+                                        end
+                                    end
+                                end
+                            end
                         end
                     end)
                 end
