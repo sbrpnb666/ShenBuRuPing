@@ -384,95 +384,90 @@ CombatTab:Toggle({
     end,
 })
 
--- 通用无限弹药 (全兼容)
+-- 通用无限弹药 (ACS框架精准适配)
 local ammoLoop = nil
 CombatTab:Toggle({
-    Title = "无限弹药 (全兼容)",
+    Title = "无限弹药",
     Default = false,
     Callback = function(val)
         State.InfiniteAmmo = val
         if val then
             Notify("战斗", "无限弹药已开启", 3)
-            local ammoKeywords = {"ammo", "mag", "bullet", "clip", "round", "reserve", "stock", "count"}
             local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
+            -- 方法1: 破坏 Reload Remote (让换弹系统失效)
+            pcall(function()
+                local gunReload = ReplicatedStorage:FindFirstChild("BulletFireSystem")
+                    and ReplicatedStorage.BulletFireSystem:FindFirstChild("GunReload")
+                if gunReload then
+                    gunReload:Destroy()
+                    local fake = Instance.new("Part")
+                    fake.Name = "GunReload"
+                    fake.Parent = ReplicatedStorage.BulletFireSystem
+                end
+            end)
+
+            -- 方法2: 持续设置弹药值
             ammoLoop = RunService.Heartbeat:Connect(function()
-                -- 搜索角色里的 Tool
                 local char = GetChar()
-                if char then
-                    for _, tool in ipairs(char:GetChildren()) do
-                        if tool:IsA("Tool") then
-                            pcall(function()
-                                for _, desc in ipairs(tool:GetDescendants()) do
-                                    if desc:IsA("ValueBase") then
-                                        local ln = string.lower(desc.Name)
-                                        for _, kw in ipairs(ammoKeywords) do
-                                            if string.find(ln, kw) then
-                                                desc.Value = desc:IsA("IntValue") and 999 or 999
-                                                break
-                                            end
-                                        end
+                if not char then return end
+
+                for _, tool in ipairs(char:GetChildren()) do
+                    if tool:IsA("Tool") then
+                        pcall(function()
+                            -- ACS框架: tool.ACS_Modulo.Variaveis.Ammo
+                            local acsMod = tool:FindFirstChild("ACS_Modulo")
+                            if acsMod then
+                                local vars = acsMod:FindFirstChild("Variaveis")
+                                if vars then
+                                    local ammo = vars:FindFirstChild("Ammo")
+                                    if ammo then ammo.Value = 9999 end
+                                    local maxAmmo = vars:FindFirstChild("MaxAmmo")
+                                    if maxAmmo then maxAmmo.Value = 9999 end
+                                    local reserve = vars:FindFirstChild("ReserveAmmo")
+                                    if reserve then reserve.Value = 9999 end
+                                end
+                            end
+
+                            -- 通用搜索: 找所有弹药相关值
+                            for _, desc in ipairs(tool:GetDescendants()) do
+                                if desc:IsA("ValueBase") then
+                                    local ln = string.lower(desc.Name)
+                                    if string.find(ln, "ammo") or string.find(ln, "mag") or string.find(ln, "clip") or string.find(ln, "bullet") then
+                                        desc.Value = 9999
                                     end
                                 end
-                            end)
-                        end
+                            end
+
+                            -- Attributes
+                            local attrs = tool:GetAttributes()
+                            for k, v in pairs(attrs) do
+                                local lk = string.lower(k)
+                                if string.find(lk, "ammo") or string.find(lk, "mag") or string.find(lk, "clip") then
+                                    tool:SetAttribute(k, 9999)
+                                end
+                            end
+                        end)
                     end
                 end
 
-                -- 搜索 Backpack 里的 Tool
+                -- 也搜索 Backpack
                 local bp = LocalPlayer:FindFirstChild("Backpack")
                 if bp then
                     for _, tool in ipairs(bp:GetChildren()) do
                         if tool:IsA("Tool") then
                             pcall(function()
-                                for _, desc in ipairs(tool:GetDescendants()) do
-                                    if desc:IsA("ValueBase") then
-                                        local ln = string.lower(desc.Name)
-                                        for _, kw in ipairs(ammoKeywords) do
-                                            if string.find(ln, kw) then
-                                                desc.Value = 999
-                                                break
-                                            end
-                                        end
+                                local acsMod = tool:FindFirstChild("ACS_Modulo")
+                                if acsMod then
+                                    local vars = acsMod:FindFirstChild("Variaveis")
+                                    if vars then
+                                        local ammo = vars:FindFirstChild("Ammo")
+                                        if ammo then ammo.Value = 9999 end
                                     end
                                 end
                             end)
                         end
                     end
-                end
-
-                -- 搜索 leaderstats
-                local ls = LocalPlayer:FindFirstChild("leaderstats")
-                if ls then
-                    for _, v in ipairs(ls:GetChildren()) do
-                        if v:IsA("ValueBase") then
-                            local ln = string.lower(v.Name)
-                            for _, kw in ipairs(ammoKeywords) do
-                                if string.find(ln, kw) then
-                                    v.Value = 999
-                                    break
-                                end
-                            end
-                        end
-                    end
-                end
-
-                -- 搜索 PlayerGui 里的弹药值
-                local pg = LocalPlayer:FindFirstChild("PlayerGui")
-                if pg then
-                    pcall(function()
-                        for _, desc in ipairs(pg:GetDescendants()) do
-                            if desc:IsA("IntValue") or desc:IsA("IntValue") then
-                                local ln = string.lower(desc.Name)
-                                for _, kw in ipairs(ammoKeywords) do
-                                    if string.find(ln, kw) then
-                                        desc.Value = 999
-                                        break
-                                    end
-                                end
-                            end
-                        end
-                    end)
                 end
             end)
         else
@@ -482,63 +477,84 @@ CombatTab:Toggle({
     end,
 })
 
--- 通用无后坐力 (全兼容)
+-- 通用无后坐力 (ACS框架精准适配)
 local noRecoilLoop = nil
 CombatTab:Toggle({
-    Title = "无后坐力 (全兼容)",
+    Title = "无后坐力",
     Default = false,
     Callback = function(val)
         State.NoRecoil = val
         if val then
             Notify("战斗", "无后坐力已开启", 3)
-            local recoilKeywords = {"recoil", "spread", "kick", "shake", "bloom", "deviation", "sway"}
-            local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
             noRecoilLoop = RunService.Heartbeat:Connect(function()
                 local char = GetChar()
                 if not char then return end
 
-                -- 搜索角色内 Tool
                 for _, tool in ipairs(char:GetChildren()) do
                     if tool:IsA("Tool") then
                         pcall(function()
+                            -- ACS框架: tool.ACS_Modulo.Variaveis 里的后坐力值
+                            local acsMod = tool:FindFirstChild("ACS_Modulo")
+                            if acsMod then
+                                local vars = acsMod:FindFirstChild("Variaveis")
+                                if vars then
+                                    -- 设置后坐力相关值
+                                    local recoil = vars:FindFirstChild("Recoil")
+                                    if recoil then recoil.Value = 0 end
+                                    local kick = vars:FindFirstChild("Kick")
+                                    if kick then kick.Value = 0 end
+                                    local spread = vars:FindFirstChild("Spread")
+                                    if spread then spread.Value = 0 end
+                                    local hipSpread = vars:FindFirstChild("HipFireSpread")
+                                    if hipSpread then hipSpread.Value = 0 end
+                                    local bloom = vars:FindFirstChild("Bloom")
+                                    if bloom then bloom.Value = 0 end
+                                    local camShake = vars:FindFirstChild("CameraShake")
+                                    if camShake then camShake.Value = 0 end
+                                    local deviation = vars:FindFirstChild("Deviation")
+                                    if deviation then deviation.Value = 0 end
+                                    local sway = vars:FindFirstChild("Sway")
+                                    if sway then sway.Value = 0 end
+                                    -- 提高准确度
+                                    local accuracy = vars:FindFirstChild("Accuracy")
+                                    if accuracy then accuracy.Value = 100 end
+                                    -- 提高射程
+                                    local range = vars:FindFirstChild("Range")
+                                    if range then range.Value = 9999 end
+                                    -- 提高射速
+                                    local firerate = vars:FindFirstChild("FireRate")
+                                    if firerate then firerate.Value = 9999 end
+                                    local cooldown = vars:FindFirstChild("Cooldown")
+                                    if cooldown then cooldown.Value = 0 end
+                                end
+                            end
+
+                            -- 通用搜索: 找所有后坐力相关值
                             for _, desc in ipairs(tool:GetDescendants()) do
                                 if desc:IsA("ValueBase") then
                                     local ln = string.lower(desc.Name)
-                                    for _, kw in ipairs(recoilKeywords) do
-                                        if string.find(ln, kw) then
-                                            desc.Value = 0
-                                            break
-                                        end
+                                    if string.find(ln, "recoil") or string.find(ln, "kick")
+                                        or string.find(ln, "spread") or string.find(ln, "bloom")
+                                        or string.find(ln, "shake") or string.find(ln, "deviation")
+                                        or string.find(ln, "sway") then
+                                        desc.Value = 0
                                     end
                                 end
                             end
-                            -- 设置 attributes
-                            pcall(function()
-                                for _, kw in ipairs(recoilKeywords) do
-                                    if tool:GetAttribute(kw) ~= nil then
-                                        tool:SetAttribute(kw, 0)
-                                    end
+
+                            -- Attributes
+                            local attrs = tool:GetAttributes()
+                            for k, v in pairs(attrs) do
+                                local lk = string.lower(k)
+                                if string.find(lk, "recoil") or string.find(lk, "kick")
+                                    or string.find(lk, "spread") or string.find(lk, "bloom")
+                                    or string.find(lk, "shake") or string.find(lk, "deviation") then
+                                    tool:SetAttribute(k, 0)
                                 end
-                            end)
+                            end
                         end)
                     end
                 end
-
-                -- 搜索 ReplicatedStorage 里的配置
-                pcall(function()
-                    for _, desc in ipairs(ReplicatedStorage:GetDescendants()) do
-                        if desc:IsA("ValueBase") then
-                            local ln = string.lower(desc.Name)
-                            for _, kw in ipairs(recoilKeywords) do
-                                if string.find(ln, kw) then
-                                    desc.Value = 0
-                                    break
-                                end
-                            end
-                        end
-                    end
-                end)
             end)
         else
             if noRecoilLoop then noRecoilLoop:Disconnect() noRecoilLoop = nil end
