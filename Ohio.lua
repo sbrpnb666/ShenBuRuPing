@@ -87,8 +87,6 @@ local State = {
     JumpPower = 50,
     InfJump = false,
     Noclip = false,
-    FlyEnabled = false,
-    FlySpeed = 50,
     GodMode = false,
     NoFallDamage = false,
     -- 视觉
@@ -112,8 +110,6 @@ local Connections = {}
 local ESPObjects = {}
 local FOVCircle = nil
 local ChamsObjects = {}
-local flyConn = nil
-local flySpeed = 50
 
 --=========== 辅助函数 ===========
 local function GetChar()
@@ -225,10 +221,10 @@ CombatTab:Toggle({
     Callback = function(val)
         State.AimbotEnabled = val
         if val then
-            Notify("战斗", "自瞄已开启 (按住右键激活)", 3)
+            Notify("战斗", "自瞄已开启 (自动锁定最近敌人)", 3)
             aimbotConn = RunService.RenderStepped:Connect(function()
                 if not State.AimbotEnabled then return end
-                if not UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2) then return end
+                -- 手机端: 开启即自动锁定, 无需按键
                 local target = GetClosestPlayerToFov()
                 if target then
                     local part = GetAimTargetPart(target)
@@ -288,7 +284,8 @@ CombatTab:Toggle({
             local oldIndex2 = mt.__index
             mt.__index = newcclosure(function(self, key)
                 if key == "Hit" or key == "Target" or key == "TargetPoint" then
-                    if State.SilentAim and not UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2) then
+                    if State.SilentAim then
+                        -- 手机端: 开启即生效, 无需按右键
                         local target = GetClosestPlayerToFov()
                         if target then
                             local part = GetAimTargetPart(target)
@@ -679,88 +676,16 @@ PlayerTab:Toggle({
 
 PlayerTab:Divider()
 
--- 飞行
-PlayerTab:Slider({
-    Title = "飞行速度",
-    Value = { Min = 10, Max = 300, Default = 50 },
-    Increment = 5,
-    Callback = function(val)
-        State.FlySpeed = val
-        flySpeed = val
-    end,
-})
-
-PlayerTab:Toggle({
-    Title = "飞行 (Fly) - 按住W/A/S/D移动",
-    Default = false,
-    Callback = function(val)
-        State.FlyEnabled = val
-        if val then
-            Notify("玩家", "飞行已开启 (WASD移动, Shift加速)", 3)
-            local root = GetRoot()
-            if not root then return end
-
-            local flyBV = Instance.new("BodyVelocity")
-            flyBV.Name = "FlyVelocity"
-            flyBV.MaxForce = Vector3.new(9e9, 9e9, 9e9)
-            flyBV.Velocity = Vector3.zero
-            flyBV.Parent = root
-
-            local flyBG = Instance.new("BodyGyro")
-            flyBG.Name = "FlyGyro"
-            flyBG.MaxTorque = Vector3.new(9e9, 9e9, 9e9)
-            flyBG.P = 9e4
-            flyBG.CFrame = Camera.CFrame
-            flyBG.Parent = root
-
-            flyConn = RunService.RenderStepped:Connect(function()
-                if not State.FlyEnabled then return end
-                local r = GetRoot()
-                if not r then return end
-                local cam = Camera.CFrame
-                local moveVec = Vector3.zero
-
-                local f = cam.LookVector
-                local r2 = cam.RightVector
-                local u = cam.UpVector
-
-                if UserInputService:IsKeyDown(Enum.KeyCode.W) then moveVec = moveVec + f end
-                if UserInputService:IsKeyDown(Enum.KeyCode.S) then moveVec = moveVec - f end
-                if UserInputService:IsKeyDown(Enum.KeyCode.A) then moveVec = moveVec - r2 end
-                if UserInputService:IsKeyDown(Enum.KeyCode.D) then moveVec = moveVec + r2 end
-                if UserInputService:IsKeyDown(Enum.KeyCode.Space) then moveVec = moveVec + u end
-                if UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then moveVec = moveVec - u end
-
-                local speed = flySpeed
-                if UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) then speed = speed * 2 end
-
-                if moveVec.Magnitude > 0 then
-                    moveVec = moveVec.Unit * speed
-                end
-
-                flyBV.Velocity = moveVec
-                flyBG.CFrame = cam
-            end)
-        else
-            if flyConn then flyConn:Disconnect() flyConn = nil end
-            local r = GetRoot()
-            if r then
-                local bv = r:FindFirstChild("FlyVelocity")
-                local bg = r:FindFirstChild("FlyGyro")
-                if bv then bv:Destroy() end
-                if bg then bg:Destroy() end
-            end
-            Notify("玩家", "飞行已关闭", 3)
-        end
-    end,
-})
-
-PlayerTab:Divider()
-
--- 飞行脚本V3
+-- 飞行脚本 V3 (手机端兼容, 独立面板)
+local flyV3Loaded = false
 PlayerTab:Button({
-    Title = "飞行脚本 V3 (独立面板)",
+    Title = "飞行脚本 V3 (手机兼容)",
     Callback = function()
+        if flyV3Loaded then
+            Notify("飞行", "飞行面板已打开, 请用面板上的按钮控制", 3)
+            return
+        end
+        flyV3Loaded = true
         loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/.uploads/飞行脚本V3(全游戏通用).txt"))()
     end,
 })
@@ -1280,26 +1205,44 @@ end
 
 TeleportTab:Divider()
 
--- 点击传送
+-- 点击传送 (手机端: 长按屏幕0.5秒传送)
 local clickTpConn = nil
+local tpHoldStart = nil
 TeleportTab:Toggle({
-    Title = "点击传送 (Ctrl+点击)",
+    Title = "长按传送 (长按屏幕0.5秒)",
     Default = false,
     Callback = function(val)
         if val then
-            Notify("传送", "点击传送已开启 (Ctrl+左键)", 3)
+            Notify("传送", "长按传送已开启 (长按屏幕0.5秒)", 3)
             clickTpConn = UserInputService.InputBegan:Connect(function(input, gpe)
                 if gpe then return end
-                if input.KeyCode == Enum.KeyCode.LeftControl and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) then
+                -- 手机端: 任何触摸/点击开始计时
+                if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    tpHoldStart = tick()
+                end
+            end)
+            -- 检测长按完成
+            Connections.TpHold = RunService.Heartbeat:Connect(function()
+                if not tpHoldStart then return end
+                local heldTime = tick() - tpHoldStart
+                if heldTime >= 0.5 then
                     local root = GetRoot()
                     if root then
                         root.CFrame = Mouse.Hit
                     end
+                    tpHoldStart = nil
                 end
+            end)
+            -- 松开手重置
+            Connections.TpEnd = UserInputService.InputEnded:Connect(function(input, gpe)
+                tpHoldStart = nil
             end)
         else
             if clickTpConn then clickTpConn:Disconnect() clickTpConn = nil end
-            Notify("传送", "点击传送已关闭", 3)
+            if Connections.TpHold then Connections.TpHold:Disconnect() Connections.TpHold = nil end
+            if Connections.TpEnd then Connections.TpEnd:Disconnect() Connections.TpEnd = nil end
+            tpHoldStart = nil
+            Notify("传送", "长按传送已关闭", 3)
         end
     end,
 })
