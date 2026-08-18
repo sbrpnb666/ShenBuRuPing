@@ -74,6 +74,9 @@ local State = {
     NoClip = false,
     FlyEnabled = false,
     GodMode = false,
+    NoFallDamage = false,
+    AimbotEnabled = false,
+    BulletTracer = false,
 }
 
 local Connections = {}
@@ -600,6 +603,211 @@ CombatTab:Toggle({
     end,
 })
 
+-- 自瞄 (Aimbot)
+local aimbotConn = nil
+local aimbotTarget = nil
+
+local function getClosestPlayerToFov()
+    local closestPlr = nil
+    local shortestDist = math.huge
+    local mousePos = UserInputService:GetMouseLocation()
+    local viewport = Camera.ViewportSize
+    local center = Vector2.new(viewport.X / 2, viewport.Y / 2)
+
+    for _, plr in ipairs(Players:GetPlayers()) do
+        if plr ~= LocalPlayer and plr.Character then
+            local head = plr.Character:FindFirstChild("Head")
+            local hrp = plr.Character:FindFirstChild("HumanoidRootPart")
+            local hum = plr.Character:FindFirstChildOfClass("Humanoid")
+            if (head or hrp) and hum and hum.Health > 0 then
+                local targetPart = head or hrp
+                local screenPos, onScreen = Camera:WorldToViewportPoint(targetPart.Position)
+                if onScreen then
+                    local dist = (Vector2.new(screenPos.X, screenPos.Y) - center).Magnitude
+                    if dist < shortestDist and dist <= 150 then
+                        shortestDist = dist
+                        closestPlr = plr
+                    end
+                end
+            end
+        end
+    end
+    return closestPlr
+end
+
+CombatTab:Toggle({
+    Title = "自瞄 (Aimbot)",
+    Default = false,
+    Callback = function(val)
+        State.AimbotEnabled = val
+        if val then
+            Notify("战斗", "自瞄已开启 (按住右键激活)", 3)
+            aimbotConn = RunService.RenderStepped:Connect(function()
+                if not State.AimbotEnabled then return end
+                -- 仅在按住右键时自瞄
+                if not UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2) then return end
+
+                local target = getClosestPlayerToFov()
+                if target and target.Character then
+                    local head = target.Character:FindFirstChild("Head")
+                    local hrp = target.Character:FindFirstChild("HumanoidRootPart")
+                    local hum = target.Character:FindFirstChildOfClass("Humanoid")
+                    if (head or hrp) and hum and hum.Health > 0 then
+                        local targetPart = head or hrp
+                        local root = GetRoot()
+                        if root then
+                            -- 平滑锁定相机到目标
+                            local targetPos = targetPart.Position
+                            local camPos = Camera.CFrame.Position
+                            local lookCFrame = CFrame.new(camPos, targetPos)
+                            -- 使用平滑插值，避免瞬移
+                            Camera.CFrame = Camera.CFrame:Lerp(lookCFrame, 0.4)
+                        end
+                    end
+                end
+            end)
+        else
+            if aimbotConn then aimbotConn:Disconnect() aimbotConn = nil end
+            aimbotTarget = nil
+            Notify("战斗", "自瞄已关闭", 3)
+        end
+    end,
+})
+
+-- 子弹追踪 (Bullet Tracer)
+local tracerConn = nil
+local tracersFolder = nil
+
+local function createTracer(startPos, endPos, color)
+    local beam = Instance.new("Part")
+    beam.Name = "BulletTracer"
+    beam.Anchored = true
+    beam.CanCollide = false
+    beam.CanQuery = false
+    beam.Material = Enum.Material.Neon
+    beam.Color = color or Color3.fromRGB(255, 200, 50)
+    beam.Transparency = 0.2
+    beam.Shape = Enum.PartType.Cylinder
+    beam.Parent = tracersFolder
+
+    local distance = (startPos - endPos).Magnitude
+    local midPoint = (startPos + endPos) / 2
+
+    beam.Size = Vector3.new(distance, 0.15, 0.15)
+    beam.CFrame = CFrame.new(midPoint, endPos) * CFrame.Angles(0, math.rad(90), 0)
+
+    -- 淡出效果
+    task.spawn(function()
+        local transparency = 0.2
+        for i = 1, 20 do
+            transparency = transparency + 0.04
+            beam.Transparency = transparency
+            beam.Size = Vector3.new(distance, 0.15 * (1 - i / 20), 0.15 * (1 - i / 20))
+            task.wait(0.03)
+        end
+        beam:Destroy()
+    end)
+end
+
+CombatTab:Toggle({
+    Title = "子弹追踪 (Tracer)",
+    Default = false,
+    Callback = function(val)
+        State.BulletTracer = val
+        if val then
+            Notify("战斗", "子弹追踪已开启", 3)
+
+            -- 创建存放 Tracer 的文件夹
+            tracersFolder = Workspace:FindFirstChild("BulletTracers")
+            if not tracersFolder then
+                tracersFolder = Instance.new("Folder")
+                tracersFolder.Name = "BulletTracers"
+                tracersFolder.Parent = Workspace
+            end
+
+            local ReplicatedStorage = game:GetService("ReplicatedStorage")
+            local lastTracerTime = 0
+
+            -- 方法1: 监听 ACS 框架的 BulletFire Remote
+            tracerConn = RunService.Heartbeat:Connect(function()
+                if not State.BulletTracer then return end
+
+                local char = GetChar()
+                if not char then return end
+
+                local now = tick()
+                if now - lastTracerTime < 0.05 then return end
+
+                -- 检测射击: 检查是否有 Tool 被激活
+                local tool = char:FindFirstChildOfClass("Tool")
+                if tool then
+                    local handle = tool:FindFirstChild("Handle")
+                    local muzzle = tool:FindFirstChild("Muzzle") or handle
+                    local root = char:FindFirstChild("HumanoidRootPart")
+
+                    if muzzle and root then
+                        -- 检测鼠标点击射击
+                        local mouse = LocalPlayer:GetMouse()
+                        local mouseHit = mouse.Hit.Position
+
+                        -- 从枪口到鼠标指向位置画线
+                        if UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) then
+                            lastTracerTime = now
+                            local startPos = muzzle.Position
+                            createTracer(startPos, mouseHit)
+                        end
+                    end
+                end
+
+                -- 方法2: 监听其他玩家的射击 (通过检测 BulletFire Remote)
+                -- 搜索 ACS 框架的 BulletFire 事件
+                pcall(function()
+                    for _, plr in ipairs(Players:GetPlayers()) do
+                        if plr ~= LocalPlayer and plr.Character then
+                            local tool = plr.Character:FindFirstChildOfClass("Tool")
+                            if tool then
+                                local handle = tool:FindFirstChild("Handle")
+                                local muzzle = tool:FindFirstChild("Muzzle") or handle
+                                local head = plr.Character:FindFirstChild("Head")
+                                if muzzle and head then
+                                    -- 检测该玩家是否在射击 (通过 ACS 模块检测)
+                                    local acsMod = tool:FindFirstChild("ACS_Modulo")
+                                    if acsMod then
+                                        local vars = acsMod:FindFirstChild("Variaveis")
+                                        if vars then
+                                            local ammo = vars:FindFirstChild("Ammo")
+                                            -- 如果弹药在减少，说明在射击
+                                            if ammo then
+                                                local key = plr.Name .. "_ammo"
+                                                local prevAmmo = _G[key] or ammo.Value
+                                                if ammo.Value < prevAmmo then
+                                                    lastTracerTime = now
+                                                    -- 计算射击方向 (朝向最近的敌人或鼠标方向)
+                                                    local startPos = muzzle.Position
+                                                    local dir = head.CFrame.LookVector
+                                                    local endPos = startPos + dir * 300
+                                                    createTracer(startPos, endPos, Color3.fromRGB(255, 100, 100))
+                                                end
+                                                _G[key] = ammo.Value
+                                            end
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end)
+            end)
+        else
+            if tracerConn then tracerConn:Disconnect() tracerConn = nil end
+            if tracersFolder then
+                tracersFolder:ClearAllChildren()
+            end
+            Notify("战斗", "子弹追踪已关闭", 3)
+        end
+    end,
+})
+
 --========================================================
 -- Tab3: 玩家
 --========================================================
@@ -693,6 +901,46 @@ PlayerTab:Toggle({
         else
             if Connections.GodMode then Connections.GodMode:Disconnect() Connections.GodMode = nil end
             Notify("玩家", "已关闭无敌", 3)
+        end
+    end,
+})
+
+-- 摔落无伤害
+PlayerTab:Toggle({
+    Title = "摔落无伤害",
+    Default = false,
+    Callback = function(val)
+        State.NoFallDamage = val
+        if val then
+            Notify("玩家", "已开启摔落无伤害", 3)
+
+            local function setupFall(h)
+                if not h then return end
+                local savedHealth = h.Health
+                h.StateChanged:Connect(function(old, new)
+                    if not State.NoFallDamage then return end
+                    if new == Enum.HumanoidStateType.Freefall then
+                        savedHealth = h.Health
+                    elseif old == Enum.HumanoidStateType.Freefall then
+                        if h.Health < savedHealth then
+                            h.Health = savedHealth
+                        end
+                    end
+                end)
+            end
+
+            local c = GetChar()
+            if c then setupFall(c:FindFirstChildOfClass("Humanoid")) end
+
+            Connections.NoFallDamage = LocalPlayer.CharacterAdded:Connect(function(char)
+                task.wait(0.3)
+                if State.NoFallDamage then
+                    setupFall(char:FindFirstChildOfClass("Humanoid") or char:WaitForChild("Humanoid"))
+                end
+            end)
+        else
+            if Connections.NoFallDamage then Connections.NoFallDamage:Disconnect() Connections.NoFallDamage = nil end
+            Notify("玩家", "已关闭摔落无伤害", 3)
         end
     end,
 })
