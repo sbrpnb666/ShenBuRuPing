@@ -1892,6 +1892,47 @@ GenTab:Toggle({
     end,
 })
 
+-- 秒互动 (ProximityPrompt 快速交互)
+GenTab:Toggle({
+    Title = "秒互动",
+    Default = false,
+    Callback = function(val)
+        State.InstantPrompt = val
+        if val then
+            local promptService = game:GetService("ProximityPromptService")
+            local function setAllPromptDuration(parent, duration)
+                for _, desc in ipairs(parent:GetDescendants()) do
+                    if desc:IsA("ProximityPrompt") then
+                        desc.HoldDuration = duration
+                    end
+                end
+            end
+            setAllPromptDuration(workspace, 0.01)
+            State._PromptBind = promptService.PromptButtonHoldBegan:Connect(function(prompt)
+                prompt.HoldDuration = 0.01
+            end)
+            State._PromptConn = workspace.DescendantAdded:Connect(function(desc)
+                if desc:IsA("ProximityPrompt") and State.InstantPrompt then
+                    desc.HoldDuration = 0.01
+                end
+            end)
+            Notify("通用", "秒互动已开启", 3)
+        else
+            if State._PromptBind then State._PromptBind:Disconnect() State._PromptBind = nil end
+            if State._PromptConn then State._PromptConn:Disconnect() State._PromptConn = nil end
+            local function resetAllPromptDuration(parent, duration)
+                for _, desc in ipairs(parent:GetDescendants()) do
+                    if desc:IsA("ProximityPrompt") then
+                        desc.HoldDuration = duration
+                    end
+                end
+            end
+            resetAllPromptDuration(workspace, 0.5)
+            Notify("通用", "秒互动已关闭", 3)
+        end
+    end,
+})
+
 --========================================================
 -- Tab5: 自瞄和子追
 --========================================================
