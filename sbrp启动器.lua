@@ -121,4 +121,17 @@ Tab:Button({
     end,
 })
 
+Tab:Button({
+    Title = "最强战场",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "最强战场", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E6%9C%80%E5%BC%BA%E6%88%98%E5%9C%BA.lua"))()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
+        end
+    end,
+})
+
 WindUI:Notify({ Title = "欢迎使用", Content = "启动器已加载", Duration = 3 })
