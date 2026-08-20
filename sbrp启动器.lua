@@ -233,7 +233,7 @@ WindUI:Notify({ Title = "欢迎使用", Content = "启动器已加载", Duration
 --========================================================
 local NoticeTab = Window:Tab({
     Title = "公告",
-    Icon = "megaphone",
+    Icon = "bell",
 })
 
 -- 赞赏码图片
