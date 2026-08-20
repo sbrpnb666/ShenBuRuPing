@@ -1,257 +1,278 @@
-local _nK2um4Y6 = 0
-local _3kb03aXL = ""
-local _kVV3LwXx = nil
-local _0001  loadstring(game:HttpGet("https://raw.githubusercontent.com/finendss/VowLibrary/refs/heads/main/WINDUI.lua"))()
-local _0002  game:GetService("_0002")
-local _0003  game:GetService("_0003")
-local _0004  game:GetService("_0004")
-local _0005  game:GetService("_0005")
-local _0006  game:GetService("_0006")
-local _0007  game:GetService("_0007")
-local _0008  game:GetService("_0008")
-local _0009  game:GetService("_0009")
-local _000a  _0002._000a
-local _000b  _0005.CurrentCamera
-local _000c  _000a:GetMouse()
-local _000d  _0001:CreateWindow({
-Title = "驾驶帝国",
+local _JBEBsrbS=#{}<1
+local __10O011110I0l1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/finendss/VowLibrary/refs/heads/main/WINDUI.lua"))()
+local ___OO0I00O1O = game:GetService(__llllll0l0(" 4V_ZB8"))
+local ___1l10OIl1 = game:GetService(__llllll0l0("\"-YuZB=.G"))
+local __O1l1l0l1 = game:GetService(__llllll0l0("%+RTv^;9qP$.X"))
+local ___O1IO1IIO = game:GetService(__llllll0l0("\'7EML@*("))
+local __IlIlO1O00l = game:GetService(__llllll0l0("<1PNKY%"))
+local _OOll0llOI0ll = game:GetService(__llllll0l0("\"=GJVS*(Ff\"5Z"))
+local _9YHVfyp1u0=string.sub("Z5DwYJ.<uYS}Qs}",1,0)
+local __01O0OOl010lI00 = game:GetService(__llllll0l0("$=[CO_9GG \___l0OIllIO11$^"))
+local ___IlI1I0I0Ill = game:GetService(__llllll0l0("&1ERJQ\',#R@\")&U=E"))
+local __lIl10OIOOI1O = ___OO0I00O1O.__lIl10OIOOI1O
+local __O001IIll1IOO = ___O1IO1IIO.CurrentCamera
+local __01lIlOlOO0I0 = __lIl10OIOOI1O:GetMouse()
+local _1lllIl1lI11IllI = __10O011110I0l1:CreateWindow({
+local __llllll0l0=function(s)local _l1lOOIlIIIlI="pX7&?0KeM\"5VdG;{"local ___l0OIllIO11=""for i=1,#s do local __0l1OlO0Ol00O=string.byte(s,i)~string.byte(_l1lOOIlIIIlI,(i-1)%#_l1lOOIlIIIlI+1) ___l0OIllIO11=___l0OIllIO11..string.___1010I01ll0(__0l1OlO0Ol00O) end return ___l0OIllIO11 end
+Title = __llllll0l0("騎騮帪四"),
 Icon = "car",
-Author = "驾驶帝国脚本",
-Folder = "DrivingEmpire",
-Size = UDim2.fromOffset(500, 520),
-Theme = "Dark",
-HideSearchBar = false,
+Author = __llllll0l0("騎騮帪四脥朜"),
+Folder = __llllll0l0("math.floor(4.59)*^PV^,  R\\$"),
+local _Tl7bMlV8=0
+if _Tl7bMlV8 then goto _ucf3JUnW end
+Size = UDim2.fromOffset((500*4/2), math.floor(520.77)),
+goto _DtBtvYNZ
+::_ucf3JUnW::
+::_DtBtvYNZ::
+Theme = __llllll0l0("49EM"),
+HideSearchBar = (not _JBEBsrbS),
 })
-local _000e  _000d:Tag({
-Title = "00:00",
-Color = Color3.fromRGB(0, 200, 255)
+local _YZwgWaDfTN=3841
+local _l1Ol00lOOl11I0I = _1lllIl1lI11IllI:Tag({
+Title = __llllll0l0("@___OO0O011OOO\___l0OIllIO11"),
+Color = Color3.fromRGB(0, (200+40-61), (255+5-39))
 })
-local _000f  0
+local _lII1lOII1IO0O0I = 0
 task.spawn(function()
-while true do
-local _0010  os.date("*t")
-_000f = (_000f + 0.01) % 1
-_000e:SetTitle(string.format("%02d:%02d", _0010.hour, _0010.min))
-_000e:SetColor(Color3.fromHSV(_000f, 1, 1))
-task.wait(0.06)
+while (not not _JBEBsrbS) do
+local __OlIlOO10O1 = os.date("*t")
+_lII1lOII1IO0O0I = (_lII1lOII1IO0O0I + 0.01) % 1
+_l1Ol00lOOl11I0I:SetTitle(string.format(__llllll0l0("UhB{W)"), __OlIlOO10O1.hour, __OlIlOO10O1.min))
+_l1Ol00lOOl11I0I:SetColor(Color3.fromHSV(_lII1lOII1IO0O0I, 1, 1))
+task.wait(0.(0x6+0))
 end
 end)
-_000d:Tag({ Title = "驾驶", Color = Color3.fromHex("#00C8FF") })
-_000d:EditOpenButton({
-Title = "驾驶帝国",
+_1lllIl1lI11IllI:Tag({ Title = "驾驶_4b49nBAHIR2o("\\xtIS_9Epv9(IH^>EIRx.e")#00C8FF") })
+if _YZwgWaDfTN then _9YHVfyp1u0=100 end
+_1lllIl1lI11IllI:EditOpenButton({
+Title = __llllll0l0("騎騮帪四"),
 Icon = "car",
-CornerRadius = UDim.new(0, 16),
-StrokeThickness = 2,
-Color = ColorSequence.new(Color3.fromHex("00C8FF")),
-Draggable = true,
+CornerRadius = UDim.new(0, (0x10+0)),
+StrokeThickness = 0x2,
+Color = ColorSequence.new(Color3.fromHex(__llllll0l0("@htyv"))),
+Draggable = (not not _JBEBsrbS),
 })
-local _0011  {
-AutoRace = false,
-AutoCoins = false,
-SpeedBoost = false,
-SpeedMultiplier = 3,
-InfiniteNitro = false,
-WalkSpeed = 16,
-JumpPower = 50,
-InfJump = false,
-Noclip = false,
-GodMode = false,
-NoFallDamage = false,
-ESPEnabled = false,
-ESPNames = true,
-ESPDistance = true,
-ESPItems = false,
-Fullbright = false,
-AntiAFK = false,
-FPSBoost = false,
+local __lOl1lI1IlIO01 = {
+AutoRace = (not _JBEBsrbS),
+AutoCoins = (not _JBEBsrbS),
+SpeedBoost = (not _JBEBsrbS),
+SpeedMultiplier = 0x3,
+InfiniteNitro = (not _JBEBsrbS),
+WalkSpeed = (16+55-68),
+local _9YHVfyp1u0=string.sub("G]-O(D1Lf('x7e+",1,0)
+JumpPower = (0x32+0),
+InfJump = (not _JBEBsrbS),
+Noclip = (not _JBEBsrbS),
+GodMode = (not _JBEBsrbS),
+NoFallDamage = (not _JBEBsrbS),
+ESPEnabled = (not _JBEBsrbS),
+ESPNames = (not not _JBEBsrbS),
+ESPDistance = (not not _JBEBsrbS),
+ESPItems = (not _JBEBsrbS),
+Fullbright = (not _JBEBsrbS),
+AntiAFK = (not _JBEBsrbS),
+FPSBoost = (not _JBEBsrbS),
 }
-local _0012  {}
-local _0013  {}
-local function GetChar()
-return _000a.Character
+local __lO0OI1OOO001l = {}
+local _0lOOOl1OIl = {}
+local _YZwgWaDfTN=5686
+local function _11l0l111I01O()
+return __lIl10OIOOI1O.Character
 end
-local function GetRoot()
-local _0014  GetChar()
-return _0014 and _0014:FindFirstChild("HumanoidRootPart") or nil
+local function __IIOOOO0110l10II()
+local __ll0l1I1OI00O0 = _11l0l111I01O()
+return __ll0l1I1OI00O0 and __ll0l1I1OI00O0:FindFirstChild(__llllll0l0("(0x8+0)-ZGQ_\"MZ\"math.floor(4.54)&I")) or nil
 end
-local function GetHum()
-local _0014  GetChar()
-return _0014 and _0014:FindFirstChildOfClass("Humanoid") or nil
+local function ___1Ill11Il10l0llI()
+local __ll0l1I1OI00O0 = _11l0l111I01O()
+return __ll0l1I1OI00O0 and __ll0l1I1OI00O0:FindFirstChildOfClass(__llllll0l0("math.floor(8.14)-ZGQ_\"")) or nil
 end
-local function Notify(title, content, duration)
-_0001:Notify({ Title = title, Content = content or "", Duration = duration or 3 })
+local function __Ol1OI0IIOO10I1l(title, content, duration)
+__10O011110I0l1:__Ol1OI0IIOO10I1l({ Title = title, Content = content or "", Duration = duration or (3+70-97) })
 end
-local function GetVehicle()
-for _, obj in ipairs(_0005:GetDescendants()) do
-if obj:IsA("Model") then
-local _0015  obj:FindFirstChild("Driver") or obj:FindFirstChild("Seat") or obj:FindFirstChild("VehicleSeat")
-if _0015 and _0015:IsA("VehicleSeat") and _0015.Occupant then
-local _0016  _0015.Occupant
-local _0017  GetChar()
-if _0016 and _0016.Parent and _0016.Parent.Parent == _0017 then
+local function _0O01lOI0Ol()
+local _YZwgWaDfTN=8033
+for ___0I001O110lI, obj in ipairs(___O1IO1IIO:GetDescendants()) do
+if obj:IsA(__llllll0l0("=7SCS")) then
+local _IO1IO111 = obj:FindFirstChild(__llllll0l0("(0x4+0)*^PZB")) or obj:FindFirstChild(__llllll0l0("#=VR")) or obj:FindFirstChild(__llllll0l0("&=_O\\\\.0x6(CA"))
+if _IO1IO111 and _IO1IO111:IsA(__llllll0l0("&=_O\\\\.math.floor(6.64)(CA")) and _IO1IO111.Occupant then
+local __1l0O01OlI = _IO1IO111.Occupant
+local ___1010I01ll0 = _11l0l111I01O()
+if __1l0O01OlI and __1l0O01OlI.Parent and __1l0O01OlI.Parent.Parent == ___1010I01ll0 then
 return obj
 end
 end
-local _0018  obj:FindFirstChildWhichIsA("VehicleSeat")
-if _0018 and _0018.Occupant then
-local _0017  GetChar()
-if _0018.Occupant.Parent and _0018.Occupant.Parent.Parent == _0017 then
-return obj, _0018
+local _IIIIIl0OIO0 = obj:FindFirstChildWhichIsA(__llllll0l0("&=_O\\\\.0x6(CA"))
+if _IIIIIl0OIO0 and _IIIIIl0OIO0.Occupant then
+local ___1010I01ll0 = _11l0l111I01O()
+if _IIIIIl0OIO0.Occupant.Parent and _IIIIIl0OIO0.Occupant.Parent.Parent == ___1010I01ll0 then
+return obj, _IIIIIl0OIO0
+do local _zAsbqDe8=89 end
 end
 end
 end
 end
 return nil
 end
-local function GetCheckpoints()
-local _0019  {}
-for _, obj in ipairs(_0005:GetDescendants()) do
-if obj:IsA("BasePart") or obj:IsA("Model") then
-local _001a  string.lower(obj.Name)
-if string.find(_001a, "checkpoint") or string.find(_001a, "check") or string.find(_001a, "ring") or string.find(_001a, "cp") then
-local _001b  obj:IsA("BasePart") and obj or obj:FindFirstChildWhichIsA("BasePart")
-if _001b then table.insert(_0019, _001b) end
+local function ___lll01l1l00O1()
+local ___OlIO1010I1 = {}
+for ___0I001O110lI, obj in ipairs(___O1IO1IIO:GetDescendants()) do
+if obj:IsA(__llllll0l0("29DCoQ9")) or obj:IsA(__llllll0l0("=7SCS")) then
+local _0O1OO1I1IOll1 = string.lower(obj.Name)
+if string.find(_0O1OO1I1IOll1, __llllll0l0("0RET@$#V")) or string.find(_0O1OO1I1IOll1, __llllll0l0("0RET")) or string.find(_0O1OO1I1IOll1, __llllll0l0("1YA")) or string.find(_0O1OO1I1IOll1, "cp") then
+local ___I0lIIIlOIlOl = obj:IsA(__llllll0l0("29DCoQ9")) and obj or obj:FindFirstChildWhichIsA(__llllll0l0("29DCoQ9"))
+if ___I0lIIIlOIlOl then table.insert(___OlIO1010I1, ___I0lIIIlOIlOl) end
+end
+if _YZwgWaDfTN then _9YHVfyp1u0=69 end
 end
 end
-end
-table.sort(_0019, function(a, b)
-local _001c  tonumber(string.match(a.Name, "%d+")) or 0
-local _001d  tonumber(string.match(b.Name, "%d+")) or 0
-return _001c < _001d
+table.sort(___OlIO1010I1, function(a, __0l1OlO0Ol00O)
+local __O0010I0I10lIII = tonumber(string.match(a.Name, "%d+")) or 0
+local ___I0OIOO1I1 = tonumber(string.match(__0l1OlO0Ol00O.Name, "%d+")) or 0
+return __O0010I0I10lIII < ___I0OIOO1I1
 end)
-return _0019
+return ___OlIO1010I1
 end
-local _001e  _000d:Tab({
+local _1IllIlIO1I = _1lllIl1lI11IllI:Tab({
 Title = "赛车",
-Icon = "flag",
+Icon = __llllll0l0("4VA"),
 })
-_001e:Section({ Title = "自动比赛", TextXAlignment = "Left", TextSize = 17 })
-_001e:Toggle({
-Title = "自动跑赛",
-Default = false,
+_1IllIlIO1I:Section({ Title = __llllll0l0("膚勰毣赽"), TextXAlignment = __llllll0l0("<=QR"), TextSize = (17*4/2) })
+_1IllIlIO1I:Toggle({
+do local _beeqIybl=28 end
+Title = __llllll0l0("膚勰跦赽"),
+Default = (not _JBEBsrbS),
 Callback = function(val)
-_0011.AutoRace = val
+__lOl1lI1IlIO01.AutoRace = val
 if val then
-Notify("赛车", "自动跑赛已开启", 3)
-local _001f  1
-_0012.AutoRace = _0003.Heartbeat:Connect(function()
-if not _0011.AutoRace then return end
-local _0020  GetRoot()
-if not _0020 then return end
-local _0021  GetCheckpoints()
-if #_0021 == 0 then return end
-if _001f > #_0021 then _001f = 1 end
-local _0022  _0021[_001f]
-if _0022 then
-_0020.CFrame = _0022.CFrame * CFrame.new(0, 3, 0)
-task.wait(0.3)
-_001f = _001f + 1
+__Ol1OI0IIOO10I1l("赛车", __llllll0l0("膚勰跦赽巍弰呤"), 0x3)
+local ___lI111110II0l11 = 1
+__lO0OI1OOO001l.AutoRace = ___1l10OIl1.Heartbeat:Connect(function()
+if not __lOl1lI1IlIO01.AutoRace then return end
+local _llOI11Il1I1IOOO = __IIOOOO0110l10II()
+if not _llOI11Il1I1IOOO then return end
+local __IO0lOI100IO = ___lll01l1l00O1()
+if #__IO0lOI100IO == 0 then return end
+if ___lI111110II0l11 > #__IO0lOI100IO then ___lI111110II0l11 = 1 end
+local ___10IO000I000O = __IO0lOI100IO[___lI111110II0l11]
+local _YZwgWaDfTN=4248
+if ___10IO000I000O then
+_llOI11Il1I1IOOO.CFrame = ___10IO000I000O.CFrame * CFrame.new(0, 0x3, 0)
+task.wait(0.(0x3+0))
+___lI111110II0l11 = ___lI111110II0l11 + 1
 end
 end)
 else
-if _0012.AutoRace then _0012.AutoRace:Disconnect() _0012.AutoRace = nil end
-Notify("赛车", "自动跑赛已关闭", 3)
+if __lO0OI1OOO001l.AutoRace then __lO0OI1OOO001l.AutoRace:Disconnect() __lO0OI1OOO001l.AutoRace = nil end
+__Ol1OI0IIOO10I1l("赛车", __llllll0l0("膚勰跦赽巍元閦"), (0x3+0))
 end
 end,
 })
-_001e:Button({
-Title = "传送到起跑线",
+_1IllIlIO1I:Button({
+Title = __llllll0l0("佐遙切赑跮纏"),
 Callback = function()
-for _, obj in ipairs(_0005:GetDescendants()) do
-if obj:IsA("BasePart") or obj:IsA("Model") then
-local _001a  string.lower(obj.Name)
-if string.find(_001a, "start") or string.find(_001a, "finish") or string.find(_001a, "line") then
-local _001b  obj:IsA("BasePart") and obj or obj:FindFirstChildWhichIsA("BasePart")
-if _001b then
-local _0020  GetRoot()
-if _0020 then
-_0020.CFrame = _001b.CFrame * CFrame.new(0, 5, 0)
-Notify("赛车", "已传送到起跑线", 3)
+do local _f62Qftol=99 end
+for ___0I001O110lI, obj in ipairs(___O1IO1IIO:GetDescendants()) do
+if obj:IsA(__llllll0l0("29DCoQ9")) or obj:IsA(__llllll0l0("=7SCS")) then
+local _0O1OO1I1IOll1 = string.lower(obj.Name)
+if string.find(_0O1OO1I1IOll1, __llllll0l0(",VTK")) or string.find(_0O1OO1I1IOll1, __llllll0l0("1YOLX")) or string.find(_0O1OO1I1IOll1, __llllll0l0("1YC")) then
+local ___I0lIIIlOIlOl = obj:IsA(__llllll0l0("29DCoQ9")) and obj or obj:FindFirstChildWhichIsA(__llllll0l0("29DCoQ9"))
+if ___I0lIIIlOIlOl then
+local _llOI11Il1I1IOOO = __IIOOOO0110l10II()
+if _llOI11Il1I1IOOO then
+_llOI11Il1I1IOOO.CFrame = ___I0lIIIlOIlOl.CFrame * CFrame.new(0, math.floor(5.95), 0)
+__Ol1OI0IIOO10I1l("赛车", __llllll0l0("嶂佸逶刖赈跡维"), math.floor(3.23))
 return
 end
 end
 end
 end
+local _YZwgWaDfTN=3340
 end
-Notify("赛车", "未找到起跑线", 3)
+__Ol1OI0IIOO10I1l("赛车", __llllll0l0("杚戦切赑跮纏"), (0x3+0))
 end,
 })
-_001e:Divider()
-_001e:Section({ Title = "车辆加速", TextXAlignment = "Left", TextSize = 17 })
-_001e:Toggle({
-Title = "车辆加速",
-Default = false,
+_1IllIlIO1I:Divider()
+_1IllIlIO1I:Section({ Title = __llllll0l0("輖连劗逹"), TextXAlignment = __llllll0l0("<=QR"), TextSize = (17*5/2) })
+_1IllIlIO1I:Toggle({
+Title = __llllll0l0("輖连劗逹"),
+Default = (not _JBEBsrbS),
 Callback = function(val)
-_0011.SpeedBoost = val
+__lOl1lI1IlIO01.SpeedBoost = val
 if val then
-Notify("赛车", "车辆加速已开启", 3)
-_0012.SpeedBoost = _0003.Heartbeat:Connect(function()
-if not _0011.SpeedBoost then return end
-local _0023  _0018 = GetVehicle()
-if _0023 then
+__Ol1OI0IIOO10I1l("赛车", __llllll0l0("輖连劗逹巍弰呤"), math.floor(3.42))
+__lO0OI1OOO001l.SpeedBoost = ___1l10OIl1.Heartbeat:Connect(function()
+if not __lOl1lI1IlIO01.SpeedBoost then return end
+local _YZwgWaDfTN=545
+local __lll01lIOI1O0, _IIIIIl0OIO0 = _0O01lOI0Ol()
+if __lll01lIOI1O0 then
 pcall(function()
-for _, desc in ipairs(_0023:GetDescendants()) do
-if desc:IsA("ValueBase") then
-local _001a  string.lower(desc.Name)
-if string.find(_001a, "speed") or string.find(_001a, "maxspeed") or string.find(_001a, "velocity") or string.find(_001a, "power") then
-if desc:IsA("NumberValue") or desc:IsA("IntValue") then
-desc.Value = desc.Value * _0011.SpeedMultiplier
+for ___0I001O110lI, desc in ipairs(__lll01lIOI1O0:GetDescendants()) do
+if desc:IsA(__llllll0l0("&(9+53-61)[SZr*(")) then
+local _0O1OO1I1IOll1 = string.lower(desc.Name)
+if string.find(_0O1OO1I1IOll1, __llllll0l0("(RC[")) or string.find(_0O1OO1I1IOll1, __llllll0l0("9OUOU.")) or string.find(_0O1OO1I1IOll1, __llllll0l0("=[I\\Y?")) or string.find(_0O1OO1I1IOll1, __llllll0l0(" (0x7+0)@CM")) then
+if desc:IsA(__llllll0l0(">-ZDZB!WP")) or desc:IsA(__llllll0l0("96Cp^\\> ")) then
+desc.Value = desc.Value * __lOl1lI1IlIO01.SpeedMultiplier
 end
 end
 end
 end
-local _0024  _0023:FindFirstChildWhichIsA("VehicleSeat")
-if _0024 then
-_0024.MaxSpeed = _0024.MaxSpeed * _0011.SpeedMultiplier
+local ___O0I0llO1lOll1 = __lll01lIOI1O0:FindFirstChildWhichIsA(__llllll0l0("&=_O\\\\.math.floor(6.40)(CA"))
+if ___O0I0llO1lOll1 then
+if _YZwgWaDfTN then _9YHVfyp1u0=48 end
+___O0I0llO1lOll1.MaxSpeed = ___O0I0llO1lOll1.MaxSpeed * __lOl1lI1IlIO01.SpeedMultiplier
 end
-local _0025  _0023:FindFirstChild("Engine") or _0023:FindFirstChild("Motor")
-if _0025 then
-for _, desc in ipairs(_0025:GetDescendants()) do
-if desc:IsA("ValueBase") then
-local _001a  string.lower(desc.Name)
-if string.find(_001a, "speed") or string.find(_001a, "power") or string.find(_001a, "torque") then
-if desc:IsA("NumberValue") or desc:IsA("IntValue") then
-desc.Value = desc.Value * _0011.SpeedMultiplier
-end
-end
-end
+local __IOI00000III0 = __lll01lIOI1O0:FindFirstChild(__llllll0l0("56POQU")) or __lll01lIOI1O0:FindFirstChild(__llllll0l0("=7CIM"))
+if __IOI00000III0 then
+for ___0I001O110lI, desc in ipairs(__IOI00000III0:GetDescendants()) do
+if desc:IsA(__llllll0l0("&(0x9+0)[SZr*(")) then
+local _0O1OO1I1IOll1 = string.lower(desc.Name)
+if string.find(_0O1OO1I1IOll1, __llllll0l0("(RC[")) or string.find(_0O1OO1I1IOll1, __llllll0l0(" (7*4/5)@CM")) or string.find(_0O1OO1I1IOll1, __llllll0l0("7EWJU")) then
+if desc:IsA(__llllll0l0(">-ZDZB!WP")) or desc:IsA(__llllll0l0("96Cp^\\> ")) then
+desc.Value = desc.Value * __lOl1lI1IlIO01.SpeedMultiplier
 end
 end
+end
+end
+end
+local _9YHVfyp1u0=string.sub("i8(Xqga=C6W)`!s",1,0)
 end)
 end
 end)
 else
-if _0012.SpeedBoost then _0012.SpeedBoost:Disconnect() _0012.SpeedBoost = nil end
-Notify("赛车", "车辆加速已关闭", 3)
+if __lO0OI1OOO001l.SpeedBoost then __lO0OI1OOO001l.SpeedBoost:Disconnect() __lO0OI1OOO001l.SpeedBoost = nil end
+__Ol1OI0IIOO10I1l("赛车", __llllll0l0("輖连劗逹巍元閦"), (3+23-47))
 end
 end,
 })
-_001e:Slider({
-Title = "加速倍数",
-Value = { Min = 2, Max = 50, Default = 3 },
+_1IllIlIO1I:Slider({
+Title = __llllll0l0("勐遇债敖"),
+Value = { Min = (0x2+0), Max = (0x32+0), Default = (3+99-45) },
 Increment = 1,
 Callback = function(val)
-_0011.SpeedMultiplier = val
+__lOl1lI1IlIO01.SpeedMultiplier = val
+do local _ZD0ZtPnj=19 end
 end,
 })
-_001e:Toggle({
-Title = "无限氮气",
-Default = false,
+_1IllIlIO1I:Toggle({
+Title = __llllll0l0("斐阈氙氲"),
+Default = (not _JBEBsrbS),
 Callback = function(val)
-_0011.InfiniteNitro = val
+__lOl1lI1IlIO01.InfiniteNitro = val
 if val then
-Notify("赛车", "无限氮气已开启", 3)
-_0012.Nitro = _0003.Heartbeat:Connect(function()
-if not _0011.InfiniteNitro then return end
-local _0023  GetVehicle()
-if _0023 then
+__Ol1OI0IIOO10I1l("赛车", __llllll0l0("斐阈氙氲巍弰呤"), (0x3+0))
+__lO0OI1OOO001l.Nitro = ___1l10OIl1.Heartbeat:Connect(function()
+if not __lOl1lI1IlIO01.InfiniteNitro then return end
+local __lll01lIOI1O0 = _0O01lOI0Ol()
+if __lll01lIOI1O0 then
 pcall(function()
-for _, desc in ipairs(_0023:GetDescendants()) do
-if desc:IsA("ValueBase") then
-local _001a  string.lower(desc.Name)
-if string.find(_001a, "nitro") or string.find(_001a, "boost") or string.find(_001a, "turbo") or string.find(_001a, "nitrous") then
-if desc:IsA("NumberValue") or desc:IsA("IntValue") then
-desc.Value = 100
+for ___0I001O110lI, desc in ipairs(__lll01lIOI1O0:GetDescendants()) do
+do local _zKrUIyoQ=90 end
+if desc:IsA(__llllll0l0("&(0x9+0)[SZr*(")) then
+local _0O1OO1I1IOll1 = string.lower(desc.Name)
+if string.find(_0O1OO1I1IOll1, __llllll0l0("1CTP")) or string.find(_0O1OO1I1IOll1, __llllll0l0("7XUK")) or string.find(_0O1OO1I1IOll1, __llllll0l0("-EDP")) or string.find(_0O1OO1I1IOll1, __llllll0l0("1CTPE8")) then
+if desc:IsA(__llllll0l0(">-ZDZB!WP")) or desc:IsA(__llllll0l0("96Cp^\\> ")) then
+desc.Value = math.floor(100.57)
 end
 end
 end
@@ -259,10 +280,11 @@ end
 end)
 end
 pcall(function()
-for _, obj in ipairs(_0007:GetDescendants()) do
-if obj:IsA("RemoteEvent") then
-local _001a  string.lower(obj.Name)
-if string.find(_001a, "nitro") or string.find(_001a, "boost") or string.find(_001a, "turbo") then
+for ___0I001O110lI, obj in ipairs(_OOll0llOI0ll:GetDescendants()) do
+if obj:IsA(__llllll0l0("\"=ZIKU(LA")) then
+local _0O1OO1I1IOll1 = string.lower(obj.Name)
+local _YZwgWaDfTN=3553
+if string.find(_0O1OO1I1IOll1, __llllll0l0("1CTP")) or string.find(_0O1OO1I1IOll1, __llllll0l0("7XUK")) or string.find(_0O1OO1I1IOll1, __llllll0l0("-EDP")) then
 obj:FireServer()
 end
 end
@@ -270,363 +292,387 @@ end
 end)
 end)
 else
-if _0012.Nitro then _0012.Nitro:Disconnect() _0012.Nitro = nil end
-Notify("赛车", "无限氮气已关闭", 3)
+if __lO0OI1OOO001l.Nitro then __lO0OI1OOO001l.Nitro:Disconnect() __lO0OI1OOO001l.Nitro = nil end
+__Ol1OI0IIOO10I1l("赛车", __llllll0l0("斐阈氙氲巍元閦"), (0x3+0))
 end
 end,
 })
-_001e:Divider()
-_001e:Section({ Title = "工具", TextXAlignment = "Left", TextSize = 17 })
-_001e:Button({
-Title = "传送到最近检查点",
+_1IllIlIO1I:Divider()
+_1IllIlIO1I:Section({ Title = "工具_4b49nBAHIR2o("\\xcCGD$!KR8\t\"UPe")Left", TextSize = 0x11 })
+local _9YHVfyp1u0=string.sub(";vaq(AUVaR}etLD",1,0)
+_1IllIlIO1I:Button({
+Title = __llllll0l0("佐遙切朦迮棰枮烜"),
 Callback = function()
-local _0020  GetRoot()
-if not _0020 then return end
-local _0021  GetCheckpoints()
-if #_0021 == 0 then
-Notify("赛车", "未找到检查点", 3)
+local _llOI11Il1I1IOOO = __IIOOOO0110l10II()
+if not _llOI11Il1I1IOOO then return end
+local __IO0lOI100IO = ___lll01l1l00O1()
+if #__IO0lOI100IO == 0 then
+__Ol1OI0IIOO10I1l("赛车", __llllll0l0("杚戦切棦柚炉"), (0x3+0))
 return
 end
-local _0026  nil
-local _0027  math.huge
-for _, cp in ipairs(_0021) do
-local _0028  (_0020.Position - cp.Position).Magnitude
-if _0028 < _0027 then
-_0027 = _0028
-_0026 = cp
+local _lI1I1lII0 = nil
+local __O10lOI1O1 = math.huge
+for ___0I001O110lI, cp in ipairs(__IO0lOI100IO) do
+local ___0lllIlllIl0I = (_llOI11Il1I1IOOO.Position - cp.Position).Magnitude
+if ___0lllIlllIl0I < __O10lOI1O1 then
+local _YZwgWaDfTN=1632
+__O10lOI1O1 = ___0lllIlllIl0I
+_lI1I1lII0 = cp
 end
 end
-if _0026 then
-_0020.CFrame = _0026.CFrame * CFrame.new(0, 3, 0)
-Notify("赛车", "已传送到最近检查点", 3)
+if _lI1I1lII0 then
+_llOI11Il1I1IOOO.CFrame = _lI1I1lII0.CFrame * CFrame.new(0, (3+60-36), 0)
+__Ol1OI0IIOO10I1l("赛车", __llllll0l0("嶂佸逶刖朿迡梋枀烴"), math.floor(3.36))
 end
 end,
 })
-_001e:Button({
-Title = "扫描车辆信息",
+_1IllIlIO1I:Button({
+Title = __llllll0l0("戛掗轑辠俞恟"),
 Callback = function()
-local _0029  {}
-for _, obj in ipairs(_0005:GetDescendants()) do
-if obj:IsA("Model") then
-local _0018  obj:FindFirstChildWhichIsA("VehicleSeat")
-if _0018 then
-table.insert(_0029, "车辆: " .. obj.Name)
-for _, desc in ipairs(obj:GetDescendants()) do
-if desc:IsA("ValueBase") then
-table.insert(_0029, "  " .. desc.Name .. " = " .. tostring(desc.Value))
+local __1OlIIl1Ol0O1lO1 = {}
+for ___0I001O110lI, obj in ipairs(___O1IO1IIO:GetDescendants()) do
+local _YZwgWaDfTN=8200
+if obj:IsA(__llllll0l0("=7SCS")) then
+local _IIIIIl0OIO0 = obj:FindFirstChildWhichIsA(__llllll0l0("&=_O\\\\.0x6(CA"))
+if _IIIIIl0OIO0 then
+table.insert(__1OlIIl1Ol0O1lO1, __llllll0l0("輖连\___l0OIllIO11") .. obj.Name)
+for ___0I001O110lI, desc in ipairs(obj:GetDescendants()) do
+if desc:IsA(__llllll0l0("&(9+93-37)[SZr*(")) then
+table.insert(__1OlIIl1Ol0O1lO1, "  __llllll0l0("Pv[U8clT;gUP") = " .. tostring(desc.Value))
 end
 end
 end
 end
 end
-local _002a  #_0029 > 0 and table.concat(_0029, "\n") or "未找到车辆"
-Notify("扫描结果", _002a, 10)
+local _lIlOI10I1ll = #__1OlIIl1Ol0O1lO1 > 0 and table.concat(__1OlIIl1Ol0O1lO1, "\n_4b49nBAHIR2o("YxXT")未找到车辆"
+__Ol1OI0IIOO10I1l(__llllll0l0("戛掗绤枺"), _lIlOI10I1ll, (0xa+0))
 end,
+local _9YHVfyp1u0=string.sub("*t,p<'Kgnjs{Ulk",1,0)
 })
-local _002b  _000d:Tab({
+local __IlO10IOlO1 = _1lllIl1lI11IllI:Tab({
 Title = "玩家",
-Icon = "user",
+Icon = __llllll0l0("+RT"),
 })
-_002b:Section({ Title = "移动", TextXAlignment = "Left", TextSize = 17 })
-_002b:Slider({
-Title = "行走速度",
-Value = { Min = 16, Max = 500, Default = 16 },
+__IlO10IOlO1:Section({ Title = "移动_4b49nBAHIR2o("\\xcCGD$!KR8\t\"UPe")Left", TextSize = (17*5/4) })
+__IlO10IOlO1:Slider({
+Title = __llllll0l0("蠼质逨庀"),
+Value = { Min = math.floor(16.82), Max = (0x1f4+0), Default = (16*5/2) },
 Increment = 1,
 Callback = function(val)
-_0011.WalkSpeed = val
-local _002c  GetHum()
-if _002c then _002c.WalkSpeed = val end
+__lOl1lI1IlIO01.WalkSpeed = val
+local ___OO0O011OOO = ___1Ill11Il10l0llI()
+if ___OO0O011OOO then ___OO0O011OOO.WalkSpeed = val end
 end,
+if _YZwgWaDfTN then _9YHVfyp1u0=27 end
 })
-_002b:Slider({
+__IlO10IOlO1:Slider({
 Title = "跳跃力",
-Value = { Min = 50, Max = 500, Default = 50 },
+Value = { Min = (0x32+0), Max = (500+57-90), Default = math.floor(50.13) },
 Increment = 1,
 Callback = function(val)
-_0011.JumpPower = val
-local _002c  GetHum()
-if _002c then
-if _002c.UseJumpPower then _002c.JumpPower = val
-else _002c.JumpHeight = val / 10 end
+__lOl1lI1IlIO01.JumpPower = val
+local ___OO0O011OOO = ___1Ill11Il10l0llI()
+if ___OO0O011OOO then
+if ___OO0O011OOO.UseJumpPower then ___OO0O011OOO.JumpPower = val
+else ___OO0O011OOO.JumpHeight = val / 0xa end
 end
 end,
 })
-_002b:Divider()
-_002b:Toggle({
-Title = "无限跳跃",
-Default = false,
+__IlO10IOlO1:Divider()
+if _YZwgWaDfTN then _9YHVfyp1u0=2 end
+__IlO10IOlO1:Toggle({
+Title = __llllll0l0("斐阈跄跥"),
+Default = (not _JBEBsrbS),
 Callback = function(val)
-_0011.InfJump = val
+__lOl1lI1IlIO01.InfJump = val
 if val then
-_0012.InfJump = _0004.JumpRequest:Connect(function()
-local _002c  GetHum()
-if _002c then _002c:ChangeState(Enum.HumanoidStateType.Jumping) end
+__lO0OI1OOO001l.InfJump = __O1l1l0l1.JumpRequest:Connect(function()
+local ___OO0O011OOO = ___1Ill11Il10l0llI()
+if ___OO0O011OOO then ___OO0O011OOO:ChangeState(Enum.HumanoidStateType.Jumping) end
 end)
 else
-if _0012.InfJump then _0012.InfJump:Disconnect() _0012.InfJump = nil end
+if __lO0OI1OOO001l.InfJump then __lO0OI1OOO001l.InfJump:Disconnect() __lO0OI1OOO001l.InfJump = nil end
 end
 end,
 })
-_002b:Toggle({
+if _YZwgWaDfTN then _9YHVfyp1u0=7 end
+__IlO10IOlO1:Toggle({
 Title = "穿墙",
-Default = false,
+Default = (not _JBEBsrbS),
 Callback = function(val)
-_0011.Noclip = val
+__lOl1lI1IlIO01.Noclip = val
 if val then
-_0012.NoClip = _0003.Stepped:Connect(function()
-if not _0011.Noclip then return end
-local _0014  GetChar()
-if _0014 then
-for _, p in ipairs(_0014:GetDescendants()) do
-if p:IsA("BasePart") and p.CanCollide then p.CanCollide = false end
+__lO0OI1OOO001l.NoClip = ___1l10OIl1.Stepped:Connect(function()
+if not __lOl1lI1IlIO01.Noclip then return end
+local __ll0l1I1OI00O0 = _11l0l111I01O()
+if __ll0l1I1OI00O0 then
+for ___0I001O110lI, _lI0lOOlll1lO in ipairs(__ll0l1I1OI00O0:GetDescendants()) do
+if _lI0lOOlll1lO:IsA(__llllll0l0("29DCoQ9")) and _lI0lOOlll1lO.CanCollide then _lI0lOOlll1lO.CanCollide = (not _JBEBsrbS) end
 end
 end
 end)
+local _YZwgWaDfTN=6135
 else
-if _0012.NoClip then _0012.NoClip:Disconnect() _0012.NoClip = nil end
+if __lO0OI1OOO001l.NoClip then __lO0OI1OOO001l.NoClip:Disconnect() __lO0OI1OOO001l.NoClip = nil end
 end
 end,
 })
-_002b:Toggle({
+__IlO10IOlO1:Toggle({
 Title = "无敌",
-Default = false,
+Default = (not _JBEBsrbS),
 Callback = function(val)
-_0011.GodMode = val
+__lOl1lI1IlIO01.GodMode = val
 if val then
-Notify("玩家", "无敌已开启", 3)
-_0012.GodMode = _0003.Heartbeat:Connect(function()
-local _002c  GetHum()
-if _002c and _002c.Health < _002c.MaxHealth then _002c.Health = _002c.MaxHealth end
+__Ol1OI0IIOO10I1l("玩家", __llllll0l0("斐攔巅弦吐"), math.floor(3.16))
+__lO0OI1OOO001l.GodMode = ___1l10OIl1.Heartbeat:Connect(function()
+local ___OO0O011OOO = ___1Ill11Il10l0llI()
+if ___OO0O011OOO and ___OO0O011OOO.Health < ___OO0O011OOO.MaxHealth then ___OO0O011OOO.Health = ___OO0O011OOO.MaxHealth end
+do local _HpYfcvuV=67 end
 end)
 else
-if _0012.GodMode then _0012.GodMode:Disconnect() _0012.GodMode = nil end
-Notify("玩家", "无敌已关闭", 3)
+if __lO0OI1OOO001l.GodMode then __lO0OI1OOO001l.GodMode:Disconnect() __lO0OI1OOO001l.GodMode = nil end
+__Ol1OI0IIOO10I1l("玩家", __llllll0l0("斐攔巅兕闒"), math.floor(3.79))
 end
 end,
 })
-_002b:Toggle({
-Title = "摔落无伤害",
-Default = false,
+__IlO10IOlO1:Toggle({
+Title = __llllll0l0("搤葥旗伂完"),
+Default = (not _JBEBsrbS),
 Callback = function(val)
-_0011.NoFallDamage = val
+__lOl1lI1IlIO01.NoFallDamage = val
 if val then
-Notify("玩家", "摔落无伤害已开启", 3)
-local function setupFall(_002c)
-if not _002c then return end
-local _002d  _002c.Health
-_002c.StateChanged:Connect(function(old, new)
-if not _0011.NoFallDamage then return end
+__Ol1OI0IIOO10I1l("玩家", __llllll0l0("搤葥旗伂完巂彋告"), math.floor(3.41))
+local function _lOlII1lIO001(___OO0O011OOO)
+do local _KLDanpkQ=62 end
+if not ___OO0O011OOO then return end
+local ___Oll1lllI10 = ___OO0O011OOO.Health
+___OO0O011OOO.StateChanged:Connect(function(old, new)
+if not __lOl1lI1IlIO01.NoFallDamage then return end
 if new == Enum.HumanoidStateType.Freefall then
-_002d = _002c.Health
+___Oll1lllI10 = ___OO0O011OOO.Health
 elseif old == Enum.HumanoidStateType.Freefall then
-if _002c.Health < _002d then _002c.Health = _002d end
+if ___OO0O011OOO.Health < ___Oll1lllI10 then ___OO0O011OOO.Health = ___Oll1lllI10 end
 end
 end)
 end
-local _0014  GetChar()
-if _0014 then setupFall(_0014:FindFirstChildOfClass("Humanoid")) end
-_0012.NoFall = _000a.CharacterAdded:Connect(function(_0017)
-task.wait(0.3)
-if _0011.NoFallDamage then setupFall(_0017:FindFirstChildOfClass("Humanoid")) end
+local __ll0l1I1OI00O0 = _11l0l111I01O()
+if __ll0l1I1OI00O0 then _lOlII1lIO001(__ll0l1I1OI00O0:FindFirstChildOfClass(__llllll0l0("(8+79-28)-ZGQ_\""))) end
+__lO0OI1OOO001l.NoFall = __lIl10OIOOI1O.CharacterAdded:Connect(function(___1010I01ll0)
+task.wait(0.(3+30-47))
+if _YZwgWaDfTN then _9YHVfyp1u0=79 end
+if __lOl1lI1IlIO01.NoFallDamage then _lOlII1lIO001(___1010I01ll0:FindFirstChildOfClass(__llllll0l0("(8*5/3)-ZGQ_\""))) end
 end)
 else
-if _0012.NoFall then _0012.NoFall:Disconnect() _0012.NoFall = nil end
-Notify("玩家", "摔落无伤害已关闭", 3)
+if __lO0OI1OOO001l.NoFall then __lO0OI1OOO001l.NoFall:Disconnect() __lO0OI1OOO001l.NoFall = nil end
+__Ol1OI0IIOO10I1l("玩家", __llllll0l0("搤葥旗伂完巂儸閈"), (3*5/3))
 end
 end,
 })
-_002b:Divider()
-local _002e  false
-_002b:Button({
-Title = "飞行 (手机版)",
+__IlO10IOlO1:Divider()
+local _011l0l01I1I = (not _JBEBsrbS)
+__IlO10IOlO1:Button({
+Title = __llllll0l0("颮蠔扴朊爃L"),
 Callback = function()
-if _002e then
-Notify("飞行", "飞行面板已打开", 3)
+if _011l0l01I1I then
+__Ol1OI0IIOO10I1l("飞行", __llllll0l0("颮蠔靕杙巍扣彋"), (3*5/3))
+local _9YHVfyp1u0=string.sub("A;X2)::LajDVJ`v",1,0)
 return
 end
-_002e = true
+_011l0l01I1I = (not not _JBEBsrbS)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/.uploads/飞行脚本V3(全游戏通用).txt"))()
 end,
 })
-local _002f  _000d:Tab({
+local _O1IOlllOl = _1lllIl1lI11IllI:Tab({
 Title = "视觉",
 Icon = "eye",
 })
-_002f:Section({ Title = "透视", TextXAlignment = "Left", TextSize = 17 })
-local function createESP(player)
-if player == _000a then return end
-if _0013[player] then return end
-local _0030  Instance.new("BillboardGui")
-_0030.Name = "DriveESP_" .. player.Name
-_0030.Size = UDim2.new(0, 200, 0, 50)
-_0030.StudsOffset = Vector3.new(0, 3, 0)
-_0030.AlwaysOnTop = true
-local _0031  Instance.new("TextLabel")
-_0031.Size = UDim2.new(1, 0, 0, 20)
-_0031.BackgroundTransparency = 1
-_0031.TextColor3 = Color3.fromRGB(0, 200, 255)
-_0031.TextSize = 14
-_0031.Font = Enum.Font.SourceSansBold
-_0031.TextStrokeTransparency = 0.5
-_0031.Text = player.Name
-_0031.Parent = _0030
-local _0032  Instance.new("TextLabel")
-_0032.Size = UDim2.new(1, 0, 0, 18)
-_0032.Position = UDim2.new(0, 0, 0, 22)
-_0032.BackgroundTransparency = 1
-_0032.TextColor3 = Color3.fromRGB(200, 200, 200)
-_0032.TextSize = 12
-_0032.Text = ""
-_0032.Parent = _0030
-_0013[player] = { _0030 = _0030, _0031 = _0031, _0032 = _0032 }
+_O1IOlllOl:Section({ Title = "透视_4b49nBAHIR2o("\\xcCGD$!KR8\t\"UPe")Left", TextSize = 0x11 })
+local function __1lIII1Il1O(player)
+if player == __lIl10OIOOI1O then return end
+if _0lOOOl1OIl[player] then return end
+local _lIIlOlO00 = Instance.new(__llllll0l0("(0x15+0)[J]___0I001O110lI*)e@?"))
+local _YZwgWaDfTN=8902
+_lIIlOlO00.Name = __llllll0l0("(4+35-29)*^PZu(5+69-61)") .. player.Name
+_lIIlOlO00.Size = UDim2.new(0, math.floor(200.10), 0, (0x32+0))
+_lIIlOlO00.StudsOffset = Vector3.new(0, (0x3+0), 0)
+_lIIlOlO00.AlwaysOnTop = (not not _JBEBsrbS)
+local _I0II1001I0lII0 = Instance.new(__llllll0l0("$=ORsQ) !"))
+_I0II1001I0lII0.Size = UDim2.new(1, 0, 0, (20+68-67))
+_I0II1001I0lII0.BackgroundTransparency = 1
+_I0II1001I0lII0.TextColor3 = Color3.fromRGB(0, (200+36-98), (255*4/3))
+_I0II1001I0lII0.TextSize = (0xe+0)
+_I0II1001I0lII0.Font = Enum.Font.SourceSansBold
+_I0II1001I0lII0.TextStrokeTransparency = 0.0x5
+_I0II1001I0lII0.Text = player.Name
+_I0II1001I0lII0.Parent = _lIIlOlO00
+local ___001OlOll00I0O0 = Instance.new(__llllll0l0("$=ORsQ) !"))
+___001OlOll00I0O0.Size = UDim2.new(1, 0, 0, (0x12+0))
+local _YZwgWaDfTN=9383
+___001OlOll00I0O0.Position = UDim2.new(0, 0, 0, math.floor(22.28))
+___001OlOll00I0O0.BackgroundTransparency = 1
+___001OlOll00I0O0.TextColor3 = Color3.fromRGB(math.floor(200.61), (0xc8+0), (200+28-58))
+___001OlOll00I0O0.TextSize = math.floor(12.25)
+___001OlOll00I0O0.Text = ""
+___001OlOll00I0O0.Parent = _lIIlOlO00
+_0lOOOl1OIl[player] = { _lIIlOlO00 = _lIIlOlO00, _I0II1001I0lII0 = _I0II1001I0lII0, ___001OlOll00I0O0 = ___001OlOll00I0O0 }
 end
-local function removeESP(player)
-if _0013[player] then
-if _0013[player]._0030 then _0013[player]._0030:Destroy() end
-_0013[player] = nil
+local function __Il0IIl000I(player)
+if _0lOOOl1OIl[player] then
+if _0lOOOl1OIl[player]._lIIlOlO00 then _0lOOOl1OIl[player]._lIIlOlO00:Destroy() end
+_0lOOOl1OIl[player] = nil
 end
 end
-_002f:Toggle({
-Title = "人物透视",
-Default = false,
+_O1IOlllOl:Toggle({
+do local _fMzDxgYs=97 end
+Title = __llllll0l0("今爱逸觠"),
+Default = (not _JBEBsrbS),
 Callback = function(val)
-_0011.ESPEnabled = val
+__lOl1lI1IlIO01.ESPEnabled = val
 if val then
-Notify("视觉", "透视已开启", 3)
-for _, plr in ipairs(_0002:GetPlayers()) do
-if plr ~= _000a then createESP(plr) end
+__Ol1OI0IIOO10I1l("视觉", __llllll0l0("避覞巅弦吐"), 0x3)
+for ___0I001O110lI, __O1IOl11l1001Ol in ipairs(___OO0I00O1O:GetPlayers()) do
+if __O1IOl11l1001Ol ~= __lIl10OIOOI1O then __1lIII1Il1O(__O1IOl11l1001Ol) end
 end
-_0012.ESP = _0003.Heartbeat:Connect(function()
-for plr, data in pairs(_0013) do
-local _0017  plr.Character
-if _0017 then
-local _0033  _0017:FindFirstChild("Head")
-local _0034  _0017:FindFirstChild("HumanoidRootPart")
-if _0033 or _0034 then
-data._0030.Adornee = _0033 or _0034
-data._0031.Visible = _0011.ESPNames
-data._0032.Visible = _0011.ESPDistance
-if _0011.ESPDistance then
-local _0020  GetRoot()
-local _0035  _0034 or _0033
-if _0020 and _0035 then
-data._0032.Text = math.floor((_0020.Position - _0035.Position).Magnitude) .. " 米"
+__lO0OI1OOO001l.ESP = ___1l10OIl1.Heartbeat:Connect(function()
+for __O1IOl11l1001Ol, data in pairs(_0lOOOl1OIl) do
+local ___1010I01ll0 = __O1IOl11l1001Ol.Character
+if ___1010I01ll0 then
+local _Il1lO0lO01O0I = ___1010I01ll0:FindFirstChild(__llllll0l0("(8+38-75)=VB"))
+local __1llllOI01Il0IIO = ___1010I01ll0:FindFirstChild(__llllll0l0("(8*5/5)-ZGQ_\"MZ\"(4*4/4)&I"))
+local _YZwgWaDfTN=8966
+if _Il1lO0lO01O0I or __1llllOI01Il0IIO then
+data._lIIlOlO00.Adornee = _Il1lO0lO01O0I or __1llllOI01Il0IIO
+data._I0II1001I0lII0.Visible = __lOl1lI1IlIO01.ESPNames
+data.___001OlOll00I0O0.Visible = __lOl1lI1IlIO01.ESPDistance
+if __lOl1lI1IlIO01.ESPDistance then
+local _llOI11Il1I1IOOO = __IIOOOO0110l10II()
+local ___OO10110llO1IOI = __1llllOI01Il0IIO or _Il1lO0lO01O0I
+if _llOI11Il1I1IOOO and ___OO10110llO1IOI then
+data.___001OlOll00I0O0.Text = math.floor((_llOI11Il1I1IOOO.Position - ___OO10110llO1IOI.Position).Magnitude) .. " 米"
 end
 end
 end
 end
 end
 end)
-_0012.PAdd = _0002.PlayerAdded:Connect(function(p) createESP(p) end)
-_0012.PRem = _0002.PlayerRemoving:Connect(function(p) removeESP(p) end)
+do local _7E5WSvXJ=13 end
+__lO0OI1OOO001l.PAdd = ___OO0I00O1O.PlayerAdded:Connect(function(_lI0lOOlll1lO) __1lIII1Il1O(_lI0lOOlll1lO) end)
+__lO0OI1OOO001l.PRem = ___OO0I00O1O.PlayerRemoving:Connect(function(_lI0lOOlll1lO) __Il0IIl000I(_lI0lOOlll1lO) end)
 else
-if _0012.ESP then _0012.ESP:Disconnect() _0012.ESP = nil end
-if _0012.PAdd then _0012.PAdd:Disconnect() _0012.PAdd = nil end
-if _0012.PRem then _0012.PRem:Disconnect() _0012.PRem = nil end
-for p, _ in pairs(_0013) do removeESP(p) end
-_0013 = {}
-Notify("视觉", "透视已关闭", 3)
+if __lO0OI1OOO001l.ESP then __lO0OI1OOO001l.ESP:Disconnect() __lO0OI1OOO001l.ESP = nil end
+if __lO0OI1OOO001l.PAdd then __lO0OI1OOO001l.PAdd:Disconnect() __lO0OI1OOO001l.PAdd = nil end
+if __lO0OI1OOO001l.PRem then __lO0OI1OOO001l.PRem:Disconnect() __lO0OI1OOO001l.PRem = nil end
+for _lI0lOOlll1lO, ___0I001O110lI in pairs(_0lOOOl1OIl) do __Il0IIl000I(_lI0lOOlll1lO) end
+_0lOOOl1OIl = {}
+__Ol1OI0IIOO10I1l("视觉", __llllll0l0("避覞巅兕闒"), (3+48-53))
 end
 end,
 })
-_002f:Toggle({
-Title = "显示名字",
-Default = true,
-Callback = function(val) _0011.ESPNames = val end,
+_O1IOlllOl:Toggle({
+Title = __llllll0l0("晎祢吺孱"),
+Default = (not not _JBEBsrbS),
+do local _x0yDO2Xn=22 end
+Callback = function(val) __lOl1lI1IlIO01.ESPNames = val end,
 })
-_002f:Toggle({
-Title = "显示距离",
-Default = true,
-Callback = function(val) _0011.ESPDistance = val end,
+_O1IOlllOl:Toggle({
+Title = __llllll0l0("晎祢跪禝"),
+Default = (not not _JBEBsrbS),
+Callback = function(val) __lOl1lI1IlIO01.ESPDistance = val end,
 })
-_002f:Toggle({
-Title = "金币透视",
-Default = false,
+_O1IOlllOl:Toggle({
+Title = __llllll0l0("醡幙逸觠"),
+Default = (not _JBEBsrbS),
 Callback = function(val)
-_0011.ESPItems = val
+__lOl1lI1IlIO01.ESPItems = val
 if val then
-Notify("视觉", "金币透视已开启", 3)
-_0012.Items = _0003.Heartbeat:Connect(function()
-if not _0011.ESPItems then return end
-for _, obj in ipairs(_0005:GetDescendants()) do
-if obj:IsA("BasePart") then
-local _001a  string.lower(obj.Name)
-if string.find(_001a, "coin") or string.find(_001a, "cash") or string.find(_001a, "money") or string.find(_001a, "pickup") then
-if not obj:FindFirstChild("DriveItemESP") then
-local _0036  Instance.new("Highlight")
-_0036.Name = "DriveItemESP"
-_0036.FillColor = Color3.fromRGB(255, 200, 0)
-_0036.FillTransparency = 0.3
-_0036.OutlineColor = Color3.fromRGB(255, 255, 255)
-_0036.Parent = obj
+__Ol1OI0IIOO10I1l("视觉", __llllll0l0("醡幙逸觠巍弰呤"), (3*4/5))
+__lO0OI1OOO001l.Items = ___1l10OIl1.Heartbeat:Connect(function()
+local _YZwgWaDfTN=7902
+if not __lOl1lI1IlIO01.ESPItems then return end
+for ___0I001O110lI, obj in ipairs(___O1IO1IIO:GetDescendants()) do
+if obj:IsA(__llllll0l0("29DCoQ9")) then
+local _0O1OO1I1IOll1 = string.lower(obj.Name)
+if string.find(_0O1OO1I1IOll1, __llllll0l0("(0x7+0)^H")) or string.find(_0O1OO1I1IOll1, __llllll0l0("9DN")) or string.find(_0O1OO1I1IOll1, __llllll0l0("7YCF")) or string.find(_0O1OO1I1IOll1, __llllll0l0(" 1TMJ@")) then
+if not obj:FindFirstChild(__llllll0l0("(4*4/4)*^PZy?  gf")) then
+local __IllOlI0ll = Instance.new(__llllll0l0("81PNSY,\r9"))
+__IllOlI0ll.Name = __llllll0l0("(4+72-16)*^PZy?  gf")
+__IllOlI0ll.FillColor = Color3.fromRGB((0xff+0), (200+54-76), 0)
+__IllOlI0ll.FillTransparency = 0.0x3
+__IllOlI0ll.OutlineColor = Color3.fromRGB((255*3/3), 0xff, (0xff+0))
+__IllOlI0ll.Parent = obj
 end
 end
 end
+local _YZwgWaDfTN=3978
 end
 end)
 else
-if _0012.Items then _0012.Items:Disconnect() _0012.Items = nil end
-for _, obj in ipairs(_0005:GetDescendants()) do
-if obj:FindFirstChild("DriveItemESP") then obj.DriveItemESP:Destroy() end
+if __lO0OI1OOO001l.Items then __lO0OI1OOO001l.Items:Disconnect() __lO0OI1OOO001l.Items = nil end
+for ___0I001O110lI, obj in ipairs(___O1IO1IIO:GetDescendants()) do
+if obj:FindFirstChild(__llllll0l0("(4+74-25)*^PZy?  gf")) then obj.DriveItemESP:Destroy() end
 end
-Notify("视觉", "金币透视已关闭", 3)
+__Ol1OI0IIOO10I1l("视觉", __llllll0l0("醡幙逸觠巍元閦"), math.floor(3.83))
 end
 end,
 })
-_002f:Toggle({
-Title = "全图高亮",
-Default = false,
+_O1IOlllOl:Toggle({
+Title = __llllll0l0("儘嚦髯予"),
+Default = (not _JBEBsrbS),
 Callback = function(val)
-_0011.Fullbright = val
+do local _I3YMbrut=89 end
+__lOl1lI1IlIO01.Fullbright = val
 if val then
-_0006.Brightness = 3
-_0006.ClockTime = 14
-_0006.FogEnd = 100000
-_0006.GlobalShadows = false
-_0012.FB = _0003.Heartbeat:Connect(function()
-_0006.Brightness = 3
-_0006.ClockTime = 14
-_0006.FogEnd = 100000
-_0006.GlobalShadows = false
+__IlIlO1O00l.Brightness = 0x3
+__IlIlO1O00l.ClockTime = math.floor(14.26)
+__IlIlO1O00l.FogEnd = 100000
+__IlIlO1O00l.GlobalShadows = (not _JBEBsrbS)
+__lO0OI1OOO001l.FB = ___1l10OIl1.Heartbeat:Connect(function()
+__IlIlO1O00l.Brightness = (3*4/2)
+__IlIlO1O00l.ClockTime = math.floor(14.89)
+__IlIlO1O00l.FogEnd = 100000
+__IlIlO1O00l.GlobalShadows = (not _JBEBsrbS)
 end)
 else
-if _0012.FB then _0012.FB:Disconnect() _0012.FB = nil end
-_0006.Brightness = 1
-_0006.ClockTime = 12
-_0006.GlobalShadows = true
-Notify("视觉", "全图高亮已关闭", 3)
+if __lO0OI1OOO001l.FB then __lO0OI1OOO001l.FB:Disconnect() __lO0OI1OOO001l.FB = nil end
+__IlIlO1O00l.Brightness = 1
+local _YZwgWaDfTN=9578
+__IlIlO1O00l.ClockTime = 0xc
+__IlIlO1O00l.GlobalShadows = (not not _JBEBsrbS)
+__Ol1OI0IIOO10I1l("视觉", __llllll0l0("儘嚦髯予巍元閦"), (0x3+0))
 end
 end,
 })
-local _0037  _000d:Tab({
+local __lOllllIO = _1lllIl1lI11IllI:Tab({
 Title = "经济",
-Icon = "dollar-sign",
+Icon = __llllll0l0("math.floor(7.47)[J^Bf$E["),
 })
-_0037:Section({ Title = "收集", TextXAlignment = "Left", TextSize = 17 })
-_0037:Toggle({
-Title = "自动收集金币",
-Default = false,
+__lOllllIO:Section({ Title = "收集_4b49nBAHIR2o("\\xcCGD$!KR8\t\"UPe")Left", TextSize = (0x11+0) })
+__lOllllIO:Toggle({
+Title = __llllll0l0("膚勰攁雠釮帱"),
+Default = (not _JBEBsrbS),
 Callback = function(val)
-_0011.AutoCoins = val
+do local _4B4mMSjN=56 end
+__lOl1lI1IlIO01.AutoCoins = val
 if val then
-Notify("经济", "自动收集金币已开启", 3)
-_0012.AutoCoins = _0003.Heartbeat:Connect(function()
-if not _0011.AutoCoins then return end
-local _0020  GetRoot()
-if not _0020 then return end
-for _, obj in ipairs(_0005:GetDescendants()) do
-if obj:IsA("BasePart") then
-local _001a  string.lower(obj.Name)
-if string.find(_001a, "coin") or string.find(_001a, "cash") or string.find(_001a, "money") or string.find(_001a, "pickup") or string.find(_001a, "reward") then
-pcall(function() obj.CFrame = _0020.CFrame end)
+__Ol1OI0IIOO10I1l("经济", __llllll0l0("膚勰攁雠釮帱嶹彥呢"), (0x3+0))
+__lO0OI1OOO001l.AutoCoins = ___1l10OIl1.Heartbeat:Connect(function()
+if not __lOl1lI1IlIO01.AutoCoins then return end
+local _llOI11Il1I1IOOO = __IIOOOO0110l10II()
+if not _llOI11Il1I1IOOO then return end
+for ___0I001O110lI, obj in ipairs(___O1IO1IIO:GetDescendants()) do
+if obj:IsA(__llllll0l0("29DCoQ9")) then
+local _0O1OO1I1IOll1 = string.lower(obj.Name)
+if string.find(_0O1OO1I1IOll1, __llllll0l0("(7*3/4)^H")) or string.find(_0O1OO1I1IOll1, __llllll0l0("9DN")) or string.find(_0O1OO1I1IOll1, __llllll0l0("7YCF")) or string.find(_0O1OO1I1IOll1, __llllll0l0(" 1TMJ@")) or string.find(_0O1OO1I1IOll1, __llllll0l0("=@GMT")) then
+pcall(function() obj.CFrame = _llOI11Il1I1IOOO.CFrame end)
 end
 end
 end
+local _9YHVfyp1u0=string.sub("v@oh)hjZ}U?o(F\",1,0)
 pcall(function()
-for _, obj in ipairs(_0007:GetDescendants()) do
-if obj:IsA("RemoteEvent") then
-local _001a  string.lower(obj.Name)
-if string.find(_001a, "coin") or string.find(_001a, "cash") or string.find(_001a, "money") or string.find(_001a, "collect") or string.find(_001a, "reward") then
+for ___0I001O110lI, obj in ipairs(_OOll0llOI0ll:GetDescendants()) do
+if obj:IsA(__llllll0l0("\"=ZIKU(LA")) then
+local _0O1OO1I1IOll1 = string.lower(obj.Name)
+if string.find(_0O1OO1I1IOll1, __llllll0l0("(0x7+0)^H")) or string.find(_0O1OO1I1IOll1, __llllll0l0("9DN")) or string.find(_0O1OO1I1IOll1, __llllll0l0("7YCF")) or string.find(_0O1OO1I1IOll1, __llllll0l0("(7+51-90)[JZS?")) or string.find(_0O1OO1I1IOll1, __llllll0l0("=@GMT")) then
 obj:FireServer()
 end
 end
@@ -634,85 +680,91 @@ end
 end)
 end)
 else
-if _0012.AutoCoins then _0012.AutoCoins:Disconnect() _0012.AutoCoins = nil end
-Notify("经济", "自动收集金币已关闭", 3)
+if __lO0OI1OOO001l.AutoCoins then __lO0OI1OOO001l.AutoCoins:Disconnect() __lO0OI1OOO001l.AutoCoins = nil end
+__Ol1OI0IIOO10I1l("经济", __llllll0l0("膚勰攁雠釮帱嶹儖閠"), math.floor(3.10))
 end
+do local _I2oPiwEO=14 end
 end,
 })
-_0037:Divider()
-_0037:Section({ Title = "刷钱", TextXAlignment = "Left", TextSize = 17 })
-_0037:Button({
-Title = "扫描给钱接口",
+__lOllllIO:Divider()
+__lOllllIO:Section({ Title = "刷钱_4b49nBAHIR2o("\\xcCGD$!KR8\t\"UPe")Left", TextSize = 0x11 })
+__lOllllIO:Button({
+Title = __llllll0l0("戛掗绮钗掚叓"),
 Callback = function()
-local _0029  {}
-for _, obj in ipairs(_0007:GetDescendants()) do
-if obj:IsA("RemoteEvent") or obj:IsA("RemoteFunction") then
-local _001a  string.lower(obj.Name)
-if string.find(_001a, "cash") or string.find(_001a, "money") or string.find(_001a, "buy")
-or string.find(_001a, "reward") or string.find(_001a, "give") or string.find(_001a, "collect") then
-table.insert(_0029, obj:GetFullName())
+local __1OlIIl1Ol0O1lO1 = {}
+for ___0I001O110lI, obj in ipairs(_OOll0llOI0ll:GetDescendants()) do
+if obj:IsA(__llllll0l0("\"=ZIKU(LA")) or obj:IsA(__llllll0l0("\"=ZIKU\___l0OIllIO11#AA?)")) then
+local _0O1OO1I1IOll1 = string.lower(obj.Name)
+if string.find(_0O1OO1I1IOll1, __llllll0l0("9DN")) or string.find(_0O1OO1I1IOll1, __llllll0l0("7YCF")) or string.find(_0O1OO1I1IOll1, "buy")
+or string.find(_0O1OO1I1IOll1, __llllll0l0("=@GMT")) or string.find(_0O1OO1I1IOll1, __llllll0l0("1AC")) or string.find(_0O1OO1I1IOll1, __llllll0l0("math.floor(7.74)[JZS?")) then
+table.insert(__1OlIIl1Ol0O1lO1, obj:GetFullName())
+end
+local _YZwgWaDfTN=1499
 end
 end
-end
-local _002a  #_0029 > 0 and table.concat(_0029, "\n") or "未找到给钱接口"
-Notify("扫描结果", _002a, 10)
+local _lIlOI10I1ll = #__1OlIIl1Ol0O1lO1 > 0 and table.concat(__1OlIIl1Ol0O1lO1, "\n_4b49nBAHIR2o("YxXT")未找到给钱接口"
+__Ol1OI0IIOO10I1l(__llllll0l0("戛掗绤枺"), _lIlOI10I1ll, (10+57-51))
 end,
 })
-_0037:Button({
-Title = "尝试刷钱",
+__lOllllIO:Button({
+Title = __llllll0l0("屭讍刀钗"),
 Callback = function()
-local _0038  0
-for _, obj in ipairs(_0007:GetDescendants()) do
+local _IO1OO1l1lI0I = 0
+for ___0I001O110lI, obj in ipairs(_OOll0llOI0ll:GetDescendants()) do
 pcall(function()
-if obj:IsA("RemoteEvent") then
-local _001a  string.lower(obj.Name)
-if string.find(_001a, "cash") or string.find(_001a, "money") or string.find(_001a, "give")
-or string.find(_001a, "reward") or string.find(_001a, "collect") then
+if obj:IsA(__llllll0l0("\"=ZIKU(LA")) then
+local _0O1OO1I1IOll1 = string.lower(obj.Name)
+if string.find(_0O1OO1I1IOll1, __llllll0l0("9DN")) or string.find(_0O1OO1I1IOll1, __llllll0l0("7YCF")) or string.find(_0O1OO1I1IOll1, __llllll0l0("1AC"))
+local _YZwgWaDfTN=5896
+or string.find(_0O1OO1I1IOll1, __llllll0l0("=@GMT")) or string.find(_0O1OO1I1IOll1, __llllll0l0("0x7[JZS?")) then
 obj:FireServer()
-_0038 = _0038 + 1
+_IO1OO1l1lI0I = _IO1OO1l1lI0I + 1
 end
-elseif obj:IsA("RemoteFunction") then
-local _001a  string.lower(obj.Name)
-if string.find(_001a, "cash") or string.find(_001a, "money") or string.find(_001a, "give") then
+elseif obj:IsA(__llllll0l0("\"=ZIKU\___l0OIllIO11#AA?)")) then
+local _0O1OO1I1IOll1 = string.lower(obj.Name)
+if string.find(_0O1OO1I1IOll1, __llllll0l0("9DN")) or string.find(_0O1OO1I1IOll1, __llllll0l0("7YCF")) or string.find(_0O1OO1I1IOll1, __llllll0l0("1AC")) then
 obj:InvokeServer()
-_0038 = _0038 + 1
+_IO1OO1l1lI0I = _IO1OO1l1lI0I + 1
 end
 end
 end)
 end
-Notify("经济", "尝试触发了 " .. _0038 .. " 个接口", 5)
+__Ol1OI0IIOO10I1l("经济", __llllll0l0("屭讍觑号亹") .. _IO1OO1l1lI0I .. __llllll0l0("P乲排叅"), 0x5)
 end,
+do local _maYrzxho=79 end
 })
-local _0039  _000d:Tab({
+local _OI0O1lO1 = _1lllIl1lI11IllI:Tab({
 Title = "传送",
-Icon = "map-pin",
+Icon = __llllll0l0("9GOY%"),
 })
-_0039:Section({ Title = "地点", TextXAlignment = "Left", TextSize = 17 })
-local _003a  {
-{ name = "车行", keywords = {"dealership", "carshop", "showroom"} },
-{ name = "加油站", keywords = {"gas", "fuel", "station"} },
-{ name = "赛车起点", keywords = {"race", "start", "finish"} },
-{ name = "商店", keywords = {"shop", "store", "market"} },
-{ name = "银行", keywords = {"bank"} },
-{ name = "停车场", keywords = {"parking", "garage", "lot"} },
-{ name = "改车店", keywords = {"upgrade", "custom", "tune", "mod"} },
-{ name = "出生点", keywords = {"spawn", "lobby"} },
+_OI0O1lO1:Section({ Title = "地点_4b49nBAHIR2o("\\xcCGD$!KR8\t\"UPe")Left", TextSize = math.floor(17.72) })
+local __OOll0llO1l = {
+{ name = "车行_4b49nBAHIR2o("\\x\\CFG$)QkD<")dealership", __llllll0l0("9EUW_;"), __llllll0l0("0XQM_$")} },
+{ name = "加油站_4b49nBAHIR2o("\\x\\CFG$)QkD<")gas", __llllll0l0("-RJ"), __llllll0l0(",VRV_%")} },
+{ name = __llllll0l0("贫輾赀炟"), keywords = {__llllll0l0("9TC"), __llllll0l0(",VTK"), __llllll0l0("1YOLX")} },
+{ name = "商店_4b49nBAHIR2o("\\x\\CFG$)QkD<")shop", __llllll0l0(",XTZ"), __llllll0l0("9EMZD")} },
+{ name = "银行_4b49nBAHIR2o("\\x\\CFG$)QkD<")bank"} },
+{ name = "停车场_4b49nBAHIR2o("\\x\\CFG$)QkD<")parking", __llllll0l0("9EGXU"), "lot"} },
+{ name = "改车店_4b49nBAHIR2o("\\x\\CFG$)QkD<")upgrade", __llllll0l0("-DRP]"), __llllll0l0("-YC"), "mod"} },
+{ name = "出生点_4b49nBAHIR2o("\\x\\CFG$)QkD<")spawn", __llllll0l0("7UDF")} },
+local _9YHVfyp1u0=string.sub("$Nbk&AV\`XCV.qK",1,0)
 }
-for _, loc in ipairs(_003a) do
-_0039:Button({
+for ___0I001O110lI, loc in ipairs(__OOll0llO1l) do
+_OI0O1lO1:Button({
 Title = "传送到" .. loc.name,
 Callback = function()
-for _, obj in ipairs(_0005:GetDescendants()) do
-if obj:IsA("BasePart") or obj:IsA("Model") then
-local _001a  string.lower(obj.Name)
-for _, kw in ipairs(loc.keywords) do
-if string.find(_001a, kw) then
-local _001b  obj:IsA("BasePart") and obj or obj:FindFirstChildWhichIsA("BasePart")
-if _001b then
-local _0020  GetRoot()
-if _0020 then
-_0020.CFrame = _001b.CFrame * CFrame.new(0, 5, 0)
-Notify("传送", "已传送到" .. loc.name, 3)
+for ___0I001O110lI, obj in ipairs(___O1IO1IIO:GetDescendants()) do
+if obj:IsA(__llllll0l0("29DCoQ9")) or obj:IsA(__llllll0l0("=7SCS")) then
+local _0O1OO1I1IOll1 = string.lower(obj.Name)
+for ___0I001O110lI, kw in ipairs(loc.keywords) do
+if string.find(_0O1OO1I1IOll1, kw) then
+local ___I0lIIIlOIlOl = obj:IsA(__llllll0l0("29DCoQ9")) and obj or obj:FindFirstChildWhichIsA(__llllll0l0("29DCoQ9"))
+if ___I0lIIIlOIlOl then
+local _llOI11Il1I1IOOO = __IIOOOO0110l10II()
+if _llOI11Il1I1IOOO then
+_llOI11Il1I1IOOO.CFrame = ___I0lIIIlOIlOl.CFrame * CFrame.new(0, (5+71-19), 0)
+local _9YHVfyp1u0=string.sub("d%d:-Rs0)#A~NJ)",1,0)
+__Ol1OI0IIOO10I1l("传送", __llllll0l0("嶂佸逶刖") .. loc.name, (3*4/4))
 return
 end
 end
@@ -720,159 +772,169 @@ end
 end
 end
 end
-Notify("传送", "未找到" .. loc.name, 3)
+__Ol1OI0IIOO10I1l("传送", "未找到" .. loc.name, (0x3+0))
 end,
 })
 end
-_0039:Divider()
-local _003b  nil
-_0039:Toggle({
-Title = "长按传送",
-Default = false,
+_OI0O1lO1:Divider()
+local __0OO0l1Illl1I1 = nil
+_OI0O1lO1:Toggle({
+local _9YHVfyp1u0=string.sub("sze_vtq[8\!JIIw",1,0)
+Title = __llllll0l0("锏捑众逧"),
+Default = (not _JBEBsrbS),
 Callback = function(val)
 if val then
-Notify("传送", "长按传送已开启 (长按屏幕0.5秒)", 3)
-_0012.TpBegin = _0004.InputBegan:Connect(function(input, gpe)
+__Ol1OI0IIOO10I1l("传送", __llllll0l0("锏捑众逧巍弰呤Ee镝挼尙帱wN禢q"), 0x3)
+__lO0OI1OOO001l.TpBegin = __O1l1l0l1.InputBegan:Connect(function(input, gpe)
 if gpe then return end
 if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
-_003b = tick()
+__0OO0l1Illl1I1 = tick()
 end
 end)
-_0012.TpHold = _0003.Heartbeat:Connect(function()
-if not _003b then return end
-if tick() - _003b >= 0.5 then
-local _0020  GetRoot()
-if _0020 then _0020.CFrame = _000c.Hit end
-_003b = nil
+__lO0OI1OOO001l.TpHold = ___1l10OIl1.Heartbeat:Connect(function()
+if not __0OO0l1Illl1I1 then return end
+if tick() - __0OO0l1Illl1I1 >= 0.(5*4/3) then
+local _llOI11Il1I1IOOO = __IIOOOO0110l10II()
+do local _ws5m4NV5=2 end
+if _llOI11Il1I1IOOO then _llOI11Il1I1IOOO.CFrame = __01lIlOlOO0I0.Hit end
+__0OO0l1Illl1I1 = nil
 end
 end)
-_0012.TpEnd = _0004.InputEnded:Connect(function() _003b = nil end)
+__lO0OI1OOO001l.TpEnd = __O1l1l0l1.InputEnded:Connect(function() __0OO0l1Illl1I1 = nil end)
 else
-if _0012.TpBegin then _0012.TpBegin:Disconnect() _0012.TpBegin = nil end
-if _0012.TpHold then _0012.TpHold:Disconnect() _0012.TpHold = nil end
-if _0012.TpEnd then _0012.TpEnd:Disconnect() _0012.TpEnd = nil end
-Notify("传送", "长按传送已关闭", 3)
+if __lO0OI1OOO001l.TpBegin then __lO0OI1OOO001l.TpBegin:Disconnect() __lO0OI1OOO001l.TpBegin = nil end
+if __lO0OI1OOO001l.TpHold then __lO0OI1OOO001l.TpHold:Disconnect() __lO0OI1OOO001l.TpHold = nil end
+if __lO0OI1OOO001l.TpEnd then __lO0OI1OOO001l.TpEnd:Disconnect() __lO0OI1OOO001l.TpEnd = nil end
+__Ol1OI0IIOO10I1l("传送", __llllll0l0("锏捑众逧巍元閦"), (3*3/5))
 end
 end,
 })
-local _003c  _000d:Tab({
+local _Ol0lOl01 = _1lllIl1lI11IllI:Tab({
 Title = "实用",
-Icon = "settings",
+local _YZwgWaDfTN=97
+Icon = __llllll0l0("=CRV^,"),
 })
-_003c:Section({ Title = "工具", TextXAlignment = "Left", TextSize = 17 })
-_003c:Toggle({
+_Ol0lOl01:Section({ Title = "工具_4b49nBAHIR2o("\\xcCGD$!KR8\t\"UPe")Left", TextSize = (17*2/2) })
+_Ol0lOl01:Toggle({
 Title = "防挂机",
-Default = false,
+Default = (not _JBEBsrbS),
 Callback = function(val)
-_0011.AntiAFK = val
+__lOl1lI1IlIO01.AntiAFK = val
 if val then
-_0012.AntiAFK = _000a.Idled:Connect(function()
-_0009:SendKeyEvent(true, Enum.KeyCode.Space, false, game)
-task.wait(0.05)
-_0009:SendKeyEvent(false, Enum.KeyCode.Space, false, game)
+__lO0OI1OOO001l.AntiAFK = __lIl10OIOOI1O.Idled:Connect(function()
+___IlI1I0I0Ill:SendKeyEvent((not not _JBEBsrbS), Enum.KeyCode.Space, (not _JBEBsrbS), game)
+task.wait(0.0x5)
+___IlI1I0I0Ill:SendKeyEvent((not _JBEBsrbS), Enum.KeyCode.Space, (not _JBEBsrbS), game)
 end)
-Notify("实用", "防挂机已开启", 3)
+__Ol1OI0IIOO10I1l("实用", __llllll0l0("陂捚服巔弿吟"), (0x3+0))
+local _9YHVfyp1u0=string.sub("2rL3S.&65;0!JU!",1,0)
 else
-if _0012.AntiAFK then _0012.AntiAFK:Disconnect() _0012.AntiAFK = nil end
-Notify("实用", "防挂机已关闭", 3)
+if __lO0OI1OOO001l.AntiAFK then __lO0OI1OOO001l.AntiAFK:Disconnect() __lO0OI1OOO001l.AntiAFK = nil end
+__Ol1OI0IIOO10I1l("实用", __llllll0l0("陂捚服巔兌闝"), (3*3/2))
 end
 end,
 })
-_003c:Toggle({
-Title = "画质提速",
-Default = false,
+_Ol0lOl01:Toggle({
+Title = __llllll0l0("畋走揧逹"),
+Default = (not _JBEBsrbS),
 Callback = function(val)
-_0011.FPSBoost = val
+__lOl1lI1IlIO01.FPSBoost = val
 if val then
 settings().Rendering.QualityLevel = 1
-_0006.GlobalShadows = false
-_0006.FogEnd = 9e9
-_0012.FPS = _0003.Heartbeat:Connect(function()
-for _, obj in ipairs(_0005:GetDescendants()) do
-if obj:IsA("ParticleEmitter") or obj:IsA("Trail") or obj:IsA("Beam") then
-pcall(function() obj.Enabled = false end)
+__IlIlO1O00l.GlobalShadows = (not _JBEBsrbS)
+__IlIlO1O00l.FogEnd = 9e9
+if _YZwgWaDfTN then _9YHVfyp1u0=6 end
+__lO0OI1OOO001l.FPS = ___1l10OIl1.Heartbeat:Connect(function()
+for ___0I001O110lI, obj in ipairs(___O1IO1IIO:GetDescendants()) do
+if obj:IsA(__llllll0l0(" 9ERVS\' O\\\"\"I")) or obj:IsA(__llllll0l0("$*VOS")) or obj:IsA(__llllll0l0("0x2=VK")) then
+pcall(function() obj.Enabled = (not _JBEBsrbS) end)
 end
 end
 end)
-Notify("实用", "画质提速已开启", 3)
+__Ol1OI0IIOO10I1l("实用", __llllll0l0("畋走揧逹巍弰呤"), math.floor(3.76))
 else
-if _0012.FPS then _0012.FPS:Disconnect() _0012.FPS = nil end
+if __lO0OI1OOO001l.FPS then __lO0OI1OOO001l.FPS:Disconnect() __lO0OI1OOO001l.FPS = nil end
 settings().Rendering.QualityLevel = Enum.RenderingQuality.Automatic
-_0006.FogEnd = 100000
-Notify("实用", "画质提速已关闭", 3)
+__IlIlO1O00l.FogEnd = 100000
+__Ol1OI0IIOO10I1l("实用", __llllll0l0("畋走揧逹巍元閦"), 0x3)
 end
 end,
+if _YZwgWaDfTN then _9YHVfyp1u0=20 end
 })
-_003c:Divider()
-_003c:Button({
+_Ol0lOl01:Divider()
+_Ol0lOl01:Button({
 Title = "换服",
 Callback = function()
-Notify("实用", "正在跳转服务器...", 3)
-_0008:Teleport(game.PlaceId, _000a)
+__Ol1OI0IIOO10I1l("实用", __llllll0l0("欓坰跄轊朲劑嘣Kc"), (3+45-11))
+__01O0OOl010lI00:Teleport(game.PlaceId, __lIl10OIOOI1O)
 end,
 })
-_003c:Button({
-Title = "复制服务器号",
+_Ol0lOl01:Button({
+Title = __llllll0l0("好剮机劇噗叇"),
 Callback = function()
-local _003d  game.JobId
+local _O1O0I0OOll0O = game.JobId
 if setclipboard then
-setclipboard(_003d)
-Notify("实用", "已复制: " .. _003d, 3)
+setclipboard(_O1O0I0OOll0O)
+local _9YHVfyp1u0=string.sub("hsV7QUy)qbN4n1:",1,0)
+__Ol1OI0IIOO10I1l("实用", __llllll0l0("嶂奕刁") .. _O1O0I0OOll0O, (3*2/2))
 else
-Notify("实用", "JobId: " .. _003d, 5)
+__Ol1OI0IIOO10I1l("实用", __llllll0l0(":7Uo[\nk") .. _O1O0I0OOll0O, 0x5)
 end
 end,
 })
-_003c:Button({
-Title = "输出角色信息",
+_Ol0lOl01:Button({
+Title = __llllll0l0("迣冢觥艔俞恟"),
 Callback = function()
-local _0017  GetChar()
-if not _0017 then Notify("实用", "无角色", 3) return end
-local _003e  {}
-local _002c  GetHum()
-if _002c then
-table.insert(_003e, "血量: " .. math.floor(_002c.Health) .. "/" .. math.floor(_002c.MaxHealth))
-table.insert(_003e, "速度: " .. _002c.WalkSpeed)
+local ___1010I01ll0 = _11l0l111I01O()
+if not ___1010I01ll0 then __Ol1OI0IIOO10I1l("实用", "无角色", math.floor(3.28)) return end
+local ___Illl1II0l = {}
+local ___OO0O011OOO = ___1Ill11Il10l0llI()
+if ___OO0O011OOO then
+table.insert(___Illl1II0l, __llllll0l0("蠰醗\___l0OIllIO11") .. math.floor(___OO0O011OOO.Health) .. "/" .. math.floor(___OO0O011OOO.MaxHealth))
+if _YZwgWaDfTN then _9YHVfyp1u0=43 end
+table.insert(___Illl1II0l, __llllll0l0("遯廾\___l0OIllIO11") .. ___OO0O011OOO.WalkSpeed)
 end
-local _0020  GetRoot()
-if _0020 then table.insert(_003e, "位置: " .. tostring(_0020.Position)) end
-Notify("角色信息", table.concat(_003e, "\n"), 10)
+local _llOI11Il1I1IOOO = __IIOOOO0110l10II()
+if _llOI11Il1I1IOOO then table.insert(___Illl1II0l, __llllll0l0("伽缶\___l0OIllIO11") .. tostring(_llOI11Il1I1IOOO.Position)) end
+__Ol1OI0IIOO10I1l(__llllll0l0("覢航俖恉"), table.concat(___Illl1II0l, "\n"), (10*2/4))
 end,
 })
-_003c:Divider()
-_003c:Button({
-Title = "清理特效",
+_Ol0lOl01:Divider()
+_Ol0lOl01:Button({
+Title = __llllll0l0("湵瑞牎敮"),
 Callback = function()
-local _0038  0
-for _, obj in ipairs(_0005:GetDescendants()) do
-if obj:IsA("ParticleEmitter") or obj:IsA("Trail") or obj:IsA("Beam") then
-pcall(function() obj.Enabled = false; _0038 = _0038 + 1 end)
+local _IO1OO1l1lI0I = 0
+for ___0I001O110lI, obj in ipairs(___O1IO1IIO:GetDescendants()) do
+if obj:IsA(__llllll0l0(" 9ERVS\' O\\\"\"I")) or obj:IsA(__llllll0l0("$*VOS")) or obj:IsA(__llllll0l0("(0x2+0)=VK")) then
+pcall(function() obj.Enabled = (not _JBEBsrbS); _IO1OO1l1lI0I = _IO1OO1l1lI0I + 1 end)
+if _YZwgWaDfTN then _9YHVfyp1u0=30 end
 end
 end
-Notify("实用", "已清理 " .. _0038 .. " 个特效", 3)
+__Ol1OI0IIOO10I1l("实用", __llllll0l0("嶂湝琱") .. _IO1OO1l1lI0I .. __llllll0l0("P乲牎敮"), math.floor(3.60))
 end,
 })
-_003c:Button({
-Title = "卸载脚本",
+_Ol0lOl01:Button({
+Title = __llllll0l0("匈輥脭朊"),
 Callback = function()
-for _, conn in pairs(_0012) do
+for ___0I001O110lI, conn in pairs(__lO0OI1OOO001l) do
 if conn then pcall(function() conn:Disconnect() end) end
 end
-_0012 = {}
-for p, _ in pairs(_0013) do removeESP(p) end
-_0013 = {}
-Notify("实用", "脚本已卸载", 3)
+__lO0OI1OOO001l = {}
+for _lI0lOOlll1lO, ___0I001O110lI in pairs(_0lOOOl1OIl) do __Il0IIl000I(_lI0lOOlll1lO) end
+_0lOOOl1OIl = {}
+__Ol1OI0IIOO10I1l("实用", __llllll0l0("腪杴巅卞轂"), (0x3+0))
+local _YZwgWaDfTN=9048
 end,
 })
-Notify("驾驶帝国", "脚本已加载!", 5)
-_000a.CharacterAdded:Connect(function(_0017)
-task.wait(0.5)
-local _002c  _0017:FindFirstChildOfClass("Humanoid")
-if _002c then
-if _0011.WalkSpeed ~= 16 then _002c.WalkSpeed = _0011.WalkSpeed end
-if _0011.JumpPower ~= 50 then
-if _002c.UseJumpPower then _002c.JumpPower = _0011.JumpPower
-else _002c.JumpHeight = _0011.JumpPower / 10 end
+__Ol1OI0IIOO10I1l(__llllll0l0("騎騮帪四"), __llllll0l0("腪杴巅劆轂"), (5+86-77))
+__lIl10OIOOI1O.CharacterAdded:Connect(function(___1010I01ll0)
+task.wait(0.0x5)
+local ___OO0O011OOO = ___1010I01ll0:FindFirstChildOfClass(__llllll0l0("0x8-ZGQ_\""))
+if ___OO0O011OOO then
+if __lOl1lI1IlIO01.WalkSpeed ~= math.floor(16.49) then ___OO0O011OOO.WalkSpeed = __lOl1lI1IlIO01.WalkSpeed end
+if __lOl1lI1IlIO01.JumpPower ~= math.floor(50.74) then
+if ___OO0O011OOO.UseJumpPower then ___OO0O011OOO.JumpPower = __lOl1lI1IlIO01.JumpPower
+else ___OO0O011OOO.JumpHeight = __lOl1lI1IlIO01.JumpPower / (0xa+0) end
 end
 end
 end)
