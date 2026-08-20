@@ -134,4 +134,56 @@ Tab:Button({
     end,
 })
 
+Tab:Button({
+    Title = "死铁轨",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "死铁轨", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E6%AD%BB%E9%93%81%E8%BD%A8.lua"))()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
+        end
+    end,
+})
+
+Tab:Button({
+    Title = "速度传奇",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "速度传奇", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E9%80%9F%E5%BA%A6%E4%BC%A0%E5%A5%87.lua"))()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
+        end
+    end,
+})
+
+Tab:Button({
+    Title = "忍者传奇",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "忍者传奇", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E5%BF%8D%E8%80%85%E4%BC%A0%E5%A5%87.lua"))()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
+        end
+    end,
+})
+
+Tab:Button({
+    Title = "圣奥里",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "圣奥里", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E5%9C%A3%E5%A5%A5%E9%87%8C.lua"))()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
+        end
+    end,
+})
+
 WindUI:Notify({ Title = "欢迎使用", Content = "启动器已加载", Duration = 3 })
