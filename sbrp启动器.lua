@@ -139,10 +139,21 @@ Tab:Button({
     Callback = function()
         WindUI:Notify({ Title = "正在加载", Content = "死铁轨", Duration = 3 })
         local success, errorMsg = pcall(function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E6%AD%BB%E9%93%81%E8%BD%A8.lua"))()
+            local code = game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E6%AD%BB%E9%93%81%E8%BD%A8.lua")
+            if not code or #code < 100 then
+                error("HttpGet返回内容过短 (" .. tostring(code and #code or 0) .. " 字节), 可能是网络问题")
+            end
+            local fn, loadErr = loadstring(code)
+            if not fn then
+                error("语法错误: " .. tostring(loadErr))
+            end
+            fn()
         end)
         if not success then
-            WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
+            local msg = tostring(errorMsg)
+            if #msg > 200 then msg = msg:sub(1, 200) .. "..." end
+            WindUI:Notify({ Title = "死铁轨加载失败", Content = msg, Duration = 15 })
+            warn("[死铁轨] 加载失败: " .. tostring(errorMsg))
         end
     end,
 })

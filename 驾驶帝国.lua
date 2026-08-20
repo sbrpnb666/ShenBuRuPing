@@ -3,7 +3,7 @@
 -- 框架：WindUI
 --========================================================
 
-local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua"))()
+local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/finendss/VowLibrary/refs/heads/main/WINDUI.lua"))()
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")

@@ -8,7 +8,7 @@
 --===========================
 local WindUI
 local uiOk, uiErr = pcall(function()
-    WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua"))()
+    WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/finendss/VowLibrary/refs/heads/main/WINDUI.lua"))()
 end)
 if not uiOk or not WindUI then
     warn("WindUI 加载失败: " .. tostring(uiErr))

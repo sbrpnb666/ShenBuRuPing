@@ -4,16 +4,25 @@
     ||  Framework: WindUI                                          ||
     ||  Author: 死铁轨脚本                                          ||
     ||  Features: 自动/玩家/视觉/传送/实用                          ||
+    ||  Version: 2.1 (2026-08-20)                                  ||
     ================================================================
 ]]
+
+print("[死铁轨] 脚本开始加载 v2.1")
 
 -- ========== WindUI 加载 ==========
 local WindUI
 local uiOk, uiErr = pcall(function()
-    WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua"))()
+    WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/finendss/VowLibrary/refs/heads/main/WINDUI.lua"))()
 end)
 if not uiOk or not WindUI then
-    warn("WindUI 加载失败: " .. tostring(uiErr))
+    pcall(function()
+        game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = "死铁轨 - WindUI加载失败",
+            Text = tostring(uiErr),
+            Duration = 10,
+        })
+    end)
     return
 end
 
@@ -285,6 +294,7 @@ local function AttackWithTool()
 end
 
 -- ========== 创建窗口 ==========
+print("[死铁轨] 正在创建窗口...")
 local Window = WindUI:CreateWindow({
     Title   = "死铁轨",
     Icon    = "train",
@@ -369,6 +379,8 @@ local TeleportTab = Window:Tab({ Title = "传送", Icon = "map-pin" })
 
 -- 5. 实用
 local UtilityTab = Window:Tab({ Title = "实用", Icon = "wrench" })
+
+print("[死铁轨] 窗口和标签页创建完成, 开始添加功能...")
 
 -- ================================================================
 --                       1. 自动标签页
@@ -2103,4 +2115,5 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 end)
 
 -- ========== 脚本加载完成提示 ==========
+print("[死铁轨] 脚本加载完成!")
 Notify("死铁轨", "脚本已加载!", 5)
