@@ -1,5 +1,5 @@
 --========================================================
--- 启动器
+-- sbrp启动器
 --========================================================
 
 local StarterGui = game:GetService("StarterGui")
@@ -20,14 +20,14 @@ if not ok or not WindUI then
 end
 
 local Window = WindUI:CreateWindow({
-    Title = "启动器",
+    Title = "sbrp启动器",
     Icon = "sparkles",
     Folder = "QiDongQi",
     HideSearchBar = true,
 })
 
 Window:EditOpenButton({
-    Title = "启动器",
+    Title = "sbrp启动器",
     Icon = "monitor",
     CornerRadius = UDim.new(0, 16),
     StrokeThickness = 2,
