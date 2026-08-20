@@ -1,153 +1,139 @@
-local _ypv1Pd8c=#{}<1
-local _1OfuZAzFJcUV=function(s)local k="/2E#w_Bh8`em{>^]"local d=""for i=1,#s,2 dolocal h=string.sub(s,i,i)local l=string.sub(s,i+1,i+1)local hv=tonumber(h,16)local lv=tonumber(l,16)if hv and lv then d=d..string.char(hv*16+lv)end endlocal r=""for i=1,#d do r=r..string.char(string.byte(d,i)~string.byte(k,(i-1)%#k+1))end return r end
-print(_1OfuZAzFJcUV("740B7C3F2A7F584438ABC5105B486F731F"))
-local __OlIIO0llOlO1
+print("[99夜] 脚本开始加载 v1.0")
+local WindUI
 local uiOk, uiErr = pcall(function()
-__OlIIO0llOlO1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/finendss/VowLibrary/refs/heads/main/WINDUI.lua"))()
+WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/finendss/VowLibrary/refs/heads/main/WINDUI.lua"))()
 end)
-if not uiOk or not __OlIIO0llOlO1 then
+if not uiOk or not WindUI then
 pcall(function()
-game:GetService(_1OfuZAzFJcUV("7C462451033A302F4D09")):SetCore(_1OfuZAzFJcUV("7C572B47393036015E09060C0F573133"), {
-Title = _1OfuZAzFJcUV("160B59035A7F150156043024DB436F78"),
+game:GetService("StarterGui"):SetCore("SendNotification", {
+Title = "99夜 - WindUI加载失败",
 Text = tostring(uiErr),
-Duration = 0xa,
+Duration = 10,
 })
 end)
 return
 end
-local function __I1IOl1lO(hex)
+local function _ROCRh1IxPlm(hex)
 return ColorSequence.new(Color3.fromHex("#" .. tostring(hex)))
 end
-local _1l0OIlOlI = game:GetService(_1OfuZAzFJcUV("7003291338162E275429"))
-local __O10O0IIOlO1 = game:GetService(_1OfuZAzFJcUV("706D0A1247107221712F09224A"))
-local ___lO000I01 = game:GetService(_1OfuZAzFJcUV("706D1A4F386F7258715054"))
-local _OlIOII1II1 = game:GetService(_1OfuZAzFJcUV("707D296A38160B59712954"))
-local __IO1ll0ll = game:GetService(_1OfuZAzFJcUV("706D0C6C46332E58540C"))
-local _11lIOOIII0 = game:GetService(_1OfuZAzFJcUV("7003744F3E100D21712955"))
-local __O1OI1O01 = game:GetService(_1OfuZAzFJcUV("706D0A12381673270851"))
-local _I0OII0I0ll = game:GetService(_1OfuZAzFJcUV("707B756C3E167221080C09"))
-local ___1l1000IIO0l = game:GetService(_1OfuZAzFJcUV("706D1A121B6E725808292C224B52"))
-local _0Ol0l0IOO11 = _1l0OIlOlI._0Ol0l0IOO11
-local __IOO1O1ll0O0 = _OlIOII1II1.CurrentCamera
-local __lO1IOOl0IIIl = _0Ol0l0IOO11:GetMouse()
-local ___OlO0I000l = {
-AutoCollect   = (not _ypv1Pd8c),
-AutoChop      = (not _ypv1Pd8c),
-AutoCampfire  = (not _ypv1Pd8c),
-AutoHeal      = (not _ypv1Pd8c),
-AutoFood      = (not _ypv1Pd8c),
-WalkSpeed     = (16+3-9),
-JumpPower     = (50*3/4),
-InfiniteJump  = (not _ypv1Pd8c),
-NoClip        = (not _ypv1Pd8c),
-GodMode       = (not _ypv1Pd8c),
-NoFallDamage  = (not _ypv1Pd8c),
-Flying        = (not _ypv1Pd8c),
-FlySpeed      = 0x32,
-PlayerESP     = (not _ypv1Pd8c),
-ItemESP       = (not _ypv1Pd8c),
-EnemyESP      = (not _ypv1Pd8c),
-FullHighlight = (not _ypv1Pd8c),
-Fullbright    = (not _ypv1Pd8c),
-LongPressTP   = (not _ypv1Pd8c),
-AntiAfk       = (not _ypv1Pd8c),
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local _2prJatBO = 3260
+local Workspace = game:GetService("Workspace")
+local Lighting = game:GetService("Lighting")
+local TweenService = game:GetService("TweenService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local TeleportService = game:GetService("TeleportService")
+local VirtualInputManager = game:GetService("VirtualInputManager")
+local LocalPlayer = Players.LocalPlayer
+local Camera = Workspace.CurrentCamera
+local Mouse = LocalPlayer:GetMouse()
+local State = {
+AutoCollect   = false,
+AutoChop      = false,
+AutoCampfire  = false,
+AutoHeal      = false,
+AutoFood      = false,
+WalkSpeed     = 16,
+JumpPower     = 50,
+InfiniteJump  = false,
+NoClip        = false,
+GodMode       = false,
+NoFallDamage  = false,
+Flying        = false,
+FlySpeed      = 50,
+PlayerESP     = false,
+ItemESP       = false,
+EnemyESP      = false,
+FullHighlight = false,
+Fullbright    = false,
+LongPressTP   = false,
+AntiAfk       = false,
 }
-local __IIll01l1 = {}
-local _00I1O1lOl011 = {}
-local function ___lIIl1l011lIO1l1()
-return _0Ol0l0IOO11.Character
+local Connections = {}
+local ESPObjects = {}
+local function GetChar()
+return LocalPlayer.Character
 end
-local function ___0IO111lIOIIllI1()
-local char = ___lIIl1l011lIO1l1()
+local function GetRoot()
+local char = GetChar()
 if char then
-return char:FindFirstChild(_1OfuZAzFJcUV("6747284219302B0C6A0F0A192B5F2C29")) or char:FindFirstChild(_1OfuZAzFJcUV("7B5D375018"))
+return char:FindFirstChild("HumanoidRootPart") or char:FindFirstChild("Torso")
 end
 return nil
 end
-local function __IlIlIIII()
-local char = ___lIIl1l011lIO1l1()
+local function GetHum()
+local char = GetChar()
 if char then
-return char:FindFirstChildOfClass(_1OfuZAzFJcUV("6747284219302B0C"))
+return char:FindFirstChildOfClass("Humanoid")
 end
 return nil
 end
-local function __0II11lOO100110I(title, content, duration)
-__OlIIO0llOlO1:__0II11lOO100110I({
+local function Notify(title, content, duration)
+WindUI:Notify({
 Title = title,
 Content = content,
-Duration = duration or (3*4/2),
+Duration = duration or 3,
 })
 end
-local function _O1OlIlOl1110I(name, conn)
-if __IIll01l1[name] then
-__IIll01l1[name]:Disconnect()
+local function _qbgvkOYyJHSQOg(name, conn)
+if Connections[name] then
+Connections[name]:Disconnect()
 end
-__IIll01l1[name] = conn
+Connections[name] = conn
 end
-local function __l1I10II0000I00(name)
-if __IIll01l1[name] then
-__IIll01l1[name]:Disconnect()
-__IIll01l1[name] = nil
+local function _kcTDh8qL8cSivU(name)
+if Connections[name] then
+Connections[name]:Disconnect()
+Connections[name] = nil
 end
 end
-local function ___IO1lllIO0O()
-for key, obj in pairs(_00I1O1lOl011) do
-pcall(function()
-if type(obj) == _1OfuZAzFJcUV("5B53274F12") then
-if obj.Billboard then obj.Billboard:Destroy() end
-if obj.Highlight then obj.Highlight:Destroy() end
-elseif obj and obj.Destroy then
-obj:Destroy()
+local function _g4TwG3qVSp9(parent, text, color, studOffset)
+if not parent or not parent:IsA("Instance") then return nil end
+local _d6qVNi3H2lkWi = Instance.new("BillboardGui")
+_d6qVNi3H2lkWi.Name = "Night99ESP"
+_d6qVNi3H2lkWi.AlwaysOnTop = true
+_d6qVNi3H2lkWi.Size = UDim2.new(0, 200, 0, 50)
+_d6qVNi3H2lkWi.StudsOffset = studOffset or Vector3.new(0, 3, 0)
+_d6qVNi3H2lkWi.Adornee = parent
+local label = Instance.new("TextLabel")
+label.Size = UDim2.new(1, 0, 1, 0)
+label.BackgroundTransparency = 1
+label.Text = text
+label.TextColor3 = color or Color3.new(1, 1, 1)
+label.TextScaled = true
+label.Font = Enum.Font.SourceSansBold
+label.TextStrokeColor3 = Color3.new(0, 0, 0)
+label.TextStrokeTransparency = 0
+label.Parent = _d6qVNi3H2lkWi
+_d6qVNi3H2lkWi.Parent = parent
+return _d6qVNi3H2lkWi
 end
-end)
+local function _AL0EpMfim33tEGt(parent, color)
+if not parent or not parent:IsA("Instance") then return nil end
+local _bt9sZLY5W4rGpd = Instance.new("Highlight")
+_bt9sZLY5W4rGpd.Name = "Night99Highlight"
+_bt9sZLY5W4rGpd.Adornee = parent
+_bt9sZLY5W4rGpd.FillColor3 = color or Color3.new(1, 0, 0)
+_bt9sZLY5W4rGpd.FillTransparency = 0.5
+_bt9sZLY5W4rGpd.OutlineColor3 = Color3.new(1, 1, 1)
+_bt9sZLY5W4rGpd.Parent = parent
+return _bt9sZLY5W4rGpd
 end
-_00I1O1lOl011 = {}
-end
-local function __IlIlO01111IIIO1(parent, text, __ll00OlII, studOffset)
-if not parent or not parent:IsA(_1OfuZAzFJcUV("665C36571631210D")) then return nil end
-local __0Il1OOlI0O1I = Instance.new(_1OfuZAzFJcUV("6D5B294F1530231A5C271004"))
-__0Il1OOlI0O1I.Name = _1OfuZAzFJcUV("615B224B03667B2D6B30")
-__0Il1OOlI0O1I.AlwaysOnTop = (not not _ypv1Pd8c)
-__0Il1OOlI0O1I.Size = UDim2.new(0, (200+15-16), 0, (50*2/2))
-__0Il1OOlI0O1I.StudsOffset = studOffset or Vector3.new(0, (3*3/4), 0)
-__0Il1OOlI0O1I.Adornee = parent
-local _1l100l0O1000ll = Instance.new(_1OfuZAzFJcUV("7B573D573B3E200D54"))
-_1l100l0O1000ll.Size = UDim2.new(1, 0, 1, 0)
-_1l100l0O1000ll.BackgroundTransparency = 1
-_1l100l0O1000ll.Text = text
-_1l100l0O1000ll.TextColor3 = __ll00OlII or Color3.new(1, 1, 1)
-_1l100l0O1000ll.TextScaled = (not not _ypv1Pd8c)
-_1l100l0O1000ll.Font = Enum.Font.SourceSansBold
-_1l100l0O1000ll.TextStrokeColor3 = Color3.new(0, 0, 0)
-_1l100l0O1000ll.TextStrokeTransparency = 0
-_1l100l0O1000ll.Parent = __0Il1OOlI0O1I
-__0Il1OOlI0O1I.Parent = parent
-return __0Il1OOlI0O1I
-end
-local function _0llO0lI1O(parent, __ll00OlII)
-if not parent or not parent:IsA(_1OfuZAzFJcUV("665C36571631210D")) then return nil end
-local _III11I0O0Il = Instance.new(_1OfuZAzFJcUV("675B224B1B3625004C"))
-_III11I0O0Il.Name = _1OfuZAzFJcUV("615B224B03667B2051070D0112593629")
-_III11I0O0Il.Adornee = parent
-_III11I0O0Il.FillColor3 = __ll00OlII or Color3.new(1, 0, 0)
-_III11I0O0Il.FillTransparency = 0.math.floor(5.21)
-_III11I0O0Il.OutlineColor3 = Color3.new(1, 1, 1)
-_III11I0O0Il.Parent = parent
-return _III11I0O0Il
-end
-local function _Ol1100Il(cframe)
-local root = ___0IO111lIOIIllI1()
+local function _kp2L3W3hpSK(cframe)
+local root = GetRoot()
 if root then
 pcall(function()
 root.CFrame = cframe
 end)
 end
 end
-local function _IOlOOI1OIOl1Ill(__000I00I00OlIIO, searchIn)
-searchIn = searchIn or _OlIOII1II1
+local function _9JEeLYJreEU9(_DvhoPFncy76uY, searchIn)
+searchIn = searchIn or Workspace
 for _, obj in pairs(searchIn:GetDescendants()) do
 local name = string.lower(obj.Name)
-for _, kw in pairs(__000I00I00OlIIO) do
+for _, kw in pairs(_DvhoPFncy76uY) do
 if string.find(name, string.lower(kw)) then
 return obj
 end
@@ -155,412 +141,413 @@ end
 end
 return nil
 end
-local function ___l0O1IllI(__000I00I00OlIIO, searchIn)
-searchIn = searchIn or _OlIOII1II1
-local __l11O0OOl = {}
+local function _zPbWpu9DNIj(_DvhoPFncy76uY, searchIn)
+searchIn = searchIn or Workspace
+local results = {}
 for _, obj in pairs(searchIn:GetDescendants()) do
-if obj:IsA(_1OfuZAzFJcUV("6D533646273E301C")) or obj:IsA(_1OfuZAzFJcUV("625D21461B")) then
+if obj:IsA("BasePart") or obj:IsA("Model") then
 local name = string.lower(obj.Name)
-for _, kw in pairs(__000I00I00OlIIO) do
+for _, kw in pairs(_DvhoPFncy76uY) do
 if string.find(name, string.lower(kw)) then
-table.insert(__l11O0OOl, obj)
+table.insert(results, obj)
 break
 end
 end
 end
 end
-return __l11O0OOl
+return results
 end
-print(_1OfuZAzFJcUV("740B7C3F2A7F2140239AF28E551070"))
-local _lI11llO110IO10I = __OlIIO0llOlO1:CreateWindow({
+print("[99夜] 正在创建窗口...")
+local Window = WindUI:CreateWindow({
 Title   = "99夜",
-Icon    = _1OfuZAzFJcUV("425D2A4D"),
-Author  = _1OfuZAzFJcUV("160B59395B"),
-Folder  = _1OfuZAzFJcUV("160B0B4A1037361B"),
-Size    = UDim2.fromOffset((500+12-11), 520),
-Theme   = _1OfuZAzFJcUV("6B533748"),
+Icon    = "moon",
+Author  = "99夜脚本",
+Folder  = "99Nights",
+Size    = UDim2.fromOffset(500, 520),
+Theme   = "Dark",
 })
-_lI11llO110IO10I:Tag({
+Window:Tag({
 Title  = "99夜",
-Color  = Color3.fromHex(_1OfuZAzFJcUV("0C0674154E1A73")),
+Color  = Color3.fromHex("#4169E1"),
 })
-_lI11llO110IO10I:EditOpenButton({
+Window:EditOpenButton({
 Title          = "99夜",
-Icon           = _1OfuZAzFJcUV("425D2A4D"),
-CornerRadius   = UDim.new(0, math.floor(16.62)),
-StrokeThickness = 0x2,
-Color          = __I1IOl1lO(_1OfuZAzFJcUV("1B03731A326E")),
-Draggable      = (not not _ypv1Pd8c),
+Icon           = "moon",
+CornerRadius   = UDim.new(0, 16),
+StrokeThickness = 2,
+Color          = _ROCRh1IxPlm("4169E1"),
+Draggable      = true,
 })
-local _0lO1ll110Ol1OI0 = _lI11llO110IO10I:Tab({ Title = "自动_1OfuZAzFJcUV("03120C401831625518")bot" })
-local _O111IOlOl = _lI11llO110IO10I:Tab({ Title = "玩家_1OfuZAzFJcUV("03120C401831625518")user" })
-local ___I01l0l1I1O01l = _lI11llO110IO10I:Tab({ Title = "视觉_1OfuZAzFJcUV("03120C401831625518")eye" })
-local ___I0OO1IO00Ol0Ol1 = _lI11llO110IO10I:Tab({ Title = "传送_1OfuZAzFJcUV("03120C401831625518")map-pin" })
-local __IO00I1IlIIO0I1 = _lI11llO110IO10I:Tab({ Title = "实用_1OfuZAzFJcUV("03120C401831625518")wrench" })
-_0lO1ll110Ol1OI0:Toggle({
-Title = _1OfuZAzFJcUV("C59A73E51E1B"),
-Desc  = _1OfuZAzFJcUV("C59A7D67338EC6017C50CED4"),
-Value = (not _ypv1Pd8c),
+local AutoTab = Window:Tab({ Title = "自动", Icon = "bot" })
+local _XHYB2EMyWBDUbc = Window:Tab({ Title = "玩家", Icon = "user" })
+local _3be1aoKO = 3410
+local _cLoNhLKwh18C = Window:Tab({ Title = "视觉", Icon = "eye" })
+local _YEM1NKtnOg = Window:Tab({ Title = "传送", Icon = "map-pin" })
+local _uVFhf40FLIP = Window:Tab({ Title = "实用", Icon = "wrench" })
+AutoTab:Toggle({
+Title = "自动收集物资",
+Desc  = "自动吸附附近的物资到身边",
+Value = false,
 Callback = function(state)
-___OlO0I000l.AutoCollect = state
+State.AutoCollect = state
 if state then
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("C59A73E51E1B629A384F44"), (3*3/3))
+Notify("99夜", "自动收集物资 已开启!", 3)
 task.spawn(function()
-while ___OlO0I000l.AutoCollect do
-local root = ___0IO111lIOIIllI1()
+while State.AutoCollect do
+local root = GetRoot()
 if root then
-local __000I00I00OlIIO = {
-_1OfuZAzFJcUV("585D2A47"), "log", _1OfuZAzFJcUV("5C462C401C"), _1OfuZAzFJcUV("5B402046"),
-_1OfuZAzFJcUV("42572457"), _1OfuZAzFJcUV("495D2A47"), _1OfuZAzFJcUV("4E42354F12"), _1OfuZAzFJcUV("4D5737510E"), _1OfuZAzFJcUV("4247364B05302D05"),
-_1OfuZAzFJcUV("5853314605"), _1OfuZAzFJcUV("4D5D31571B3A"), _1OfuZAzFJcUV("4C532B57123A2C"),
-_1OfuZAzFJcUV("4D532B47163827"), _1OfuZAzFJcUV("425721481E2B"), "med", _1OfuZAzFJcUV("4757244F"),
-_1OfuZAzFJcUV("5C462A4D12"), _1OfuZAzFJcUV("5D5D2648"), _1OfuZAzFJcUV("46402A4D"), "ore",
-_1OfuZAzFJcUV("4C5E2A571F"), _1OfuZAzFJcUV("5D5D3546"), _1OfuZAzFJcUV("5C46374A1938"),
-_1OfuZAzFJcUV("4C5D2C4D"), _1OfuZAzFJcUV("485D2947"), "gem", _1OfuZAzFJcUV("4B5B244E183126"),
-"can", _1OfuZAzFJcUV("5C5D2142"), _1OfuZAzFJcUV("5C5D3053"),
+local _DvhoPFncy76uY = {
+"wood", "log", "stick", "tree",
+"meat", "food", "apple", "berry", "mushroom",
+"water", "bottle", "canteen",
+"bandage", "medkit", "med", "heal",
+"stone", "rock", "iron", "ore",
+"cloth", "rope", "string",
+"coin", "gold", "gem", "diamond",
+"can", "soda", "soup",
 }
-for _, obj in pairs(_OlIOII1II1:GetDescendants()) do
-if obj:IsA(_1OfuZAzFJcUV("6D533646273E301C")) and obj.Name ~= _1OfuZAzFJcUV("6747284219302B0C6A0F0A192B5F2C29") then
-local ___lIl1IlI0Il1 = string.lower(obj.Name)
-local _11OI1IOlOI1I = (not _ypv1Pd8c)
-for _, kw in pairs(__000I00I00OlIIO) do
-if string.find(___lIl1IlI0Il1, kw) then
-_11OI1IOlOI1I = (not not _ypv1Pd8c)
+for _, obj in pairs(Workspace:GetDescendants()) do
+if obj:IsA("BasePart") and obj.Name ~= "HumanoidRootPart" then
+local _ADRiDa5WiwZ8B = string.lower(obj.Name)
+local matched = false
+for _, kw in pairs(_DvhoPFncy76uY) do
+if string.find(_ADRiDa5WiwZ8B, kw) then
+matched = true
 break
 end
 end
-if _11OI1IOlOI1I then
+if matched then
 local dist = (obj.Position - root.Position).Magnitude
-if dist < math.floor(200.81) and dist > math.floor(2.22) then
+if dist < 200 and dist > 2 then
 pcall(function()
-obj.CFrame = root.CFrame * CFrame.new(0, 0, -(3+17-7))
+obj.CFrame = root.CFrame * CFrame.new(0, 0, -3)
 end)
 end
 end
 end
 end
 end
-task.wait(math.random((15*3/2), (50+6-6)) / (100*2/4))
+task.wait(math.random(15, 50) / 100)
 end
 end)
 else
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("C59A73E51E1B629A4B8D44"), 0x3)
+Notify("99夜", "自动收集物资 已关闭!", 3)
 end
 end,
 })
-_0lO1ll110Ol1OI0:Toggle({
-Title = _1OfuZAzFJcUV("C59A4832"),
-Desc  = _1OfuZAzFJcUV("C59A7ED8338EC67910D7B3452B"),
-Value = (not _ypv1Pd8c),
+AutoTab:Toggle({
+Title = "自动砍树",
+Desc  = "自动攻击附近的树木获取木材",
+Value = false,
 Callback = function(state)
-___OlO0I000l.AutoChop = state
+State.AutoChop = state
 if state then
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("C59A483257AD424719"), (3+14-12))
+Notify("99夜", "自动砍树 已开启!", 3)
 task.spawn(function()
-while ___OlO0I000l.AutoChop do
-local root = ___0IO111lIOIIllI1()
-local hum = __IlIlIIII()
+while State.AutoChop do
+local root = GetRoot()
+local hum = GetHum()
 if root and hum then
-local __IlI1Il1II = nil
-local _IlI1IlO0 = math.huge
-for _, obj in pairs(_OlIOII1II1:GetDescendants()) do
-if obj:IsA(_1OfuZAzFJcUV("625D21461B")) or obj:IsA(_1OfuZAzFJcUV("6D533646273E301C")) then
-local ___lIl1IlI0Il1 = string.lower(obj.Name)
-if string.find(___lIl1IlI0Il1, _1OfuZAzFJcUV("5B402046")) or string.find(___lIl1IlI0Il1, _1OfuZAzFJcUV("585D2A47")) then
-local pos = obj:IsA(_1OfuZAzFJcUV("6D533646273E301C")) and obj.Position or obj:GetPivot().Position
+local _3oVpLRNHThP = nil
+local _sk3XIXmR8BKXZgXq = math.huge
+for _, obj in pairs(Workspace:GetDescendants()) do
+if obj:IsA("Model") or obj:IsA("BasePart") then
+local _ADRiDa5WiwZ8B = string.lower(obj.Name)
+if string.find(_ADRiDa5WiwZ8B, "tree") or string.find(_ADRiDa5WiwZ8B, "wood") then
+local pos = obj:IsA("BasePart") and obj.Position or obj:GetPivot().Position
 local dist = (pos - root.Position).Magnitude
-if dist < _IlI1IlO0 and dist < 0x64 then
-_IlI1IlO0 = dist
-__IlI1Il1II = obj
+if dist < _sk3XIXmR8BKXZgXq and dist < 100 then
+_sk3XIXmR8BKXZgXq = dist
+_3oVpLRNHThP = obj
 end
 end
 end
 end
-if __IlI1Il1II then
-local _O101Il00lO0 = __IlI1Il1II:IsA(_1OfuZAzFJcUV("6D533646273E301C")) and __IlI1Il1II.Position or __IlI1Il1II:GetPivot().Position
-_Ol1100Il(CFrame.new(_O101Il00lO0 + Vector3.new(0x3, 0, math.floor(3.12))))
-task.wait(math.random((20*4/4), 0x28) / 0x64)
+if _3oVpLRNHThP then
+local treePos = _3oVpLRNHThP:IsA("BasePart") and _3oVpLRNHThP.Position or _3oVpLRNHThP:GetPivot().Position
+_kp2L3W3hpSK(CFrame.new(treePos + Vector3.new(3, 0, 3)))
+task.wait(math.random(20, 40) / 100)
 pcall(function()
-___1l1000IIO0l:SendKeyEvent((not not _ypv1Pd8c), Enum.KeyCode.E, (not _ypv1Pd8c), game)
+VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.E, false, game)
 task.wait(0.1)
-___1l1000IIO0l:SendKeyEvent((not _ypv1Pd8c), Enum.KeyCode.E, (not _ypv1Pd8c), game)
+VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.E, false, game)
 end)
 end
 end
-task.wait(math.random((30+17-1), (60*3/3)) / (100+18-16))
+task.wait(math.random(30, 60) / 100)
 end
 end)
 else
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("C59A483257AD318519"), (3*4/4))
+Notify("99夜", "自动砍树 已关闭!", 3)
 end
 end,
 })
-_0lO1ll110Ol1OI0:Toggle({
-Title = _1OfuZAzFJcUV("C59AB122AA34"),
-Desc  = _1OfuZAzFJcUV("C59A9C67A682299398A3FC"),
-Value = (not _ypv1Pd8c),
+AutoTab:Toggle({
+Title = "自动维持篝火",
+Desc  = "自动给附近篝火添加燃料",
+Value = false,
 Callback = function(state)
-___OlO0I000l.AutoCampfire = state
+State.AutoCampfire = state
 if state then
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("C59AB122AA34629A384F44"), math.floor(3.36))
+Notify("99夜", "自动维持篝火 已开启!", 3)
 task.spawn(function()
-while ___OlO0I000l.AutoCampfire do
-local _0O1OI1O0 = ___l0O1IllI({_1OfuZAzFJcUV("4C5328531136300D"), _1OfuZAzFJcUV("495B3746"), "篝火"})
-if #_0O1OI1O0 > 0 then
-for _, cf in pairs(_0O1OI1O0) do
+while State.AutoCampfire do
+local _5VHyCYM4siMB = _zPbWpu9DNIj({"campfire", "fire", "篝火"})
+if #_5VHyCYM4siMB > 0 then
+for _, cf in pairs(_5VHyCYM4siMB) do
 pcall(function()
-local fire = cf:FindFirstChildWhichIsA(_1OfuZAzFJcUV("695B3746"))
+local fire = cf:FindFirstChildWhichIsA("Fire")
 if not fire then
-local pos = cf:IsA(_1OfuZAzFJcUV("6D533646273E301C")) and cf.Position or cf:GetPivot().Position
-_Ol1100Il(CFrame.new(pos + Vector3.new(0x2, 0, (2*2/3))))
-task.wait(0.(3*4/3))
-___1l1000IIO0l:SendKeyEvent((not not _ypv1Pd8c), Enum.KeyCode.E, (not _ypv1Pd8c), game)
+local pos = cf:IsA("BasePart") and cf.Position or cf:GetPivot().Position
+_kp2L3W3hpSK(CFrame.new(pos + Vector3.new(2, 0, 2)))
+task.wait(0.3)
+VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.E, false, game)
 task.wait(0.1)
-___1l1000IIO0l:SendKeyEvent((not _ypv1Pd8c), Enum.KeyCode.E, (not _ypv1Pd8c), game)
+VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.E, false, game)
 end
 end)
 end
 end
-task.wait((3+14-4))
+task.wait(3)
 end
 end)
 else
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("C59AB122AA34629A4B8D44"), 0x3)
+Notify("99夜", "自动维持篝火 已关闭!", 3)
 end
 end,
 })
-_0lO1ll110Ol1OI0:Toggle({
-Title = _1OfuZAzFJcUV("C59AFEB4"),
-Desc  = _1OfuZAzFJcUV("6FFD0BD59DF73D40CF464A56EC3B"),
-Value = (not _ypv1Pd8c),
+AutoTab:Toggle({
+Title = "自动治疗",
+Desc  = "血量低时自动使用绷带/医疗包",
+Value = false,
 Callback = function(state)
-___OlO0I000l.AutoHeal = state
+State.AutoHeal = state
 if state then
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("C59AFEB457AD424719"), (3*4/2))
+Notify("99夜", "自动治疗 已开启!", 3)
 task.spawn(function()
-while ___OlO0I000l.AutoHeal do
-local hum = __IlIlIIII()
-if hum and hum.Health < hum.MaxHealth * 0.(5+5-19) then
+while State.AutoHeal do
+local hum = GetHum()
+if hum and hum.Health < hum.MaxHealth * 0.5 then
 pcall(function()
-___1l1000IIO0l:SendKeyEvent((not not _ypv1Pd8c), Enum.KeyCode.H, (not _ypv1Pd8c), game)
+VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.H, false, game)
 task.wait(0.1)
-___1l1000IIO0l:SendKeyEvent((not _ypv1Pd8c), Enum.KeyCode.H, (not _ypv1Pd8c), game)
+VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.H, false, game)
 end)
-task.wait((2*2/4))
+task.wait(2)
 end
 task.wait(1)
 end
 end)
 else
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("C59AFEB457AD318519"), (3*4/2))
+Notify("99夜", "自动治疗 已关闭!", 3)
 end
 end,
 })
-_0lO1ll110Ol1OI0:Toggle({
-Title = _1OfuZAzFJcUV("C59A9EFC"),
-Desc  = _1OfuZAzFJcUV("C59A46FC1E3A070D475C"),
-Value = (not _ypv1Pd8c),
+AutoTab:Toggle({
+Title = "自动进食",
+Desc  = "自动吃食物补充饥饿值",
+Value = false,
 Callback = function(state)
-___OlO0I000l.AutoFood = state
+State.AutoFood = state
 if state then
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("C59A9EFC57AD424719"), 0x3)
+Notify("99夜", "自动进食 已开启!", 3)
 task.spawn(function()
-while ___OlO0I000l.AutoFood do
+while State.AutoFood do
 pcall(function()
-___1l1000IIO0l:SendKeyEvent((not not _ypv1Pd8c), Enum.KeyCode.F, (not _ypv1Pd8c), game)
+VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.F, false, game)
 task.wait(0.1)
-___1l1000IIO0l:SendKeyEvent((not _ypv1Pd8c), Enum.KeyCode.F, (not _ypv1Pd8c), game)
+VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.F, false, game)
 end)
-task.wait(math.random(0x5, (10+8-2)))
+task.wait(math.random(5, 10))
 end
 end)
 else
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("C59A9EFC57AD318519"), (3+12-14))
+Notify("99夜", "自动进食 已关闭!", 3)
 end
 end,
 })
-_O111IOlOl:Slider({
-Title = _1OfuZAzFJcUV("D49A5A85"),
-Min = (16*2/2),
-Max = math.floor(200.96),
-Default = 0x10,
+_XHYB2EMyWBDUbc:Slider({
+Title = "移动速度",
+Min = 16,
+Max = 200,
+Default = 16,
 Callback = function(val)
-___OlO0I000l.WalkSpeed = val
-local hum = __IlIlIIII()
+State.WalkSpeed = val
+local hum = GetHum()
 if hum then
 hum.WalkSpeed = val
 end
 end,
 })
-_O111IOlOl:Slider({
+_XHYB2EMyWBDUbc:Slider({
 Title = "跳跃力",
-Min = math.floor(50.74),
-Max = math.floor(300.44),
-Default = 0x32,
+Min = 50,
+Max = 300,
+Default = 50,
 Callback = function(val)
-___OlO0I000l.JumpPower = val
-local hum = __IlIlIIII()
+State.JumpPower = val
+local hum = GetHum()
 if hum then
-hum.UseJumpPower = (not not _ypv1Pd8c)
+hum.UseJumpPower = true
 hum.JumpPower = val
 end
 end,
 })
-_O111IOlOl:Slider({
-Title = _1OfuZAzFJcUV("F17E5A85"),
-Min = 0xa,
-Max = 0xc8,
-Default = (50+14-1),
+_XHYB2EMyWBDUbc:Slider({
+Title = "飞行速度",
+Min = 10,
+Max = 200,
+Default = 50,
 Callback = function(val)
-___OlO0I000l.FlySpeed = val
+State.FlySpeed = val
 end,
 })
-_O111IOlOl:Toggle({
-Title = _1OfuZAzFJcUV("CF62B6E0"),
-Desc  = _1OfuZAzFJcUV("0748687C98BAB1AB"),
-Value = (not _ypv1Pd8c),
+_XHYB2EMyWBDUbc:Toggle({
+Title = "无限跳跃",
+Desc  = "在空中也可以跳跃",
+Value = false,
 Callback = function(state)
-___OlO0I000l.InfiniteJump = state
+State.InfiniteJump = state
 if state then
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("CF62B6E057AD424719"), math.floor(3.77))
+Notify("99夜", "无限跳跃 已开启!", 3)
 else
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("CF62B6E057AD318519"), 0x3)
+Notify("99夜", "无限跳跃 已关闭!", 3)
 end
 end,
 })
-___lO000I01.JumpRequest:Connect(function()
-if ___OlO0I000l.InfiniteJump then
-local hum = __IlIlIIII()
+UserInputService.JumpRequest:Connect(function()
+if State.InfiniteJump then
+local hum = GetHum()
 if hum then
 hum:ChangeState(Enum.HumanoidStateType.Jumping)
 end
 end
 end)
-_O111IOlOl:Toggle({
+_XHYB2EMyWBDUbc:Toggle({
 Title = "飞行",
-Desc  = _1OfuZAzFJcUV("78731667D069FB79181A59673C1E0D35465431283A"),
-Value = (not _ypv1Pd8c),
+Desc  = "WASD控制方向 空格上升 Shift下降",
+Value = false,
 Callback = function(state)
-___OlO0I000l.Flying = state
+State.Flying = state
 if state then
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("F17E65D1777063"), (3+19-20))
+Notify("99夜", "飞行 已开启!", 3)
 task.spawn(function()
-local hum = __IlIlIIII()
-local root = ___0IO111lIOIIllI1()
+local hum = GetHum()
+local root = GetRoot()
 if not hum or not root then return end
-local bv = Instance.new(_1OfuZAzFJcUV("6D5D215A213A2E075B091114"))
-bv.Name = _1OfuZAzFJcUV("695E3C7512332D0B51141C")
+local bv = Instance.new("BodyVelocity")
+bv.Name = "FlyVelocity"
 bv.MaxForce = Vector3.new(9e9, 9e9, 9e9)
 bv.Velocity = Vector3.new(0, 0, 0)
 bv.Parent = root
-local bg = Instance.new(_1OfuZAzFJcUV("6D5D215A30263007"))
-bg.Name = _1OfuZAzFJcUV("695E3C640E2D2D")
+local bg = Instance.new("BodyGyro")
+bg.Name = "FlyGyro"
 bg.MaxTorque = Vector3.new(9e9, 9e9, 9e9)
 bg.CFrame = root.CFrame
 bg.Parent = root
-hum.PlatformStand = (not not _ypv1Pd8c)
-_O1OlIlOl1110I(_1OfuZAzFJcUV("695E3C6F183032"), __O10O0IIOlO1.RenderStepped:Connect(function()
-if not ___OlO0I000l.Flying then return end
-local r = ___0IO111lIOIIllI1()
-local c = ___lIIl1l011lIO1l1()
+hum.PlatformStand = true
+_qbgvkOYyJHSQOg("FlyLoop", RunService.RenderStepped:Connect(function()
+if not State.Flying then return end
+local r = GetRoot()
+local c = GetChar()
 if not r or not c then return end
-local cam = _OlIOII1II1.CurrentCamera
-local __IIl0II1100OllO = Vector3.new(0, 0, 0)
-if ___lO000I01:IsKeyDown(Enum.KeyCode.W) then
-__IIl0II1100OllO = __IIl0II1100OllO + cam.CFrame.LookVector
+local cam = Workspace.CurrentCamera
+local moveDir = Vector3.new(0, 0, 0)
+if UserInputService:IsKeyDown(Enum.KeyCode.W) then
+moveDir = moveDir + cam.CFrame.LookVector
 end
-if ___lO000I01:IsKeyDown(Enum.KeyCode.S) then
-__IIl0II1100OllO = __IIl0II1100OllO - cam.CFrame.LookVector
+if UserInputService:IsKeyDown(Enum.KeyCode.S) then
+moveDir = moveDir - cam.CFrame.LookVector
 end
-if ___lO000I01:IsKeyDown(Enum.KeyCode.A) then
-__IIl0II1100OllO = __IIl0II1100OllO - cam.CFrame.RightVector
+if UserInputService:IsKeyDown(Enum.KeyCode.A) then
+moveDir = moveDir - cam.CFrame.RightVector
 end
-if ___lO000I01:IsKeyDown(Enum.KeyCode.D) then
-__IIl0II1100OllO = __IIl0II1100OllO + cam.CFrame.RightVector
+if UserInputService:IsKeyDown(Enum.KeyCode.D) then
+moveDir = moveDir + cam.CFrame.RightVector
 end
-if ___lO000I01:IsKeyDown(Enum.KeyCode.Space) then
-__IIl0II1100OllO = __IIl0II1100OllO + Vector3.new(0, 1, 0)
+if UserInputService:IsKeyDown(Enum.KeyCode.Space) then
+moveDir = moveDir + Vector3.new(0, 1, 0)
 end
-if ___lO000I01:IsKeyDown(Enum.KeyCode.LeftShift) then
-__IIl0II1100OllO = __IIl0II1100OllO - Vector3.new(0, 1, 0)
+if UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) then
+moveDir = moveDir - Vector3.new(0, 1, 0)
 end
-if __IIl0II1100OllO.Magnitude > 0 then
-__IIl0II1100OllO = __IIl0II1100OllO.Unit
+if moveDir.Magnitude > 0 then
+moveDir = moveDir.Unit
 end
-bv.Velocity = __IIl0II1100OllO * ___OlO0I000l.FlySpeed
+bv.Velocity = moveDir * State.FlySpeed
 bg.CFrame = cam.CFrame
 end))
-while ___OlO0I000l.Flying do
+while State.Flying do
 task.wait(0.1)
 end
-__l1I10II0000I00(_1OfuZAzFJcUV("695E3C6F183032"))
-local r = ___0IO111lIOIIllI1()
-local h = __IlIlIIII()
+_kcTDh8qL8cSivU("FlyLoop")
+local r = GetRoot()
+local h = GetHum()
 if r then
-local bv2 = r:FindFirstChild(_1OfuZAzFJcUV("695E3C7512332D0B51141C"))
+local bv2 = r:FindFirstChild("FlyVelocity")
 if bv2 then bv2:Destroy() end
-local bg2 = r:FindFirstChild(_1OfuZAzFJcUV("695E3C640E2D2D"))
+local bg2 = r:FindFirstChild("FlyGyro")
 if bg2 then bg2:Destroy() end
 end
 if h then
-h.PlatformStand = (not _ypv1Pd8c)
+h.PlatformStand = false
 end
 end)
 else
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("F17E65D104B263"), 0x3)
-__l1I10II0000I00(_1OfuZAzFJcUV("695E3C6F183032"))
-local r = ___0IO111lIOIIllI1()
-local h = __IlIlIIII()
+Notify("99夜", "飞行 已关闭!", 3)
+_kcTDh8qL8cSivU("FlyLoop")
+local r = GetRoot()
+local h = GetHum()
 if r then
-local bv2 = r:FindFirstChild(_1OfuZAzFJcUV("695E3C7512332D0B51141C"))
+local bv2 = r:FindFirstChild("FlyVelocity")
 if bv2 then bv2:Destroy() end
-local bg2 = r:FindFirstChild(_1OfuZAzFJcUV("695E3C640E2D2D"))
+local bg2 = r:FindFirstChild("FlyGyro")
 if bg2 then bg2:Destroy() end
 end
 if h then
-h.PlatformStand = (not _ypv1Pd8c)
+h.PlatformStand = false
 end
 end
 end,
 })
-_O111IOlOl:Toggle({
+_XHYB2EMyWBDUbc:Toggle({
 Title = "穿墙",
-Desc  = _1OfuZAzFJcUV("50F5052AEBD22B"),
-Value = (not _ypv1Pd8c),
+Desc  = "穿过所有障碍物",
+Value = false,
 Callback = function(state)
-___OlO0I000l.NoClip = state
+State.NoClip = state
 if state then
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("50AB65D1777063"), 0x3)
-_O1OlIlOl1110I(_1OfuZAzFJcUV("615D064F1E2F"), __O10O0IIOlO1.Stepped:Connect(function()
-local char = ___lIIl1l011lIO1l1()
+Notify("99夜", "穿墙 已开启!", 3)
+_qbgvkOYyJHSQOg("NoClip", RunService.Stepped:Connect(function()
+local char = GetChar()
 if char then
 for _, part in pairs(char:GetDescendants()) do
-if part:IsA(_1OfuZAzFJcUV("6D533646273E301C")) and part.CanCollide then
-part.CanCollide = (not _ypv1Pd8c)
+if part:IsA("BasePart") and part.CanCollide then
+part.CanCollide = false
 end
 end
 end
 end))
 else
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("50AB65D104B263"), 0x3)
-__l1I10II0000I00(_1OfuZAzFJcUV("615D064F1E2F"))
+Notify("99夜", "穿墙 已关闭!", 3)
+_kcTDh8qL8cSivU("NoClip")
 end
 end,
 })
-_O111IOlOl:Toggle({
-Title = _1OfuZAzFJcUV("7B0FA507C4"),
-Desc  = _1OfuZAzFJcUV("E1EA41AA7C3A4F725B20"),
-Value = (not _ypv1Pd8c),
+_XHYB2EMyWBDUbc:Toggle({
+Title = "摔落无伤害",
+Desc  = "从高处掉下来不会扣血",
+Value = false,
 Callback = function(state)
-___OlO0I000l.NoFallDamage = state
+State.NoFallDamage = state
 if state then
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("7B0FA507C47FB0681741"), math.floor(3.88))
-_O1OlIlOl1110I(_1OfuZAzFJcUV("615D03421B33"), _0Ol0l0IOO11.CharacterAdded:Connect(function(char)
+Notify("99夜", "摔落无伤害 已开启!", 3)
+_qbgvkOYyJHSQOg("NoFall", LocalPlayer.CharacterAdded:Connect(function(char)
 task.wait(1)
-local hum = char:FindFirstChildOfClass(_1OfuZAzFJcUV("6747284219302B0C"))
+local hum = char:FindFirstChildOfClass("Humanoid")
 if hum then
 hum.Freefalling:Connect(function()
-if ___OlO0I000l.NoFallDamage then
+if State.NoFallDamage then
 pcall(function()
 hum.Health = hum.MaxHealth
 end)
@@ -568,10 +555,10 @@ end
 end)
 end
 end))
-local hum = __IlIlIIII()
+local hum = GetHum()
 if hum then
 hum.Freefalling:Connect(function()
-if ___OlO0I000l.NoFallDamage then
+if State.NoFallDamage then
 pcall(function()
 hum.Health = hum.MaxHealth
 end)
@@ -579,336 +566,337 @@ end
 end)
 end
 else
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("7B0FA507C47FB01BD541"), (3*4/4))
-__l1I10II0000I00(_1OfuZAzFJcUV("615D03421B33"))
+Notify("99夜", "摔落无伤害 已关闭!", 3)
+_kcTDh8qL8cSivU("NoFall")
 end
 end,
 })
-_O111IOlOl:Toggle({
-Title = _1OfuZAzFJcUV("CF7E642C"),
-Desc  = _1OfuZAzFJcUV("6FFD45D7AA5EA328"),
-Value = (not _ypv1Pd8c),
+_XHYB2EMyWBDUbc:Toggle({
+Title = "无敌模式",
+Desc  = "血量一直保持满血",
+Value = false,
 Callback = function(state)
-___OlO0I000l.GodMode = state
+State.GodMode = state
 if state then
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("CF7E642C57AD424719"), (3*4/3))
-_O1OlIlOl1110I(_1OfuZAzFJcUV("685D216E183B27"), __O10O0IIOlO1.RenderStepped:Connect(function()
-local hum = __IlIlIIII()
+Notify("99夜", "无敌模式 已开启!", 3)
+_qbgvkOYyJHSQOg("GodMode", RunService.RenderStepped:Connect(function()
+local hum = GetHum()
+local _fTSwwkBf = 6476
 if hum and hum.Health < hum.MaxHealth then
 hum.Health = hum.MaxHealth
 end
 end))
 else
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("CF7E642C57AD318519"), (3+2-10))
-__l1I10II0000I00(_1OfuZAzFJcUV("685D216E183B27"))
+Notify("99夜", "无敌模式 已关闭!", 3)
+_kcTDh8qL8cSivU("GodMode")
 end
 end,
 })
-___I01l0l1I1O01l:Toggle({
-Title = _1OfuZAzFJcUV("8684007027"),
-Desc  = _1OfuZAzFJcUV("20F47B193756EBDE750E"),
-Value = (not _ypv1Pd8c),
+_cLoNhLKwh18C:Toggle({
+Title = "玩家ESP",
+Desc  = "透视显示所有玩家位置",
+Value = false,
 Callback = function(state)
-___OlO0I000l.PlayerESP = state
+State.PlayerESP = state
 if state then
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("86840070277FB0681741"), (3*3/4))
+Notify("99夜", "玩家ESP 已开启!", 3)
 task.spawn(function()
-while ___OlO0I000l.PlayerESP do
-for _, player in pairs(_1l0OIlOlI:GetPlayers()) do
-if player ~= _0Ol0l0IOO11 and player.Character then
+while State.PlayerESP do
+for _, player in pairs(Players:GetPlayers()) do
+if player ~= LocalPlayer and player.Character then
 local char = player.Character
-if not _00I1O1lOl011[_1OfuZAzFJcUV("5F5E245A122D1D") .. player.Name] then
-local hl = _0llO0lI1O(char, Color3.new(0, 1, 0))
-local bb = __IlIlO01111IIIO1(char:FindFirstChild(_1OfuZAzFJcUV("67572447")) or char, player.Name, Color3.new(0, 1, 0), Vector3.new(0, (3*3/2), 0))
-_00I1O1lOl011[_1OfuZAzFJcUV("5F5E245A122D1D") .. player.Name] = { Highlight = hl, Billboard = bb }
+if not ESPObjects["player_" .. player.Name] then
+local hl = _AL0EpMfim33tEGt(char, Color3.new(0, 1, 0))
+local bb = _g4TwG3qVSp9(char:FindFirstChild("Head") or char, player.Name, Color3.new(0, 1, 0), Vector3.new(0, 3, 0))
+ESPObjects["player_" .. player.Name] = { Highlight = hl, Billboard = bb }
 end
 else
-if _00I1O1lOl011[_1OfuZAzFJcUV("5F5E245A122D1D") .. player.Name] then
-local obj = _00I1O1lOl011[_1OfuZAzFJcUV("5F5E245A122D1D") .. player.Name]
+if ESPObjects["player_" .. player.Name] then
+local obj = ESPObjects["player_" .. player.Name]
 if obj.Highlight then obj.Highlight:Destroy() end
 if obj.Billboard then obj.Billboard:Destroy() end
-_00I1O1lOl011[_1OfuZAzFJcUV("5F5E245A122D1D") .. player.Name] = nil
+ESPObjects["player_" .. player.Name] = nil
 end
 end
 end
-task.wait(0.(5+7-17))
+task.wait(0.5)
 end
-for name, obj in pairs(_00I1O1lOl011) do
-if string.find(name, _1OfuZAzFJcUV("5F5E245A122D1D")) then
+for name, obj in pairs(ESPObjects) do
+if string.find(name, "player_") then
 if obj.Highlight then obj.Highlight:Destroy() end
 if obj.Billboard then obj.Billboard:Destroy() end
-_00I1O1lOl011[name] = nil
+ESPObjects[name] = nil
 end
 end
 end)
 else
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("86840070277FB01BD541"), (3*4/2))
+Notify("99夜", "玩家ESP 已关闭!", 3)
 end
 end,
 })
-___I01l0l1I1O01l:Toggle({
-Title = _1OfuZAzFJcUV("6388007027"),
-Desc  = _1OfuZAzFJcUV("20F47B1937560ED2174A0C2015"),
-Value = (not _ypv1Pd8c),
+_cLoNhLKwh18C:Toggle({
+Title = "敌人ESP",
+Desc  = "透视显示所有敌人/怪物位置",
+Value = false,
 Callback = function(state)
-___OlO0I000l.EnemyESP = state
+State.EnemyESP = state
 if state then
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("63880070277FB0681741"), (3+11-11))
+Notify("99夜", "敌人ESP 已开启!", 3)
 task.spawn(function()
-while ___OlO0I000l.EnemyESP do
-for _, obj in pairs(_OlIOII1II1:GetDescendants()) do
-if obj:IsA(_1OfuZAzFJcUV("625D21461B")) then
-local hum = obj:FindFirstChildOfClass(_1OfuZAzFJcUV("6747284219302B0C"))
-local hrp = obj:FindFirstChild(_1OfuZAzFJcUV("6747284219302B0C6A0F0A192B5F2C29"))
+while State.EnemyESP do
+for _, obj in pairs(Workspace:GetDescendants()) do
+if obj:IsA("Model") then
+local hum = obj:FindFirstChildOfClass("Humanoid")
+local hrp = obj:FindFirstChild("HumanoidRootPart")
 if hum and hrp and hum.Health > 0 then
-local __lllOllO1IOOOOI = (not _ypv1Pd8c)
-for _, player in pairs(_1l0OIlOlI:GetPlayers()) do
+local _TSkdYO0nU5 = false
+for _, player in pairs(Players:GetPlayers()) do
 if player.Character == obj then
-__lllOllO1IOOOOI = (not not _ypv1Pd8c)
+_TSkdYO0nU5 = true
 break
 end
 end
-if not __lllOllO1IOOOOI and not _00I1O1lOl011[_1OfuZAzFJcUV("4A5C204E0E00") .. obj:GetFullName()] then
-local ___lIl1IlI0Il1 = string.lower(obj.Name)
-local __ll00OlII = Color3.new(1, 0, 0)
-if string.find(___lIl1IlI0Il1, _1OfuZAzFJcUV("4D5D3650")) then
-__ll00OlII = Color3.new(1, 0, 1)
-elseif string.find(___lIl1IlI0Il1, _1OfuZAzFJcUV("4C472957")) or string.find(___lIl1IlI0Il1, "ram_1OfuZAzFJcUV("06122A51572C361A510E02431D573039076D1A7C1B162E59710C2C5D32526F710F")owl") then
-__ll00OlII = Color3.new(1, 0.(5*4/3), 0)
+if not _TSkdYO0nU5 and not ESPObjects["enemy_" .. obj:GetFullName()] then
+local _ADRiDa5WiwZ8B = string.lower(obj.Name)
+local color = Color3.new(1, 0, 0)
+if string.find(_ADRiDa5WiwZ8B, "boss") then
+color = Color3.new(1, 0, 1)
+elseif string.find(_ADRiDa5WiwZ8B, "cult") or string.find(_ADRiDa5WiwZ8B, "ram") or string.find(_ADRiDa5WiwZ8B, "owl") then
+color = Color3.new(1, 0.5, 0)
 end
-local hl = _0llO0lI1O(obj, __ll00OlII)
-local bb = __IlIlO01111IIIO1(hrp, obj.Name, __ll00OlII, Vector3.new(0, (3*2/2), 0))
-_00I1O1lOl011[_1OfuZAzFJcUV("4A5C204E0E00") .. obj:GetFullName()] = { Highlight = hl, Billboard = bb }
+local hl = _AL0EpMfim33tEGt(obj, color)
+local bb = _g4TwG3qVSp9(hrp, obj.Name, color, Vector3.new(0, 3, 0))
+ESPObjects["enemy_" .. obj:GetFullName()] = { Highlight = hl, Billboard = bb }
 end
 end
 end
 end
 task.wait(1)
 end
-for name, obj in pairs(_00I1O1lOl011) do
-if string.find(name, _1OfuZAzFJcUV("4A5C204E0E00")) then
+for name, obj in pairs(ESPObjects) do
+if string.find(name, "enemy_") then
 if obj.Highlight then obj.Highlight:Destroy() end
 if obj.Billboard then obj.Billboard:Destroy() end
-_00I1O1lOl011[name] = nil
+ESPObjects[name] = nil
 end
 end
 end)
 else
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("63880070277FB01BD541"), 0x3)
+Notify("99夜", "敌人ESP 已关闭!", 3)
 end
 end,
 })
-___I01l0l1I1O01l:Toggle({
-Title = _1OfuZAzFJcUV("46F3007027"),
-Desc  = _1OfuZAzFJcUV("20F47B193756AD96EE09A4"),
-Value = (not _ypv1Pd8c),
+_cLoNhLKwh18C:Toggle({
+Title = "物品ESP",
+Desc  = "透视显示所有可拾取物品",
+Value = false,
 Callback = function(state)
-___OlO0I000l.ItemESP = state
+State.ItemESP = state
 if state then
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("46F30070277FB0681741"), (3+5-17))
+Notify("99夜", "物品ESP 已开启!", 3)
 task.spawn(function()
-while ___OlO0I000l.ItemESP do
-local __000I00I00OlIIO = {
-_1OfuZAzFJcUV("585D2A47"), "log", _1OfuZAzFJcUV("5C462C401C"),
-_1OfuZAzFJcUV("42572457"), _1OfuZAzFJcUV("495D2A47"), _1OfuZAzFJcUV("4E42354F12"), _1OfuZAzFJcUV("4D5737510E"),
-_1OfuZAzFJcUV("5853314605"), _1OfuZAzFJcUV("4D5D31571B3A"),
-_1OfuZAzFJcUV("4D532B47163827"), _1OfuZAzFJcUV("425721481E2B"),
-_1OfuZAzFJcUV("5C462A4D12"), _1OfuZAzFJcUV("5D5D2648"), _1OfuZAzFJcUV("46402A4D"), "ore",
-_1OfuZAzFJcUV("4C5D2C4D"), _1OfuZAzFJcUV("485D2947"), "gem",
-"can", _1OfuZAzFJcUV("5C5D2142"),
+while State.ItemESP do
+local _DvhoPFncy76uY = {
+"wood", "log", "stick",
+"meat", "food", "apple", "berry",
+"water", "bottle",
+"bandage", "medkit",
+"stone", "rock", "iron", "ore",
+"coin", "gold", "gem",
+"can", "soda",
 }
-for _, obj in pairs(_OlIOII1II1:GetDescendants()) do
-if obj:IsA(_1OfuZAzFJcUV("6D533646273E301C")) and obj.Name ~= _1OfuZAzFJcUV("6747284219302B0C6A0F0A192B5F2C29") then
-local ___lIl1IlI0Il1 = string.lower(obj.Name)
-for _, kw in pairs(__000I00I00OlIIO) do
-if string.find(___lIl1IlI0Il1, kw) and not _00I1O1lOl011[_1OfuZAzFJcUV("4646204E28") .. obj:GetFullName()] then
-local __ll00OlII = Color3.new(1, 1, 0)
-if string.find(___lIl1IlI0Il1, _1OfuZAzFJcUV("485D2947")) or string.find(___lIl1IlI0Il1, "gem_1OfuZAzFJcUV("06122A51572C361A510E02431D573039076D1A7C1B162E59710C2C5D32526F710F")diamond") then
-__ll00OlII = Color3.new(1, 0.(84*4/2), 0)
-elseif string.find(___lIl1IlI0Il1, "med_1OfuZAzFJcUV("06122A51572C361A510E02431D573039076D1A7C1B162E59710C2C5D32526F710F")bandage") then
-__ll00OlII = Color3.new(1, 0.0x2, 0.0x2)
-elseif string.find(___lIl1IlI0Il1, _1OfuZAzFJcUV("495D2A47")) or string.find(___lIl1IlI0Il1, _1OfuZAzFJcUV("42572457")) or string.find(___lIl1IlI0Il1, _1OfuZAzFJcUV("4E42354F12")) then
-__ll00OlII = Color3.new(0.(5*3/3), 1, 0)
+for _, obj in pairs(Workspace:GetDescendants()) do
+if obj:IsA("BasePart") and obj.Name ~= "HumanoidRootPart" then
+local _ADRiDa5WiwZ8B = string.lower(obj.Name)
+for _, kw in pairs(_DvhoPFncy76uY) do
+if string.find(_ADRiDa5WiwZ8B, kw) and not ESPObjects["item_" .. obj:GetFullName()] then
+local color = Color3.new(1, 1, 0)
+if string.find(_ADRiDa5WiwZ8B, "gold") or string.find(_ADRiDa5WiwZ8B, "gem") or string.find(_ADRiDa5WiwZ8B, "diamond") then
+color = Color3.new(1, 0.84, 0)
+elseif string.find(_ADRiDa5WiwZ8B, "med") or string.find(_ADRiDa5WiwZ8B, "bandage") then
+color = Color3.new(1, 0.2, 0.2)
+elseif string.find(_ADRiDa5WiwZ8B, "food") or string.find(_ADRiDa5WiwZ8B, "meat") or string.find(_ADRiDa5WiwZ8B, "apple") then
+color = Color3.new(0.5, 1, 0)
 end
-local bb = __IlIlO01111IIIO1(obj, obj.Name, __ll00OlII, Vector3.new(0, (2*2/3), 0))
-_00I1O1lOl011[_1OfuZAzFJcUV("4646204E28") .. obj:GetFullName()] = { Billboard = bb }
+local bb = _g4TwG3qVSp9(obj, obj.Name, color, Vector3.new(0, 2, 0))
+ESPObjects["item_" .. obj:GetFullName()] = { Billboard = bb }
 break
 end
 end
 end
 end
-task.wait((2+2-6))
+task.wait(2)
 end
-for name, obj in pairs(_00I1O1lOl011) do
-if string.find(name, _1OfuZAzFJcUV("4646204E28")) then
+for name, obj in pairs(ESPObjects) do
+if string.find(name, "item_") then
 if obj.Billboard then obj.Billboard:Destroy() end
-_00I1O1lOl011[name] = nil
+ESPObjects[name] = nil
 end
 end
 end)
 else
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("46F30070277FB01BD541"), 0x3)
+Notify("99夜", "物品ESP 已关闭!", 3)
 end
 end,
 })
-___I01l0l1I1O01l:Toggle({
-Title = _1OfuZAzFJcUV("477D9D8D"),
-Desc  = _1OfuZAzFJcUV("6F3B2C70AFF17C52"),
-Value = (not _ypv1Pd8c),
+_cLoNhLKwh18C:Toggle({
+Title = "全屏高亮",
+Desc  = "所有物体高亮显示",
+Value = false,
 Callback = function(state)
-___OlO0I000l.FullHighlight = state
+State.FullHighlight = state
 if state then
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("477D9D8D57AD424719"), 0x3)
-local hl = Instance.new(_1OfuZAzFJcUV("675B224B1B3625004C"))
-hl.Name = _1OfuZAzFJcUV("6947294F3F362500540902050F0767")
-hl.Adornee = _OlIOII1II1
+Notify("99夜", "全屏高亮 已开启!", 3)
+local hl = Instance.new("Highlight")
+hl.Name = "FullHighlight99"
+hl.Adornee = Workspace
 hl.FillColor3 = Color3.new(1, 1, 1)
-hl.FillTransparency = 0.(9+5-12)
+hl.FillTransparency = 0.9
 hl.OutlineColor3 = Color3.new(1, 1, 1)
 hl.OutlineTransparency = 0
-hl.Parent = game:GetService(_1OfuZAzFJcUV("6C5D3746302A2B"))
-_00I1O1lOl011[_1OfuZAzFJcUV("4947294F1F362500540902050F")] = hl
+hl.Parent = game:GetService("CoreGui")
+ESPObjects["fullhighlight"] = hl
 else
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("477D9D8D57AD318519"), math.floor(3.75))
-if _00I1O1lOl011[_1OfuZAzFJcUV("4947294F1F362500540902050F")] then
-_00I1O1lOl011[_1OfuZAzFJcUV("4947294F1F362500540902050F")]:Destroy()
-_00I1O1lOl011[_1OfuZAzFJcUV("4947294F1F362500540902050F")] = nil
+Notify("99夜", "全屏高亮 已关闭!", 3)
+if ESPObjects["fullhighlight"] then
+ESPObjects["fullhighlight"]:Destroy()
+ESPObjects["fullhighlight"] = nil
 end
 end
 end,
 })
-___I01l0l1I1O01l:Toggle({
-Title = _1OfuZAzFJcUV("477D958D"),
-Desc  = _1OfuZAzFJcUV("33681ADE7C5A18"),
-Value = (not _ypv1Pd8c),
+_cLoNhLKwh18C:Toggle({
+Title = "全屏提亮",
+Desc  = "夜晚也能看清楚",
+Value = false,
 Callback = function(state)
-___OlO0I000l.Fullbright = state
+State.Fullbright = state
 if state then
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("477D958D57AD424719"), (3+17-6))
-__IO1ll0ll.Brightness = 0x3
-__IO1ll0ll.ClockTime = (12+6-3)
-__IO1ll0ll.FogEnd = 100000
-__IO1ll0ll.GlobalShadows = (not _ypv1Pd8c)
-__IO1ll0ll.Ambient = Color3.new(1, 1, 1)
-__IO1ll0ll.OutdoorAmbient = Color3.new(1, 1, 1)
+Notify("99夜", "全屏提亮 已开启!", 3)
+Lighting.Brightness = 3
+Lighting.ClockTime = 12
+Lighting.FogEnd = 100000
+Lighting.GlobalShadows = false
+Lighting.Ambient = Color3.new(1, 1, 1)
+Lighting.OutdoorAmbient = Color3.new(1, 1, 1)
 else
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("477D958D57AD318519"), (3+5-5))
-__IO1ll0ll.Brightness = 1
-__IO1ll0ll.ClockTime = 0xc
-__IO1ll0ll.GlobalShadows = (not not _ypv1Pd8c)
-__IO1ll0ll.Ambient = Color3.new(0.(5*4/4), 0.0x5, 0.math.floor(5.90))
-__IO1ll0ll.OutdoorAmbient = Color3.new(0.0x5, 0.(5+1-13), 0.0x5)
+Notify("99夜", "全屏提亮 已关闭!", 3)
+Lighting.Brightness = 1
+Lighting.ClockTime = 12
+Lighting.GlobalShadows = true
+Lighting.Ambient = Color3.new(0.5, 0.5, 0.5)
+Lighting.OutdoorAmbient = Color3.new(0.5, 0.5, 0.5)
 end
 end,
 })
-___I0OO1IO00Ol0Ol1:Button({
-Title = _1OfuZAzFJcUV("0F337523A6F6F4"),
+_YEM1NKtnOg:Button({
+Title = "传送到最近玩家",
 Callback = function()
-local root = ___0IO111lIOIIllI1()
+local root = GetRoot()
 if not root then
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("513F75F1057E"), (3*2/3))
+Notify("99夜", "找不到角色!", 3)
 return
 end
-local _01I1O010100l1 = nil
-local _IlI1IlO0 = math.huge
-for _, player in pairs(_1l0OIlOlI:GetPlayers()) do
-if player ~= _0Ol0l0IOO11 and player.Character then
-local __IOOOII0O0I = player.Character:FindFirstChild(_1OfuZAzFJcUV("6747284219302B0C6A0F0A192B5F2C29"))
-if __IOOOII0O0I then
-local dist = (__IOOOII0O0I.Position - root.Position).Magnitude
-if dist < _IlI1IlO0 then
-_IlI1IlO0 = dist
-_01I1O010100l1 = player
+local _noCKO3yMawLaKKie = nil
+local _sk3XIXmR8BKXZgXq = math.huge
+for _, player in pairs(Players:GetPlayers()) do
+if player ~= LocalPlayer and player.Character then
+local pRoot = player.Character:FindFirstChild("HumanoidRootPart")
+if pRoot then
+local dist = (pRoot.Position - root.Position).Magnitude
+if dist < _sk3XIXmR8BKXZgXq then
+_sk3XIXmR8BKXZgXq = dist
+_noCKO3yMawLaKKie = player
 end
 end
 end
 end
-if _01I1O010100l1 then
-local __IOOOII0O0I = _01I1O010100l1.Character:FindFirstChild(_1OfuZAzFJcUV("6747284219302B0C6A0F0A192B5F2C29"))
-if __IOOOII0O0I then
-_Ol1100Il(__IOOOII0O0I.CFrame * CFrame.new(0, 0, math.floor(3.28)))
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("DD12441357") .. _01I1O010100l1.Name, (3*4/4))
+if _noCKO3yMawLaKKie then
+local pRoot = _noCKO3yMawLaKKie.Character:FindFirstChild("HumanoidRootPart")
+if pRoot then
+_kp2L3W3hpSK(pRoot.CFrame * CFrame.new(0, 0, 3))
+Notify("99夜", "已传送到 " .. _noCKO3yMawLaKKie.Name, 3)
 end
 else
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("6BE3E42A0189EBDE19"), math.floor(3.54))
+Notify("99夜", "附近没有其他玩家!", 3)
 end
 end,
 })
-___I0OO1IO00Ol0Ol1:Button({
-Title = _1OfuZAzFJcUV("0F33750647"),
+_YEM1NKtnOg:Button({
+Title = "传送到营地",
 Callback = function()
-local camp = _IOlOOI1OIOl1Ill({_1OfuZAzFJcUV("4C532853"), _1OfuZAzFJcUV("4D533646"), _1OfuZAzFJcUV("5B572B57"), _1OfuZAzFJcUV("4C5328531136300D"), _1OfuZAzFJcUV("5C42245419")})
+local camp = _9JEeLYJreEU9({"camp", "base", "tent", "campfire", "spawn"})
 if camp then
-local pos = camp:IsA(_1OfuZAzFJcUV("6D533646273E301C")) and camp.Position or camp:GetPivot().Position
-_Ol1100Il(CFrame.new(pos + Vector3.new(0, math.floor(3.30), 0)))
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("DD124413526F63"), (3*4/2))
+local pos = camp:IsA("BasePart") and camp.Position or camp:GetPivot().Position
+_kp2L3W3hpSK(CFrame.new(pos + Vector3.new(0, 3, 0)))
+Notify("99夜", "已传送到营地!", 3)
 else
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("513F7506477E"), (3*4/3))
+Notify("99夜", "找不到营地!", 3)
 end
 end,
 })
-___I0OO1IO00Ol0Ol1:Button({
-Title = _1OfuZAzFJcUV("0F337523A64E6A"),
+_YEM1NKtnOg:Button({
+Title = "传送到最近树木",
 Callback = function()
-local root = ___0IO111lIOIIllI1()
+local root = GetRoot()
 if not root then return end
-local __IlI1Il1II = nil
-local _IlI1IlO0 = math.huge
-for _, obj in pairs(_OlIOII1II1:GetDescendants()) do
-if obj:IsA(_1OfuZAzFJcUV("625D21461B")) or obj:IsA(_1OfuZAzFJcUV("6D533646273E301C")) then
-local ___lIl1IlI0Il1 = string.lower(obj.Name)
-if string.find(___lIl1IlI0Il1, _1OfuZAzFJcUV("5B402046")) or string.find(___lIl1IlI0Il1, "log") then
-local pos = obj:IsA(_1OfuZAzFJcUV("6D533646273E301C")) and obj.Position or obj:GetPivot().Position
+local _3oVpLRNHThP = nil
+local _sk3XIXmR8BKXZgXq = math.huge
+for _, obj in pairs(Workspace:GetDescendants()) do
+if obj:IsA("Model") or obj:IsA("BasePart") then
+local _ADRiDa5WiwZ8B = string.lower(obj.Name)
+if string.find(_ADRiDa5WiwZ8B, "tree") or string.find(_ADRiDa5WiwZ8B, "log") then
+local pos = obj:IsA("BasePart") and obj.Position or obj:GetPivot().Position
 local dist = (pos - root.Position).Magnitude
-if dist < _IlI1IlO0 and dist > (5+13-9) then
-_IlI1IlO0 = dist
-__IlI1Il1II = obj
+if dist < _sk3XIXmR8BKXZgXq and dist > 5 then
+_sk3XIXmR8BKXZgXq = dist
+_3oVpLRNHThP = obj
 end
 end
 end
 end
-if __IlI1Il1II then
-local pos = __IlI1Il1II:IsA(_1OfuZAzFJcUV("6D533646273E301C")) and __IlI1Il1II.Position or __IlI1Il1II:GetPivot().Position
-_Ol1100Il(CFrame.new(pos + Vector3.new(0x2, 0, (2+16-5))))
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("DD124413667763"), 0x3)
+if _3oVpLRNHThP then
+local pos = _3oVpLRNHThP:IsA("BasePart") and _3oVpLRNHThP.Position or _3oVpLRNHThP:GetPivot().Position
+_kp2L3W3hpSK(CFrame.new(pos + Vector3.new(2, 0, 2)))
+Notify("99夜", "已传送到树木!", 3)
 else
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("6BE3E42A667E"), (3+1-1))
+Notify("99夜", "附近没有树!", 3)
 end
 end,
 })
-___I0OO1IO00Ol0Ol1:Button({
-Title = _1OfuZAzFJcUV("0F3375FB7377054111"),
+_YEM1NKtnOg:Button({
+Title = "传送到高处(升天)",
 Callback = function()
-local root = ___0IO111lIOIIllI1()
+local root = GetRoot()
 if root then
-_Ol1100Il(root.CFrame * CFrame.new(0, 0x1f4, 0))
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("DD124413AF2563"), (3*3/2))
+_kp2L3W3hpSK(root.CFrame * CFrame.new(0, 500, 0))
+Notify("99夜", "已传送到高空!", 3)
 end
 end,
 })
-___I0OO1IO00Ol0Ol1:Toggle({
-Title = _1OfuZAzFJcUV("503B6524575E"),
-Desc  = _1OfuZAzFJcUV("503B65249171626908A67A2015"),
-Value = (not _ypv1Pd8c),
+_YEM1NKtnOg:Toggle({
+Title = "长按鼠标传送",
+Desc  = "长按鼠标左键传送到准星位置",
+Value = false,
 Callback = function(state)
-___OlO0I000l.LongPressTP = state
+State.LongPressTP = state
 if state then
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("503B652257AD424719"), 0x3)
-local _OlO1000I0I1 = 0
-local ___lIOl1O10O011Il = (not _ypv1Pd8c)
-_O1OlIlOl1110I(_1OfuZAzFJcUV("635D2B44272D271B4B240A1A15"), ___lO000I01.InputBegan:Connect(function(input, gpe)
+Notify("99夜", "长按传送 已开启!", 3)
+local _qzmk28KujX = 0
+local _BVTr9zhyXff = false
+_qbgvkOYyJHSQOg("LongPressDown", UserInputService.InputBegan:Connect(function(input, gpe)
 if gpe then return end
 if input.UserInputType == Enum.UserInputType.MouseButton1 then
-___lIOl1O10O011Il = (not not _ypv1Pd8c)
-_OlO1000I0I1 = tick()
+_BVTr9zhyXff = true
+_qzmk28KujX = tick()
 task.spawn(function()
-while ___lIOl1O10O011Il and ___OlO0I000l.LongPressTP do
-if tick() - _OlO1000I0I1 >= 0.0x5 then
-local root = ___0IO111lIOIIllI1()
+while _BVTr9zhyXff and State.LongPressTP do
+if tick() - _qzmk28KujX >= 0.5 then
+local root = GetRoot()
 if root then
-local __lOl0IO1lllllO00 = __lO1IOOl0IIIl.Hit
-if __lOl0IO1lllllO00 then
-_Ol1100Il(__lOl0IO1lllllO00 + Vector3.new(0, math.floor(3.44), 0))
+local _kDxHCIGDLNwiA = Mouse.Hit
+if _kDxHCIGDLNwiA then
+_kp2L3W3hpSK(_kDxHCIGDLNwiA + Vector3.new(0, 3, 0))
 end
 end
 break
@@ -918,96 +906,96 @@ end
 end)
 end
 end))
-_O1OlIlOl1110I(_1OfuZAzFJcUV("635D2B44272D271B4B3515"), ___lO000I01.InputEnded:Connect(function(input, gpe)
+_qbgvkOYyJHSQOg("LongPressUp", UserInputService.InputEnded:Connect(function(input, gpe)
 if input.UserInputType == Enum.UserInputType.MouseButton1 then
-___lIOl1O10O011Il = (not _ypv1Pd8c)
+_BVTr9zhyXff = false
 end
 end))
 else
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("503B652257AD318519"), 0x3)
-__l1I10II0000I00(_1OfuZAzFJcUV("635D2B44272D271B4B240A1A15"))
-__l1I10II0000I00(_1OfuZAzFJcUV("635D2B44272D271B4B3515"))
+Notify("99夜", "长按传送 已关闭!", 3)
+_kcTDh8qL8cSivU("LongPressDown")
+_kcTDh8qL8cSivU("LongPressUp")
 end
 end,
 })
-__IO00I1IlIIO0I1:Toggle({
+_uVFhf40FLIP:Toggle({
 Title = "防挂机",
-Desc  = _1OfuZAzFJcUV("1D50A5214DF46092006F"),
-Value = (not _ypv1Pd8c),
+Desc  = "防止因挂机被踢出游戏",
+Value = false,
 Callback = function(state)
-___OlO0I000l.AntiAfk = state
+State.AntiAfk = state
 if state then
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("1D307F03855F6D49"), 0x3)
-local vu = game:GetService(_1OfuZAzFJcUV("795B3757023E2E3D4B0517"))
-_O1OlIlOl1110I(_1OfuZAzFJcUV("6E5C314A363929"), _0Ol0l0IOO11.Idled:Connect(function()
+Notify("99夜", "防挂机 已开启!", 3)
+local vu = game:GetService("VirtualUser")
+_qbgvkOYyJHSQOg("AntiAfk", LocalPlayer.Idled:Connect(function()
 vu:CaptureController()
 vu:ClickButton2(Vector2.new())
 end))
 else
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("1D307F03852CAF49"), math.floor(3.59))
-__l1I10II0000I00(_1OfuZAzFJcUV("6E5C314A363929"))
+Notify("99夜", "防挂机 已关闭!", 3)
+_kcTDh8qL8cSivU("AntiAfk")
 end
 end,
 })
-__IO00I1IlIIO0I1:Button({
-Title = _1OfuZAzFJcUV("E282E546"),
+_uVFhf40FLIP:Button({
+Title = "重新加入",
 Callback = function()
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("4C1A8893D73A6C4616"), (3+5-4))
-_I0OII0I0ll:Teleport(game.PlaceId, _0Ol0l0IOO11)
+Notify("99夜", "正在重新加入...", 3)
+TeleportService:Teleport(game.PlaceId, LocalPlayer)
 end,
 })
-__IO00I1IlIIO0I1:Button({
-Title = _1OfuZAzFJcUV("220448821F1606"),
+_uVFhf40FLIP:Button({
+Title = "复制服务器ID",
 Callback = function()
 if setclipboard then
 setclipboard(game.JobId)
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("655D276A13AD4F5E080A51125A"), 0x3)
+Notify("99夜", "JobId已复制到剪贴板!", 3)
 else
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("7C7F226F1F526D6952541A4C"), math.floor(3.87))
+Notify("99夜", "当前执行器不支持剪贴板!", 3)
 end
 end,
 })
-__IO00I1IlIIO0I1:Button({
-Title = _1OfuZAzFJcUV("CA3997519630"),
+_uVFhf40FLIP:Button({
+Title = "查看角色信息",
 Callback = function()
-local hum = __IlIlIIII()
-local root = ___0IO111lIOIIllI1()
+local hum = GetHum()
+local root = GetRoot()
 if hum and root then
-__0II11lOO100110I(_1OfuZAzFJcUV("FD40A44C"),
-_1OfuZAzFJcUV("6FFD7F03") .. math.floor(hum.Health) .. "/" .. math.floor(hum.MaxHealth) ..
+Notify("角色信息",
+"血量: " .. math.floor(hum.Health) .. "/" .. math.floor(hum.MaxHealth) ..
 "\n速度: " .. math.floor(hum.WalkSpeed) ..
 "\n位置: " .. tostring(root.Position),
-math.floor(8.48)
+8
 )
 else
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("513F75F1057E"), math.floor(3.24))
+Notify("99夜", "找不到角色!", 3)
 end
 end,
 })
-__IO00I1IlIIO0I1:Button({
-Title = _1OfuZAzFJcUV("2204166E2758"),
+_uVFhf40FLIP:Button({
+Title = "复制当前坐标",
 Callback = function()
-local root = ___0IO111lIOIIllI1()
+local root = GetRoot()
 if root and setclipboard then
 local pos = root.Position
-local __00O1I1OlIOI0lI = string.format(_1OfuZAzFJcUV("0A1C74455B7F67460906494D5E106F3B"), pos.X, pos.Y, pos.Z)
-setclipboard(__00O1I1OlIOI0lI)
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("7F35B72E416562") .. __00O1I1OlIOI0lI, (5+19-8))
+local coord = string.format("%.1f, %.1f, %.1f", pos.X, pos.Y, pos.Z)
+setclipboard(coord)
+Notify("99夜", "坐标已复制: " .. coord, 5)
 end
 end,
 })
-_0Ol0l0IOO11.CharacterAdded:Connect(function(char)
+LocalPlayer.CharacterAdded:Connect(function(char)
 task.wait(1)
-local hum = char:FindFirstChildOfClass(_1OfuZAzFJcUV("6747284219302B0C"))
+local hum = char:FindFirstChildOfClass("Humanoid")
 if hum then
-if ___OlO0I000l.WalkSpeed ~= 0x10 then
-hum.WalkSpeed = ___OlO0I000l.WalkSpeed
+if State.WalkSpeed ~= 16 then
+hum.WalkSpeed = State.WalkSpeed
 end
-if ___OlO0I000l.JumpPower ~= math.floor(50.73) then
-hum.UseJumpPower = (not not _ypv1Pd8c)
-hum.JumpPower = ___OlO0I000l.JumpPower
+if State.JumpPower ~= 50 then
+hum.UseJumpPower = true
+hum.JumpPower = State.JumpPower
 end
 end
 end)
-print(_1OfuZAzFJcUV("740B7C3F2A7F5844981DE97D5B486F731F"))
-__0II11lOO100110I("99夜", _1OfuZAzFJcUV("351EE55E67C0634865C85D6272D520"), 0x5)
+print("[99夜] 脚本加载完成 v1.0")
+Notify("99夜", "脚本加载成功! 祝您游戏愉快~", 5)
