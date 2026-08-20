@@ -227,3 +227,35 @@ Tab:Button({
 })
 
 WindUI:Notify({ Title = "欢迎使用", Content = "启动器已加载", Duration = 3 })
+
+--========================================================
+-- 公告标签页
+--========================================================
+local NoticeTab = Window:Tab({
+    Title = "公告",
+    Icon = "megaphone",
+})
+
+-- 赞赏码图片
+NoticeTab:Image(
+    "https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E8%B5%9E%E8%B5%8F%E7%A0%81.png",
+    "zanshangma",
+    12,
+    "Notice",
+    "zsm"
+)
+
+NoticeTab:Space()
+
+-- 脚本作者信息
+NoticeTab:Section({ Title = "脚本作者" })
+
+NoticeTab:Paragraph({
+    Title = "霉国总统",
+    Desc = "脚本核心开发 / 功能实现"
+})
+
+NoticeTab:Paragraph({
+    Title = "神不如平",
+    Desc = "脚本核心开发 / 功能实现"
+})
