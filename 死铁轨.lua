@@ -42,6 +42,7 @@ local State = {
     AutoRepair     = false,
     AutoZombie     = false,
     AutoQuest      = false,
+    AutoBond       = false,
     -- 玩家功能
     WalkSpeed      = 16,
     JumpPower      = 50,
@@ -50,6 +51,7 @@ local State = {
     GodMode        = false,
     NoFallDamage   = false,
     Flying         = false,
+    AntiFlyTP      = false,
     -- 视觉功能
     PlayerESP      = false,
     ItemESP        = false,
@@ -617,6 +619,80 @@ AutoTab:Toggle({
     end,
 })
 
+-- ---- 刷债券 ----
+AutoTab:Toggle({
+    Title = "刷债券",
+    Desc  = "自动搜索并触发债券相关接口",
+    Value = false,
+    Callback = function(state)
+        State.AutoBond = state
+        if state then
+            Notify("死铁轨", "刷债券 已开启!", 3)
+            task.spawn(function()
+                while State.AutoBond do
+                    -- 搜索 ReplicatedStorage 中的债券相关 Remote
+                    pcall(function()
+                        for _, obj in ipairs(ReplicatedStorage:GetDescendants()) do
+                            if obj:IsA("RemoteEvent") then
+                                local ln = string.lower(obj.Name)
+                                if string.find(ln, "bond") or string.find(ln, "bonds")
+                                    or string.find(ln, "coupon") or string.find(ln, "treasury")
+                                    or string.find(ln, "reward") or string.find(ln, "claim") then
+                                    obj:FireServer()
+                                end
+                            end
+                            if obj:IsA("RemoteFunction") then
+                                local ln = string.lower(obj.Name)
+                                if string.find(ln, "bond") or string.find(ln, "bonds")
+                                    or string.find(ln, "coupon") or string.find(ln, "claim") then
+                                    pcall(function() obj:InvokeServer() end)
+                                end
+                            end
+                        end
+                    end)
+                    -- 搜索 Workspace 中的债券物品并捡取
+                    pcall(function()
+                        local root = GetRoot()
+                        if root then
+                            for _, obj in ipairs(Workspace:GetDescendants()) do
+                                if obj:IsA("BasePart") then
+                                    local ln = string.lower(obj.Name)
+                                    if string.find(ln, "bond") or string.find(ln, "bonds")
+                                        or string.find(ln, "coupon") or string.find(ln, "treasure") then
+                                        local dist = (root.Position - obj.Position).Magnitude
+                                        if dist < 500 then
+                                            obj.CFrame = root.CFrame
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end)
+                    -- 搜索 ProximityPrompt 并触发
+                    pcall(function()
+                        for _, obj in ipairs(Workspace:GetDescendants()) do
+                            if obj:IsA("ProximityPrompt") then
+                                local ln = string.lower(obj.Name)
+                                local parentName = obj.Parent and string.lower(obj.Parent.Name) or ""
+                                if string.find(ln, "bond") or string.find(ln, "claim")
+                                    or string.find(parentName, "bond") or string.find(parentName, "treasure") then
+                                    obj.HoldDuration = 0.01
+                                    pcall(function() obj:InputHoldBegin() end)
+                                    task.wait(0.05)
+                                    pcall(function() obj:InputHoldEnd() end)
+                                end
+                            end
+                        end
+                    end)
+                    task.wait(math.random(50, 120) / 100)
+                end
+            end)
+        else
+            Notify("死铁轨", "刷债券 已关闭!", 3)
+        end
+    end,
+})
+
 -- ================================================================
 --                       2. 玩家标签页
 -- ================================================================
@@ -785,21 +861,539 @@ PlayerTab:Toggle({
 
 PlayerTab:Space()
 
--- ---- 飞行 (手机版) ----
-PlayerTab:Button({
-    Title = "飞行 (手机版)",
-    Desc  = "加载飞行脚本V3 (全游戏通用)",
-    Icon  = "wind",
-    Callback = function()
-        State.Flying = true
-        Notify("死铁轨", "正在加载飞行脚本V3...", 3)
-        local success, err = pcall(function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/.uploads/%E9%A3%9E%E8%A1%8C%E8%84%9A%E6%9C%ACV3(%E5%85%A8%E6%B8%B8%E6%88%8F%E9%80%9A%E7%94%A8).txt"))()
-        end)
-        if success then
-            Notify("死铁轨", "飞行脚本V3 已加载!", 3)
+-- ---- 飞行不拉回 (飞行V3 + 防拉回) ----
+PlayerTab:Toggle({
+    Title = "飞行不拉回",
+    Desc  = "飞行V3方式飞行, 防止被服务端拉回",
+    Value = false,
+    Callback = function(state)
+        State.AntiFlyTP = state
+        if state then
+            Notify("死铁轨", "飞行不拉回 已开启! 用面板按钮控制飞行", 3)
+
+            -- ====== 飞行V3 面板 ======
+            local flyGui = Instance.new("ScreenGui")
+            flyGui.Name = "FlyV3Panel"
+            flyGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+            flyGui.ResetOnSpawn = false
+
+            local frame = Instance.new("Frame")
+            frame.Parent = flyGui
+            frame.BackgroundColor3 = Color3.fromRGB(163, 255, 137)
+            frame.BorderColor3 = Color3.fromRGB(103, 221, 213)
+            frame.Position = UDim2.new(0.10, 0, 0.38, 0)
+            frame.Size = UDim2.new(0, 190, 0, 57)
+            frame.Active = true
+            frame.Draggable = true
+
+            local title = Instance.new("TextLabel")
+            title.Parent = frame
+            title.BackgroundColor3 = Color3.fromRGB(242, 60, 255)
+            title.Position = UDim2.new(0.47, 0, 0, 0)
+            title.Size = UDim2.new(0, 100, 0, 28)
+            title.Font = Enum.Font.SourceSans
+            title.Text = "飞行不拉回"
+            title.TextColor3 = Color3.fromRGB(0, 0, 0)
+            title.TextScaled = true
+
+            local upBtn = Instance.new("TextButton")
+            upBtn.Name = "up"
+            upBtn.Parent = frame
+            upBtn.BackgroundColor3 = Color3.fromRGB(79, 255, 152)
+            upBtn.Size = UDim2.new(0, 44, 0, 28)
+            upBtn.Font = Enum.Font.SourceSans
+            upBtn.Text = "上升"
+            upBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+            upBtn.TextSize = 14
+
+            local downBtn = Instance.new("TextButton")
+            downBtn.Name = "down"
+            downBtn.Parent = frame
+            downBtn.BackgroundColor3 = Color3.fromRGB(215, 255, 121)
+            downBtn.Position = UDim2.new(0, 0, 0.49, 0)
+            downBtn.Size = UDim2.new(0, 44, 0, 28)
+            downBtn.Font = Enum.Font.SourceSans
+            downBtn.Text = "下降"
+            downBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+            downBtn.TextSize = 14
+
+            local flyBtn = Instance.new("TextButton")
+            flyBtn.Name = "fly"
+            flyBtn.Parent = frame
+            flyBtn.BackgroundColor3 = Color3.fromRGB(255, 249, 74)
+            flyBtn.Position = UDim2.new(0.70, 0, 0.49, 0)
+            flyBtn.Size = UDim2.new(0, 56, 0, 28)
+            flyBtn.Font = Enum.Font.SourceSans
+            flyBtn.Text = "飞行"
+            flyBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+            flyBtn.TextSize = 14
+
+            local plusBtn = Instance.new("TextButton")
+            plusBtn.Name = "plus"
+            plusBtn.Parent = frame
+            plusBtn.BackgroundColor3 = Color3.fromRGB(133, 145, 255)
+            plusBtn.Position = UDim2.new(0.23, 0, 0, 0)
+            plusBtn.Size = UDim2.new(0, 45, 0, 28)
+            plusBtn.Font = Enum.Font.SourceSans
+            plusBtn.Text = "+"
+            plusBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+            plusBtn.TextScaled = true
+
+            local speedLbl = Instance.new("TextLabel")
+            speedLbl.Name = "speed"
+            speedLbl.Parent = frame
+            speedLbl.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
+            speedLbl.Position = UDim2.new(0.47, 0, 0.49, 0)
+            speedLbl.Size = UDim2.new(0, 44, 0, 28)
+            speedLbl.Font = Enum.Font.SourceSans
+            speedLbl.Text = "1"
+            speedLbl.TextColor3 = Color3.fromRGB(0, 0, 0)
+            speedLbl.TextScaled = true
+
+            local mineBtn = Instance.new("TextButton")
+            mineBtn.Name = "mine"
+            mineBtn.Parent = frame
+            mineBtn.BackgroundColor3 = Color3.fromRGB(123, 255, 247)
+            mineBtn.Position = UDim2.new(0.23, 0, 0.49, 0)
+            mineBtn.Size = UDim2.new(0, 45, 0, 29)
+            mineBtn.Font = Enum.Font.SourceSans
+            mineBtn.Text = "-"
+            mineBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+            mineBtn.TextScaled = true
+
+            local closeBtn = Instance.new("TextButton")
+            closeBtn.Name = "close"
+            closeBtn.Parent = frame
+            closeBtn.BackgroundColor3 = Color3.fromRGB(225, 25, 0)
+            closeBtn.Font = Enum.Font.SourceSans
+            closeBtn.Size = UDim2.new(0, 45, 0, 28)
+            closeBtn.Text = "X"
+            closeBtn.TextSize = 30
+            closeBtn.Position = UDim2.new(0, 0, -1, 27)
+
+            local miniBtn = Instance.new("TextButton")
+            miniBtn.Name = "mini"
+            miniBtn.Parent = frame
+            miniBtn.BackgroundColor3 = Color3.fromRGB(192, 150, 230)
+            miniBtn.Font = Enum.Font.SourceSans
+            miniBtn.Size = UDim2.new(0, 45, 0, 28)
+            miniBtn.Text = "T"
+            miniBtn.TextSize = 30
+            miniBtn.Position = UDim2.new(0, 44, -1, 27)
+
+            local mini2Btn = Instance.new("TextButton")
+            mini2Btn.Name = "mini2"
+            mini2Btn.Parent = frame
+            mini2Btn.BackgroundColor3 = Color3.fromRGB(192, 150, 230)
+            mini2Btn.Font = Enum.Font.SourceSans
+            mini2Btn.Size = UDim2.new(0, 45, 0, 28)
+            mini2Btn.Text = "T"
+            mini2Btn.TextSize = 30
+            mini2Btn.Position = UDim2.new(0, 44, -1, 57)
+            mini2Btn.Visible = false
+
+            -- ====== 飞行V3 核心逻辑 ======
+            local flySpeeds = 1
+            local isFlying = false
+            local tpwalking = false
+            local flyConn = nil
+            local upHold = nil
+            local downHold = nil
+            local lastPos = nil
+            local lastTime = tick()
+
+            -- 键盘控制
+            local ctrl = {f = 0, b = 0, l = 0, r = 0}
+            local keyConn
+            keyConn = UserInputService.InputBegan:Connect(function(input)
+                if input.KeyCode == Enum.KeyCode.W then ctrl.f = 1 end
+                if input.KeyCode == Enum.KeyCode.S then ctrl.b = -1 end
+                if input.KeyCode == Enum.KeyCode.A then ctrl.l = -1 end
+                if input.KeyCode == Enum.KeyCode.D then ctrl.r = 1 end
+            end)
+            local keyConn2
+            keyConn2 = UserInputService.InputEnded:Connect(function(input)
+                if input.KeyCode == Enum.KeyCode.W then ctrl.f = 0 end
+                if input.KeyCode == Enum.KeyCode.S then ctrl.b = 0 end
+                if input.KeyCode == Enum.KeyCode.A then ctrl.l = 0 end
+                if input.KeyCode == Enum.KeyCode.D then ctrl.r = 0 end
+            end)
+            AddConnection("FlyKeyBind", keyConn)
+            AddConnection("FlyKeyRelease", keyConn2)
+
+            -- 启动飞行
+            local function startFly()
+                isFlying = true
+                flyBtn.Text = "停止"
+                flyBtn.BackgroundColor3 = Color3.fromRGB(255, 100, 100)
+
+                local char = GetChar()
+                if not char then return end
+                local hum = GetHum()
+                if not hum then return end
+
+                -- tpwalking
+                tpwalking = false
+                for i = 1, flySpeeds do
+                    task.spawn(function()
+                        local hb = RunService.Heartbeat
+                        tpwalking = true
+                        local c = GetChar()
+                        local h = c and c:FindFirstChildWhichIsA("Humanoid")
+                        while tpwalking and hb:Wait() and c and h and h.Parent do
+                            if h.MoveDirection.Magnitude > 0 then
+                                c:TranslateBy(h.MoveDirection)
+                            end
+                        end
+                    end)
+                end
+
+                pcall(function() char.Animate.Disabled = true end)
+
+                -- 禁用所有状态
+                for _, st in ipairs({
+                    Enum.HumanoidStateType.Climbing,
+                    Enum.HumanoidStateType.FallingDown,
+                    Enum.HumanoidStateType.Flying,
+                    Enum.HumanoidStateType.Freefall,
+                    Enum.HumanoidStateType.GettingUp,
+                    Enum.HumanoidStateType.Jumping,
+                    Enum.HumanoidStateType.Landed,
+                    Enum.HumanoidStateType.Physics,
+                    Enum.HumanoidStateType.PlatformStanding,
+                    Enum.HumanoidStateType.Ragdoll,
+                    Enum.HumanoidStateType.Running,
+                    Enum.HumanoidStateType.RunningNoPhysics,
+                    Enum.HumanoidStateType.Seated,
+                    Enum.HumanoidStateType.StrafingNoPhysics,
+                    Enum.HumanoidStateType.Swimming,
+                }) do
+                    pcall(function() hum:SetStateEnabled(st, false) end)
+                end
+                hum:ChangeState(Enum.HumanoidStateType.Swimming)
+                hum.PlatformStand = true
+
+                -- BodyGyro + BodyVelocity
+                local torso = char:FindFirstChild("Torso") or char:FindFirstChild("UpperTorso") or char:FindFirstChild("HumanoidRootPart")
+                if not torso then return end
+
+                local bg = Instance.new("BodyGyro")
+                bg.P = 9e4
+                bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+                bg.CFrame = torso.CFrame
+                bg.Parent = torso
+
+                local bv = Instance.new("BodyVelocity")
+                bv.Velocity = Vector3.new(0, 0.1, 0)
+                bv.MaxForce = Vector3.new(9e9, 9e9, 9e9)
+                bv.Parent = torso
+
+                local maxspeed = 50
+                local speed = 0
+                local lastctrl = {f = 0, b = 0, l = 0, r = 0}
+
+                flyConn = RunService.RenderStepped:Connect(function()
+                    if not isFlying then return end
+                    local c = GetChar()
+                    if not c then return end
+                    local h = c:FindFirstChildWhichIsA("Humanoid")
+                    if not h or h.Health == 0 then return end
+
+                    -- 加速/减速
+                    if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
+                        speed = speed + 0.5 + (speed / maxspeed)
+                        if speed > maxspeed then speed = maxspeed end
+                    elseif speed ~= 0 then
+                        speed = speed - 1
+                        if speed < 0 then speed = 0 end
+                    end
+
+                    -- 移动方向
+                    if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
+                        bv.Velocity = ((Camera.CoordinateFrame.lookVector * (ctrl.f + ctrl.b))
+                            + ((Camera.CoordinateFrame * CFrame.new(ctrl.l + ctrl.r, (ctrl.f + ctrl.b) * 0.2, 0).p)
+                            - Camera.CoordinateFrame.p)) * speed
+                        lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
+                    elseif speed ~= 0 then
+                        bv.Velocity = ((Camera.CoordinateFrame.lookVector * (lastctrl.f + lastctrl.b))
+                            + ((Camera.CoordinateFrame * CFrame.new(lastctrl.l + lastctrl.r, (lastctrl.f + lastctrl.b) * 0.2, 0).p)
+                            - Camera.CoordinateFrame.p)) * speed
+                    else
+                        bv.Velocity = Vector3.new(0, 0, 0)
+                    end
+
+                    -- 身体朝向
+                    bg.CFrame = Camera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f + ctrl.b) * 50 * speed / maxspeed), 0, 0)
+
+                    -- ====== 防拉回保护 ======
+                    local root = GetRoot()
+                    if root then
+                        pcall(function()
+                            -- 1. 记录正常位置
+                            local vel = root.AssemblyLinearVelocity
+                            if vel.Y >= -50 then
+                                lastPos = root.Position
+                                lastTime = tick()
+                            end
+
+                            -- 2. 检测服务端拉回：短时间内 Y 轴大幅下降
+                            if lastPos then
+                                local now = tick()
+                                local dt = now - lastTime
+                                if dt > 0 and dt < 0.5 then
+                                    local deltaY = root.Position.Y - lastPos.Y
+                                    if deltaY < -30 then
+                                        root.CFrame = CFrame.new(lastPos.X, lastPos.Y, lastPos.Z)
+                                            * CFrame.Angles(0, math.rad(root.Orientation.Y), 0)
+                                    end
+                                end
+                            end
+
+                            -- 3. 零化下落速度
+                            if vel.Y < -50 then
+                                root.AssemblyLinearVelocity = Vector3.new(vel.X, 0, vel.Z)
+                            end
+
+                            -- 4. NetworkOwnership 锁定
+                            for _, part in ipairs(c:GetDescendants()) do
+                                if part:IsA("BasePart") then
+                                    pcall(function() part:SetNetworkOwner(LocalPlayer) end)
+                                end
+                            end
+                        end)
+                    end
+                end)
+
+                -- 存储引用以便停止时清理
+                flyGui:SetAttribute("bg", bg)
+                flyGui:SetAttribute("bv", bv)
+            end
+
+            -- 停止飞行
+            local function stopFly()
+                isFlying = false
+                tpwalking = false
+                flyBtn.Text = "飞行"
+                flyBtn.BackgroundColor3 = Color3.fromRGB(255, 249, 74)
+
+                if flyConn then
+                    flyConn:Disconnect()
+                    flyConn = nil
+                end
+
+                local char = GetChar()
+                if char then
+                    local hum = GetHum()
+                    local torso = char:FindFirstChild("Torso") or char:FindFirstChild("UpperTorso") or char:FindFirstChild("HumanoidRootPart")
+                    if torso then
+                        local bg = torso:FindFirstChildOfClass("BodyGyro")
+                        local bv = torso:FindFirstChildOfClass("BodyVelocity")
+                        if bg then bg:Destroy() end
+                        if bv then bv:Destroy() end
+                    end
+                    if hum then
+                        pcall(function()
+                            hum.PlatformStand = false
+                            char.Animate.Disabled = false
+                            for _, st in ipairs({
+                                Enum.HumanoidStateType.Climbing,
+                                Enum.HumanoidStateType.FallingDown,
+                                Enum.HumanoidStateType.Flying,
+                                Enum.HumanoidStateType.Freefall,
+                                Enum.HumanoidStateType.GettingUp,
+                                Enum.HumanoidStateType.Jumping,
+                                Enum.HumanoidStateType.Landed,
+                                Enum.HumanoidStateType.Physics,
+                                Enum.HumanoidStateType.PlatformStanding,
+                                Enum.HumanoidStateType.Ragdoll,
+                                Enum.HumanoidStateType.Running,
+                                Enum.HumanoidStateType.RunningNoPhysics,
+                                Enum.HumanoidStateType.Seated,
+                                Enum.HumanoidStateType.StrafingNoPhysics,
+                                Enum.HumanoidStateType.Swimming,
+                            }) do
+                                hum:SetStateEnabled(st, true)
+                            end
+                            hum:ChangeState(Enum.HumanoidStateType.RunningNoPhysics)
+                        end)
+                    end
+                end
+            end
+
+            -- 飞行按钮
+            flyBtn.MouseButton1Down:Connect(function()
+                if isFlying then
+                    stopFly()
+                else
+                    startFly()
+                end
+            end)
+
+            -- 上升按钮 (支持手机长按)
+            upBtn.MouseButton1Down:Connect(function()
+                upHold = RunService.Heartbeat:Connect(function()
+                    local root = GetRoot()
+                    if root then
+                        root.CFrame = root.CFrame * CFrame.new(0, 1, 0)
+                    end
+                end)
+            end)
+            upBtn.MouseButton1Up:Connect(function()
+                if upHold then upHold:Disconnect() upHold = nil end
+            end)
+            upBtn.MouseLeave:Connect(function()
+                if upHold then upHold:Disconnect() upHold = nil end
+            end)
+
+            -- 下降按钮 (支持手机长按)
+            downBtn.MouseButton1Down:Connect(function()
+                downHold = RunService.Heartbeat:Connect(function()
+                    local root = GetRoot()
+                    if root then
+                        root.CFrame = root.CFrame * CFrame.new(0, -1, 0)
+                    end
+                end)
+            end)
+            downBtn.MouseButton1Up:Connect(function()
+                if downHold then downHold:Disconnect() downHold = nil end
+            end)
+            downBtn.MouseLeave:Connect(function()
+                if downHold then downHold:Disconnect() downHold = nil end
+            end)
+
+            -- 加速按钮
+            plusBtn.MouseButton1Down:Connect(function()
+                flySpeeds = flySpeeds + 1
+                speedLbl.Text = tostring(flySpeeds)
+                if isFlying then
+                    tpwalking = false
+                    task.wait(0.1)
+                    for i = 1, flySpeeds do
+                        task.spawn(function()
+                            local hb = RunService.Heartbeat
+                            tpwalking = true
+                            local c = GetChar()
+                            local h = c and c:FindFirstChildWhichIsA("Humanoid")
+                            while tpwalking and hb:Wait() and c and h and h.Parent do
+                                if h.MoveDirection.Magnitude > 0 then
+                                    c:TranslateBy(h.MoveDirection)
+                                end
+                            end
+                        end)
+                    end
+                end
+            end)
+
+            -- 减速按钮
+            mineBtn.MouseButton1Down:Connect(function()
+                if flySpeeds > 1 then
+                    flySpeeds = flySpeeds - 1
+                    speedLbl.Text = tostring(flySpeeds)
+                    if isFlying then
+                        tpwalking = false
+                        task.wait(0.1)
+                        for i = 1, flySpeeds do
+                            task.spawn(function()
+                                local hb = RunService.Heartbeat
+                                tpwalking = true
+                                local c = GetChar()
+                                local h = c and c:FindFirstChildWhichIsA("Humanoid")
+                                while tpwalking and hb:Wait() and c and h and h.Parent do
+                                    if h.MoveDirection.Magnitude > 0 then
+                                        c:TranslateBy(h.MoveDirection)
+                                    end
+                                end
+                            end)
+                        end
+                    end
+                end
+            end)
+
+            -- 关闭按钮
+            closeBtn.MouseButton1Click:Connect(function()
+                stopFly()
+                flyGui:Destroy()
+                State.AntiFlyTP = false
+            end)
+
+            -- 最小化按钮
+            miniBtn.MouseButton1Click:Connect(function()
+                upBtn.Visible = false
+                downBtn.Visible = false
+                flyBtn.Visible = false
+                plusBtn.Visible = false
+                speedLbl.Visible = false
+                mineBtn.Visible = false
+                miniBtn.Visible = false
+                mini2Btn.Visible = true
+                frame.BackgroundTransparency = 1
+                closeBtn.Position = UDim2.new(0, 0, -1, 57)
+            end)
+
+            mini2Btn.MouseButton1Click:Connect(function()
+                upBtn.Visible = true
+                downBtn.Visible = true
+                flyBtn.Visible = true
+                plusBtn.Visible = true
+                speedLbl.Visible = true
+                mineBtn.Visible = true
+                miniBtn.Visible = true
+                mini2Btn.Visible = false
+                frame.BackgroundTransparency = 0
+                closeBtn.Position = UDim2.new(0, 0, -1, 27)
+            end)
+
+            -- 拦截服务端拉回相关 RemoteEvent
+            task.spawn(function()
+                while State.AntiFlyTP do
+                    pcall(function()
+                        for _, obj in ipairs(ReplicatedStorage:GetDescendants()) do
+                            if obj:IsA("RemoteEvent") then
+                                local ln = string.lower(obj.Name)
+                                if string.find(ln, "teleport") or string.find(ln, "tpback")
+                                    or string.find(ln, "respawn") or string.find(ln, "antifly")
+                                    or string.find(ln, "anti_fly") or string.find(ln, "anti-fly")
+                                    or string.find(ln, "noclip") or string.find(ln, "hack") then
+                                    pcall(function() obj.FireServer = function() end end)
+                                end
+                            end
+                        end
+                    end)
+                    task.wait(2)
+                end
+            end)
+
+            -- 角色重生时重置
+            local respawnConn
+            respawnConn = LocalPlayer.CharacterAdded:Connect(function(char)
+                task.wait(0.7)
+                pcall(function()
+                    local hum = char:FindFirstChildWhichIsA("Humanoid")
+                    if hum then
+                        hum.PlatformStand = false
+                    end
+                    char.Animate.Disabled = false
+                end)
+                if isFlying then
+                    stopFly()
+                    task.wait(0.5)
+                    startFly()
+                end
+            end)
+            AddConnection("FlyRespawn", respawnConn)
+
         else
-            Notify("死铁轨", "飞行脚本加载失败: " .. tostring(err), 5)
+            RemoveConnection("AntiFlyTP")
+            RemoveConnection("FlyKeyBind")
+            RemoveConnection("FlyKeyRelease")
+            RemoveConnection("FlyRespawn")
+            -- 清理飞行面板
+            local gui = LocalPlayer:FindFirstChild("PlayerGui")
+            if gui then
+                local panel = gui:FindFirstChild("FlyV3Panel")
+                if panel then panel:Destroy() end
+            end
+            Notify("死铁轨", "飞行不拉回 已关闭!", 3)
         end
     end,
 })

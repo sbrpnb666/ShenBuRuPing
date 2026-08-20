@@ -166,11 +166,12 @@ end
 -- 调用 Remote
 local function CallRemote(remote, ...)
     if not remote then return end
+    local args = {...}
     pcall(function()
         if remote:IsA("RemoteEvent") then
-            remote:FireServer(...)
+            remote:FireServer(unpack(args))
         elseif remote:IsA("RemoteFunction") then
-            remote:InvokeServer(...)
+            remote:InvokeServer(unpack(args))
         end
     end)
 end
