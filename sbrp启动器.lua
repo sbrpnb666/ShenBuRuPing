@@ -1,3 +1,14 @@
+--[[
+    ================================================================
+    ||  脚本作者: 霉国总统 / 神不如平                           ||
+    ||  QQ群: 神不如平                                          ||
+    ||  GitHub: github.com/sbrpnb666/ShenBuRuPing              ||
+    ||                                                          ||
+    ||  本脚本仅供学习交流使用，请勿用于商业用途                ||
+    ||  转载请注明出处，禁止倒卖/改名为己用                     ||
+    ================================================================
+]]
+
 --========================================================
 -- sbrp启动器
 --========================================================
@@ -219,6 +230,19 @@ Tab:Button({
         WindUI:Notify({ Title = "正在加载", Content = "自然灾害", Duration = 3 })
         local success, errorMsg = pcall(function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E8%87%AA%E7%84%B6%E7%81%BE%E5%AE%B3.lua"))()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
+        end
+    end,
+})
+
+Tab:Button({
+    Title = "99夜",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "99夜", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/99%E5%A4%9C.lua"))()
         end)
         if not success then
             WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })

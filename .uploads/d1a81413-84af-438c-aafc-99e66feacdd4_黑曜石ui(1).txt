@@ -1,0 +1,34 @@
+local repo = "https://raw.githubusercontent.com/ATLASTEAM01/Obsidian/main/"
+local Library = loadstring(game:HttpGet(repo .. "Library.lua"))()
+local ThemeManager = loadstring(game:HttpGet(repo .. "addons/ThemeManager.lua"))()
+local SaveManager = loadstring(game:HttpGet(repo .. "addons/SaveManager.lua"))()
+
+local Options = Library.Options
+local Toggles = Library.Toggles
+
+local Window = Library:CreateWindow({ Title = "Universal Silent Aim", Footer = "1.3", Center = true, AutoShow = true })
+
+local Tabs = {
+    Main = Window:AddTab("主页", "user"),
+    ["UI Settings"] = Window:AddTab("UI设置", "settings"),
+}
+
+-- 主页
+local MainSettingsBox = Tabs.Main:AddLeftGroupbox("主设置")
+MainSettingsBox:AddToggle("EnabledToggle", { Text = "（举例）", Default = false }):AddKeyPicker("EnabledKeybind", { Default = "RightAlt", SyncToggleState = true, Mode = "Toggle" })
+Toggles.EnabledToggle:OnChanged(function(Value)
+    -- 启用或禁用UI界面
+end)
+
+-- UI设置
+ThemeManager:SetLibrary(Library)
+SaveManager:SetLibrary(Library)
+
+SaveManager:IgnoreThemeSettings()
+SaveManager:SetIgnoreIndexes({ "MenuKeybind" })
+SaveManager:SetFolder("UniversalSilentAim/Configs")
+
+SaveManager:BuildConfigSection(Tabs["UI Settings"])
+ThemeManager:ApplyToTab(Tabs["UI Settings"])
+
+SaveManager:LoadAutoloadConfig()

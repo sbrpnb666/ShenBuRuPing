@@ -3,6 +3,16 @@
 -- 框架：WindUI
 --========================================================
 
+--[[
+    ================================================================
+    ||  脚本作者: 霉国总统 / 神不如平                           ||
+    ||  QQ群: 神不如平                                          ||
+    ||  GitHub: github.com/sbrpnb666/ShenBuRuPing              ||
+    ||                                                          ||
+    ||  本脚本仅供学习交流使用，请勿用于商业用途                ||
+    ||  转载请注明出处，禁止倒卖/改名为己用                     ||
+    ================================================================
+]]
 local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/finendss/VowLibrary/refs/heads/main/WINDUI.lua"))()
 
 local Players = game:GetService("Players")
