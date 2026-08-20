@@ -8,7 +8,14 @@
 ]]
 
 -- ========== WindUI 加载 ==========
-local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/finendss/VowLibrary/refs/heads/main/WINDUI.lua"))()
+local WindUI
+local uiOk, uiErr = pcall(function()
+    WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua"))()
+end)
+if not uiOk or not WindUI then
+    warn("WindUI 加载失败: " .. tostring(uiErr))
+    return
+end
 
 -- ========== ColorSequence.fromHex 兼容处理 ==========
 if not ColorSequence.fromHex then

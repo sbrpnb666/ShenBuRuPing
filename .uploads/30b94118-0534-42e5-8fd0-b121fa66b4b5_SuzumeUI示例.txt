@@ -1,0 +1,236 @@
+local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/finendss/VowLibrary/refs/heads/main/WINDUI.lua"))() --把这个Windui Link换掉
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+local Window = WindUI:CreateWindow({
+    Title = "脚本名字",
+    Icon = "sparkles", --图标
+    Author = "脚本名字",
+    Folder = "DefenseSystem",
+    Size = UDim2.fromOffset(400, 400),
+    Theme = "Pink",  --这是主题颜色
+    HideSearchBar = false, 
+    --[[
+    User = {      --这些可删除或保留
+        Enabled = true,   
+        Callback = function() end,
+        Anonymous = false
+    },
+    KeySystem = {       --这个是卡密系统可以删除保留   
+        Key = {"卡密","卡密"},
+        Note = "名字",
+        URL = "可以放群号或链接",
+        SaveKey = true,    --这个可以让输了一次的玩家不用再输入 可以改为false
+    },
+    ]]
+})
+
+
+--[[
+这是模糊效果
+local blur = Instance.new("BlurEffect")
+blur.Size = 12
+blur.Parent = game:GetService("Lighting")
+
+这些是边框流动效果 可删除
+local mainContainer = Window.UIElements and Window.UIElements.Main
+if mainContainer then
+    local stroke = Instance.new("UIStroke")
+    stroke.Thickness = 1.5
+    stroke.Color = Color3.new(1, 1, 1)
+    stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+    local gradient = Instance.new("UIGradient")
+    gradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 50, 50)),
+        ColorSequenceKeypoint.new(0.2, Color3.fromRGB(255, 100, 200)),
+        ColorSequenceKeypoint.new(0.4, Color3.fromRGB(255, 50, 50)),
+        ColorSequenceKeypoint.new(0.6, Color3.fromRGB(255, 100, 200)),
+        ColorSequenceKeypoint.new(0.8, Color3.fromRGB(255, 50, 50)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 100, 200)),
+    })
+    gradient.Enabled = true
+    gradient.Parent = stroke
+    stroke.Parent = mainContainer
+
+    task.spawn(function()
+        local speed = 8
+        while stroke and stroke.Parent do
+            task.wait()
+            gradient.Rotation = (gradient.Rotation + speed) % 360
+        end
+    end)
+end
+]]
+
+--时间标签
+local TimeTag = Window:Tag({
+    Title = "00:00",
+    Color = Color3.fromRGB(255, 255, 255)
+})
+
+local hue = 0
+task.spawn(function()
+    while true do
+        local now = os.date("*t")
+        local hours = string.format("%02d", now.hour)
+        local minutes = string.format("%02d", now.min)
+        
+        hue = (hue + 0.01) % 1
+        local rainbowColor = Color3.fromHSV(hue, 1, 1)
+        
+        TimeTag:SetTitle(hours .. ":" .. minutes)
+        TimeTag:SetColor(rainbowColor) 
+
+        task.wait(0.06)
+    end
+end)
+
+Window:Tag({
+    Title = "名字",
+    Color = Color3.fromHex("#7FDBFF")
+})
+
+Window:EditOpenButton({
+    Title = "脚本名字",
+    Icon = "monitor",
+    CornerRadius = UDim.new(0, 16),
+    StrokeThickness = 2,
+    Color = ColorSequence.new(Color3.fromHex("FF6B6B")),
+    Draggable = true,
+})
+
+--创建窗口 Tab可后面可以加数字Tab123456这样 或者前面加字母 ABDTab这样
+local Tab = Window:Tab({
+    Title = "名字",
+    Icon = "settings", --这是图标
+    Locked = false,
+})
+
+--标签的部分
+Tab:Section({Title = "名字", TextXAlignment = "Left", TextSize = 17})
+
+--标签的段落
+Tab:Paragraph({
+    Title = "名字",
+    Desc = "名字",
+})
+
+--标签的代码
+Tab:Code({
+    Title = "名字",
+    Code = [[
+内容
+]]
+})
+
+Tab:Paragraph({
+    Title = "名字",
+    Desc = "名字",
+    ImageSize = 20, 
+    Buttons = {
+        {
+            Title = "名字",
+            Icon = "copy", --图标
+            Variant = "Tertiary",
+            Callback = function()
+                if setclipboard then
+                    setclipboard("这里放链接或群号")
+                    --通知
+                    WindUI:Notify({
+                        Title = "已复制",
+                        Content = "",
+                        Duration = 5
+                    })
+                else
+                    WindUI:Notify({
+                        Title = "错误",
+                        Content = "",
+                        Duration = 5
+                    })
+                end
+            end
+        },
+        --[[
+        可以叠加复制
+        {
+            Title = "名字",
+            Icon = "copy",
+            Variant = "Tertiary",
+            Callback = function()
+                if setclipboard then
+                    setclipboard("一样的")
+                    WindUI:Notify({
+                        Title = "已复制",
+                        Content = "",
+                        Duration = 5
+                    })
+                else
+                    WindUI:Notify({
+                        Title = "错误",
+                        Content = "",
+                        Duration = 5
+                    })
+                end
+            end
+        }
+        ]]
+    }
+})
+
+--开关
+Tab:Toggle({
+    Title = "名字",
+    Default = false,
+    Callback = function()
+--你的功能代码
+    end
+})
+
+--滑块
+Tab:Slider({
+    Title = "名字",
+    Value = {Min = 50, Max = 500, Default = 196}, --可以自定义数字
+    Increment = 1,
+    Callback = function()
+--你的功能代码
+    end
+})
+
+--按键
+Tab:Button({
+    Title = "名字",
+    Callback = function()
+--你的功能代码
+    end
+})
+
+--输入框
+Tab:Input({
+    Title = "名字",
+    Placeholder = "输入内容",
+    Callback = function()
+--你的代码
+    end
+})
+
+--下滑菜单
+Tab:Dropdown({
+    Title = "名字",
+    Values = {"名字1", "名字2", "名字3"},
+    Value = "名字1",
+    Callback = function()
+--你的代码
+    end
+})
+
+--通知按键
+Tab:Button({
+    Title = "一个通知",
+    Default = false,
+    Callback = function()
+ --你的代码
+        WindUI:Notify({Title = "只是一个通知", Content = "", Duration = 5}) --这个5可以调节 这是通知时间
+    end
+})
