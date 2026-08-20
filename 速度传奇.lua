@@ -799,7 +799,7 @@ end
 Window:EditOpenButton({
     Title = "速度传奇",
     Icon = "zap",
-    CornerRadius = 16,
+    CornerRadius = UDim.new(0, 16),
     StrokeThickness = 2,
     Color = CSFromHex("00BFFF"),
     Draggable = true,

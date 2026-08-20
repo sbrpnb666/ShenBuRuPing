@@ -354,7 +354,7 @@ end)
 Window:EditOpenButton({
     Title          = "死铁轨",
     Icon           = "train",
-    CornerRadius   = 16,
+    CornerRadius   = UDim.new(0, 16),
     StrokeThickness = 2,
     Color          = CSFromHex("8B0000"),
     Draggable      = true,
