@@ -26,12 +26,9 @@ if not uiOk or not WindUI then
     return
 end
 
--- ========== ColorSequence.fromHex 兼容处理 ==========
-if not ColorSequence.fromHex then
-    ColorSequence.fromHex = function(hex)
-        local color = Color3.fromHex("#" .. tostring(hex))
-        return ColorSequence.new(color)
-    end
+-- ========== ColorSequence.fromHex 辅助函数 ==========
+local function CSFromHex(hex)
+    return ColorSequence.new(Color3.fromHex("#" .. tostring(hex)))
 end
 
 -- ========== 服务引用 ==========
@@ -359,7 +356,7 @@ Window:EditOpenButton({
     Icon           = "train",
     CornerRadius   = 16,
     StrokeThickness = 2,
-    Color          = ColorSequence.fromHex("8B0000"),
+    Color          = CSFromHex("8B0000"),
     Draggable      = true,
 })
 

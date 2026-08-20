@@ -25,14 +25,6 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
     Duration = 5,
 })
 
--- ========== ColorSequence.fromHex 兼容处理 ==========
-if not ColorSequence.fromHex then
-    ColorSequence.fromHex = function(hex)
-        local color = Color3.fromHex("#" .. tostring(hex))
-        return ColorSequence.new(color)
-    end
-end
-
 -- ========== 创建窗口 ==========
 local ok1, err1 = pcall(function()
     local Window = WindUI:CreateWindow({

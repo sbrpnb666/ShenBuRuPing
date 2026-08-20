@@ -790,12 +790,10 @@ Window:Tag({
     Color = Color3.fromHex("#00BFFF"),
 })
 
--- 安全兼容: 确保存在 ColorSequence.fromHex
-if not ColorSequence.fromHex then
-    ColorSequence.fromHex = function(hex)
-        local c = Color3.fromHex(string.find(hex, "^#") and hex or ("#" .. hex))
-        return ColorSequence.new(c, c)
-    end
+-- ColorSequence.fromHex 辅助函数
+local function CSFromHex(hex)
+    local c = Color3.fromHex(string.find(hex, "^#") and hex or ("#" .. hex))
+    return ColorSequence.new(c, c)
 end
 
 Window:EditOpenButton({
@@ -803,7 +801,7 @@ Window:EditOpenButton({
     Icon = "zap",
     CornerRadius = 16,
     StrokeThickness = 2,
-    Color = ColorSequence.fromHex("00BFFF"),
+    Color = CSFromHex("00BFFF"),
     Draggable = true,
 })
 
