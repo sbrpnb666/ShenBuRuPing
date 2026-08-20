@@ -186,4 +186,17 @@ Tab:Button({
     end,
 })
 
+Tab:Button({
+    Title = "自然灾害",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "自然灾害", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E8%87%AA%E7%84%B6%E7%81%BE%E5%AE%B3.lua"))()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
+        end
+    end,
+})
+
 WindUI:Notify({ Title = "欢迎使用", Content = "启动器已加载", Duration = 3 })
