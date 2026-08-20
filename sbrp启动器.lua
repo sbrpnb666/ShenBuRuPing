@@ -159,6 +159,22 @@ Tab:Button({
 })
 
 Tab:Button({
+    Title = "死铁轨(测试版)",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "死铁轨测试版", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            local code = game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E6%AD%BB%E9%93%81%E8%BD%A8_test.lua")
+            local fn = loadstring(code)
+            if not fn then error("语法错误") end
+            fn()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "测试版也失败", Content = tostring(errorMsg):sub(1, 200), Duration = 15 })
+        end
+    end,
+})
+
+Tab:Button({
     Title = "速度传奇",
     Callback = function()
         WindUI:Notify({ Title = "正在加载", Content = "速度传奇", Duration = 3 })
