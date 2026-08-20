@@ -1,227 +1,261 @@
-local _FD9fgDTH=1~=0
-local _RnLoTe6HDwNd=function(s)local k="doltJ19+~n*Tk\\GF"local d=""for i=1,#s,2 dolocal h=string.sub(s,i,i)local l=string.sub(s,i+1,i+1)local hv=tonumber(h,16)local lv=tonumber(l,16)if hv and lv then d=d..string.char(hv*16+lv)end endlocal r=""for i=1,#d do r=r..string.char(string.byte(d,i)~string.byte(k,(i-1)%#k+1))end return r end
-local _lIOll1l0O = game:GetService(_RnLoTe6HDwNd("3B03253B265D08474E21"))
-local function _10IlI01I(title, text)
-pcall(function()
-_lIOll1l0O:SetCore(_RnLoTe6HDwNd("370A0210045E4D42180749351F352828"), {Title = title, Text = text or "", Duration = (5*4/3)})
-end)
+--========================================================
+-- sbrp启动器
+--========================================================
+
+local StarterGui = game:GetService("StarterGui")
+local function sysMsg(title, text)
+    pcall(function()
+        StarterGui:SetCore("SendNotification", {Title = title, Text = text or "", Duration = 5})
+    end)
 end
-local __11101OII11O1O10
+
+-- 加载 WindUI（用原来 sbrp脚本 能跑的源）
+local WindUI
 local ok, err = pcall(function()
-__11101OII11O1O10 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/__11101OII11O1O10/main/dist/main.lua"))()
+    WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua"))()
 end)
-if not ok or not __11101OII11O1O10 then
-_10IlI01I(_RnLoTe6HDwNd("C4125D51"), _RnLoTe6HDwNd("3B305D457B01086437271B65246D0877544FCC097B14030B") .. tostring(err))
-local _OXzRkuv5bq=string.sub("RVz?M_Up?ub]oh2",1,0)
-return
+if not ok or not WindUI then
+    sysMsg("加载失败", "WindUI 加载失败: " .. tostring(err))
+    return
 end
-local _0l0OIll0O10O1 = __11101OII11O1O10:CreateWindow({
-Title = _RnLoTe6HDwNd("170D1E04659951"),
-Icon = _RnLoTe6HDwNd("171F0D06215D5C58"),
-Folder = _RnLoTe6HDwNd("3506281B24566842"),
-HideSearchBar = (not not _FD9fgDTH),
+
+local Window = WindUI:CreateWindow({
+    Title = "sbrp启动器",
+    Icon = "sparkles",
+    Folder = "QiDongQi",
+    HideSearchBar = true,
 })
-_0l0OIll0O10O1:EditOpenButton({
-Title = _RnLoTe6HDwNd("170D1E04659951"),
-Icon = _RnLoTe6HDwNd("0900021D3E5E4B"),
-CornerRadius = UDim.new(0, 0x10),
-StrokeThickness = (2*2/2),
-Color = ColorSequence.new(Color3.fromHex(_RnLoTe6HDwNd("22295A367C73"))),
-Draggable = (not not _FD9fgDTH),
+
+Window:EditOpenButton({
+    Title = "sbrp启动器",
+    Icon = "monitor",
+    CornerRadius = UDim.new(0, 16),
+    StrokeThickness = 2,
+    Color = ColorSequence.new(Color3.fromHex("FF6B6B")),
+    Draggable = true,
 })
-local Tab = _0l0OIll0O10O1:Tab({
-Title = "脚本",
-Icon = _RnLoTe6HDwNd("0206001167455C530A"),
+
+--========================================================
+-- 脚本板块
+--========================================================
+local Tab = Window:Tab({
+    Title = "脚本",
+    Icon = "file-text",
 })
+
 Tab:Button({
-Title = _RnLoTe6HDwNd("372D3E2450192307"),
-Callback = function()
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("0747CC09"), Content = _RnLoTe6HDwNd("372D3E2450192307"), Duration = 0x3 })
-local ___Ol1l1IOIllOIl, errorMsg = pcall(function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/sbrp%E8%84%9A%E6%9C%AC.lua"))()
-end)
-if not ___Ol1l1IOIllOIl then
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("C4125D51"), Content = tostring(errorMsg), Duration = math.floor(8.12) })
-end
-end,
+    Title = "SBRP通用脚本",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "SBRP通用脚本", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/sbrp%E8%84%9A%E6%9C%AC.lua"))()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
+        end
+    end,
 })
+
 Tab:Button({
-Title = _RnLoTe6HDwNd("7CE64BDC"),
-Callback = function()
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("0747CC09"), Content = _RnLoTe6HDwNd("7CE64BDC"), Duration = (3+5-12) })
-local ___Ol1l1IOIllOIl, errorMsg = pcall(function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E6%88%98%E4%BA%89%E5%A4%A7%E4%BA%A8.lua"))()
-end)
-if not ___Ol1l1IOIllOIl then
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("C4125D51"), Content = tostring(errorMsg), Duration = (8*3/2) })
-end
-end,
+    Title = "战争大亨",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "战争大亨", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E6%88%98%E4%BA%89%E5%A4%A7%E4%BA%A8.lua"))()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
+        end
+    end,
 })
+
 Tab:Button({
-Title = _RnLoTe6HDwNd("2B07051B"),
-Callback = function()
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("0747CC09"), Content = _RnLoTe6HDwNd("2B07051B"), Duration = (3*4/4) })
-local ___Ol1l1IOIllOIl, errorMsg = pcall(function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/Ohio.lua"))()
-end)
-if not ___Ol1l1IOIllOIl then
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("C4125D51"), Content = tostring(errorMsg), Duration = math.floor(8.28) })
-end
-end,
+    Title = "Ohio",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "Ohio", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/Ohio.lua"))()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
+        end
+    end,
 })
+
 Tab:Button({
-Title = _RnLoTe6HDwNd("66CB4DAB22"),
-Callback = function()
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("0747CC09"), Content = _RnLoTe6HDwNd("66CB4DAB22"), Duration = 0x3 })
-local ___Ol1l1IOIllOIl, errorMsg = pcall(function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E8%9C%82%E7%BE%A4%E6%A8%A1%E6%8B%9F%E5%99%A8.lua"))()
-end)
-if not ___Ol1l1IOIllOIl then
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("C4125D51"), Content = tostring(errorMsg), Duration = 0x8 })
-end
-end,
+    Title = "蜂群模拟器",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "蜂群模拟器", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E8%9C%82%E7%BE%A4%E6%A8%A1%E6%8B%9F%E5%99%A8.lua"))()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
+        end
+    end,
 })
+
 Tab:Button({
-Title = _RnLoTe6HDwNd("1A197189"),
-Callback = function()
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("0747CC09"), Content = _RnLoTe6HDwNd("1A197189"), Duration = 0x3 })
-local ___Ol1l1IOIllOIl, errorMsg = pcall(function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E9%A9%BE%E9%A9%B6%E5%B8%9D%E5%9B%BD.lua"))()
-end)
-if not ___Ol1l1IOIllOIl then
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("C4125D51"), Content = tostring(errorMsg), Duration = math.floor(8.13) })
-end
-end,
+    Title = "驾驶帝国",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "驾驶帝国", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E9%A9%BE%E9%A9%B6%E5%B8%9D%E5%9B%BD.lua"))()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
+        end
+    end,
 })
+
 Tab:Button({
-Title = _RnLoTe6HDwNd("FFA04C33"),
-Callback = function()
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("0747CC09"), Content = _RnLoTe6HDwNd("FFA04C33"), Duration = 0x3 })
-local ___Ol1l1IOIllOIl, errorMsg = pcall(function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E5%8A%9B%E9%87%8F%E4%BC%A0%E5%A5%87.lua"))()
-end)
-if not ___Ol1l1IOIllOIl then
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("C4125D51"), Content = tostring(errorMsg), Duration = (8+12-7) })
-end
-end,
+    Title = "力量传奇",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "力量传奇", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E5%8A%9B%E9%87%8F%E4%BC%A0%E5%A5%87.lua"))()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
+        end
+    end,
 })
+
 Tab:Button({
-Title = _RnLoTe6HDwNd("6455744E"),
-Callback = function()
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("0747CC09"), Content = _RnLoTe6HDwNd("6455744E"), Duration = math.floor(3.30) })
-local ___Ol1l1IOIllOIl, errorMsg = pcall(function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E6%9C%80%E5%BC%BA%E6%88%98%E5%9C%BA.lua"))()
-end)
-if not ___Ol1l1IOIllOIl then
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("C4125D51"), Content = tostring(errorMsg), Duration = (8+8-10) })
-end
-end,
+    Title = "最强战场",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "最强战场", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E6%9C%80%E5%BC%BA%E6%88%98%E5%9C%BA.lua"))()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
+        end
+    end,
 })
+
 Tab:Button({
-Title = "死铁轨",
-Callback = function()
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("0747CC09"), Content = "死铁轨", Duration = (3+8-18) })
-local ___Ol1l1IOIllOIl, errorMsg = pcall(function()
-local code = game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E6%AD%BB%E9%93%81%E8%BD%A8.lua")
-if not code or #code < (100+20-19) then
-error(_RnLoTe6HDwNd("2C1B18040D544DFFA0EB9393867C6F") .. tostring(code and #code or 0) .. _RnLoTe6HDwNd("4438EE5D6611D6D6513FF6BAF3"))
-end
-local fn, loadErr = loadstring(code)
-if not fn then
-error(_RnLoTe6HDwNd("89BA759B7011") .. tostring(loadErr))
-end
-fn()
-end)
-if not ___Ol1l1IOIllOIl then
-local msg = tostring(errorMsg)
-if #msg > (200+17-6) then msg = msg:sub(1, (200+8-16)) .. "..." end
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("1FAE04D437001C"), Content = msg, Duration = math.floor(15.49) })
-warn(_RnLoTe6HDwNd("3F14AD1C171199564F4B1074") .. tostring(errorMsg))
-end
-end,
+    Title = "死铁轨",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "死铁轨", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            local code = game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E6%AD%BB%E9%93%81%E8%BD%A8.lua")
+            if not code or #code < 100 then
+                error("HttpGet返回内容过短 (" .. tostring(code and #code or 0) .. " 字节), 可能是网络问题")
+            end
+            local fn, loadErr = loadstring(code)
+            if not fn then
+                error("语法错误: " .. tostring(loadErr))
+            end
+            fn()
+        end)
+        if not success then
+            local msg = tostring(errorMsg)
+            if #msg > 200 then msg = msg:sub(1, 200) .. "..." end
+            WindUI:Notify({ Title = "死铁轨加载失败", Content = msg, Duration = 15 })
+            warn("[死铁轨] 加载失败: " .. tostring(errorMsg))
+        end
+    end,
 })
+
 Tab:Button({
-Title = _RnLoTe6HDwNd("1FAE045C01E47102"),
-Callback = function()
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("0747CC09"), Content = _RnLoTe6HDwNd("1FAE043F9F79"), Duration = math.floor(3.91) })
-local ___Ol1l1IOIllOIl, errorMsg = pcall(function()
-local code = game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E6%AD%BB%E9%93%81%E8%BD%A8_test.lua")
-local fn = loadstring(code)
-if not fn then error(_RnLoTe6HDwNd("89BA759B")) end
-fn()
-end)
-if not ___Ol1l1IOIllOIl then
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("2FBA242B7B14"), Content = tostring(errorMsg):sub(1, 0xc8), Duration = (15*2/4) })
-end
-end,
+    Title = "死铁轨(测试版)",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "死铁轨测试版", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            local code = game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E6%AD%BB%E9%93%81%E8%BD%A8_test.lua")
+            local fn = loadstring(code)
+            if not fn then error("语法错误") end
+            fn()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "测试版也失败", Content = tostring(errorMsg):sub(1, 200), Duration = 15 })
+        end
+    end,
 })
+
 Tab:Button({
-Title = _RnLoTe6HDwNd("7BC94C33"),
-Callback = function()
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("0747CC09"), Content = _RnLoTe6HDwNd("7BC94C33"), Duration = 0x3 })
-local ___Ol1l1IOIllOIl, errorMsg = pcall(function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E9%80%9F%E5%BA%A6%E4%BC%A0%E5%A5%87.lua"))()
-end)
-if not ___Ol1l1IOIllOIl then
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("C4125D51"), Content = tostring(errorMsg), Duration = (8+20-9) })
-end
-end,
+    Title = "速度传奇",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "速度传奇", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E9%80%9F%E5%BA%A6%E4%BC%A0%E5%A5%87.lua"))()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
+        end
+    end,
 })
+
 Tab:Button({
-Title = _RnLoTe6HDwNd("A96A4C33"),
-Callback = function()
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("0747CC09"), Content = _RnLoTe6HDwNd("A96A4C33"), Duration = (3*4/3) })
-local ___Ol1l1IOIllOIl, errorMsg = pcall(function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E5%BF%8D%E8%80%85%E4%BC%A0%E5%A5%87.lua"))()
-end)
-if not ___Ol1l1IOIllOIl then
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("C4125D51"), Content = tostring(errorMsg), Duration = (8*3/2) })
-end
-end,
+    Title = "忍者传奇",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "忍者传奇", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E5%BF%8D%E8%80%85%E4%BC%A0%E5%A5%87.lua"))()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
+        end
+    end,
 })
+
 Tab:Button({
-Title = "圣奥里",
-Callback = function()
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("0747CC09"), Content = "圣奥里", Duration = math.floor(3.64) })
-local ___Ol1l1IOIllOIl, errorMsg = pcall(function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E5%9C%A3%E5%A5%A5%E9%87%8C.lua"))()
-end)
-if not ___Ol1l1IOIllOIl then
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("C4125D51"), Content = tostring(errorMsg), Duration = math.floor(8.43) })
-end
-end,
+    Title = "圣奥里",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "圣奥里", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E5%9C%A3%E5%A5%A5%E9%87%8C.lua"))()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
+        end
+    end,
 })
+
 Tab:Button({
-Title = _RnLoTe6HDwNd("8E5912C7"),
-Callback = function()
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("0747CC09"), Content = _RnLoTe6HDwNd("8E5912C7"), Duration = (3*2/2) })
-local ___Ol1l1IOIllOIl, errorMsg = pcall(function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E8%87%AA%E7%84%B6%E7%81%BE%E5%AE%B3.lua"))()
-end)
-if not ___Ol1l1IOIllOIl then
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("C4125D51"), Content = tostring(errorMsg), Duration = (8*3/4) })
-end
-end,
+    Title = "自然灾害",
+    Callback = function()
+        WindUI:Notify({ Title = "正在加载", Content = "自然灾害", Duration = 3 })
+        local success, errorMsg = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E8%87%AA%E7%84%B6%E7%81%BE%E5%AE%B3.lua"))()
+        end)
+        if not success then
+            WindUI:Notify({ Title = "加载失败", Content = tostring(errorMsg), Duration = 8 })
+        end
+    end,
 })
-__11101OII11O1O10:Notify({ Title = _RnLoTe6HDwNd("46A1135C"), Content = _RnLoTe6HDwNd("4BC70486EA4C"), Duration = (3*4/4) })
-local _1OOlOlOI0lO = _0l0OIll0O10O1:Tab({
-Title = "公告",
-Icon = _RnLoTe6HDwNd("060A0018"),
+
+WindUI:Notify({ Title = "欢迎使用", Content = "启动器已加载", Duration = 3 })
+
+--========================================================
+-- 公告标签页
+--========================================================
+local NoticeTab = Window:Tab({
+    Title = "公告",
+    Icon = "bell",
 })
-_1OOlOlOI0lO:Image(
-"https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E8%B5%9E%E8%B5%8F%E7%A0%81.png",
-_RnLoTe6HDwNd("1E0E02072250574C130F"),
-(12*2/4),
-_RnLoTe6HDwNd("2A00181D2954"),
-"zsm"
+
+-- 赞赏码图片
+NoticeTab:Image(
+    "https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/%E8%B5%9E%E8%B5%8F%E7%A0%81.png",
+    "zanshangma",
+    12,
+    "Notice",
+    "zsm"
 )
-_1OOlOlOI0lO:Space()
-_1OOlOlOI0lO:Section({ Title = _RnLoTe6HDwNd("7E433071") })
-_1OOlOlOI0lO:Paragraph({
-Title = _RnLoTe6HDwNd("6D9257AB"),
-Desc = _RnLoTe6HDwNd("7E4354B74AE019045EF1D7CADB")
+
+NoticeTab:Space()
+
+-- 脚本作者信息
+NoticeTab:Section({ Title = "脚本作者" })
+
+NoticeTab:Paragraph({
+    Title = "霉国总统",
+    Desc = "脚本核心开发 / 功能实现"
 })
-_1OOlOlOI0lO:Paragraph({
-Title = _RnLoTe6HDwNd("3A62EE07"),
-Desc = _RnLoTe6HDwNd("7E4354B74AE019045EF1D7CADB")
+
+NoticeTab:Paragraph({
+    Title = "神不如平",
+    Desc = "脚本核心开发 / 功能实现"
 })

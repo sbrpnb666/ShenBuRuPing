@@ -1,1042 +1,1228 @@
-local _nTdOGAka=""~=nil
-local _rsrNsI9w1fRv=function(s)local k="<OXPooSWn&ppu8]{"local d=""for i=1,#s,2 dolocal h=string.sub(s,i,i)local l=string.sub(s,i+1,i+1)local hv=tonumber(h,16)local lv=tonumber(l,16)if hv and lv then d=d..string.char(hv*16+lv)end endlocal r=""for i=1,#d do r=r..string.char(string.byte(d,i)~string.byte(k,(i-1)%#k+1))end return r end
-local ___Ol0O01l0O = loadstring(game:HttpGet("https://raw.githubusercontent.com/finendss/VowLibrary/refs/heads/main/WINDUI.lua"))()
-local __lOI0OOIO0O = game:GetService(_rsrNsI9w1fRv("6310341F265F1C182769403F"))
-local ___l0l00110 = game:GetService(_rsrNsI9w1fRv("6310073C5F0363675F1740"))
-local _IOOl00l0lO1 = game:GetService(_rsrNsI9w1fRv("6306171F035F633B5E4A3F41"))
-local _0lOI001l01l = game:GetService(_rsrNsI9w1fRv("637F341F265F63660216411C"))
-local __II0O1OOO10O1l = game:GetService(_rsrNsI9w1fRv("631011195F206218216941403A0931"))
-local ___lI1OIIIIIl1l = game:GetService(_rsrNsI9w1fRv("6310073C265E1C1E276F3939190931"))
-local __0O000110O0Il0 = game:GetService(_rsrNsI9w1fRv("6310681F5F5F63665F163F403C546D"))
-local ___lI0lOOI00lOO = game:GetService(_rsrNsI9w1fRv("6310073C265F3F18216F4040197712"))
-local ___II0Ill0II1 = game:GetService(_rsrNsI9w1fRv("63100719265F1A3B0216393944"))
-local __IOO00lIIl = __lOI0OOIO0O.__IOO00lIIl
-local _1IlllOIl = _0lOI001l01l.CurrentCamera
-local ___l0I0IlOlI = __IOO00lIIl:GetMouse()
-local __I1OlOIII0IIl1 = {
-_I10I1O1Ol1l = (not _nTdOGAka),
-___1lO01IOI = (not _nTdOGAka),
-_100I11l1110 = (not _nTdOGAka),
-__0lI1Il011I = (not _nTdOGAka),
-__I0Il0O00 = (not _nTdOGAka),
-_I1llOI0III010I0 = (not _nTdOGAka),
-___l100II11I = (not _nTdOGAka),
-WalkSpeed = math.floor(16.64),
-JumpPower = (50*4/2),
-InfiniteJump = (not _nTdOGAka),
-Noclip = (not _nTdOGAka),
-GodMode = (not _nTdOGAka),
-NoFallDamage = (not _nTdOGAka),
-Fly = (not _nTdOGAka),
-PlayerESP = (not _nTdOGAka),
-ItemESP = (not _nTdOGAka),
-FullHighlight = (not _nTdOGAka),
-HoldTeleport = (not _nTdOGAka),
-AntiAFK = (not _nTdOGAka),
-GraphicsBoost = (not _nTdOGAka),
+--[[
+    速度传奇 Speed Legend
+    使用 WindUI 框架
+    手机端兼容
+]]
+
+-- ============================================================
+-- 加载 WindUI
+-- ============================================================
+local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/finendss/VowLibrary/refs/heads/main/WINDUI.lua"))()
+
+-- ============================================================
+-- 服务引用
+-- ============================================================
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local Workspace = game:GetService("Workspace")
+local Lighting = game:GetService("Lighting")
+local TweenService = game:GetService("TweenService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local TeleportService = game:GetService("TeleportService")
+local VirtualInputManager = game:GetService("VirtualInputManager")
+
+-- ============================================================
+-- 本地变量
+-- ============================================================
+local LocalPlayer = Players.LocalPlayer
+local Camera = Workspace.CurrentCamera
+local Mouse = LocalPlayer:GetMouse()
+
+-- ============================================================
+-- 状态表
+-- ============================================================
+local State = {
+    -- 自动
+    AutoTrain = false,
+    AutoRebirth = false,
+    AutoBuyShoe = false,
+    AutoBuyPet = false,
+    AutoHatch = false,
+    AutoCollectCoin = false,
+    AutoQuest = false,
+    -- 玩家
+    WalkSpeed = 16,
+    JumpPower = 50,
+    InfiniteJump = false,
+    Noclip = false,
+    GodMode = false,
+    NoFallDamage = false,
+    Fly = false,
+    -- 视觉
+    PlayerESP = false,
+    ItemESP = false,
+    FullHighlight = false,
+    -- 传送
+    HoldTeleport = false,
+    -- 实用
+    AntiAFK = false,
+    GraphicsBoost = false,
 }
-local __1lIll0l0IOlO = {}
-local ___1OIO1ll0 = {}
-local ___lOOOlO111Ol0I0
-local _IIl11101OlOlO
-local function __IOO01ll1l()
-return __IOO00lIIl.Character or __IOO00lIIl.CharacterAdded:Wait()
+
+local Connections = {}
+local ESPObjects = {}
+
+-- 前置声明 (这些对象在后面才创建, 但卸载函数需要引用)
+local Window
+local TimeLabelGui
+
+-- ============================================================
+-- 辅助函数
+-- ============================================================
+local function GetChar()
+    return LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 end
-local function ___1llO00ll0lO10()
-local char = __IOO01ll1l()
-if char then
-return char:FindFirstChild(_rsrNsI9w1fRv("743A353101003A333C491F0425592F0F")) or char:FindFirstChildWhichIsA(_rsrNsI9w1fRv("7E2E2B353F0E2123"))
+
+local function GetRoot()
+    local char = GetChar()
+    if char then
+        return char:FindFirstChild("HumanoidRootPart") or char:FindFirstChildWhichIsA("BasePart")
+    end
+    return nil
 end
-return nil
+
+local function GetHum()
+    local char = GetChar()
+    if char then
+        return char:FindFirstChildOfClass("Humanoid")
+    end
+    return nil
 end
-local function ___1IIIOlIl1IO11()
-local char = __IOO01ll1l()
-if char then
-return char:FindFirstChildOfClass(_rsrNsI9w1fRv("743A353101003A33"))
+
+local function Notify(title, content, duration)
+    WindUI:Notify({
+        Title = title,
+        Content = content,
+        Duration = duration or 3,
+    })
 end
-return nil
+
+-- ============================================================
+-- Remote / Part 搜索
+-- ============================================================
+local function FindRemoteAny(keywords)
+    local lowers = {}
+    for _, k in ipairs(keywords) do table.insert(lowers, string.lower(k)) end
+    local function search(parent)
+        for _, v in ipairs(parent:GetDescendants()) do
+            if v:IsA("RemoteEvent") or v:IsA("RemoteFunction") then
+                local name = string.lower(v.Name)
+                for _, kw in ipairs(lowers) do
+                    if string.find(name, kw) then
+                        return v
+                    end
+                end
+            end
+        end
+        return nil
+    end
+    return search(ReplicatedStorage) or search(Workspace)
 end
-local function __IIlII000(title, content, duration)
-___Ol0O01l0O:__IIlII000({
-Title = title,
-Content = content,
-Duration = duration or 0x3,
+
+local function FindRemoteAll(keys)
+    local lowers = {}
+    for _, k in ipairs(keys) do table.insert(lowers, string.lower(k)) end
+    local function search(parent)
+        for _, v in ipairs(parent:GetDescendants()) do
+            if v:IsA("RemoteEvent") or v:IsA("RemoteFunction") then
+                local name = string.lower(v.Name)
+                local ok = true
+                for _, kw in ipairs(lowers) do
+                    if not string.find(name, kw) then ok = false break end
+                end
+                if ok then return v end
+            end
+        end
+        return nil
+    end
+    return search(ReplicatedStorage) or search(Workspace)
+end
+
+local function FireRemote(rem, ...)
+    if not rem then return end
+    pcall(function(...)
+        if rem:IsA("RemoteEvent") then
+            rem:FireServer(...)
+        elseif rem:IsA("RemoteFunction") then
+            pcall(rem.InvokeServer, rem, ...)
+        end
+    end, ...)
+end
+
+local function FindParts(keywords)
+    local results = {}
+    local lowers = {}
+    for _, k in ipairs(keywords) do table.insert(lowers, string.lower(k)) end
+    for _, v in ipairs(Workspace:GetDescendants()) do
+        if v:IsA("BasePart") then
+            local name = string.lower(v.Name)
+            for _, kw in ipairs(lowers) do
+                if string.find(name, kw) then
+                    table.insert(results, v)
+                    break
+                end
+            end
+        end
+    end
+    return results
+end
+
+local function FindFirstPart(keywords)
+    local lowers = {}
+    for _, k in ipairs(keywords) do table.insert(lowers, string.lower(k)) end
+    for _, v in ipairs(Workspace:GetDescendants()) do
+        if v:IsA("BasePart") then
+            local name = string.lower(v.Name)
+            for _, kw in ipairs(lowers) do
+                if string.find(name, kw) then return v end
+            end
+        end
+    end
+    return nil
+end
+
+local function FindFirstModel(keywords)
+    local lowers = {}
+    for _, k in ipairs(keywords) do table.insert(lowers, string.lower(k)) end
+    for _, v in ipairs(Workspace:GetDescendants()) do
+        if v:IsA("Model") then
+            local name = string.lower(v.Name)
+            for _, kw in ipairs(lowers) do
+                if string.find(name, kw) then return v end
+            end
+        end
+    end
+    return nil
+end
+
+-- ============================================================
+-- 自动功能
+-- ============================================================
+local function AutoTrain()
+    local rem = FindRemoteAny({"train", "run", "speed", "velocity", "treadmill"})
+    FireRemote(rem)
+end
+
+local function AutoRebirth()
+    local rem = FindRemoteAny({"rebirth", "prestige", "reset"})
+    FireRemote(rem)
+end
+
+local function AutoBuyShoe()
+    local rem = FindRemoteAll({"buy", "shoe"}) or FindRemoteAll({"buy", "speed"}) or FindRemoteAny({"shoe", "shoes"})
+    FireRemote(rem)
+end
+
+local function AutoBuyPet()
+    local rem = FindRemoteAll({"buy", "pet"}) or FindRemoteAll({"buy", "egg"}) or FindRemoteAny({"pet", "egg"})
+    FireRemote(rem)
+end
+
+local function AutoHatch()
+    local rem = FindRemoteAny({"hatch", "egg"})
+    FireRemote(rem)
+end
+
+local function AutoCollectCoin()
+    local root = GetRoot()
+    if not root then return end
+    local parts = FindParts({"coin", "cash", "money", "gold"})
+    for _, part in ipairs(parts) do
+        pcall(function()
+            if firetouchinterest then
+                firetouchinterest(part, root, 0)
+                firetouchinterest(part, root, 1)
+            else
+                part.CFrame = root.CFrame
+            end
+        end)
+    end
+end
+
+local function AutoQuest()
+    local rem = FindRemoteAny({"quest", "mission", "claim"})
+    FireRemote(rem)
+end
+
+local function StartAutoLoop(key, func)
+    Connections[key] = task.spawn(function()
+        while State[key] do
+            pcall(func)
+            task.wait(math.random(30, 80) / 100)
+        end
+    end)
+end
+
+local function StopAutoLoop(key)
+    State[key] = false
+end
+
+-- ============================================================
+-- 玩家功能
+-- ============================================================
+local function SetWalkSpeed(value)
+    State.WalkSpeed = value
+    local hum = GetHum()
+    if hum then hum.WalkSpeed = value end
+    if not Connections.WalkSpeedMaintain then
+        Connections.WalkSpeedMaintain = RunService.Heartbeat:Connect(function()
+            local h = GetHum()
+            if h and h.WalkSpeed ~= State.WalkSpeed then
+                pcall(function() h.WalkSpeed = State.WalkSpeed end)
+            end
+        end)
+    end
+end
+
+local function SetJumpPower(value)
+    State.JumpPower = value
+    local hum = GetHum()
+    if hum then
+        pcall(function()
+            hum.UseJumpPower = true
+            hum.JumpPower = value
+        end)
+    end
+    if not Connections.JumpPowerMaintain then
+        Connections.JumpPowerMaintain = RunService.Heartbeat:Connect(function()
+            local h = GetHum()
+            if h then
+                pcall(function()
+                    h.UseJumpPower = true
+                    if h.JumpPower ~= State.JumpPower then h.JumpPower = State.JumpPower end
+                end)
+            end
+        end)
+    end
+end
+
+local function ToggleInfiniteJump(enabled)
+    if enabled then
+        Connections.InfiniteJump = UserInputService.JumpRequest:Connect(function()
+            local hum = GetHum()
+            if hum then
+                pcall(function() hum:ChangeState(Enum.HumanoidStateType.Jumping) end)
+            end
+        end)
+    else
+        if Connections.InfiniteJump then Connections.InfiniteJump:Disconnect() Connections.InfiniteJump = nil end
+    end
+end
+
+local function ToggleNoclip(enabled)
+    if enabled then
+        Connections.Noclip = RunService.Stepped:Connect(function()
+            local char = GetChar()
+            if char then
+                for _, part in ipairs(char:GetDescendants()) do
+                    if part:IsA("BasePart") and part.CanCollide then
+                        part.CanCollide = false
+                    end
+                end
+            end
+        end)
+    else
+        if Connections.Noclip then Connections.Noclip:Disconnect() Connections.Noclip = nil end
+        local char = GetChar()
+        if char then
+            for _, part in ipairs(char:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    pcall(function() part.CanCollide = true end)
+                end
+            end
+        end
+    end
+end
+
+local function ToggleGodMode(enabled)
+    if enabled then
+        Connections.GodMode = RunService.Heartbeat:Connect(function()
+            local hum = GetHum()
+            if hum then
+                pcall(function()
+                    if hum.MaxHealth < 1e9 then hum.MaxHealth = 1e9 end
+                    hum.Health = hum.MaxHealth
+                end)
+            end
+        end)
+    else
+        if Connections.GodMode then Connections.GodMode:Disconnect() Connections.GodMode = nil end
+        local hum = GetHum()
+        if hum then
+            pcall(function()
+                hum.MaxHealth = 100
+                hum.Health = 100
+            end)
+        end
+    end
+end
+
+local function ToggleNoFallDamage(enabled)
+    if enabled then
+        Connections.NoFallDamage = RunService.Heartbeat:Connect(function()
+            local hum = GetHum()
+            if hum then
+                pcall(function()
+                    hum:SetStateEnabled(Enum.HumanoidStateType.FallingDown, false)
+                    hum:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, false)
+                end)
+            end
+        end)
+    else
+        if Connections.NoFallDamage then Connections.NoFallDamage:Disconnect() Connections.NoFallDamage = nil end
+    end
+end
+
+local flyLoaded = false
+local FLY_URL = "https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/.uploads/%E9%A3%9E%E8%A1%8C%E8%84%9A%E6%9C%ACV3(%E5%85%A8%E6%B8%B8%E6%88%8F%E9%80%9A%E7%94%A8).txt"
+local function ToggleFly(enabled)
+    State.Fly = enabled
+    if enabled then
+        if not flyLoaded then
+            flyLoaded = true
+            pcall(function()
+                loadstring(game:HttpGet(FLY_URL))()
+            end)
+        end
+    end
+end
+
+-- ============================================================
+-- 视觉功能 ESP
+-- ============================================================
+local function CreateESPBillboard(parent, color, sizeY)
+    local gui = Instance.new("BillboardGui")
+    gui.Name = "SpeedLegendESP"
+    gui.AlwaysOnTop = true
+    gui.Size = UDim2.new(0, 200, 0, sizeY or 30)
+    gui.StudsOffset = Vector3.new(0, 2.5, 0)
+    gui.MaxDistance = 2000
+    gui.ResetOnSpawn = false
+    gui.LightInfluence = 0
+    local label = Instance.new("TextLabel")
+    label.Name = "Text"
+    label.BackgroundTransparency = 1
+    label.Size = UDim2.new(1, 0, 1, 0)
+    label.TextColor3 = color or Color3.fromHex("#00BFFF")
+    label.TextStrokeTransparency = 0
+    label.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+    label.TextScaled = true
+    label.Font = Enum.Font.GothamBold
+    label.Text = ""
+    label.Parent = gui
+    gui.Parent = parent
+    return gui, label
+end
+
+local function TogglePlayerESP(enabled)
+    if enabled then
+        Connections.PlayerESP = task.spawn(function()
+            while State.PlayerESP do
+                for _, plr in ipairs(Players:GetPlayers()) do
+                    if plr ~= LocalPlayer and plr.Character then
+                        local head = plr.Character:FindFirstChild("Head")
+                        if head then
+                            local key = "p_" .. plr.UserId
+                            local gui = ESPObjects[key]
+                            if not gui or not gui.Parent or not gui.Parent:IsDescendantOf(game) then
+                                gui = CreateESPBillboard(head, Color3.fromHex("#00BFFF"))
+                                ESPObjects[key] = gui
+                            end
+                            local root = GetRoot()
+                            local theirRoot = plr.Character:FindFirstChild("HumanoidRootPart")
+                            local dist = ""
+                            if root and theirRoot then
+                                dist = string.format("  [%.0fm]", (root.Position - theirRoot.Position).Magnitude)
+                            end
+                            gui.Text.Text = plr.DisplayName .. dist
+                        end
+                    end
+                end
+                task.wait(0.1)
+            end
+        end)
+    else
+        if Connections.PlayerESP then Connections.PlayerESP = nil end
+        for key in pairs(ESPObjects) do
+            if string.sub(key, 1, 2) == "p_" then
+                pcall(function() ESPObjects[key]:Destroy() end)
+                ESPObjects[key] = nil
+            end
+        end
+    end
+end
+
+local function ToggleItemESP(enabled)
+    if enabled then
+        Connections.ItemESP = task.spawn(function()
+            while State.ItemESP do
+                local parts = FindParts({"coin", "cash", "money", "gem", "diamond", "chest", "orb", "crystal"})
+                for idx, part in ipairs(parts) do
+                    if idx > 250 then break end
+                    local key = "i_" .. part:GetDebugId()
+                    local hl = ESPObjects[key]
+                    if not hl or not hl.Parent then
+                        hl = Instance.new("Highlight")
+                        hl.Name = "SpeedLegendItemESP"
+                        hl.FillColor = Color3.fromHex("#FFD700")
+                        hl.OutlineColor = Color3.fromRGB(255, 255, 255)
+                        hl.FillTransparency = 0.5
+                        hl.OutlineTransparency = 0
+                        hl.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+                        hl.Adornee = part
+                        hl.Parent = part
+                        ESPObjects[key] = hl
+                    end
+                end
+                task.wait(0.5)
+            end
+        end)
+    else
+        if Connections.ItemESP then Connections.ItemESP = nil end
+        for key in pairs(ESPObjects) do
+            if string.sub(key, 1, 2) == "i_" then
+                pcall(function() ESPObjects[key]:Destroy() end)
+                ESPObjects[key] = nil
+            end
+        end
+    end
+end
+
+local function ToggleFullHighlight(enabled)
+    if enabled then
+        Connections.FullHighlight = task.spawn(function()
+            while State.FullHighlight do
+                for _, v in ipairs(Workspace:GetDescendants()) do
+                    if v:IsA("Model") and #v:GetChildren() > 0 then
+                        local key = "f_" .. v:GetDebugId()
+                        if not ESPObjects[key] then
+                            local hl = Instance.new("Highlight")
+                            hl.Name = "SpeedLegendFullHL"
+                            hl.FillColor = Color3.fromHex("#00BFFF")
+                            hl.FillTransparency = 0.75
+                            hl.OutlineColor = Color3.fromRGB(255, 255, 255)
+                            hl.OutlineTransparency = 0.4
+                            hl.Adornee = v
+                            hl.Parent = v
+                            ESPObjects[key] = hl
+                        end
+                    end
+                    task.wait()
+                end
+                task.wait(2)
+            end
+        end)
+    else
+        if Connections.FullHighlight then Connections.FullHighlight = nil end
+        for key in pairs(ESPObjects) do
+            if string.sub(key, 1, 2) == "f_" then
+                pcall(function() ESPObjects[key]:Destroy() end)
+                ESPObjects[key] = nil
+            end
+        end
+    end
+end
+
+-- ============================================================
+-- 传送功能
+-- ============================================================
+local function TeleportTo(obj)
+    local root = GetRoot()
+    if not root or not obj then return false end
+    pcall(function()
+        local cf
+        if obj:IsA("BasePart") then
+            cf = obj.CFrame + Vector3.new(0, 3, 0)
+        elseif obj:IsA("Model") then
+            cf = obj:GetPivot() + Vector3.new(0, 3, 0)
+        end
+        if cf then root.CFrame = cf end
+    end)
+    return true
+end
+
+local function TeleportByName(keywords, label)
+    local part = FindFirstPart(keywords) or FindFirstModel(keywords)
+    if part then
+        TeleportTo(part)
+        Notify("速度传奇", "已传送到: " .. label, 3)
+    else
+        Notify("速度传奇", "未找到: " .. label, 3)
+    end
+end
+
+local holdingTP = false
+local function ToggleHoldTeleport(enabled)
+    if enabled then
+        Connections.HoldTPBegin = UserInputService.InputBegan:Connect(function(input, gp)
+            if gp then return end
+            if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                holdingTP = true
+            end
+        end)
+        Connections.HoldTPEnd = UserInputService.InputEnded:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                holdingTP = false
+            end
+        end)
+        Connections.HoldTP = RunService.RenderStepped:Connect(function()
+            if holdingTP then
+                local root = GetRoot()
+                if root then
+                    local target = Mouse.Hit.Position
+                    root.CFrame = root.CFrame:Lerp(CFrame.new(target), 0.25)
+                end
+            end
+        end)
+    else
+        holdingTP = false
+        for _, k in ipairs({"HoldTPBegin", "HoldTPEnd", "HoldTP"}) do
+            if Connections[k] then Connections[k]:Disconnect() Connections[k] = nil end
+        end
+    end
+end
+
+-- ============================================================
+-- 实用功能
+-- ============================================================
+local function ToggleAntiAFK(enabled)
+    if enabled then
+        Connections.AntiAFK = LocalPlayer.Idled:Connect(function()
+            pcall(function()
+                VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Space, false, game)
+                task.wait(0.05)
+                VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Space, false, game)
+            end)
+        end)
+    else
+        if Connections.AntiAFK then Connections.AntiAFK:Disconnect() Connections.AntiAFK = nil end
+    end
+end
+
+local function ToggleGraphicsBoost(enabled)
+    if enabled then
+        Lighting.GlobalShadows = true
+        Lighting.FogEnd = 1e9
+        Lighting.Brightness = 2
+        Lighting.ClockTime = 14
+        Lighting.ExposureCompensation = 0.3
+        Lighting.Ambient = Color3.fromRGB(150, 150, 150)
+        Lighting.OutdoorAmbient = Color3.fromRGB(150, 150, 150)
+        pcall(function() Lighting.Technology = Enum.Technology.Future end)
+    else
+        Lighting.GlobalShadows = false
+        Lighting.FogEnd = 100000
+        Lighting.Brightness = 1
+        Lighting.ExposureCompensation = 0
+        Lighting.Ambient = Color3.fromRGB(0, 0, 0)
+        Lighting.OutdoorAmbient = Color3.fromRGB(0, 0, 0)
+    end
+end
+
+local function ServerHop()
+    Notify("速度传奇", "正在换服...", 3)
+    pcall(function()
+        local HttpService = game:GetService("HttpService")
+        local placeId = game.PlaceId
+        local req = (request or http_request or (syn and syn.request))
+        local function fetchServers(cursor)
+            local url = string.format("https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=Asc&limit=100", placeId)
+            if cursor and cursor ~= "" then
+                url = url .. "&cursor=" .. cursor
+            end
+            local resp = req({ Url = url, Method = "GET" })
+            return HttpService:JSONDecode(resp.Body)
+        end
+        local data = fetchServers("")
+        local picked
+        if data and data.data then
+            for _, server in ipairs(data.data) do
+                if server.playing and server.maxPlayers and server.playing < server.maxPlayers and server.id ~= game.JobId then
+                    picked = server
+                    break
+                end
+            end
+        end
+        if picked then
+            TeleportService:TeleportToPlaceInstance(placeId, picked.id, LocalPlayer)
+        else
+            Notify("速度传奇", "未找到可用服务器", 4)
+        end
+    end)
+end
+
+local function CopyServerID()
+    local jobId = game.JobId
+    if jobId == "" then jobId = "未知" end
+    pcall(function()
+        if setclipboard then setclipboard(jobId) end
+    end)
+    Notify("速度传奇", "服务器号已复制: " .. jobId, 6)
+end
+
+local function CharacterInfo()
+    local hum = GetHum()
+    local root = GetRoot()
+    local info = "未找到角色"
+    if hum and root then
+        info = string.format(
+            "血量: %.0f / %.0f\n速度: %.0f\n跳跃力: %.0f\n位置: %.1f, %.1f, %.1f",
+            hum.Health, hum.MaxHealth, hum.WalkSpeed, hum.JumpPower,
+            root.Position.X, root.Position.Y, root.Position.Z
+        )
+    end
+    Notify("角色信息", info, 8)
+end
+
+local function ClearEffects()
+    local count = 0
+    for _, v in ipairs(Workspace:GetDescendants()) do
+        if v:IsA("ParticleEmitter") or v:IsA("Trail") or v:IsA("Beam") or v:IsA("Smoke") or v:IsA("Fire") or v:IsA("Sparkles") or v:IsA("Explosion") then
+            pcall(function() v.Enabled = false v:Destroy() end)
+            count = count + 1
+        end
+    end
+    Notify("速度传奇", "已清理 " .. count .. " 个特效", 4)
+end
+
+local function UnloadScript()
+    -- 关闭所有状态
+    for k, v in pairs(State) do
+        if type(v) == "boolean" then State[k] = false end
+    end
+    -- 断开所有连接
+    for k, conn in pairs(Connections) do
+        pcall(function()
+            if typeof(conn) == "RBXScriptConnection" then
+                conn:Disconnect()
+            end
+        end)
+        Connections[k] = nil
+    end
+    -- 清理 ESP
+    for k, obj in pairs(ESPObjects) do
+        pcall(function() obj:Destroy() end)
+        ESPObjects[k] = nil
+    end
+    -- 恢复角色
+    pcall(function()
+        local hum = GetHum()
+        if hum then
+            hum.WalkSpeed = 16
+            pcall(function() hum.JumpPower = 50 end)
+        end
+        local char = GetChar()
+        if char then
+            for _, part in ipairs(char:GetDescendants()) do
+                if part:IsA("BasePart") then pcall(function() part.CanCollide = true end) end
+            end
+        end
+    end)
+    -- 恢复画质
+    ToggleGraphicsBoost(false)
+    -- 销毁窗口与时间标签
+    pcall(function() Window:Destroy() end)
+    pcall(function() TimeLabelGui:Destroy() end)
+    Notify("速度传奇", "脚本已卸载", 4)
+end
+
+-- ============================================================
+-- 创建窗口
+-- ============================================================
+Window = WindUI:CreateWindow({
+    Title = "速度传奇",
+    Icon = "zap",
+    Author = "速度传奇脚本",
+    Folder = "SpeedLegend",
+    Size = UDim2.fromOffset(500, 520),
+    Theme = "Dark",
 })
-end
-local function __l0lOO001llI(keywords)
-local ___1Il0001OO1 = {}
-for _, k in ipairs(keywords) do table.insert(___1Il0001OO1, string.lower(k)) end
-local function __10OOO01llOI0I(__0O10O10l1l1Ol)
-for _, v in ipairs(__0O10O10l1l1Ol:GetDescendants()) do
-if v:IsA(_rsrNsI9w1fRv("6E2A353F1B0A16210B4804")) or v:IsA(_rsrNsI9w1fRv("6E2A353F1B0A1522004504191A56")) then
-local name = string.lower(v.Name)
-for _, kw in ipairs(___1Il0001OO1) do
-if string.find(name, kw) then
-return v
-end
-end
-end
-end
-return nil
-end
-return __10OOO01llOI0I(__0O000110O0Il0) or __10OOO01llOI0I(_0lOI001l01l)
-end
-local function ___00l0O1IlO1lO(keys)
-local ___1Il0001OO1 = {}
-for _, k in ipairs(keys) do table.insert(___1Il0001OO1, string.lower(k)) end
-local function __10OOO01llOI0I(__0O10O10l1l1Ol)
-for _, v in ipairs(__0O10O10l1l1Ol:GetDescendants()) do
-if v:IsA(_rsrNsI9w1fRv("6E2A353F1B0A16210B4804")) or v:IsA(_rsrNsI9w1fRv("6E2A353F1B0A1522004504191A56")) then
-local name = string.lower(v.Name)
-local ok = (not not _nTdOGAka)
-for _, kw in ipairs(___1Il0001OO1) do
-if not string.find(name, kw) then ok = (not _nTdOGAka) break end
-end
-if ok then return v end
-end
-end
-return nil
-end
-return __10OOO01llOI0I(__0O000110O0Il0) or __10OOO01llOI0I(_0lOI001l01l)
-end
-local function __lOlO0001(rem, ...)
-if not rem then return end
-pcall(function(...)
-if rem:IsA(_rsrNsI9w1fRv("6E2A353F1B0A16210B4804")) then
-rem:FireServer(...)
-elseif rem:IsA(_rsrNsI9w1fRv("6E2A353F1B0A1522004504191A56")) then
-pcall(rem.InvokeServer, rem, ...)
-end
-end, ...)
-end
-local function __IO11OOOO1I(keywords)
-local __0O0lO10O = {}
-local ___1Il0001OO1 = {}
-for _, k in ipairs(keywords) do table.insert(___1Il0001OO1, string.lower(k)) end
-for _, v in ipairs(_0lOI001l01l:GetDescendants()) do
-if v:IsA(_rsrNsI9w1fRv("7E2E2B353F0E2123")) then
-local name = string.lower(v.Name)
-for _, kw in ipairs(___1Il0001OO1) do
-if string.find(name, kw) then
-table.insert(__0O0lO10O, v)
-break
-end
-end
-end
-end
-return __0O0lO10O
-end
-local function ___l111I101I0O(keywords)
-local ___1Il0001OO1 = {}
-for _, k in ipairs(keywords) do table.insert(___1Il0001OO1, string.lower(k)) end
-for _, v in ipairs(_0lOI001l01l:GetDescendants()) do
-if v:IsA(_rsrNsI9w1fRv("7E2E2B353F0E2123")) then
-local name = string.lower(v.Name)
-for _, kw in ipairs(___1Il0001OO1) do
-if string.find(name, kw) then return v end
-end
-end
-end
-return nil
-end
-local function __1llI1IO1OlI11(keywords)
-local ___1Il0001OO1 = {}
-for _, k in ipairs(keywords) do table.insert(___1Il0001OO1, string.lower(k)) end
-for _, v in ipairs(_0lOI001l01l:GetDescendants()) do
-if v:IsA(_rsrNsI9w1fRv("71203C3503")) then
-local name = string.lower(v.Name)
-for _, kw in ipairs(___1Il0001OO1) do
-if string.find(name, kw) then return v end
-end
-end
-end
-return nil
-end
-local function _I10I1O1Ol1l()
-local rem = __l0lOO001llI({_rsrNsI9w1fRv("483D393901"), "run", _rsrNsI9w1fRv("4F3F3D350B"), _rsrNsI9w1fRv("4A2A343F0C06272E"), _rsrNsI9w1fRv("483D3D310B023A3B02")})
-__lOlO0001(rem)
-end
-local function ___1lO01IOI()
-local rem = __l0lOO001llI({_rsrNsI9w1fRv("4E2A3A391D1B3B"), _rsrNsI9w1fRv("4C3D3D231B063432"), _rsrNsI9w1fRv("4E2A2B351B")})
-__lOlO0001(rem)
-end
-local function _100I11l1110()
-local rem = ___00l0O1IlO1lO({"buy", _rsrNsI9w1fRv("4F273735")}) or ___00l0O1IlO1lO({"buy", _rsrNsI9w1fRv("4F3F3D350B")}) or __l0lOO001llI({_rsrNsI9w1fRv("4F273735"), _rsrNsI9w1fRv("4F2737351C")})
-__lOlO0001(rem)
-end
-local function __0lI1Il011I()
-local rem = ___00l0O1IlO1lO({"buy", "pet_rsrNsI9w1fRv("4166783F1D4F0C083116401C45776C325000693C204728")buy", "egg_rsrNsI9w1fRv("4166783F1D4F0C0802161C3F3A086D4A5023117814")pet", "egg"})
-__lOlO0001(rem)
-end
-local function __I0Il0O00()
-local rem = __l0lOO001llI({_rsrNsI9w1fRv("542E2C3307"), "egg"})
-__lOlO0001(rem)
-end
-local function _I1llOI0III010I0()
-local root = ___1llO00ll0lO10()
-if not root then return end
-local __O1l1IlII1I1I = __IO11OOOO1I({_rsrNsI9w1fRv("5F20313E"), _rsrNsI9w1fRv("5F2E2B38"), _rsrNsI9w1fRv("5120363516"), _rsrNsI9w1fRv("5B203434")})
-for _, part in ipairs(__O1l1IlII1I1I) do
+
+-- ============================================================
+-- 时间标签 (彩虹色循环, 0.06秒更新)
+-- ============================================================
+TimeLabelGui = Instance.new("ScreenGui")
+TimeLabelGui.Name = "SpeedLegendTimeLabel"
+TimeLabelGui.ResetOnSpawn = false
+TimeLabelGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+TimeLabelGui.IgnoreGuiInset = true
 pcall(function()
-if firetouchinterest then
-firetouchinterest(part, root, 0)
-firetouchinterest(part, root, 1)
-else
-part.CFrame = root.CFrame
-end
+    local parent = (gethui and gethui()) or game:GetService("CoreGui")
+    TimeLabelGui.Parent = parent
 end)
-end
-end
-local function ___l100II11I()
-local rem = __l0lOO001llI({_rsrNsI9w1fRv("4D3A3D231B"), _rsrNsI9w1fRv("51262B2306003D"), _rsrNsI9w1fRv("5F23393902")})
-__lOlO0001(rem)
-end
-local function _l1OIO1lI0lI0(key, func)
-__1lIll0l0IOlO[key] = task.spawn(function()
-while __I1OlOIII0IIl1[key] do
-pcall(func)
-task.wait(math.random((30*3/2), (80*4/4)) / (100*2/4))
-end
-end)
-end
-local function _OI0l0Il00IOl011(key)
-__I1OlOIII0IIl1[key] = (not _nTdOGAka)
-end
-local function _IIOI1IIOO1I1I1(value)
-__I1OlOIII0IIl1.WalkSpeed = value
-local hum = ___1IIIOlIl1IO11()
-if hum then hum.WalkSpeed = value end
-if not __1lIll0l0IOlO.WalkSpeedMaintain then
-__1lIll0l0IOlO.WalkSpeedMaintain = ___l0l00110.Heartbeat:Connect(function()
-local h = ___1IIIOlIl1IO11()
-if h and h.WalkSpeed ~= __I1OlOIII0IIl1.WalkSpeed then
-pcall(function() h.WalkSpeed = __I1OlOIII0IIl1.WalkSpeed end)
-end
-end)
-end
-end
-local function _1lO110II(value)
-__I1OlOIII0IIl1.JumpPower = value
-local hum = ___1IIIOlIl1IO11()
-if hum then
-pcall(function()
-hum.UseJumpPower = (not not _nTdOGAka)
-hum.JumpPower = value
-end)
-end
-if not __1lIll0l0IOlO.JumpPowerMaintain then
-__1lIll0l0IOlO.JumpPowerMaintain = ___l0l00110.Heartbeat:Connect(function()
-local h = ___1IIIOlIl1IO11()
-if h then
-pcall(function()
-h.UseJumpPower = (not not _nTdOGAka)
-if h.JumpPower ~= __I1OlOIII0IIl1.JumpPower then h.JumpPower = __I1OlOIII0IIl1.JumpPower end
-end)
-end
-end)
-end
-end
-local function __0O10OII1001(enabled)
-if enabled then
-__1lIll0l0IOlO.InfiniteJump = _IOOl00l0lO1.JumpRequest:Connect(function()
-local hum = ___1IIIOlIl1IO11()
-if hum then
-pcall(function() hum:ChangeState(Enum.HumanoidStateType.Jumping) end)
-end
-end)
-else
-if __1lIll0l0IOlO.InfiniteJump then __1lIll0l0IOlO.InfiniteJump:Disconnect() __1lIll0l0IOlO.InfiniteJump = nil end
-end
-end
-local function __I00IIOI1I(enabled)
-if enabled then
-__1lIll0l0IOlO.Noclip = ___l0l00110.Stepped:Connect(function()
-local char = __IOO01ll1l()
-if char then
-for _, part in ipairs(char:GetDescendants()) do
-if part:IsA(_rsrNsI9w1fRv("7E2E2B353F0E2123")) and part.CanCollide then
-part.CanCollide = (not _nTdOGAka)
-end
-end
-end
-end)
-else
-if __1lIll0l0IOlO.Noclip then __1lIll0l0IOlO.Noclip:Disconnect() __1lIll0l0IOlO.Noclip = nil end
-local char = __IOO01ll1l()
-if char then
-for _, part in ipairs(char:GetDescendants()) do
-if part:IsA(_rsrNsI9w1fRv("7E2E2B353F0E2123")) then
-pcall(function() part.CanCollide = (not not _nTdOGAka) end)
-end
-end
-end
-end
-end
-local function _l0OOI10ll1llI(enabled)
-if enabled then
-__1lIll0l0IOlO.GodMode = ___l0l00110.Heartbeat:Connect(function()
-local hum = ___1IIIOlIl1IO11()
-if hum then
-pcall(function()
-if hum.MaxHealth < 1e9 then hum.MaxHealth = 1e9 end
-hum.Health = hum.MaxHealth
-end)
-end
-end)
-else
-if __1lIll0l0IOlO.GodMode then __1lIll0l0IOlO.GodMode:Disconnect() __1lIll0l0IOlO.GodMode = nil end
-local hum = ___1IIIOlIl1IO11()
-if hum then
-pcall(function()
-hum.MaxHealth = math.floor(100.90)
-hum.Health = math.floor(100.95)
-end)
-end
-end
-end
-local function ___100O1O101(enabled)
-if enabled then
-__1lIll0l0IOlO.NoFallDamage = ___l0l00110.Heartbeat:Connect(function()
-local hum = ___1IIIOlIl1IO11()
-if hum then
-pcall(function()
-hum:SetStateEnabled(Enum.HumanoidStateType.FallingDown, (not _nTdOGAka))
-hum:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, (not _nTdOGAka))
-end)
-end
-end)
-else
-if __1lIll0l0IOlO.NoFallDamage then __1lIll0l0IOlO.NoFallDamage:Disconnect() __1lIll0l0IOlO.NoFallDamage = nil end
-end
-end
-local _01ll1I111llOI0 = (not _nTdOGAka)
-local __l01OOOlOOI00O = "https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/.uploads/%E9%A3%9E%E8%A1%8C%E8%84%9A%E6%9C%ACV3(%E5%85%A8%E6%B8%B8%E6%88%8F%E9%80%9A%E7%94%A8).txt"
-local function _I0O0l11lOlO1ll(enabled)
-__I1OlOIII0IIl1.Fly = enabled
-if enabled then
-if not _01ll1I111llOI0 then
-_01ll1I111llOI0 = (not not _nTdOGAka)
-pcall(function()
-loadstring(game:HttpGet(__l01OOOlOOI00O))()
-end)
-end
-end
-end
-local function _0I1OlllI1(__0O10O10l1l1Ol, color, sizeY)
-local gui = Instance.new(_rsrNsI9w1fRv("7E26343C0D0032250A610519"))
-gui.Name = _rsrNsI9w1fRv("6F3F3D350B2336300B4814352668")
-gui.AlwaysOnTop = (not not _nTdOGAka)
-gui.Size = UDim2.new(0, (200*3/3), 0, sizeY or (30+16-17))
-gui.StudsOffset = Vector3.new(0, (2+19-2).(5+16-9), 0)
-gui.MaxDistance = 2000
-gui.ResetOnSpawn = (not _nTdOGAka)
-gui.LightInfluence = 0
-local __O00O00OIIIIl0 = Instance.new(_rsrNsI9w1fRv("682A2024230E313202"))
-__O00O00OIIIIl0.Name = _rsrNsI9w1fRv("682A2024")
-__O00O00OIIIIl0.BackgroundTransparency = 1
-__O00O00OIIIIl0.Size = UDim2.new(1, 0, 1, 0)
-__O00O00OIIIIl0.TextColor3 = color or Color3.fromHex(_rsrNsI9w1fRv("1F7F6812292915"))
-__O00O00OIIIIl0.TextStrokeTransparency = 0
-__O00O00OIIIIl0.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
-__O00O00OIIIIl0.TextScaled = (not not _nTdOGAka)
-__O00O00OIIIIl0.Font = Enum.Font.GothamBold
-__O00O00OIIIIl0.Text = ""
-__O00O00OIIIIl0.Parent = gui
-gui.Parent = __0O10O10l1l1Ol
-return gui, __O00O00OIIIIl0
-end
-local function _IIOIlll0ll1(enabled)
-if enabled then
-__1lIll0l0IOlO.PlayerESP = task.spawn(function()
-while __I1OlOIII0IIl1.PlayerESP do
-for _, plr in ipairs(__lOI0OOIO0O:GetPlayers()) do
-if plr ~= __IOO00lIIl and plr.Character then
-local head = plr.Character:FindFirstChild(_rsrNsI9w1fRv("742A3934"))
-if head then
-local key = "p_" .. plr.UserId
-local gui = ___1OIO1ll0[key]
-if not gui or not gui.Parent or not gui.Parent:IsDescendantOf(game) then
-gui = _0I1OlllI1(head, Color3.fromHex(_rsrNsI9w1fRv("1F7F6812292915")))
-___1OIO1ll0[key] = gui
-end
-local root = ___1llO00ll0lO10()
-local __011OO1OIOlO01I = plr.Character:FindFirstChild(_rsrNsI9w1fRv("743A353101003A333C491F0425592F0F"))
-local dist = ""
-if root and __011OO1OIOlO01I then
-dist = string.format(_rsrNsI9w1fRv("1C6F0375415F353A33"), (root.Position - __011OO1OIOlO01I.Position).Magnitude)
-end
-gui.Text.Text = plr.DisplayName .. dist
-end
-end
-end
-task.wait(0.1)
-end
-end)
-else
-if __1lIll0l0IOlO.PlayerESP then __1lIll0l0IOlO.PlayerESP = nil end
-for key in pairs(___1OIO1ll0) do
-if string.sub(key, 1, (2*2/3)) == "p_" then
-pcall(function() ___1OIO1ll0[key]:Destroy() end)
-___1OIO1ll0[key] = nil
-end
-end
-end
-end
-local function __10l1OlIlO1lI(enabled)
-if enabled then
-__1lIll0l0IOlO.ItemESP = task.spawn(function()
-while __I1OlOIII0IIl1.ItemESP do
-local __O1l1IlII1I1I = __IO11OOOO1I({_rsrNsI9w1fRv("5F20313E"), _rsrNsI9w1fRv("5F2E2B38"), _rsrNsI9w1fRv("5120363516"), "gem", _rsrNsI9w1fRv("5826393D000137"), _rsrNsI9w1fRv("5F273D231B"), "orb", _rsrNsI9w1fRv("5F3D21231B0E3F")})
-for idx, part in ipairs(__O1l1IlII1I1I) do
-if idx > 0xfa then break end
-local key = "i_" .. part:GetDebugId()
-local hl = ___1OIO1ll0[key]
-if not hl or not hl.Parent then
-hl = Instance.new(_rsrNsI9w1fRv("74263F380306343F1A"))
-hl.Name = _rsrNsI9w1fRv("6F3F3D350B2336300B481439015D303E6F1F")
-hl.FillColor = Color3.fromHex(_rsrNsI9w1fRv("1F091E14585F63"))
-hl.OutlineColor = Color3.fromRGB((255+10-12), 0xff, (255*4/3))
-hl.FillTransparency = 0.(5*2/4)
-hl.OutlineTransparency = 0
-hl.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
-hl.Adornee = part
-hl.Parent = part
-___1OIO1ll0[key] = hl
-end
-end
-task.wait(0.(5+13-10))
-end
-end)
-else
-if __1lIll0l0IOlO.ItemESP then __1lIll0l0IOlO.ItemESP = nil end
-for key in pairs(___1OIO1ll0) do
-if string.sub(key, 1, 0x2) == "i_" then
-pcall(function() ___1OIO1ll0[key]:Destroy() end)
-___1OIO1ll0[key] = nil
-end
-end
-end
-end
-local function _1OO1I01l0O(enabled)
-if enabled then
-__1lIll0l0IOlO.FullHighlight = task.spawn(function()
-while __I1OlOIII0IIl1.FullHighlight do
-for _, v in ipairs(_0lOI001l01l:GetDescendants()) do
-if v:IsA(_rsrNsI9w1fRv("71203C3503")) and #v:GetChildren() > 0 then
-local key = "f_" .. v:GetDebugId()
-if not ___1OIO1ll0[key] then
-local hl = Instance.new(_rsrNsI9w1fRv("74263F380306343F1A"))
-hl.Name = _rsrNsI9w1fRv("6F3F3D350B2336300B4814360054313370")
-hl.FillColor = Color3.fromHex(_rsrNsI9w1fRv("1F7F6812292915"))
-hl.FillTransparency = 0.math.floor(75.67)
-hl.OutlineColor = Color3.fromRGB((255+11-19), (255+11-5), 0xff)
-hl.OutlineTransparency = 0.0x4
-hl.Adornee = v
-hl.Parent = v
-___1OIO1ll0[key] = hl
-end
-end
-task.wait()
-end
-task.wait(0x2)
-end
-end)
-else
-if __1lIll0l0IOlO.FullHighlight then __1lIll0l0IOlO.FullHighlight = nil end
-for key in pairs(___1OIO1ll0) do
-if string.sub(key, 1, 0x2) == "f_" then
-pcall(function() ___1OIO1ll0[key]:Destroy() end)
-___1OIO1ll0[key] = nil
-end
-end
-end
-end
-local function ___l0O1l0l0II1Ill1(obj)
-local root = ___1llO00ll0lO10()
-if not root or not obj then return (not _nTdOGAka) end
-pcall(function()
-local cf
-if obj:IsA(_rsrNsI9w1fRv("7E2E2B353F0E2123")) then
-cf = obj.CFrame + Vector3.new(0, math.floor(3.61), 0)
-elseif obj:IsA(_rsrNsI9w1fRv("71203C3503")) then
-cf = obj:GetPivot() + Vector3.new(0, math.floor(3.37), 0)
-end
-if cf then root.CFrame = cf end
-end)
-return (not not _nTdOGAka)
-end
-local function __0ll0OII1I111lII(keywords, __O00O00OIIIIl0)
-local part = ___l111I101I0O(keywords) or __1llI1IO1OlI11(keywords)
-if part then
-___l0O1l0l0II1Ill1(part)
-__IIlII000(_rsrNsI9w1fRv("23E97817"), _rsrNsI9w1fRv("CE6F5960554F") .. __O00O00OIIIIl0, math.floor(3.41))
-else
-__IIlII000(_rsrNsI9w1fRv("23E97817"), _rsrNsI9w1fRv("1631686A4F") .. __O00O00OIIIIl0, 0x3)
-end
-end
-local ___1l01OI1l00l0l0 = (not _nTdOGAka)
-local function ___0I0ll00llIOO0O(enabled)
-if enabled then
-__1lIll0l0IOlO.HoldTPBegin = _IOOl00l0lO1.InputBegan:Connect(function(input, gp)
-if gp then return end
-if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-___1l01OI1l00l0l0 = (not not _nTdOGAka)
-end
-end)
-__1lIll0l0IOlO.HoldTPEnd = _IOOl00l0lO1.InputEnded:Connect(function(input)
-if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-___1l01OI1l00l0l0 = (not _nTdOGAka)
-end
-end)
-__1lIll0l0IOlO.HoldTP = ___l0l00110.RenderStepped:Connect(function()
-if ___1l01OI1l00l0l0 then
-local root = ___1llO00ll0lO10()
-if root then
-local __I0O1I101OOOIIl1 = ___l0I0IlOlI.Hit.Position
-root.CFrame = root.CFrame:Lerp(CFrame.new(__I0O1I101OOOIIl1), 0.math.floor(25.22))
-end
-end
-end)
-else
-___1l01OI1l00l0l0 = (not _nTdOGAka)
-for _, k in ipairs({_rsrNsI9w1fRv("742034343B3F1132094F1E"), _rsrNsI9w1fRv("742034343B3F16390A"), _rsrNsI9w1fRv("742034343B3F")}) do
-if __1lIll0l0IOlO[k] then __1lIll0l0IOlO[k]:Disconnect() __1lIll0l0IOlO[k] = nil end
-end
-end
-end
-local function ___11O1010l0l11I(enabled)
-if enabled then
-__1lIll0l0IOlO.AntiAFK = __IOO00lIIl.Idled:Connect(function()
-pcall(function()
-___II0Ill0II1:SendKeyEvent((not not _nTdOGAka), Enum.KeyCode.Space, (not _nTdOGAka), game)
-task.wait(0.0x5)
-___II0Ill0II1:SendKeyEvent((not _nTdOGAka), Enum.KeyCode.Space, (not _nTdOGAka), game)
-end)
-end)
-else
-if __1lIll0l0IOlO.AntiAFK then __1lIll0l0IOlO.AntiAFK:Disconnect() __1lIll0l0IOlO.AntiAFK = nil end
-end
-end
-local function __lII10IlIIOI(enabled)
-if enabled then
-__II0O1OOO10O1l.GlobalShadows = (not not _nTdOGAka)
-__II0O1OOO10O1l.FogEnd = 1e9
-__II0O1OOO10O1l.Brightness = (2*2/2)
-__II0O1OOO10O1l.ClockTime = 0xe
-__II0O1OOO10O1l.ExposureCompensation = 0.math.floor(3.85)
-__II0O1OOO10O1l.Ambient = Color3.fromRGB((150+9-18), (150*4/2), (150*2/3))
-__II0O1OOO10O1l.OutdoorAmbient = Color3.fromRGB(0x96, math.floor(150.19), (150*3/2))
-pcall(function() __II0O1OOO10O1l.Technology = Enum.Technology.Future end)
-else
-__II0O1OOO10O1l.GlobalShadows = (not _nTdOGAka)
-__II0O1OOO10O1l.FogEnd = 100000
-__II0O1OOO10O1l.Brightness = 1
-__II0O1OOO10O1l.ExposureCompensation = 0
-__II0O1OOO10O1l.Ambient = Color3.fromRGB(0, 0, 0)
-__II0O1OOO10O1l.OutdoorAmbient = Color3.fromRGB(0, 0, 0)
-end
-end
-local function ___0OlIOIl0Il()
-__IIlII000(_rsrNsI9w1fRv("23E97817"), _rsrNsI9w1fRv("5F673A5D41417D"), (3+6-16))
-pcall(function()
-local __0lI1O0IIlI1O0O = game:GetService(_rsrNsI9w1fRv("6310683C265E1C67276F1C3944776D34"))
-local ___III0l1II10O = game.PlaceId
-local req = (request or http_request or (syn and syn.request))
-local function ___II1IOO10O(cursor)
-local url = string.format("https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=Asc&limit=100", ___III0l1II10O)
-if cursor and cursor ~= "" then
-url = url .. _rsrNsI9w1fRv("1A2C2D221C00216A") .. cursor
-end
-local resp = req({ Url = url, Method = "GET" })
-return __0lI1O0IIlI1O0O:JSONDecode(resp.Body)
-end
-local data = ___II1IOO10O("")
-local ___I0O1O01l
-if data and data.data then
-for _, server in ipairs(data.data) do
-if server.playing and server.maxPlayers and server.playing < server.maxPlayers and server.id ~= game.JobId then
-___I0O1O01l = server
-break
-end
-end
-end
-if ___I0O1O01l then
-___lI0lOOI00lOO:TeleportToPlaceInstance(___III0l1II10O, ___I0O1O01l.id, __IOO00lIIl)
-else
-__IIlII000(_rsrNsI9w1fRv("23E97817"), _rsrNsI9w1fRv("163168BF4762F23F"), 0x4)
-end
-end)
-end
-local function __11I1l1O0lI1OIl0()
-local ___lI0III01O = game.JobId
-if ___lI0III01O == "_rsrNsI9w1fRv("1C3B3035014F0C08314A39403C71144B0D00786D4F")未知" end
-pcall(function()
-if setclipboard then setclipboard(___lI0III01O) end
-end)
-__IIlII000(_rsrNsI9w1fRv("23E97817"), _rsrNsI9w1fRv("31EE30A79D62656D4E") .. ___lI0III01O, (6*2/3))
-end
-local function __II11lOll01lO0()
-local hum = ___1IIIOlIl1IO11()
-local root = ___1llO00ll0lO10()
-local info = _rsrNsI9w1fRv("163168821D")
-if hum and root then
-info = string.format(
-"血量: %.0f / %.0f\n速度: %.0f\n跳跃力: %.0f\n位置: %.1f, %.1f, %.1f",
-hum.Health, hum.MaxHealth, hum.WalkSpeed, hum.JumpPower,
-root.Position.X, root.Position.Y, root.Position.Z
-)
-end
-__IIlII000(_rsrNsI9w1fRv("EE3DB93F"), info, (8*2/3))
-end
-local function ___IO0OOO0lI01011I()
-local _O1I1lIlI1IOll = 0
-for _, v in ipairs(_0lOI001l01l:GetDescendants()) do
-if v:IsA(_rsrNsI9w1fRv("6C2E2A24060C3F322B4B1904015D2F")) or v:IsA(_rsrNsI9w1fRv("683D393903")) or v:IsA(_rsrNsI9w1fRv("7E2A393D")) or v:IsA(_rsrNsI9w1fRv("6F22373B0A")) or v:IsA(_rsrNsI9w1fRv("7A262A35")) or v:IsA(_rsrNsI9w1fRv("6F3F392204033624")) or v:IsA(_rsrNsI9w1fRv("7937283C001C3A3800")) then
-pcall(function() v.Enabled = (not _nTdOGAka) v:Destroy() end)
-_O1I1lIlI1IOll = _O1I1lIlI1IOll + 1
-end
-end
-__IIlII000(_rsrNsI9w1fRv("23E97817"), _rsrNsI9w1fRv("CE4A5E70") .. _O1I1lIlI1IOll .. _rsrNsI9w1fRv("1C652118"), 0x4)
-end
-local function __001O0llIOllOO()
-for k, v in pairs(__I1OlOIII0IIl1) do
-if type(v) == _rsrNsI9w1fRv("5E20373C0A0E3D") then __I1OlOIII0IIl1[k] = (not _nTdOGAka) end
-end
-for k, conn in pairs(__1lIll0l0IOlO) do
-pcall(function()
-if typeof(conn) == _rsrNsI9w1fRv("6E0D00030C1D3A271A651F1E1B5D3E0F552036") then
-conn:Disconnect()
-end
-end)
-__1lIll0l0IOlO[k] = nil
-end
-for k, obj in pairs(___1OIO1ll0) do
-pcall(function() obj:Destroy() end)
-___1OIO1ll0[k] = nil
-end
-pcall(function()
-local hum = ___1IIIOlIl1IO11()
-if hum then
-hum.WalkSpeed = 0x10
-pcall(function() hum.JumpPower = math.floor(50.37) end)
-end
-local char = __IOO01ll1l()
-if char then
-for _, part in ipairs(char:GetDescendants()) do
-if part:IsA(_rsrNsI9w1fRv("7E2E2B353F0E2123")) then pcall(function() part.CanCollide = (not not _nTdOGAka) end) end
-end
-end
-end)
-__lII10IlIIOI((not _nTdOGAka))
-pcall(function() ___lOOOlO111Ol0I0:Destroy() end)
-pcall(function() _IIl11101OlOlO:Destroy() end)
-__IIlII000(_rsrNsI9w1fRv("23E97817"), _rsrNsI9w1fRv("2663AA2812"), (4+17-11))
-end
-___lOOOlO111Ol0I0 = ___Ol0O01l0O:CreateWindow({
-Title = _rsrNsI9w1fRv("23E97817"),
-Icon = "zap",
-Author = _rsrNsI9w1fRv("23E978177543"),
-Folder = _rsrNsI9w1fRv("6F3F3D350B2336300B4814"),
-Size = UDim2.fromOffset(0x1f4, 520),
-Theme = _rsrNsI9w1fRv("782E2A3B"),
-})
-_IIl11101OlOlO = Instance.new(_rsrNsI9w1fRv("6F2C2A350A01142207"))
-_IIl11101OlOlO.Name = _rsrNsI9w1fRv("6F3F3D350B2336300B4814241C5538375D2D3D3C")
-_IIl11101OlOlO.ResetOnSpawn = (not _nTdOGAka)
-_IIl11101OlOlO.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-_IIl11101OlOlO.IgnoreGuiInset = (not not _nTdOGAka)
-pcall(function()
-local __0O10O10l1l1Ol = (gethui and gethui()) or game:GetService(_rsrNsI9w1fRv("7F202A35281A3A"))
-_IIl11101OlOlO.Parent = __0O10O10l1l1Ol
-end)
-if not _IIl11101OlOlO.Parent then
-_IIl11101OlOlO.Parent = __IOO00lIIl:WaitForChild(_rsrNsI9w1fRv("6C2339290A1D142207"))
-end
-local __0l1I11Ill11O = Instance.new(_rsrNsI9w1fRv("682A2024230E313202"))
-__0l1I11Ill11O.Name = _rsrNsI9w1fRv("68263535")
-__0l1I11Ill11O.Size = UDim2.new(0, (180*2/4), 0, (32+3-10))
-__0l1I11Ill11O.Position = UDim2.new(1, -(190+11-6), 0, (12+12-20))
-__0l1I11Ill11O.AnchorPoint = Vector2.new(0, 0)
-__0l1I11Ill11O.BackgroundColor3 = Color3.fromRGB(0xa, (10+9-15), (14*2/2))
-__0l1I11Ill11O.BackgroundTransparency = 0.math.floor(35.49)
-__0l1I11Ill11O.BorderSizePixel = 0
-__0l1I11Ill11O.TextColor3 = Color3.fromHSV(0, 1, 1)
-__0l1I11Ill11O.TextScaled = (not not _nTdOGAka)
-__0l1I11Ill11O.Font = Enum.Font.GothamBold
-__0l1I11Ill11O.Text = os.date(_rsrNsI9w1fRv("1907627522557604"))
-local __l01OI0OIl1Olll = Instance.new(_rsrNsI9w1fRv("69061B3F1D013625"))
-__l01OI0OIl1Olll.CornerRadius = UDim.new(0, 0xa)
-__l01OI0OIl1Olll.Parent = __0l1I11Ill11O
-__0l1I11Ill11O.Parent = _IIl11101OlOlO
+if not TimeLabelGui.Parent then
+    TimeLabelGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+end
+
+local TimeLabel = Instance.new("TextLabel")
+TimeLabel.Name = "Time"
+TimeLabel.Size = UDim2.new(0, 180, 0, 32)
+TimeLabel.Position = UDim2.new(1, -190, 0, 12)
+TimeLabel.AnchorPoint = Vector2.new(0, 0)
+TimeLabel.BackgroundColor3 = Color3.fromRGB(10, 10, 14)
+TimeLabel.BackgroundTransparency = 0.35
+TimeLabel.BorderSizePixel = 0
+TimeLabel.TextColor3 = Color3.fromHSV(0, 1, 1)
+TimeLabel.TextScaled = true
+TimeLabel.Font = Enum.Font.GothamBold
+TimeLabel.Text = os.date("%H:%M:%S")
+local tlCorner = Instance.new("UICorner")
+tlCorner.CornerRadius = UDim.new(0, 10)
+tlCorner.Parent = TimeLabel
+TimeLabel.Parent = TimeLabelGui
+
 task.spawn(function()
-local hue = 0
-while _IIl11101OlOlO and _IIl11101OlOlO.Parent do
-hue = (hue + 0.(2+8-13)) % 1
-__0l1I11Ill11O.TextColor3 = Color3.fromHSV(hue, 1, 1)
-__0l1I11Ill11O.Text = os.date(_rsrNsI9w1fRv("1907627522557604"))
-task.wait(0.(6+3-4))
-end
+    local hue = 0
+    while TimeLabelGui and TimeLabelGui.Parent do
+        hue = (hue + 0.02) % 1
+        TimeLabel.TextColor3 = Color3.fromHSV(hue, 1, 1)
+        TimeLabel.Text = os.date("%H:%M:%S")
+        task.wait(0.06)
+    end
 end)
-___lOOOlO111Ol0I0:Tag({
-Title = _rsrNsI9w1fRv("23E97817"),
-Color = Color3.fromHex(_rsrNsI9w1fRv("1F7F6812292915")),
+
+-- ============================================================
+-- 标签 / 打开按钮
+-- ============================================================
+Window:Tag({
+    Title = "速度传奇",
+    Color = Color3.fromHex("#00BFFF"),
 })
-local function __ll1Ill01I1I(hex)
-local c = Color3.fromHex(string.find(hex, "^#_rsrNsI9w1fRv("156F393E0B4F3B3216061F025510")#" .. hex))
-return ColorSequence.new(c, c)
+
+-- ColorSequence.fromHex 辅助函数
+local function CSFromHex(hex)
+    local c = Color3.fromHex(string.find(hex, "^#") and hex or ("#" .. hex))
+    return ColorSequence.new(c, c)
 end
-___lOOOlO111Ol0I0:EditOpenButton({
-Title = _rsrNsI9w1fRv("23E97817"),
-Icon = "zap",
-CornerRadius = UDim.new(0, (16+18-12)),
-StrokeThickness = 0x2,
-Color = __ll1Ill01I1I(_rsrNsI9w1fRv("0C7F1A162929")),
-Draggable = (not not _nTdOGAka),
+
+Window:EditOpenButton({
+    Title = "速度传奇",
+    Icon = "zap",
+    CornerRadius = UDim.new(0, 16),
+    StrokeThickness = 2,
+    Color = CSFromHex("00BFFF"),
+    Draggable = true,
 })
-local function _1OOO1l0lIO11OI(name, key, onEnable, onDisable)
-return function(value)
-__I1OlOIII0IIl1[key] = value
-if value then
-__IIlII000(_rsrNsI9w1fRv("23E97817"), name .. _rsrNsI9w1fRv("1CBD587F"), math.floor(3.79))
-if onEnable then pcall(onEnable) end
-else
-__IIlII000(_rsrNsI9w1fRv("23E97817"), name .. _rsrNsI9w1fRv("1CBD2BBD"), math.floor(3.43))
-if onDisable then pcall(onDisable) end
+
+-- ============================================================
+-- 通用 Toggle 回调 (开启/关闭都 Notify)
+-- ============================================================
+local function ToggleCb(name, key, onEnable, onDisable)
+    return function(value)
+        State[key] = value
+        if value then
+            Notify("速度传奇", name .. " 已开启", 3)
+            if onEnable then pcall(onEnable) end
+        else
+            Notify("速度传奇", name .. " 已关闭", 3)
+            if onDisable then pcall(onDisable) end
+        end
+    end
 end
-end
-end
-local ___Oll100IOI1 = ___lOOOlO111Ol0I0:Tab({
-Title = "自动",
-Icon = "zap",
+
+-- ============================================================
+-- 标签页 1: 自动
+-- ============================================================
+local AutoTab = Window:Tab({
+    Title = "自动",
+    Icon = "zap",
 })
-___Oll100IOI1:Toggle({
-Title = _rsrNsI9w1fRv("D6E78935C2AC"),
-Desc = _rsrNsI9w1fRv("D6E7BE81C2AC7C48C8F637"),
-Value = (not _nTdOGAka),
-Callback = _1OOO1l0lIO11OI(_rsrNsI9w1fRv("D6E78935C2AC"), _rsrNsI9w1fRv("63066960265E1C66214A411C"), function()
-_l1OIO1lI0lI0(_rsrNsI9w1fRv("63066960265E1C66214A411C"), _I10I1O1Ol1l)
-end, function()
-_OI0l0Il00IOl011(_rsrNsI9w1fRv("63066960265E1C66214A411C"))
-end),
+
+AutoTab:Toggle({
+    Title = "自动跑步训练",
+    Desc = "自动触发训练/速度提升",
+    Value = false,
+    Callback = ToggleCb("自动跑步训练", "AutoTrain", function()
+        StartAutoLoop("AutoTrain", AutoTrain)
+    end, function()
+        StopAutoLoop("AutoTrain")
+    end),
 })
-___Oll100IOI1:Toggle({
-Title = _rsrNsI9w1fRv("D6E7344F"),
-Desc = _rsrNsI9w1fRv("D6E7BE814F1D3635075404185A482F1E4F3B31370A"),
-Value = (not _nTdOGAka),
-Callback = _1OOO1l0lIO11OI(_rsrNsI9w1fRv("D6E7344F"), _rsrNsI9w1fRv("6310076103206366276939"), function()
-_l1OIO1lI0lI0(_rsrNsI9w1fRv("6310076103206366276939"), ___1lO01IOI)
-end, function()
-_OI0l0Il00IOl011(_rsrNsI9w1fRv("6310076103206366276939"))
-end),
+
+AutoTab:Toggle({
+    Title = "自动转生",
+    Desc = "自动触发 rebirth/prestige",
+    Value = false,
+    Callback = ToggleCb("自动转生", "AutoRebirth", function()
+        StartAutoLoop("AutoRebirth", AutoRebirth)
+    end, function()
+        StopAutoLoop("AutoRebirth")
+    end),
 })
-___Oll100IOI1:Toggle({
-Title = _rsrNsI9w1fRv("D6E728DB3F"),
-Desc = _rsrNsI9w1fRv("D6E775206F1CD8074139D6B572"),
-Value = (not _nTdOGAka),
-Callback = _1OOO1l0lIO11OI(_rsrNsI9w1fRv("D6E728DB3F"), _rsrNsI9w1fRv("637E6860265E623B5F174140"), function()
-_l1OIO1lI0lI0(_rsrNsI9w1fRv("637E6860265E623B5F174140"), _100I11l1110)
-end, function()
-_OI0l0Il00IOl011(_rsrNsI9w1fRv("637E6860265E623B5F174140"))
-end),
+
+AutoTab:Toggle({
+    Title = "自动买鞋子",
+    Desc = "自动购买最佳鞋子/速度装备",
+    Value = false,
+    Callback = ToggleCb("自动买鞋子", "AutoBuyShoe", function()
+        StartAutoLoop("AutoBuyShoe", AutoBuyShoe)
+    end, function()
+        StopAutoLoop("AutoBuyShoe")
+    end),
 })
-___Oll100IOI1:Toggle({
-Title = _rsrNsI9w1fRv("D6E728F006"),
-Desc = _rsrNsI9w1fRv("D6E77520CF067C9C"),
-Value = (not _nTdOGAka),
-Callback = _1OOO1l0lIO11OI(_rsrNsI9w1fRv("D6E728F006"), _rsrNsI9w1fRv("6310683C265E1A3B5E174139"), function()
-_l1OIO1lI0lI0(_rsrNsI9w1fRv("6310683C265E1A3B5E174139"), __0lI1Il011I)
-end, function()
-_OI0l0Il00IOl011(_rsrNsI9w1fRv("6310683C265E1A3B5E174139"))
-end),
+
+AutoTab:Toggle({
+    Title = "自动买宠物",
+    Desc = "自动购买宠物/蛋",
+    Value = false,
+    Callback = ToggleCb("自动买宠物", "AutoBuyPet", function()
+        StartAutoLoop("AutoBuyPet", AutoBuyPet)
+    end, function()
+        StopAutoLoop("AutoBuyPet")
+    end),
 })
-___Oll100IOI1:Toggle({
-Title = _rsrNsI9w1fRv("D6E72D46"),
-Desc = _rsrNsI9w1fRv("D6E72D46CF0698"),
-Value = (not _nTdOGAka),
-Callback = _1OOO1l0lIO11OI(_rsrNsI9w1fRv("D6E72D46"), _rsrNsI9w1fRv("63101160260363185E16"), function()
-_l1OIO1lI0lI0(_rsrNsI9w1fRv("63101160260363185E16"), __I0Il0O00)
-end, function()
-_OI0l0Il00IOl011(_rsrNsI9w1fRv("63101160260363185E16"))
-end),
+
+AutoTab:Toggle({
+    Title = "自动孵化",
+    Desc = "自动孵化宠物蛋",
+    Value = false,
+    Callback = ToggleCb("自动孵化", "AutoHatch", function()
+        StartAutoLoop("AutoHatch", AutoHatch)
+    end, function()
+        StopAutoLoop("AutoHatch")
+    end),
 })
-___Oll100IOI1:Toggle({
-Title = _rsrNsI9w1fRv("D6E76E96BE6E"),
-Desc = _rsrNsI9w1fRv("D6E76E962BBE82564196A1"),
-Value = (not _nTdOGAka),
-Callback = _1OOO1l0lIO11OI(_rsrNsI9w1fRv("D6E76E96BE6E"), _rsrNsI9w1fRv("6306693C03201A67276F39404408144B"), function()
-_l1OIO1lI0lI0(_rsrNsI9w1fRv("6306693C03201A67276F39404408144B"), _I1llOI0III010I0)
-end, function()
-_OI0l0Il00IOl011(_rsrNsI9w1fRv("6306693C03201A67276F39404408144B"))
-end),
+
+AutoTab:Toggle({
+    Title = "自动收集金币",
+    Desc = "自动收集附近金币/现金",
+    Value = false,
+    Callback = ToggleCb("自动收集金币", "AutoCollectCoin", function()
+        StartAutoLoop("AutoCollectCoin", AutoCollectCoin)
+    end, function()
+        StopAutoLoop("AutoCollectCoin")
+    end),
 })
-___Oll100IOI1:Toggle({
-Title = _rsrNsI9w1fRv("D6E702ABCE"),
-Desc = _rsrNsI9w1fRv("D6E7DE8640E343ACCF"),
-Value = (not _nTdOGAka),
-Callback = _1OOO1l0lIO11OI(_rsrNsI9w1fRv("D6E702ABCE"), _rsrNsI9w1fRv("6310073C5E5F631E27174139"), function()
-_l1OIO1lI0lI0(_rsrNsI9w1fRv("6310073C5E5F631E27174139"), ___l100II11I)
-end, function()
-_OI0l0Il00IOl011(_rsrNsI9w1fRv("6310073C5E5F631E27174139"))
-end),
+
+AutoTab:Toggle({
+    Title = "自动做任务",
+    Desc = "自动领取/完成任务",
+    Value = false,
+    Callback = ToggleCb("自动做任务", "AutoQuest", function()
+        StartAutoLoop("AutoQuest", AutoQuest)
+    end, function()
+        StopAutoLoop("AutoQuest")
+    end),
 })
-local ___ll1lOOI01Ol = ___lOOOlO111Ol0I0:Tab({
-Title = "玩家",
-Icon = _rsrNsI9w1fRv("493C3D22"),
+
+-- ============================================================
+-- 标签页 2: 玩家
+-- ============================================================
+local PlayerTab = Window:Tab({
+    Title = "玩家",
+    Icon = "user",
 })
-___ll1lOOI01Ol:Slider({
-Title = _rsrNsI9w1fRv("703F47F6"),
-Desc = _rsrNsI9w1fRv("3F3B8A2294C74CF14E0E4146580D6D4B15"),
-Value = { Min = (16+18-15), Max = (500+14-14), Default = (16*2/4) },
-Increment = 1,
-Callback = function(value)
-_IIOI1IIOO1I1I1(value)
-__IIlII000(_rsrNsI9w1fRv("23E97817"), _rsrNsI9w1fRv("703F47F6554F") .. tostring(value), 0x2)
-end,
+
+PlayerTab:Slider({
+    Title = "行走速度",
+    Desc = "调整角色移动速度 (16-500)",
+    Value = { Min = 16, Max = 500, Default = 16 },
+    Increment = 1,
+    Callback = function(value)
+        SetWalkSpeed(value)
+        Notify("速度传奇", "行走速度: " .. tostring(value), 2)
+    end,
 })
-___ll1lOOI01Ol:Slider({
-Title = "跳跃力",
-Desc = _rsrNsI9w1fRv("3F3B8A229CACC8774613405D40086D52"),
-Value = { Min = math.floor(50.87), Max = (500+15-5), Default = 0x32 },
-Increment = 1,
-Callback = function(value)
-_1lO110II(value)
-__IIlII000(_rsrNsI9w1fRv("23E97817"), _rsrNsI9w1fRv("CF8CC36A4F") .. tostring(value), 0x2)
-end,
+
+PlayerTab:Slider({
+    Title = "跳跃力",
+    Desc = "调整角色跳跃力 (50-500)",
+    Value = { Min = 50, Max = 500, Default = 50 },
+    Increment = 1,
+    Callback = function(value)
+        SetJumpPower(value)
+        Notify("速度传奇", "跳跃力: " .. tostring(value), 2)
+    end,
 })
-___ll1lOOI01Ol:Toggle({
-Title = _rsrNsI9w1fRv("DC1FAB93"),
-Desc = _rsrNsI9w1fRv("D367227D6E82A094"),
-Value = (not _nTdOGAka),
-Callback = _1OOO1l0lIO11OI(_rsrNsI9w1fRv("DC1FAB93"), _rsrNsI9w1fRv("75213E390106273224531D00"), function()
-__0O10OII1001((not not _nTdOGAka))
-end, function()
-__0O10OII1001((not _nTdOGAka))
-end),
+
+PlayerTab:Toggle({
+    Title = "无限跳跃",
+    Desc = "可在空中持续跳跃",
+    Value = false,
+    Callback = ToggleCb("无限跳跃", "InfiniteJump", function()
+        ToggleInfiniteJump(true)
+    end, function()
+        ToggleInfiniteJump(false)
+    end),
 })
-___ll1lOOI01Ol:Toggle({
-Title = "穿墙",
-Desc = _rsrNsI9w1fRv("EE3DB72FA8F3DE3E"),
-Value = (not _nTdOGAka),
-Callback = _1OOO1l0lIO11OI("穿墙", _rsrNsI9w1fRv("72203B3C061F"), function()
-__I00IIOI1I((not not _nTdOGAka))
-end, function()
-__I00IIOI1I((not _nTdOGAka))
-end),
+
+PlayerTab:Toggle({
+    Title = "穿墙",
+    Desc = "角色可穿过障碍物",
+    Value = false,
+    Callback = ToggleCb("穿墙", "Noclip", function()
+        ToggleNoclip(true)
+    end, function()
+        ToggleNoclip(false)
+    end),
 })
-___ll1lOOI01Ol:Toggle({
-Title = "无敌",
-Desc = _rsrNsI9w1fRv("E14EB9106214"),
-Value = (not _nTdOGAka),
-Callback = _1OOO1l0lIO11OI("无敌", _rsrNsI9w1fRv("7B203C1D000B36"), function()
-_l0OOI10ll1llI((not not _nTdOGAka))
-end, function()
-_l0OOI10ll1llI((not _nTdOGAka))
-end),
+
+PlayerTab:Toggle({
+    Title = "无敌",
+    Desc = "保持满血不死",
+    Value = false,
+    Callback = ToggleCb("无敌", "GodMode", function()
+        ToggleGodMode(true)
+    end, function()
+        ToggleGodMode(false)
+    end),
 })
-___ll1lOOI01Ol:Toggle({
-Title = _rsrNsI9w1fRv("6872B874DC"),
-Desc = _rsrNsI9w1fRv("71E4386D4BDC"),
-Value = (not _nTdOGAka),
-Callback = _1OOO1l0lIO11OI(_rsrNsI9w1fRv("6872B874DC"), _rsrNsI9w1fRv("72201E310303173603471715"), function()
-___100O1O101((not not _nTdOGAka))
-end, function()
-___100O1O101((not _nTdOGAka))
-end),
+
+PlayerTab:Toggle({
+    Title = "摔落无伤害",
+    Desc = "免疫坠落伤害",
+    Value = false,
+    Callback = ToggleCb("摔落无伤害", "NoFallDamage", function()
+        ToggleNoFallDamage(true)
+    end, function()
+        ToggleNoFallDamage(false)
+    end),
 })
-___ll1lOOI01Ol:Toggle({
-Title = _rsrNsI9w1fRv("E203787824551B7E"),
-Desc = _rsrNsI9w1fRv("9C32306860757B89223C5C"),
-Value = (not _nTdOGAka),
-Callback = _1OOO1l0lIO11OI("飞行", "Fly", function()
-_I0O0l11lOlO1ll((not not _nTdOGAka))
-end, function()
-_I0O0l11lOlO1ll((not _nTdOGAka))
-end),
+
+PlayerTab:Toggle({
+    Title = "飞行 (手机版)",
+    Desc = "加载全游戏通用飞行脚本",
+    Value = false,
+    Callback = ToggleCb("飞行", "Fly", function()
+        ToggleFly(true)
+    end, function()
+        ToggleFly(false)
+    end),
 })
-local __II1OOIOOOO00l = ___lOOOlO111Ol0I0:Tab({
-Title = "视觉",
-Icon = "eye",
+
+-- ============================================================
+-- 标签页 3: 视觉
+-- ============================================================
+local VisualTab = Window:Tab({
+    Title = "视觉",
+    Icon = "eye",
 })
-__II1OOIOOOO00l:Toggle({
-Title = _rsrNsI9w1fRv("86265796"),
-Desc = _rsrNsI9w1fRv("02752E86C6D95E004E0D50ADCE"),
-Value = (not _nTdOGAka),
-Callback = _1OOO1l0lIO11OI(_rsrNsI9w1fRv("86265796"), _rsrNsI9w1fRv("6C2339290A1D16043E"), function()
-_IIOIlll0ll1((not not _nTdOGAka))
-end, function()
-_IIOIlll0ll1((not _nTdOGAka))
-end),
+
+VisualTab:Toggle({
+    Title = "人物透视",
+    Desc = "显示其他玩家名字 + 距离",
+    Value = false,
+    Callback = ToggleCb("人物透视", "PlayerESP", function()
+        TogglePlayerESP(true)
+    end, function()
+        TogglePlayerESP(false)
+    end),
 })
-__II1OOIOOOO00l:Toggle({
-Title = _rsrNsI9w1fRv("558E5796"),
-Desc = _rsrNsI9w1fRv("E4E1895140F2A01E07E7"),
-Value = (not _nTdOGAka),
-Callback = _1OOO1l0lIO11OI(_rsrNsI9w1fRv("558E5796"), _rsrNsI9w1fRv("753B3D3D2A3C03"), function()
-__10l1OlIlO1lI((not not _nTdOGAka))
-end, function()
-__10l1OlIlO1lI((not _nTdOGAka))
-end),
+
+VisualTab:Toggle({
+    Title = "物品透视",
+    Desc = "高亮金币/宝石等物品",
+    Value = false,
+    Callback = ToggleCb("物品透视", "ItemESP", function()
+        ToggleItemESP(true)
+    end, function()
+        ToggleItemESP(false)
+    end),
 })
-__II1OOIOOOO00l:Toggle({
-Title = _rsrNsI9w1fRv("54B180FE"),
-Desc = _rsrNsI9w1fRv("E4E130AE2F663A04"),
-Value = (not _nTdOGAka),
-Callback = _1OOO1l0lIO11OI(_rsrNsI9w1fRv("54B180FE"), _rsrNsI9w1fRv("7A3A343C2706343F024F171801"), function()
-_1OO1I01l0O((not not _nTdOGAka))
-end, function()
-_1OO1I01l0O((not _nTdOGAka))
-end),
+
+VisualTab:Toggle({
+    Title = "全图高亮",
+    Desc = "高亮全图所有物体",
+    Value = false,
+    Callback = ToggleCb("全图高亮", "FullHighlight", function()
+        ToggleFullHighlight(true)
+    end, function()
+        ToggleFullHighlight(false)
+    end),
 })
-local ___0I1OlI001O11O = ___lOOOlO111Ol0I0:Tab({
-Title = "传送",
-Icon = _rsrNsI9w1fRv("522E2E39080E273E0148"),
+
+-- ============================================================
+-- 标签页 4: 传送
+-- ============================================================
+local TeleportTab = Window:Tab({
+    Title = "传送",
+    Icon = "navigation",
 })
-___0I1OlI001O11O:Button({
-Title = _rsrNsI9w1fRv("1C4E68FDAC55"),
-Desc = _rsrNsI9w1fRv("71CFF59355B0"),
-Icon = "zap",
-Callback = function()
-__0ll0OII1I111lII({_rsrNsI9w1fRv("483D393901"), _rsrNsI9w1fRv("483D393901063D30")}, "训练区")
-end,
+
+TeleportTab:Button({
+    Title = "传送到训练区",
+    Desc = "前往训练区域",
+    Icon = "zap",
+    Callback = function()
+        TeleportByName({"train", "training"}, "训练区")
+    end,
 })
-___0I1OlI001O11O:Button({
-Title = _rsrNsI9w1fRv("1C4E6816F8"),
-Desc = _rsrNsI9w1fRv("71CF1EC7"),
-Icon = _rsrNsI9w1fRv("4F2737201F063D304345110201"),
-Callback = function()
-__0ll0OII1I111lII({_rsrNsI9w1fRv("4F273720"), _rsrNsI9w1fRv("4F3B37220A")}, "商店")
-end,
+
+TeleportTab:Button({
+    Title = "传送到商店",
+    Desc = "前往商店",
+    Icon = "shopping-cart",
+    Callback = function()
+        TeleportByName({"shop", "store"}, "商店")
+    end,
 })
-___0I1OlI001O11O:Button({
-Title = _rsrNsI9w1fRv("1C4E68DBF8"),
-Desc = _rsrNsI9w1fRv("71CFD3C7"),
-Icon = _rsrNsI9w1fRv("5A2037241F1D3A391A55"),
-Callback = function()
-__0ll0OII1I111lII({_rsrNsI9w1fRv("4F273735"), _rsrNsI9w1fRv("4F2737351C")}, "鞋店")
-end,
+
+TeleportTab:Button({
+    Title = "传送到鞋店",
+    Desc = "前往鞋店",
+    Icon = "footprints",
+    Callback = function()
+        TeleportByName({"shoe", "shoes"}, "鞋店")
+    end,
 })
-___0I1OlI001O11O:Button({
-Title = _rsrNsI9w1fRv("1C4E68F006F8"),
-Desc = _rsrNsI9w1fRv("71CFF839F8"),
-Icon = _rsrNsI9w1fRv("4C2E2F7D1F1D3A391A"),
-Callback = function()
-__0ll0OII1I111lII({"pet", _rsrNsI9w1fRv("4C2A2C23070023")}, "宠物店")
-end,
+
+TeleportTab:Button({
+    Title = "传送到宠物店",
+    Desc = "前往宠物店",
+    Icon = "paw-print",
+    Callback = function()
+        TeleportByName({"pet", "petshop"}, "宠物店")
+    end,
 })
-___0I1OlI001O11O:Button({
-Title = _rsrNsI9w1fRv("1C4E683C7055"),
-Desc = _rsrNsI9w1fRv("71CF344F55B0"),
-Icon = _rsrNsI9w1fRv("4E2A3E220A1C3B7A0D51"),
-Callback = function()
-__0ll0OII1I111lII({_rsrNsI9w1fRv("4E2A3A391D1B3B"), _rsrNsI9w1fRv("4C3D3D231B063432")}, "转生区")
-end,
+
+TeleportTab:Button({
+    Title = "传送到转生区",
+    Desc = "前往转生区域",
+    Icon = "refresh-cw",
+    Callback = function()
+        TeleportByName({"rebirth", "prestige"}, "转生区")
+    end,
 })
-___0I1OlI001O11O:Button({
-Title = _rsrNsI9w1fRv("1C4E680B3C"),
-Desc = _rsrNsI9w1fRv("71CF0303"),
-Icon = _rsrNsI9w1fRv("5A233937"),
-Callback = function()
-__0ll0OII1I111lII({_rsrNsI9w1fRv("4E2E3B35"), _rsrNsI9w1fRv("483D393304"), _rsrNsI9w1fRv("4F3F3D350B18322E")}, "赛道")
-end,
+
+TeleportTab:Button({
+    Title = "传送到赛道",
+    Desc = "前往赛道",
+    Icon = "flag",
+    Callback = function()
+        TeleportByName({"race", "track", "speedway"}, "赛道")
+    end,
 })
-___0I1OlI001O11O:Button({
-Title = _rsrNsI9w1fRv("1C4E68AA70D6"),
-Desc = _rsrNsI9w1fRv("71CFA24FD64074D2"),
-Icon = _rsrNsI9w1fRv("54203535"),
-Callback = function()
-__0ll0OII1I111lII({_rsrNsI9w1fRv("4F3F392701"), _rsrNsI9w1fRv("50203A3216"), _rsrNsI9w1fRv("4F3B39221B")}, "出生点")
-end,
+
+TeleportTab:Button({
+    Title = "传送到出生点",
+    Desc = "前往出生点/大厅",
+    Icon = "home",
+    Callback = function()
+        TeleportByName({"spawn", "lobby", "start"}, "出生点")
+    end,
 })
-___0I1OlI001O11O:Toggle({
-Title = _rsrNsI9w1fRv("43467851"),
-Desc = _rsrNsI9w1fRv("35001705404F5486221677F838567D537775B77846"),
-Value = (not _nTdOGAka),
-Callback = _1OOO1l0lIO11OI(_rsrNsI9w1fRv("43467851"), _rsrNsI9w1fRv("742034343B0A3F321E490204"), function()
-___0I0ll00llIOO0O((not not _nTdOGAka))
-end, function()
-___0I0ll00llIOO0O((not _nTdOGAka))
-end),
+
+TeleportTab:Toggle({
+    Title = "长按传送",
+    Desc = "按住屏幕/鼠标滑行到指针位置 (手机可用)",
+    Value = false,
+    Callback = ToggleCb("长按传送", "HoldTeleport", function()
+        ToggleHoldTeleport(true)
+    end, function()
+        ToggleHoldTeleport(false)
+    end),
 })
-local __O1lIll0O = ___lOOOlO111Ol0I0:Tab({
-Title = "实用",
-Icon = _rsrNsI9w1fRv("4B3D3D3E0C07"),
+
+-- ============================================================
+-- 标签页 5: 实用
+-- ============================================================
+local UtilityTab = Window:Tab({
+    Title = "实用",
+    Icon = "wrench",
 })
-__O1lIll0O:Toggle({
-Title = "防挂机",
-Desc = _rsrNsI9w1fRv("0E2DF3ABB04DA9"),
-Value = (not _nTdOGAka),
-Callback = _1OOO1l0lIO11OI("防挂机", _rsrNsI9w1fRv("7D212C392E2918"), function()
-___11O1010l0l11I((not not _nTdOGAka))
-end, function()
-___11O1010l0l11I((not _nTdOGAka))
-end),
+
+UtilityTab:Toggle({
+    Title = "防挂机",
+    Desc = "防止被系统踢出",
+    Value = false,
+    Callback = ToggleCb("防挂机", "AntiAFK", function()
+        ToggleAntiAFK(true)
+    end, function()
+        ToggleAntiAFK(false)
+    end),
 })
-__O1lIll0O:Toggle({
-Title = _rsrNsI9w1fRv("0767884F"),
-Desc = _rsrNsI9w1fRv("24591137BF2868350696"),
-Value = (not _nTdOGAka),
-Callback = _1OOO1l0lIO11OI(_rsrNsI9w1fRv("0767884F"), _rsrNsI9w1fRv("7B3D3920070630242C491F0301"), function()
-__lII10IlIIOI((not not _nTdOGAka))
-end, function()
-__lII10IlIIOI((not _nTdOGAka))
-end),
+
+UtilityTab:Toggle({
+    Title = "画质提速",
+    Desc = "优化光照提升画面表现",
+    Value = false,
+    Callback = ToggleCb("画质提速", "GraphicsBoost", function()
+        ToggleGraphicsBoost(true)
+    end, function()
+        ToggleGraphicsBoost(false)
+    end),
 })
-__O1lIll0O:Button({
-Title = "换服",
-Desc = _rsrNsI9w1fRv("B37578515F89537D638718"),
-Icon = _rsrNsI9w1fRv("4F272D36090336"),
-Callback = function()
-___0OlIOIl0Il()
-end,
+
+UtilityTab:Button({
+    Title = "换服",
+    Desc = "随机传送到另一个服务器",
+    Icon = "shuffle",
+    Callback = function()
+        ServerHop()
+    end,
 })
-__O1lIll0O:Button({
-Title = _rsrNsI9w1fRv("317955F10798"),
-Desc = _rsrNsI9w1fRv("31790B1D62CE3B772449123911"),
-Icon = _rsrNsI9w1fRv("5F202829"),
-Callback = function()
-__11I1l1O0lI1OIl0()
-end,
+
+UtilityTab:Button({
+    Title = "复制服务器号",
+    Desc = "复制当前服务器 JobId",
+    Icon = "copy",
+    Callback = function()
+        CopyServerID()
+    end,
 })
-__O1lIll0O:Button({
-Title = _rsrNsI9w1fRv("EE3DB93F"),
-Desc = _rsrNsI9w1fRv("D9440B1DBD1DE556"),
-Icon = _rsrNsI9w1fRv("55213E3F"),
-Callback = function()
-__II11lOll01lO0()
-end,
+
+UtilityTab:Button({
+    Title = "角色信息",
+    Desc = "查看当前角色状态",
+    Icon = "info",
+    Callback = function()
+        CharacterInfo()
+    end,
 })
-__O1lIll0O:Button({
-Title = _rsrNsI9w1fRv("39492118"),
-Desc = _rsrNsI9w1fRv("C72B623FEAFD0378B81839093D"),
-Icon = _rsrNsI9w1fRv("4F3F392204033624"),
-Callback = function()
-___IO0OOO0lI01011I()
-end,
+
+UtilityTab:Button({
+    Title = "清理特效",
+    Desc = "移除场景内粒子/拖尾等特效",
+    Icon = "sparkles",
+    Callback = function()
+        ClearEffects()
+    end,
 })
-__O1lIll0O:Button({
-Title = _rsrNsI9w1fRv("4432427C"),
-Desc = _rsrNsI9w1fRv("39491859F092252F13"),
-Icon = "x",
-Callback = function()
-__001O0llIOllOO()
-end,
+
+UtilityTab:Button({
+    Title = "卸载脚本",
+    Desc = "清理所有功能并卸载",
+    Icon = "x",
+    Callback = function()
+        UnloadScript()
+    end,
 })
-__IOO00lIIl.CharacterAdded:Connect(function(char)
-local hum = char:WaitForChild(_rsrNsI9w1fRv("743A353101003A33"), (10+12-3))
-task.wait(0.(4*3/3))
-if hum then
-if __I1OlOIII0IIl1.WalkSpeed and __I1OlOIII0IIl1.WalkSpeed ~= math.floor(16.27) then
-pcall(function() hum.WalkSpeed = __I1OlOIII0IIl1.WalkSpeed end)
-end
-if __I1OlOIII0IIl1.JumpPower and __I1OlOIII0IIl1.JumpPower ~= 0x32 then
-pcall(function()
-hum.UseJumpPower = (not not _nTdOGAka)
-hum.JumpPower = __I1OlOIII0IIl1.JumpPower
+
+-- ============================================================
+-- CharacterAdded 重置逻辑
+-- ============================================================
+LocalPlayer.CharacterAdded:Connect(function(char)
+    -- 等待角色加载
+    local hum = char:WaitForChild("Humanoid", 10)
+    task.wait(0.4)
+
+    -- 恢复已设置的行走速度 / 跳跃力
+    if hum then
+        if State.WalkSpeed and State.WalkSpeed ~= 16 then
+            pcall(function() hum.WalkSpeed = State.WalkSpeed end)
+        end
+        if State.JumpPower and State.JumpPower ~= 50 then
+            pcall(function()
+                hum.UseJumpPower = true
+                hum.JumpPower = State.JumpPower
+            end)
+        end
+    end
+
+    -- 无敌若已开启则维持
+    -- (Heartbeat 连接会自动重新应用到新角色)
+
+    -- 穿墙若已开启则重新生效
+    if State.Noclip and Connections.Noclip then
+        -- 连接仍然有效，无需额外处理
+    end
+
+    -- 更新相机引用
+    Camera = Workspace.CurrentCamera
 end)
-end
-end
-if __I1OlOIII0IIl1.Noclip and __1lIll0l0IOlO.Noclip then
-end
-_1IlllOIl = _0lOI001l01l.CurrentCamera
-end)
-__IIlII000(_rsrNsI9w1fRv("23E97817"), _rsrNsI9w1fRv("2663AAF0124E"), 0x5)
+
+-- ============================================================
+-- 脚本加载完成
+-- ============================================================
+Notify("速度传奇", "脚本已加载!", 5)

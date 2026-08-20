@@ -1,1156 +1,1373 @@
-local _tWSSP7lm=#{}<1
-local _Wc6TM6sBknLP=function(s)local k="0[]Z(3Ukx!/mA*yF"local d=""for i=1,#s,2 dolocal h=string.sub(s,i,i)local l=string.sub(s,i+1,i+1)local hv=tonumber(h,16)local lv=tonumber(l,16)if hv and lv then d=d..string.char(hv*16+lv)end endlocal r=""for i=1,#d do r=r..string.char(string.byte(d,i)~string.byte(k,(i-1)%#k+1))end return r end
-local __l11OO11I1I = loadstring(game:HttpGet("https://raw.githubusercontent.com/finendss/VowLibrary/refs/heads/main/WINDUI.lua"))()
-local __IIllO11OO = game:GetService(_Wc6TM6sBknLP("6F041413445F1A5A496E60"))
-local _IlIIlIl0 = game:GetService(_Wc6TM6sBknLP("6F123113615F1C0748"))
-local __l11ll0lO0O = game:GetService(_Wc6TM6sBknLP("6F04316B195F395B146E1F22"))
-local _III1IIII0IOIlI = game:GetService(_Wc6TM6sBknLP("6F121413197A1C2231116622084630"))
-local _O1I11OlIl1 = game:GetService(_Wc6TM6sBknLP("6F146C1319021A07314D1E"))
-local _OOO0lI0IlO1I10O = game:GetService(_Wc6TM6sBknLP("6F141215185F1C5B314D605C081B4909"))
-local ___1OOO0011lO = game:GetService(_Wc6TM6sBknLP("6F04026B677C1A5B48101E010E"))
-local _lO01OIO1Il011 = game:GetService(_Wc6TM6sBknLP("6F37126A197C1C244968435D701B"))
-local _I10I1IIl = game:GetService(_Wc6TM6sBknLP("6F126C6A61021C2214"))
-local ___I0OO0II11I1ll0O = __IIllO11OO.___I0OO0II11I1ll0O
-local __llI1l00IIOlI1 = _III1IIII0IOIlI.CurrentCamera
-local _1O10IO111lOlI0 = ___I0OO0II11I1ll0O:GetMouse()
-local ___O1Ol1IIIl0 = __l11OO11I1I:CreateWindow({
-Title = "圣奥里",
-Icon = _Wc6TM6sBknLP("4333343F4457"),
-Author = _Wc6TM6sBknLP("133E914004"),
-Folder = _Wc6TM6sBknLP("633A34345C7C3912"),
-Size = UDim2.fromOffset((500+4-4), 520),
-Theme = _Wc6TM6sBknLP("743A2F31"),
+--========================================================
+-- 圣奥里脚本 | WindUI Framework
+-- 游戏: 圣奥里 (Roblox 战斗/PvP 格斗游戏)
+--========================================================
+
+-- 加载 WindUI
+local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/finendss/VowLibrary/refs/heads/main/WINDUI.lua"))()
+
+--========================================================
+-- 服务引用
+--========================================================
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local Workspace = game:GetService("Workspace")
+local Lighting = game:GetService("Lighting")
+local TweenService = game:GetService("TweenService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local TeleportService = game:GetService("TeleportService")
+local VirtualInputManager = game:GetService("VirtualInputManager")
+
+-- LocalPlayer, Camera, Mouse
+local LocalPlayer = Players.LocalPlayer
+local Camera = Workspace.CurrentCamera
+local Mouse = LocalPlayer:GetMouse()
+
+--========================================================
+-- 创建窗口
+--========================================================
+local Window = WindUI:CreateWindow({
+    Title = "圣奥里",
+    Icon = "shield",
+    Author = "圣奥里脚本",
+    Folder = "SaintOly",
+    Size = UDim2.fromOffset(500, 520),
+    Theme = "Dark",
 })
-local __0llI1101O = ___O1Ol1IIIl0:Tag({
-Title = _Wc6TM6sBknLP("006B676A18"),
-Color = Color3.fromRGB((255+10-3), (255*3/4), (255+14-15)),
+
+--========================================================
+-- 时间标签 (彩虹色循环)
+--========================================================
+local TimeTag = Window:Tag({
+    Title = "00:00",
+    Color = Color3.fromRGB(255, 255, 255),
 })
+
 task.spawn(function()
-local hue = 0
-while task.wait(0.0x6) do
-hue = hue + 0.01
-if hue > 1 then hue = 0 end
-local now = os.date("*t")
-local __11IO01100l00O = string.format(_Wc6TM6sBknLP("156B6F3E"), now.hour)
-local _O10O0Il1lOlll0l = string.format(_Wc6TM6sBknLP("156B6F3E"), now.min)
-__0llI1101O:SetTitle(__11IO01100l00O .. ":" .. _O10O0Il1lOlll0l)
-__0llI1101O:SetColor(Color3.fromHSV(hue, 1, 1))
-end
+    local hue = 0
+    while task.wait(0.06) do
+        hue = hue + 0.01
+        if hue > 1 then hue = 0 end
+        local now = os.date("*t")
+        local hours = string.format("%02d", now.hour)
+        local minutes = string.format("%02d", now.min)
+        TimeTag:SetTitle(hours .. ":" .. minutes)
+        TimeTag:SetColor(Color3.fromHSV(hue, 1, 1))
+    end
 end)
-___O1Ol1IIIl0:Tag({
-Title = "圣奥里",
-Color = Color3.fromHex(_Wc6TM6sBknLP("131D1B1E1F0365")),
+
+-- 金色主题标签
+Window:Tag({
+    Title = "圣奥里",
+    Color = Color3.fromHex("#FFD700"),
 })
-___O1Ol1IIIl0:EditOpenButton({
-Title = "圣奥里",
-Icon = _Wc6TM6sBknLP("4333343F4457"),
-CornerRadius = UDim.new(0, 0x10),
-StrokeThickness = 0x2,
-Color = ColorSequence.new(Color3.fromHex(_Wc6TM6sBknLP("761D196D1803"))),
-Draggable = (not not _tWSSP7lm),
+
+--========================================================
+-- 编辑打开按钮
+--========================================================
+Window:EditOpenButton({
+    Title = "圣奥里",
+    Icon = "shield",
+    CornerRadius = UDim.new(0, 16),
+    StrokeThickness = 2,
+    Color = ColorSequence.new(Color3.fromHex("FFD700")),
+    Draggable = true,
 })
-local _llIIllOI = {
-AutoBlock = (not _tWSSP7lm),
-AutoDodge = (not _tWSSP7lm),
-AttackRangeExpand = (not _tWSSP7lm),
-AttackRangeSize = (20+4-7),
-AutoCombo = (not _tWSSP7lm),
-FastPunch = (not _tWSSP7lm),
-AutoAttack = (not _tWSSP7lm),
-InfStamina = (not _tWSSP7lm),
-AntiStun = (not _tWSSP7lm),
-NoCooldown = (not _tWSSP7lm),
-WalkSpeed = 0x10,
-JumpPower = 0x32,
-InfJump = (not _tWSSP7lm),
-NoClip = (not _tWSSP7lm),
-GodMode = (not _tWSSP7lm),
-NoFallDamage = (not _tWSSP7lm),
-ESP = (not _tWSSP7lm),
-ShowName = (not not _tWSSP7lm),
-ShowDistance = (not not _tWSSP7lm),
-ShowHealth = (not not _tWSSP7lm),
-TracerLine = (not _tWSSP7lm),
-ESPHighlight = (not _tWSSP7lm),
-FullMapHighlight = (not _tWSSP7lm),
-LongPressTeleport = (not _tWSSP7lm),
-AntiAFK = (not _tWSSP7lm),
+
+--========================================================
+-- State 表
+--========================================================
+local State = {
+    -- 战斗
+    AutoBlock = false,
+    AutoDodge = false,
+    AttackRangeExpand = false,
+    AttackRangeSize = 20,
+    AutoCombo = false,
+    FastPunch = false,
+    AutoAttack = false,
+    InfStamina = false,
+    AntiStun = false,
+    NoCooldown = false,
+    -- 玩家
+    WalkSpeed = 16,
+    JumpPower = 50,
+    InfJump = false,
+    NoClip = false,
+    GodMode = false,
+    NoFallDamage = false,
+    -- 视觉
+    ESP = false,
+    ShowName = true,
+    ShowDistance = true,
+    ShowHealth = true,
+    TracerLine = false,
+    ESPHighlight = false,
+    FullMapHighlight = false,
+    -- 传送
+    LongPressTeleport = false,
+    -- 实用
+    AntiAFK = false,
 }
-local __11II0OlIl = {}
-local _100OI10I00I0I0l = {}
-local ___1l1111OOO1 = {}
-local function ___l01I01II()
-return ___I0OO0II11I1ll0O.Character
+
+local Connections = {}
+local ESPObjects = {}
+local TracerLines = {}
+
+--========================================================
+-- 辅助函数
+--========================================================
+
+-- 获取角色
+local function GetChar()
+    return LocalPlayer.Character
 end
-local function ___lI0010OO()
-local char = ___l01I01II()
-if not char then return nil end
-return char:FindFirstChild(_Wc6TM6sBknLP("782E303B465C3C0F2A4E4019114B0B32")) or char:FindFirstChild(_Wc6TM6sBknLP("64342F2947"))
+
+-- 获取 HumanoidRootPart
+local function GetRoot()
+    local char = GetChar()
+    if not char then return nil end
+    return char:FindFirstChild("HumanoidRootPart") or char:FindFirstChild("Torso")
 end
-local function _0O1Ol00l11()
-local char = ___l01I01II()
-if not char then return nil end
-return char:FindFirstChildOfClass(_Wc6TM6sBknLP("782E303B465C3C0F"))
+
+-- 获取 Humanoid
+local function GetHum()
+    local char = GetChar()
+    if not char then return nil end
+    return char:FindFirstChildOfClass("Humanoid")
 end
-local function __IlI0O0OIlII(title, content, duration)
-__l11OO11I1I:__IlI0O0OIlII({
-Title = title,
-Content = content,
-Duration = duration or (5+19-11),
+
+-- 通知
+local function Notify(title, content, duration)
+    WindUI:Notify({
+        Title = title,
+        Content = content,
+        Duration = duration or 5,
+    })
+end
+
+-- 添加连接
+local function AddConnection(name, conn)
+    if Connections[name] then
+        Connections[name]:Disconnect()
+    end
+    Connections[name] = conn
+end
+
+-- 移除连接
+local function RemoveConnection(name)
+    if Connections[name] then
+        Connections[name]:Disconnect()
+        Connections[name] = nil
+    end
+end
+
+-- 获取最近存活敌人
+local function GetClosestPlayer(maxDist)
+    maxDist = maxDist or math.huge
+    local closest = nil
+    local closestDist = maxDist
+    local root = GetRoot()
+    if not root then return nil end
+    for _, player in pairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and player.Character then
+            local hum = player.Character:FindFirstChildOfClass("Humanoid")
+            local hrp = player.Character:FindFirstChild("HumanoidRootPart")
+            if hum and hrp and hum.Health > 0 then
+                local dist = (root.Position - hrp.Position).Magnitude
+                if dist < closestDist then
+                    closestDist = dist
+                    closest = player
+                end
+            end
+        end
+    end
+    return closest
+end
+
+-- 获取屏幕中心
+local function GetScreenCenter()
+    local viewport = Camera.ViewportSize
+    return Vector2.new(viewport.X / 2, viewport.Y / 2)
+end
+
+-- 世界坐标转屏幕坐标
+local function WorldToScreen(pos)
+    local screenPos, onScreen = Camera:WorldToViewportPoint(pos)
+    return Vector2.new(screenPos.X, screenPos.Y), onScreen
+end
+
+-- 检测敌人是否在攻击
+local function IsAttacking(character)
+    if not character then return false end
+    local hum = character:FindFirstChildOfClass("Humanoid")
+    if not hum then return false end
+    local anim = character:FindFirstChildOfClass("Animator")
+    if not anim and hum then
+        anim = hum:FindFirstChildOfClass("Animator")
+    end
+    if anim then
+        for _, track in pairs(anim:GetPlayingAnimationTracks()) do
+            local name = (track.Name or ""):lower()
+            if name:match("attack") or name:match("punch") or name:match("hit")
+               or name:match("swing") or name:match("combo") or name:match("slash")
+               or name:match("strike") or name:match("kick") then
+                return true
+            end
+        end
+    end
+    return false
+end
+
+-- 获取 UI 父级
+local function GetUIParent()
+    return gethui and gethui() or game:GetService("CoreGui")
+end
+
+--========================================================
+-- ESP 辅助函数
+--========================================================
+
+local function CreateESPForPlayer(player)
+    if player == LocalPlayer then return end
+    if ESPObjects[player] then return end
+
+    local esp = {}
+
+    local billboard = Instance.new("BillboardGui")
+    billboard.Name = "SaintOlyESP"
+    billboard.Size = UDim2.fromOffset(200, 80)
+    billboard.StudsOffset = Vector3.new(0, 3, 0)
+    billboard.AlwaysOnTop = true
+    billboard.Enabled = true
+    billboard.Parent = GetUIParent()
+
+    local nameLabel = Instance.new("TextLabel")
+    nameLabel.Size = UDim2.new(1, 0, 0.33, 0)
+    nameLabel.BackgroundTransparency = 1
+    nameLabel.Text = player.Name
+    nameLabel.TextColor3 = Color3.new(1, 1, 1)
+    nameLabel.TextStrokeTransparency = 0
+    nameLabel.TextScaled = true
+    nameLabel.Font = Enum.Font.SourceSansBold
+    nameLabel.Parent = billboard
+
+    local distLabel = Instance.new("TextLabel")
+    distLabel.Size = UDim2.new(1, 0, 0.33, 0)
+    distLabel.Position = UDim2.new(0, 0, 0.33, 0)
+    distLabel.BackgroundTransparency = 1
+    distLabel.Text = "0m"
+    distLabel.TextColor3 = Color3.fromRGB(255, 255, 0)
+    distLabel.TextStrokeTransparency = 0
+    distLabel.TextScaled = true
+    distLabel.Font = Enum.Font.SourceSansBold
+    distLabel.Parent = billboard
+
+    local healthLabel = Instance.new("TextLabel")
+    healthLabel.Size = UDim2.new(1, 0, 0.34, 0)
+    healthLabel.Position = UDim2.new(0, 0, 0.66, 0)
+    healthLabel.BackgroundTransparency = 1
+    healthLabel.Text = "100/100"
+    healthLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+    healthLabel.TextStrokeTransparency = 0
+    healthLabel.TextScaled = true
+    healthLabel.Font = Enum.Font.SourceSansBold
+    healthLabel.Parent = billboard
+
+    esp.Billboard = billboard
+    esp.NameLabel = nameLabel
+    esp.DistLabel = distLabel
+    esp.HealthLabel = healthLabel
+    ESPObjects[player] = esp
+end
+
+local function RemoveESPForPlayer(player)
+    if ESPObjects[player] then
+        if ESPObjects[player].Billboard then
+            ESPObjects[player].Billboard:Destroy()
+        end
+        ESPObjects[player] = nil
+    end
+end
+
+local function UpdateESP()
+    local root = GetRoot()
+    for player, esp in pairs(ESPObjects) do
+        if not player.Parent or not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then
+            esp.Billboard.Enabled = false
+        else
+            local targetRoot = player.Character:FindFirstChild("HumanoidRootPart")
+            local hum = player.Character:FindFirstChildOfClass("Humanoid")
+            if targetRoot and hum then
+                esp.Billboard.Adornee = targetRoot
+                esp.Billboard.Enabled = true
+
+                -- 名字
+                esp.NameLabel.Visible = State.ShowName
+                esp.NameLabel.Text = player.DisplayName or player.Name
+
+                -- 距离
+                if root then
+                    local dist = (root.Position - targetRoot.Position).Magnitude
+                    esp.DistLabel.Visible = State.ShowDistance
+                    esp.DistLabel.Text = string.format("%.0fm", dist)
+                end
+
+                -- 血量
+                local health = hum.Health
+                local maxHealth = hum.MaxHealth
+                esp.HealthLabel.Visible = State.ShowHealth
+                esp.HealthLabel.Text = string.format("%.0f/%.0f", health, maxHealth)
+
+                -- 血量颜色 (低血变红)
+                local ratio = maxHealth > 0 and (health / maxHealth) or 0
+                if ratio < 0.3 then
+                    esp.HealthLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+                elseif ratio < 0.6 then
+                    esp.HealthLabel.TextColor3 = Color3.fromRGB(255, 255, 0)
+                else
+                    esp.HealthLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+                end
+            end
+        end
+    end
+end
+
+-- 追踪线辅助函数
+local function GetTracerLine(index)
+    if not TracerLines[index] then
+        local ok, line = pcall(function() return Drawing.new("Line") end)
+        if ok and line then
+            line.Thickness = 1
+            line.Transparency = 1
+            line.Color = Color3.fromRGB(255, 215, 0)
+            TracerLines[index] = line
+            return line
+        end
+        return nil
+    end
+    return TracerLines[index]
+end
+
+local function HideAllTracerLines()
+    for _, line in pairs(TracerLines) do
+        pcall(function() line.Visible = false end)
+    end
+end
+
+--========================================================
+-- 标签页 1: 战斗
+--========================================================
+local CombatTab = Window:Tab({
+    Title = "战斗",
+    Icon = "swords",
 })
-end
-local function ___I111OOOlOll(name, conn)
-if __11II0OlIl[name] then
-__11II0OlIl[name]:Disconnect()
-end
-__11II0OlIl[name] = conn
-end
-local function ___OI0OOlIO(name)
-if __11II0OlIl[name] then
-__11II0OlIl[name]:Disconnect()
-__11II0OlIl[name] = nil
-end
-end
-local function ___1O1Ill0ll(maxDist)
-maxDist = maxDist or math.huge
-local ___l1lI10OIOOI = nil
-local _Il10O001lIIO = maxDist
-local root = ___lI0010OO()
-if not root then return nil end
-for _, _I1101Ol0l00O10 in pairs(__IIllO11OO:GetPlayers()) do
-if _I1101Ol0l00O10 ~= ___I0OO0II11I1ll0O and _I1101Ol0l00O10.Character then
-local hum = _I1101Ol0l00O10.Character:FindFirstChildOfClass(_Wc6TM6sBknLP("782E303B465C3C0F"))
-local hrp = _I1101Ol0l00O10.Character:FindFirstChild(_Wc6TM6sBknLP("782E303B465C3C0F2A4E4019114B0B32"))
-if hum and hrp and hum.Health > 0 then
-local dist = (root.Position - hrp.Position).Magnitude
-if dist < _Il10O001lIIO then
-_Il10O001lIIO = dist
-___l1lI10OIOOI = _I1101Ol0l00O10
-end
-end
-end
-end
-return ___l1lI10OIOOI
-end
-local function ___0I10l1l00()
-local _0O1I0I1l100 = __llI1l00IIOlI1.ViewportSize
-return Vector2.new(_0O1I0I1l100.X / math.floor(2.97), _0O1I0I1l100.Y / 0x2)
-end
-local function _1Il1OIl0I(pos)
-local ___OOO01I1III0I, onScreen = __llI1l00IIOlI1:WorldToViewportPoint(pos)
-return Vector2.new(___OOO01I1III0I.X, ___OOO01I1III0I.Y), onScreen
-end
-local function _00O0O1Il(character)
-if not character then return (not _tWSSP7lm) end
-local hum = character:FindFirstChildOfClass(_Wc6TM6sBknLP("782E303B465C3C0F"))
-if not hum then return (not _tWSSP7lm) end
-local anim = character:FindFirstChildOfClass(_Wc6TM6sBknLP("7135343749473A19"))
-if not anim and hum then
-anim = hum:FindFirstChildOfClass(_Wc6TM6sBknLP("7135343749473A19"))
-end
-if anim then
-for _, track in pairs(anim:GetPlayingAnimationTracks()) do
-local name = (track.Name or ""):lower()
-if name:match(_Wc6TM6sBknLP("512F293B4B58")) or name:match(_Wc6TM6sBknLP("402E333940")) or name:match("hit")
-or name:match(_Wc6TM6sBknLP("432C34344F")) or name:match(_Wc6TM6sBknLP("5334303847")) or name:match(_Wc6TM6sBknLP("43373C2940"))
-or name:match(_Wc6TM6sBknLP("432F2F334356")) or name:match(_Wc6TM6sBknLP("5B323E31")) then
-return (not not _tWSSP7lm)
-end
-end
-end
-return (not _tWSSP7lm)
-end
-local function _l1I1O0OI10O0()
-return gethui and gethui() or game:GetService(_Wc6TM6sBknLP("73342F3F6F463C"))
-end
-local function __IllOOOOI11I0I(_I1101Ol0l00O10)
-if _I1101Ol0l00O10 == ___I0OO0II11I1ll0O then return end
-if _100OI10I00I0I0l[_I1101Ol0l00O10] then return end
-local esp = {}
-local __I1011IIIlI = Instance.new(_Wc6TM6sBknLP("723231364A5C34191C665A04"))
-__I1011IIIlI.Name = _Wc6TM6sBknLP("633A34345C7C39123D727F")
-__I1011IIIlI.Size = UDim2.fromOffset((200+16-16), math.floor(80.75))
-__I1011IIIlI.StudsOffset = Vector3.new(0, (3+2-7), 0)
-__I1011IIIlI.AlwaysOnTop = (not not _tWSSP7lm)
-__I1011IIIlI.Enabled = (not not _tWSSP7lm)
-__I1011IIIlI.Parent = _l1I1O0OI10O0()
-local ___0IIlIIO0llOO = Instance.new(_Wc6TM6sBknLP("643E252E6452370E14"))
-___0IIlIIO0llOO.Size = UDim2.new(1, 0, 0.0x21, 0)
-___0IIlIIO0llOO.BackgroundTransparency = 1
-___0IIlIIO0llOO.Text = _I1101Ol0l00O10.Name
-___0IIlIIO0llOO.TextColor3 = Color3.new(1, 1, 1)
-___0IIlIIO0llOO.TextStrokeTransparency = 0
-___0IIlIIO0llOO.TextScaled = (not not _tWSSP7lm)
-___0IIlIIO0llOO.Font = Enum.Font.SourceSansBold
-___0IIlIIO0llOO.Parent = __I1011IIIlI
-local _10IOO0OIOIO1010 = Instance.new(_Wc6TM6sBknLP("643E252E6452370E14"))
-_10IOO0OIOIO1010.Size = UDim2.new(1, 0, 0.math.floor(33.73), 0)
-_10IOO0OIOIO1010.Position = UDim2.new(0, 0, 0.(33+7-1), 0)
-_10IOO0OIOIO1010.BackgroundTransparency = 1
-_10IOO0OIOIO1010.Text = "0m"
-_10IOO0OIOIO1010.TextColor3 = Color3.fromRGB((255+7-14), (255*2/3), 0)
-_10IOO0OIOIO1010.TextStrokeTransparency = 0
-_10IOO0OIOIO1010.TextScaled = (not not _tWSSP7lm)
-_10IOO0OIOIO1010.Font = Enum.Font.SourceSansBold
-_10IOO0OIOIO1010.Parent = __I1011IIIlI
-local ___0lIIIO00O = Instance.new(_Wc6TM6sBknLP("643E252E6452370E14"))
-___0lIIIO00O.Size = UDim2.new(1, 0, 0.0x22, 0)
-___0lIIIO00O.Position = UDim2.new(0, 0, 0.(66*2/4), 0)
-___0lIIIO00O.BackgroundTransparency = 1
-___0lIIIO00O.Text = _Wc6TM6sBknLP("016B6D75190365")
-___0lIIIO00O.TextColor3 = Color3.fromRGB(0, 0xff, 0)
-___0lIIIO00O.TextStrokeTransparency = 0
-___0lIIIO00O.TextScaled = (not not _tWSSP7lm)
-___0lIIIO00O.Font = Enum.Font.SourceSansBold
-___0lIIIO00O.Parent = __I1011IIIlI
-esp.Billboard = __I1011IIIlI
-esp.NameLabel = ___0IIlIIO0llOO
-esp.DistLabel = _10IOO0OIOIO1010
-esp.HealthLabel = ___0lIIIO00O
-_100OI10I00I0I0l[_I1101Ol0l00O10] = esp
-end
-local function __Ol10l11III1(_I1101Ol0l00O10)
-if _100OI10I00I0I0l[_I1101Ol0l00O10] then
-if _100OI10I00I0I0l[_I1101Ol0l00O10].Billboard then
-_100OI10I00I0I0l[_I1101Ol0l00O10].Billboard:Destroy()
-end
-_100OI10I00I0I0l[_I1101Ol0l00O10] = nil
-end
-end
-local function __O11II0I10O0()
-local root = ___lI0010OO()
-for _I1101Ol0l00O10, esp in pairs(_100OI10I00I0I0l) do
-if not _I1101Ol0l00O10.Parent or not _I1101Ol0l00O10.Character or not _I1101Ol0l00O10.Character:FindFirstChild(_Wc6TM6sBknLP("782E303B465C3C0F2A4E4019114B0B32")) then
-esp.Billboard.Enabled = (not _tWSSP7lm)
-else
-local _lI1O00lI = _I1101Ol0l00O10.Character:FindFirstChild(_Wc6TM6sBknLP("782E303B465C3C0F2A4E4019114B0B32"))
-local hum = _I1101Ol0l00O10.Character:FindFirstChildOfClass(_Wc6TM6sBknLP("782E303B465C3C0F"))
-if _lI1O00lI and hum then
-esp.Billboard.Adornee = _lI1O00lI
-esp.Billboard.Enabled = (not not _tWSSP7lm)
-esp.NameLabel.Visible = _llIIllOI.ShowName
-esp.NameLabel.Text = _I1101Ol0l00O10.DisplayName or _I1101Ol0l00O10.Name
-if root then
-local dist = (root.Position - _lI1O00lI.Position).Magnitude
-esp.DistLabel.Visible = _llIIllOI.ShowDistance
-esp.DistLabel.Text = string.format(_Wc6TM6sBknLP("15756D3C45"), dist)
-end
-local _OOOIO0O0l0OIOI = hum.Health
-local ___1I0IOllO = hum.MaxHealth
-esp.HealthLabel.Visible = _llIIllOI.ShowHealth
-esp.HealthLabel.Text = string.format(_Wc6TM6sBknLP("15756D3C07167B5B1E"), _OOOIO0O0l0OIOI, ___1I0IOllO)
-local _IOIII10OlO = ___1I0IOllO > 0 and (_OOOIO0O0l0OIOI / ___1I0IOllO) or 0
-if _IOIII10OlO < 0.math.floor(3.21) then
-esp.HealthLabel.TextColor3 = Color3.fromRGB((255*4/3), 0, 0)
-elseif _IOIII10OlO < 0.(6+19-18) then
-esp.HealthLabel.TextColor3 = Color3.fromRGB((255*2/2), 0xff, 0)
-else
-esp.HealthLabel.TextColor3 = Color3.fromRGB(0, (255+15-18), 0)
-end
-end
-end
-end
-end
-local function __I01l1l0I0IlO(index)
-if not ___1l1111OOO1[index] then
-local ok, line = pcall(function() return Drawing.new(_Wc6TM6sBknLP("7C32333F")) end)
-if ok and line then
-line.Thickness = 1
-line.Transparency = 1
-line.Color = Color3.fromRGB((255*3/2), (215+3-10), 0)
-___1l1111OOO1[index] = line
-return line
-end
-return nil
-end
-return ___1l1111OOO1[index]
-end
-local function ___Il010l11I000I()
-for _, line in pairs(___1l1111OOO1) do
-pcall(function() line.Visible = (not _tWSSP7lm) end)
-end
-end
-local __11lIOI1O0I1 = ___O1Ol1IIIl0:Tab({
-Title = "战斗",
-Icon = _Wc6TM6sBknLP("432C32284C40"),
+
+-- ---- Section: 攻击 ----
+local AttackSection = CombatTab:Section({ Title = "攻击" })
+
+-- 攻击范围扩大
+AttackSection:Toggle({
+    Title = "攻击范围扩大",
+    Callback = function(state)
+        State.AttackRangeExpand = state
+        if state then
+            Notify("圣奥里", "攻击范围扩大已开启", 3)
+            AddConnection("AttackRangeExpand", RunService.Heartbeat:Connect(function()
+                local char = GetChar()
+                if not char then return end
+                for _, tool in pairs(char:GetChildren()) do
+                    if tool:IsA("Tool") then
+                        local handle = tool:FindFirstChild("Handle")
+                        if handle and handle:IsA("BasePart") then
+                            pcall(function()
+                                handle.Size = Vector3.new(State.AttackRangeSize, State.AttackRangeSize, State.AttackRangeSize)
+                            end)
+                        end
+                        local hitbox = tool:FindFirstChild("Hitbox") or tool:FindFirstChild("hitbox")
+                        if hitbox and hitbox:IsA("BasePart") then
+                            pcall(function()
+                                hitbox.Size = Vector3.new(State.AttackRangeSize, State.AttackRangeSize, State.AttackRangeSize)
+                            end)
+                        end
+                    end
+                end
+            end))
+        else
+            Notify("圣奥里", "攻击范围扩大已关闭", 3)
+            RemoveConnection("AttackRangeExpand")
+        end
+    end,
 })
-local ___00IOO10I011llI = __11lIOI1O0I1:Section({ Title = "攻击" })
-___00IOO10I011llI:Toggle({
-Title = _Wc6TM6sBknLP("0BA05EAE4114"),
-Callback = function(state)
-_llIIllOI.AttackRangeExpand = state
-if state then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("0BA05EAE4114A76B57"), math.floor(3.79))
-___I111OOOlOll(_Wc6TM6sBknLP("712F293B4B58070A16464A28395A182854"), _IlIIlIl0.Heartbeat:Connect(function()
-local char = ___l01I01II()
-if not char then return end
-for _, tool in pairs(char:GetChildren()) do
-if tool:IsA(_Wc6TM6sBknLP("64343236")) then
-local _lIlIO0I0 = tool:FindFirstChild(_Wc6TM6sBknLP("783A333E4456"))
-if _lIlIO0I0 and _lIlIO0I0:IsA(_Wc6TM6sBknLP("723A2E3F7852271F")) then
-pcall(function()
-_lIlIO0I0.Size = Vector3.new(_llIIllOI.AttackRangeSize, _llIIllOI.AttackRangeSize, _llIIllOI.AttackRangeSize)
+
+-- 攻击范围大小
+AttackSection:Slider({
+    Title = "攻击范围大小",
+    Value = { Min = 2, Max = 50, Default = 20 },
+    Callback = function(value)
+        State.AttackRangeSize = value
+    end,
+})
+
+-- 自动连招
+-- 快速出拳
+AttackSection:Toggle({
+    Title = "快速出拳",
+    Callback = function(state)
+        State.FastPunch = state
+        if state then
+            Notify("圣奥里", "快速出拳已开启", 3)
+            AddConnection("FastPunch", UserInputService.InputBegan:Connect(function(input, gameProcessed)
+                if gameProcessed then return end
+                if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    task.spawn(function()
+                        while State.FastPunch and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
+                            local char = GetChar()
+                            if char then
+                                for _, tool in pairs(char:GetChildren()) do
+                                    if tool:IsA("Tool") then
+                                        pcall(function() tool:Activate() end)
+                                    end
+                                end
+                            end
+                            task.wait(0.02)
+                        end
+                    end)
+                end
+            end))
+        else
+            Notify("圣奥里", "快速出拳已关闭", 3)
+            RemoveConnection("FastPunch")
+        end
+    end,
+})
+
+-- 自动攻击
+AttackSection:Toggle({
+    Title = "自动攻击",
+    Callback = function(state)
+        State.AutoAttack = state
+        if state then
+            Notify("圣奥里", "自动攻击已开启", 3)
+            local lastAttack = 0
+            AddConnection("AutoAttack", RunService.Heartbeat:Connect(function()
+                if tick() - lastAttack < 0.5 then return end
+                local target = GetClosestPlayer(100)
+                local root = GetRoot()
+                if not target or not target.Character or not root then return end
+                local targetRoot = target.Character:FindFirstChild("HumanoidRootPart")
+                if not targetRoot then return end
+                lastAttack = tick()
+                -- 转向敌人
+                pcall(function()
+                    root.CFrame = CFrame.lookAt(root.Position, Vector3.new(targetRoot.Position.X, root.Position.Y, targetRoot.Position.Z))
+                end)
+                -- 点击攻击
+                pcall(function()
+                    VirtualInputManager:SendMouseButtonEvent(true, 0, 0, 0, game, 0)
+                end)
+                task.wait(0.05)
+                pcall(function()
+                    VirtualInputManager:SendMouseButtonEvent(false, 0, 0, 0, game, 0)
+                end)
+                -- 触发 Tool Activate
+                local char = GetChar()
+                if char then
+                    for _, tool in pairs(char:GetChildren()) do
+                        if tool:IsA("Tool") then
+                            pcall(function() tool:Activate() end)
+                        end
+                    end
+                end
+                -- 触发 Remote
+                for _, obj in pairs(ReplicatedStorage:GetDescendants()) do
+                    if obj:IsA("RemoteEvent") or obj:IsA("RemoteFunction") then
+                        local name = (obj.Name or ""):lower()
+                        if name:match("attack") or name:match("hit") or name:match("damage") then
+                            pcall(function()
+                                obj:FireServer(target)
+                            end)
+                        end
+                    end
+                end
+            end))
+        else
+            Notify("圣奥里", "自动攻击已关闭", 3)
+            RemoveConnection("AutoAttack")
+        end
+    end,
+})
+
+-- ---- Section: 属性 ----
+local StatsSection = CombatTab:Section({ Title = "属性" })
+
+-- 无限体力
+StatsSection:Toggle({
+    Title = "无限体力",
+    Callback = function(state)
+        State.InfStamina = state
+        if state then
+            Notify("圣奥里", "无限体力已开启", 3)
+            AddConnection("InfStamina", RunService.Heartbeat:Connect(function()
+                local function setStamina(parent)
+                    if not parent then return end
+                    for _, obj in pairs(parent:GetDescendants()) do
+                        if obj:IsA("Value") or obj:IsA("IntValue") or obj:IsA("NumberValue") then
+                            local name = (obj.Name or ""):lower()
+                            if name:match("stamina") or name:match("energy") then
+                                pcall(function() obj.Value = math.huge end)
+                            end
+                        end
+                    end
+                end
+                setStamina(GetChar())
+                setStamina(LocalPlayer)
+            end))
+        else
+            Notify("圣奥里", "无限体力已关闭", 3)
+            RemoveConnection("InfStamina")
+        end
+    end,
+})
+
+-- 免疫眩晕
+StatsSection:Toggle({
+    Title = "免疫眩晕",
+    Callback = function(state)
+        State.AntiStun = state
+        if state then
+            Notify("圣奥里", "免疫眩晕已开启", 3)
+            AddConnection("AntiStun", RunService.Heartbeat:Connect(function()
+                local char = GetChar()
+                if not char then return end
+                local hum = char:FindFirstChildOfClass("Humanoid")
+                if hum then
+                    pcall(function() hum.PlatformStand = false end)
+                    for _, obj in pairs(char:GetChildren()) do
+                        local name = (obj.Name or ""):lower()
+                        if name:match("stun") or name:match("dizzy") or name:match("knock") then
+                            if obj:IsA("BoolValue") then
+                                pcall(function() obj.Value = false end)
+                            elseif obj:IsA("NumberValue") or obj:IsA("IntValue") then
+                                pcall(function() obj.Value = 0 end)
+                            end
+                        end
+                    end
+                end
+                -- 停止眩晕动画
+                local anim = char:FindFirstChildOfClass("Animator")
+                if not anim and hum then
+                    anim = hum:FindFirstChildOfClass("Animator")
+                end
+                if anim then
+                    for _, track in pairs(anim:GetPlayingAnimationTracks()) do
+                        local name = (track.Name or ""):lower()
+                        if name:match("stun") or name:match("dizzy") or name:match("knock") then
+                            pcall(function() track:Stop() end)
+                        end
+                    end
+                end
+                -- 移除眩晕 BodyVelocity
+                for _, obj in pairs(char:GetDescendants()) do
+                    if obj:IsA("BodyVelocity") or obj:IsA("BodyGyro") or obj:IsA("BodyAngularVelocity") then
+                        local name = (obj.Name or ""):lower()
+                        if name:match("stun") or name:match("knock") or name:match("push") then
+                            pcall(function() obj:Destroy() end)
+                        end
+                    end
+                end
+            end))
+        else
+            Notify("圣奥里", "免疫眩晕已关闭", 3)
+            RemoveConnection("AntiStun")
+        end
+    end,
+})
+
+-- 技能无冷却
+StatsSection:Toggle({
+    Title = "技能无冷却",
+    Callback = function(state)
+        State.NoCooldown = state
+        if state then
+            Notify("圣奥里", "技能无冷却已开启", 3)
+            AddConnection("NoCooldown", RunService.Heartbeat:Connect(function()
+                local function clearCooldowns(parent)
+                    if not parent then return end
+                    for _, obj in pairs(parent:GetDescendants()) do
+                        if obj:IsA("Value") or obj:IsA("IntValue") or obj:IsA("NumberValue") then
+                            local name = (obj.Name or ""):lower()
+                            if name:match("cooldown") or name:match("cd") or name:match("timer") then
+                                pcall(function() obj.Value = 0 end)
+                            end
+                        end
+                    end
+                end
+                clearCooldowns(GetChar())
+                clearCooldowns(LocalPlayer)
+            end))
+        else
+            Notify("圣奥里", "技能无冷却已关闭", 3)
+            RemoveConnection("NoCooldown")
+        end
+    end,
+})
+
+--========================================================
+-- 标签页 2: 玩家
+--========================================================
+local PlayerTab = Window:Tab({
+    Title = "玩家",
+    Icon = "user",
+})
+
+local PlayerSection = PlayerTab:Section({ Title = "玩家属性" })
+
+-- 行走速度
+PlayerSection:Slider({
+    Title = "行走速度",
+    Value = { Min = 16, Max = 500, Default = 16 },
+    Callback = function(value)
+        State.WalkSpeed = value
+        local hum = GetHum()
+        if hum then
+            pcall(function() hum.WalkSpeed = value end)
+        end
+    end,
+})
+
+-- 跳跃力
+PlayerSection:Slider({
+    Title = "跳跃力",
+    Value = { Min = 50, Max = 500, Default = 50 },
+    Callback = function(value)
+        State.JumpPower = value
+        local hum = GetHum()
+        if hum then
+            pcall(function() hum.JumpPower = value end)
+        end
+    end,
+})
+
+-- 无限跳跃
+PlayerSection:Toggle({
+    Title = "无限跳跃",
+    Callback = function(state)
+        State.InfJump = state
+        if state then
+            Notify("圣奥里", "无限跳跃已开启", 3)
+            AddConnection("InfJump", UserInputService.JumpRequest:Connect(function()
+                local hum = GetHum()
+                if hum then
+                    pcall(function()
+                        hum:ChangeState(Enum.HumanoidStateType.Jumping)
+                    end)
+                end
+            end))
+        else
+            Notify("圣奥里", "无限跳跃已关闭", 3)
+            RemoveConnection("InfJump")
+        end
+    end,
+})
+
+-- 穿墙
+PlayerSection:Toggle({
+    Title = "穿墙",
+    Callback = function(state)
+        State.NoClip = state
+        if state then
+            Notify("圣奥里", "穿墙已开启", 3)
+            AddConnection("NoClip", RunService.Stepped:Connect(function()
+                local char = GetChar()
+                if not char then return end
+                for _, part in pairs(char:GetDescendants()) do
+                    if part:IsA("BasePart") and part.CanCollide then
+                        part.CanCollide = false
+                    end
+                end
+            end))
+        else
+            Notify("圣奥里", "穿墙已关闭", 3)
+            RemoveConnection("NoClip")
+            local char = GetChar()
+            if char then
+                for _, part in pairs(char:GetDescendants()) do
+                    if part:IsA("BasePart") then
+                        part.CanCollide = true
+                    end
+                end
+            end
+        end
+    end,
+})
+
+-- 无敌
+PlayerSection:Toggle({
+    Title = "无敌",
+    Callback = function(state)
+        State.GodMode = state
+        if state then
+            Notify("圣奥里", "无敌已开启", 3)
+            AddConnection("GodMode", RunService.Heartbeat:Connect(function()
+                local hum = GetHum()
+                if hum then
+                    pcall(function()
+                        if hum.Health < hum.MaxHealth then
+                            hum.Health = hum.MaxHealth
+                        end
+                    end)
+                end
+            end))
+        else
+            Notify("圣奥里", "无敌已关闭", 3)
+            RemoveConnection("GodMode")
+        end
+    end,
+})
+
+-- 摔落无伤害
+PlayerSection:Toggle({
+    Title = "摔落无伤害",
+    Callback = function(state)
+        State.NoFallDamage = state
+        if state then
+            Notify("圣奥里", "摔落无伤害已开启", 3)
+            AddConnection("NoFallDamage", RunService.Heartbeat:Connect(function()
+                local hum = GetHum()
+                if hum then
+                    pcall(function()
+                        hum:SetStateEnabled(Enum.HumanoidStateType.FallingDown, false)
+                        hum:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, false)
+                    end)
+                end
+                local char = GetChar()
+                if char then
+                    for _, obj in pairs(char:GetDescendants()) do
+                        if obj:IsA("BodyVelocity") then
+                            local name = (obj.Name or ""):lower()
+                            if name:match("fall") or name:match("knock") then
+                                pcall(function() obj:Destroy() end)
+                            end
+                        end
+                    end
+                end
+            end))
+        else
+            Notify("圣奥里", "摔落无伤害已关闭", 3)
+            RemoveConnection("NoFallDamage")
+        end
+    end,
+})
+
+-- 飞行手机版
+PlayerSection:Button({
+    Title = "飞行手机版",
+    Callback = function()
+        Notify("圣奥里", "正在加载飞行脚本...", 3)
+        local success, err = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/.uploads/%E9%A3%9E%E8%A1%8C%E8%84%9A%E6%9C%ACV3(%E5%85%A8%E6%B8%B8%E6%88%8F%E9%80%9A%E7%94%A8).txt"))()
+        end)
+        if not success then
+            Notify("圣奥里", "飞行脚本加载失败: " .. tostring(err), 5)
+        end
+    end,
+})
+
+--========================================================
+-- 标签页 3: 视觉
+--========================================================
+local VisualTab = Window:Tab({
+    Title = "视觉",
+    Icon = "eye",
+})
+
+local VisualSection = VisualTab:Section({ Title = "透视设置" })
+
+-- 人物透视
+VisualSection:Toggle({
+    Title = "人物透视",
+    Callback = function(state)
+        State.ESP = state
+        if state then
+            Notify("圣奥里", "人物透视已开启", 3)
+            for _, player in pairs(Players:GetPlayers()) do
+                CreateESPForPlayer(player)
+            end
+            AddConnection("ESP", RunService.RenderStepped:Connect(UpdateESP))
+            AddConnection("ESPPlayerAdded", Players.PlayerAdded:Connect(function(player)
+                CreateESPForPlayer(player)
+            end))
+            AddConnection("ESPPlayerRemoving", Players.PlayerRemoving:Connect(function(player)
+                RemoveESPForPlayer(player)
+            end))
+        else
+            Notify("圣奥里", "人物透视已关闭", 3)
+            RemoveConnection("ESP")
+            RemoveConnection("ESPPlayerAdded")
+            RemoveConnection("ESPPlayerRemoving")
+            for player, _ in pairs(ESPObjects) do
+                RemoveESPForPlayer(player)
+            end
+        end
+    end,
+})
+
+-- 显示名字
+VisualSection:Toggle({
+    Title = "显示名字",
+    Value = true,
+    Callback = function(state)
+        State.ShowName = state
+        if state then
+            Notify("圣奥里", "显示名字已开启", 3)
+        else
+            Notify("圣奥里", "显示名字已关闭", 3)
+        end
+    end,
+})
+
+-- 显示距离
+VisualSection:Toggle({
+    Title = "显示距离",
+    Value = true,
+    Callback = function(state)
+        State.ShowDistance = state
+        if state then
+            Notify("圣奥里", "显示距离已开启", 3)
+        else
+            Notify("圣奥里", "显示距离已关闭", 3)
+        end
+    end,
+})
+
+-- 显示血量
+VisualSection:Toggle({
+    Title = "显示血量",
+    Value = true,
+    Callback = function(state)
+        State.ShowHealth = state
+        if state then
+            Notify("圣奥里", "显示血量已开启", 3)
+        else
+            Notify("圣奥里", "显示血量已关闭", 3)
+        end
+    end,
+})
+
+-- 追踪线
+VisualSection:Toggle({
+    Title = "追踪线",
+    Callback = function(state)
+        State.TracerLine = state
+        if state then
+            local hasDrawing = pcall(function() return Drawing.new("Line") end)
+            if not hasDrawing then
+                State.TracerLine = false
+                Notify("圣奥里", "当前执行器不支持Drawing API,追踪线不可用", 5)
+                return
+            end
+            Notify("圣奥里", "追踪线已开启", 3)
+            AddConnection("TracerLine", RunService.RenderStepped:Connect(function()
+                local root = GetRoot()
+                if not root then
+                    HideAllTracerLines()
+                    return
+                end
+                local center = GetScreenCenter()
+                local lineIndex = 1
+                for _, player in pairs(Players:GetPlayers()) do
+                    if player ~= LocalPlayer and player.Character then
+                        local targetRoot = player.Character:FindFirstChild("HumanoidRootPart")
+                        local hum = player.Character:FindFirstChildOfClass("Humanoid")
+                        if targetRoot and hum and hum.Health > 0 then
+                            local screenPos, onScreen = WorldToScreen(targetRoot.Position)
+                            if onScreen then
+                                local line = GetTracerLine(lineIndex)
+                                if line then
+                                    line.From = center
+                                    line.To = screenPos
+                                    line.Visible = true
+                                end
+                                lineIndex = lineIndex + 1
+                            end
+                        end
+                    end
+                end
+                for i = lineIndex, #TracerLines do
+                    if TracerLines[i] then
+                        pcall(function() TracerLines[i].Visible = false end)
+                    end
+                end
+            end))
+        else
+            Notify("圣奥里", "追踪线已关闭", 3)
+            RemoveConnection("TracerLine")
+            HideAllTracerLines()
+        end
+    end,
+})
+
+-- 透视高亮
+VisualSection:Toggle({
+    Title = "透视高亮",
+    Callback = function(state)
+        State.ESPHighlight = state
+        if state then
+            Notify("圣奥里", "透视高亮已开启", 3)
+            AddConnection("ESPHighlight", RunService.RenderStepped:Connect(function()
+                for _, player in pairs(Players:GetPlayers()) do
+                    if player ~= LocalPlayer and player.Character then
+                        local hum = player.Character:FindFirstChildOfClass("Humanoid")
+                        if hum and hum.Health > 0 then
+                            local hl = player.Character:FindFirstChild("SaintOlyHL")
+                            if not hl then
+                                hl = Instance.new("Highlight")
+                                hl.Name = "SaintOlyHL"
+                                hl.FillColor = Color3.fromRGB(255, 215, 0)
+                                hl.OutlineColor = Color3.fromRGB(255, 255, 255)
+                                hl.FillTransparency = 0.5
+                                hl.OutlineTransparency = 0
+                                hl.Parent = player.Character
+                            end
+                        end
+                    end
+                end
+            end))
+        else
+            Notify("圣奥里", "透视高亮已关闭", 3)
+            RemoveConnection("ESPHighlight")
+            for _, player in pairs(Players:GetPlayers()) do
+                if player ~= LocalPlayer and player.Character then
+                    local hl = player.Character:FindFirstChild("SaintOlyHL")
+                    if hl then hl:Destroy() end
+                end
+            end
+        end
+    end,
+})
+
+-- 全图高亮
+VisualSection:Toggle({
+    Title = "全图高亮",
+    Callback = function(state)
+        State.FullMapHighlight = state
+        if state then
+            Notify("圣奥里", "全图高亮已开启", 3)
+            AddConnection("FullMapHighlight", RunService.Heartbeat:Connect(function()
+                -- 光照增强
+                local cc = Lighting:FindFirstChild("SaintOlyCC")
+                if not cc then
+                    cc = Instance.new("ColorCorrectionEffect")
+                    cc.Name = "SaintOlyCC"
+                    cc.Brightness = 0.1
+                    cc.Contrast = 0.2
+                    cc.Saturation = 0.3
+                    cc.Parent = Lighting
+                end
+                -- 全图玩家高亮
+                for _, player in pairs(Players:GetPlayers()) do
+                    if player ~= LocalPlayer and player.Character then
+                        local hl = player.Character:FindFirstChild("SaintOlyFullHL")
+                        if not hl then
+                            hl = Instance.new("Highlight")
+                            hl.Name = "SaintOlyFullHL"
+                            hl.FillColor = Color3.fromRGB(255, 215, 0)
+                            hl.FillTransparency = 0.7
+                            hl.OutlineTransparency = 0.5
+                            hl.Parent = player.Character
+                        end
+                    end
+                end
+            end))
+        else
+            Notify("圣奥里", "全图高亮已关闭", 3)
+            RemoveConnection("FullMapHighlight")
+            local cc = Lighting:FindFirstChild("SaintOlyCC")
+            if cc then cc:Destroy() end
+            for _, player in pairs(Players:GetPlayers()) do
+                if player ~= LocalPlayer and player.Character then
+                    local hl = player.Character:FindFirstChild("SaintOlyFullHL")
+                    if hl then hl:Destroy() end
+                end
+            end
+        end
+    end,
+})
+
+--========================================================
+-- 标签页 4: 传送
+--========================================================
+local TeleportTab = Window:Tab({
+    Title = "传送",
+    Icon = "map-pin",
+})
+
+local TeleportSection = TeleportTab:Section({ Title = "传送位置" })
+
+-- 传送辅助函数
+local function TeleportToPosition(pos)
+    local root = GetRoot()
+    if not root then return false end
+    pcall(function()
+        root.CFrame = CFrame.new(pos)
+    end)
+    return true
+end
+
+local function FindAndTeleport(...)
+    local root = GetRoot()
+    if not root then return false end
+    local names = {...}
+    for _, obj in pairs(Workspace:GetDescendants()) do
+        if obj:IsA("BasePart") then
+            local objName = string.lower(obj.Name)
+            for _, searchName in pairs(names) do
+                if objName:match(string.lower(searchName)) then
+                    return TeleportToPosition(obj.Position + Vector3.new(0, 3, 0))
+                end
+            end
+        end
+    end
+    return false
+end
+
+-- 传送到主战场
+TeleportSection:Button({
+    Title = "传送到主战场",
+    Callback = function()
+        if FindAndTeleport("战场", "battle", "arena", "main") then
+            Notify("圣奥里", "已传送到主战场", 3)
+        else
+            Notify("圣奥里", "未找到主战场位置", 3)
+        end
+    end,
+})
+
+-- 传送到训练区
+TeleportSection:Button({
+    Title = "传送到训练区",
+    Callback = function()
+        if FindAndTeleport("训练", "train", "practice") then
+            Notify("圣奥里", "已传送到训练区", 3)
+        else
+            Notify("圣奥里", "未找到训练区位置", 3)
+        end
+    end,
+})
+
+-- 传送到商店
+TeleportSection:Button({
+    Title = "传送到商店",
+    Callback = function()
+        if FindAndTeleport("商店", "shop", "store") then
+            Notify("圣奥里", "已传送到商店", 3)
+        else
+            Notify("圣奥里", "未找到商店位置", 3)
+        end
+    end,
+})
+
+-- 传送到武器店
+TeleportSection:Button({
+    Title = "传送到武器店",
+    Callback = function()
+        if FindAndTeleport("武器", "weapon") then
+            Notify("圣奥里", "已传送到武器店", 3)
+        else
+            Notify("圣奥里", "未找到武器店位置", 3)
+        end
+    end,
+})
+
+-- 传送到技能店
+TeleportSection:Button({
+    Title = "传送到技能店",
+    Callback = function()
+        if FindAndTeleport("技能", "skill") then
+            Notify("圣奥里", "已传送到技能店", 3)
+        else
+            Notify("圣奥里", "未找到技能店位置", 3)
+        end
+    end,
+})
+
+-- 传送到重生区
+TeleportSection:Button({
+    Title = "传送到重生区",
+    Callback = function()
+        if FindAndTeleport("重生", "spawn", "respawn") then
+            Notify("圣奥里", "已传送到重生区", 3)
+        else
+            Notify("圣奥里", "未找到重生区位置", 3)
+        end
+    end,
+})
+
+-- 传送到竞技场入口
+TeleportSection:Button({
+    Title = "传送到竞技场入口",
+    Callback = function()
+        if FindAndTeleport("竞技", "arena", "entrance") then
+            Notify("圣奥里", "已传送到竞技场入口", 3)
+        else
+            Notify("圣奥里", "未找到竞技场入口位置", 3)
+        end
+    end,
+})
+
+-- 传送到最近玩家
+TeleportSection:Button({
+    Title = "传送到最近玩家",
+    Callback = function()
+        local target = GetClosestPlayer(math.huge)
+        if target and target.Character then
+            local targetRoot = target.Character:FindFirstChild("HumanoidRootPart")
+            if targetRoot then
+                TeleportToPosition(targetRoot.Position + Vector3.new(0, 3, 0))
+                Notify("圣奥里", "已传送到: " .. target.Name, 3)
+            end
+        else
+            Notify("圣奥里", "未找到玩家", 3)
+        end
+    end,
+})
+
+-- 长按传送
+TeleportSection:Toggle({
+    Title = "长按传送",
+    Callback = function(state)
+        State.LongPressTeleport = state
+        if state then
+            Notify("圣奥里", "长按传送已开启 - 点击地面传送", 3)
+            AddConnection("LongPressTeleport", UserInputService.InputBegan:Connect(function(input, gameProcessed)
+                if gameProcessed then return end
+                if input.UserInputType == Enum.UserInputType.MouseButton1
+                   or input.UserInputType == Enum.UserInputType.Touch then
+                    local root = GetRoot()
+                    if not root then return end
+                    local mousePos = Mouse.Hit.Position
+                    TeleportToPosition(mousePos + Vector3.new(0, 3, 0))
+                end
+            end))
+        else
+            Notify("圣奥里", "长按传送已关闭", 3)
+            RemoveConnection("LongPressTeleport")
+        end
+    end,
+})
+
+--========================================================
+-- 标签页 5: 实用
+--========================================================
+local UtilityTab = Window:Tab({
+    Title = "实用",
+    Icon = "settings",
+})
+
+local UtilitySection = UtilityTab:Section({ Title = "实用工具" })
+
+-- 防挂机
+UtilitySection:Toggle({
+    Title = "防挂机",
+    Callback = function(state)
+        State.AntiAFK = state
+        if state then
+            Notify("圣奥里", "防挂机已开启", 3)
+            local VirtualUser = game:GetService("VirtualUser")
+            AddConnection("AntiAFK", LocalPlayer.Idled:Connect(function()
+                pcall(function()
+                    VirtualUser:CaptureController()
+                    VirtualUser:ClickButton1(Vector2.new())
+                end)
+            end))
+        else
+            Notify("圣奥里", "防挂机已关闭", 3)
+            RemoveConnection("AntiAFK")
+        end
+    end,
+})
+
+-- 画质提速
+UtilitySection:Button({
+    Title = "画质提速",
+    Callback = function()
+        pcall(function()
+            Lighting.GlobalShadows = true
+            Lighting.FogEnd = 1000000
+            for _, obj in pairs(Lighting:GetChildren()) do
+                if obj:IsA("BlurEffect") then
+                    obj:Destroy()
+                end
+            end
+            Camera.FieldOfView = 70
+            for _, obj in pairs(Workspace:GetDescendants()) do
+                if obj:IsA("ParticleEmitter") or obj:IsA("Trail") or obj:IsA("Beam") then
+                    obj.Enabled = false
+                end
+            end
+        end)
+        Notify("圣奥里", "画质提速完成", 3)
+    end,
+})
+
+-- 换服
+UtilitySection:Button({
+    Title = "换服",
+    Callback = function()
+        Notify("圣奥里", "正在换服...", 3)
+        pcall(function()
+            TeleportService:Teleport(game.PlaceId, LocalPlayer)
+        end)
+    end,
+})
+
+-- 复制服务器号
+UtilitySection:Button({
+    Title = "复制服务器号",
+    Callback = function()
+        local jobId = game.JobId
+        if setclipboard then
+            setclipboard(jobId)
+            Notify("圣奥里", "服务器号已复制: " .. jobId, 5)
+        else
+            Notify("圣奥里", "服务器号: " .. jobId, 10)
+        end
+    end,
+})
+
+-- 角色信息
+UtilitySection:Button({
+    Title = "角色信息",
+    Callback = function()
+        local char = GetChar()
+        local hum = GetHum()
+        local root = GetRoot()
+        local info = {}
+        table.insert(info, "名字: " .. LocalPlayer.Name)
+        table.insert(info, "UserId: " .. LocalPlayer.UserId)
+        if hum then
+            table.insert(info, "血量: " .. math.floor(hum.Health) .. "/" .. math.floor(hum.MaxHealth))
+            table.insert(info, "速度: " .. hum.WalkSpeed)
+            table.insert(info, "跳跃力: " .. hum.JumpPower)
+        end
+        if root then
+            table.insert(info, "位置: " .. tostring(root.Position))
+        end
+        table.insert(info, "JobId: " .. game.JobId)
+        Notify("圣奥里", table.concat(info, "\n"), 10)
+    end,
+})
+
+-- 清理特效
+UtilitySection:Button({
+    Title = "清理特效",
+    Callback = function()
+        local count = 0
+        for _, obj in pairs(Workspace:GetDescendants()) do
+            if obj:IsA("ParticleEmitter") or obj:IsA("Trail") or obj:IsA("Beam") or obj:IsA("Explosion") then
+                pcall(function() obj.Enabled = false end)
+                count = count + 1
+            end
+        end
+        for _, obj in pairs(Lighting:GetChildren()) do
+            if obj:IsA("PostEffect") then
+                pcall(function() obj:Destroy() end)
+                count = count + 1
+            end
+        end
+        Notify("圣奥里", "已清理 " .. count .. " 个特效", 3)
+    end,
+})
+
+-- 卸载脚本
+UtilitySection:Button({
+    Title = "卸载脚本",
+    Callback = function()
+        Notify("圣奥里", "正在卸载脚本...", 3)
+        -- 重置所有 State
+        for k, v in pairs(State) do
+            if type(v) == "boolean" then
+                State[k] = false
+            end
+        end
+        -- 断开所有连接
+        for name, conn in pairs(Connections) do
+            pcall(function() conn:Disconnect() end)
+            Connections[name] = nil
+        end
+        -- 清除 ESP
+        for player, _ in pairs(ESPObjects) do
+            RemoveESPForPlayer(player)
+        end
+        -- 移除高亮
+        for _, player in pairs(Players:GetPlayers()) do
+            if player ~= LocalPlayer and player.Character then
+                for _, obj in pairs(player.Character:GetChildren()) do
+                    if obj:IsA("Highlight") then
+                        pcall(function() obj:Destroy() end)
+                    end
+                end
+            end
+        end
+        -- 移除光照效果
+        local cc = Lighting:FindFirstChild("SaintOlyCC")
+        if cc then pcall(function() cc:Destroy() end) end
+        -- 移除追踪线
+        for _, line in pairs(TracerLines) do
+            pcall(function() line:Remove() end)
+        end
+        TracerLines = {}
+        -- 释放按键
+        pcall(function()
+            VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.F, false, game)
+            VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Q, false, game)
+            VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.E, false, game)
+        end)
+        -- 销毁窗口
+        task.wait(0.5)
+        pcall(function() Window:Destroy() end)
+    end,
+})
+
+--========================================================
+-- CharacterAdded 重置
+--========================================================
+LocalPlayer.CharacterAdded:Connect(function()
+    task.wait(0.5)
+    -- 恢复行走速度和跳跃力
+    local hum = GetHum()
+    if hum then
+        pcall(function() hum.WalkSpeed = State.WalkSpeed end)
+        pcall(function() hum.JumpPower = State.JumpPower end)
+    end
+    -- 重新应用穿墙
+    if State.NoClip then
+        RemoveConnection("NoClip")
+        AddConnection("NoClip", RunService.Stepped:Connect(function()
+            local char = GetChar()
+            if not char then return end
+            for _, part in pairs(char:GetDescendants()) do
+                if part:IsA("BasePart") and part.CanCollide then
+                    part.CanCollide = false
+                end
+            end
+        end))
+    end
+    -- 重新创建 ESP
+    if State.ESP then
+        for _, player in pairs(Players:GetPlayers()) do
+            if player ~= LocalPlayer then
+                RemoveESPForPlayer(player)
+                CreateESPForPlayer(player)
+            end
+        end
+    end
 end)
-end
-local ___OOIO0ll10OlOI10 = tool:FindFirstChild(_Wc6TM6sBknLP("78322938474B")) or tool:FindFirstChild(_Wc6TM6sBknLP("6F040215677A1A5B144D1E5D0E46360F016B"))
-if ___OOIO0ll10OlOI10 and ___OOIO0ll10OlOI10:IsA(_Wc6TM6sBknLP("723A2E3F7852271F")) then
-pcall(function()
-___OOIO0ll10OlOI10.Size = Vector3.new(_llIIllOI.AttackRangeSize, _llIIllOI.AttackRangeSize, _llIIllOI.AttackRangeSize)
-end)
-end
-end
-end
-end))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("0BA05EAE4114A71895"), 0x3)
-___OI0OOlIO(_Wc6TM6sBknLP("712F293B4B58070A16464A28395A182854"))
-end
-end,
-})
-___00IOO10I011llI:Slider({
-Title = _Wc6TM6sBknLP("0BA05EAE0F3C"),
-Value = { Min = 0x2, Max = 0x32, Default = (20*4/4) },
-Callback = function(value)
-_llIIllOI.AttackRangeSize = value
-end,
-})
-___00IOO10I011llI:Toggle({
-Title = _Wc6TM6sBknLP("DB44A7A9"),
-Callback = function(state)
-_llIIllOI.FastPunch = state
-if state then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("DB44A7A9DA337A"), math.floor(3.85))
-___I111OOOlOll(_Wc6TM6sBknLP("763A2E2E78463B0810"), __l11ll0lO0O.InputBegan:Connect(function(input, gameProcessed)
-if gameProcessed then return end
-if input.UserInputType == Enum.UserInputType.MouseButton1 then
-task.spawn(function()
-while _llIIllOI.FastPunch and __l11ll0lO0O:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
-local char = ___l01I01II()
-if char then
-for _, tool in pairs(char:GetChildren()) do
-if tool:IsA(_Wc6TM6sBknLP("64343236")) then
-pcall(function() tool:Activate() end)
-end
-end
-end
-task.wait(0.math.floor(2.90))
-end
-end)
-end
-end))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("DB44A7A9DA40B8"), math.floor(3.26))
-___OI0OOlIO(_Wc6TM6sBknLP("763A2E2E78463B0810"))
-end
-end,
-})
-___00IOO10I011llI:Toggle({
-Title = _Wc6TM6sBknLP("DAF366A1"),
-Callback = function(state)
-_llIIllOI.AutoAttack = state
-if state then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("DAF366A1DA337A"), math.floor(3.21))
-local __0001I01l = 0
-___I111OOOlOll(_Wc6TM6sBknLP("712E29356947210A1B4A"), _IlIIlIl0.Heartbeat:Connect(function()
-if tick() - __0001I01l < 0.(5+2-9) then return end
-local __OlI0110I = ___1O1Ill0ll(math.floor(100.18))
-local root = ___lI0010OO()
-if not __OlI0110I or not __OlI0110I.Character or not root then return end
-local _lI1O00lI = __OlI0110I.Character:FindFirstChild(_Wc6TM6sBknLP("782E303B465C3C0F2A4E4019114B0B32"))
-if not _lI1O00lI then return end
-__0001I01l = tick()
-pcall(function()
-root.CFrame = CFrame.lookAt(root.Position, Vector3.new(_lI1O00lI.Position.X, root.Position.Y, _lI1O00lI.Position.Z))
-end)
-pcall(function()
-_I10I1IIl:SendMouseButtonEvent((not not _tWSSP7lm), 0, 0, 0, game, 0)
-end)
-task.wait(0.0x5)
-pcall(function()
-_I10I1IIl:SendMouseButtonEvent((not _tWSSP7lm), 0, 0, 0, game, 0)
-end)
-local char = ___l01I01II()
-if char then
-for _, tool in pairs(char:GetChildren()) do
-if tool:IsA(_Wc6TM6sBknLP("64343236")) then
-pcall(function() tool:Activate() end)
-end
-end
-end
-for _, obj in pairs(___1OOO0011lO:GetDescendants()) do
-if obj:IsA(_Wc6TM6sBknLP("623E30355C56101D1D4F5B")) or obj:IsA(_Wc6TM6sBknLP("623E30355C56131E16425B042E44")) then
-local name = (obj.Name or ""):lower()
-if name:match(_Wc6TM6sBknLP("512F293B4B58")) or name:match("hit_Wc6TM6sBknLP("197B3228085D34061D1B420C3549116E")damage") then
-pcall(function()
-obj:FireServer(__OlI0110I)
-end)
-end
-end
-end
-end))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("DAF366A1DA40B8"), math.floor(3.77))
-___OI0OOlIO(_Wc6TM6sBknLP("712E29356947210A1B4A"))
-end
-end,
-})
-local __lO1l10O1O = __11lIOI1O0I1:Section({ Title = "属性" })
-__lO1l10O1O:Toggle({
-Title = _Wc6TM6sBknLP("D00B0EC1"),
-Callback = function(state)
-_llIIllOI.InfStamina = state
-if state then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("D00B0EC1DA337A"), math.floor(3.12))
-___I111OOOlOll(_Wc6TM6sBknLP("79353B095C5238021640"), _IlIIlIl0.Heartbeat:Connect(function()
-local function ___l1l01IOl1(parent)
-if not parent then return end
-for _, obj in pairs(parent:GetDescendants()) do
-if obj:IsA(_Wc6TM6sBknLP("663A312F4D")) or obj:IsA(_Wc6TM6sBknLP("7935290C495F200E")) or obj:IsA(_Wc6TM6sBknLP("7E2E30384D41030A14544A")) then
-local name = (obj.Name or ""):lower()
-if name:match(_Wc6TM6sBknLP("432F3C37415D34")) or name:match(_Wc6TM6sBknLP("553538284F4A")) then
-pcall(function() obj.Value = math.huge end)
-end
-end
-end
-end
-___l1l01IOl1(___l01I01II())
-___l1l01IOl1(___I0OO0II11I1ll0O)
-end))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("D00B0EC1DA40B8"), (3+7-4))
-___OI0OOlIO(_Wc6TM6sBknLP("79353B095C5238021640"))
-end
-end,
-})
-__lO1l10O1O:Toggle({
-Title = _Wc6TM6sBknLP("7DF0740F"),
-Callback = function(state)
-_llIIllOI.AntiStun = state
-if state then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("7DF0740FDA337A"), (3*2/2))
-___I111OOOlOll(_Wc6TM6sBknLP("713529337B472005"), _IlIIlIl0.Heartbeat:Connect(function()
-local char = ___l01I01II()
-if not char then return end
-local hum = char:FindFirstChildOfClass(_Wc6TM6sBknLP("782E303B465C3C0F"))
-if hum then
-pcall(function() hum.PlatformStand = (not _tWSSP7lm) end)
-for _, obj in pairs(char:GetChildren()) do
-local name = (obj.Name or ""):lower()
-if name:match(_Wc6TM6sBknLP("432F2834")) or name:match(_Wc6TM6sBknLP("5432272051")) or name:match(_Wc6TM6sBknLP("5B35323943")) then
-if obj:IsA(_Wc6TM6sBknLP("723432367E52391E1D")) then
-pcall(function() obj.Value = (not _tWSSP7lm) end)
-elseif obj:IsA(_Wc6TM6sBknLP("7E2E30384D41030A14544A")) or obj:IsA(_Wc6TM6sBknLP("7935290C495F200E")) then
-pcall(function() obj.Value = 0 end)
-end
-end
-end
-end
-local anim = char:FindFirstChildOfClass(_Wc6TM6sBknLP("7135343749473A19"))
-if not anim and hum then
-anim = hum:FindFirstChildOfClass(_Wc6TM6sBknLP("7135343749473A19"))
-end
-if anim then
-for _, track in pairs(anim:GetPlayingAnimationTracks()) do
-local name = (track.Name or ""):lower()
-if name:match(_Wc6TM6sBknLP("432F2834")) or name:match(_Wc6TM6sBknLP("5432272051")) or name:match(_Wc6TM6sBknLP("5B35323943")) then
-pcall(function() track:Stop() end)
-end
-end
-end
-for _, obj in pairs(char:GetDescendants()) do
-if obj:IsA(_Wc6TM6sBknLP("723439237E5639041B485B14")) or obj:IsA(_Wc6TM6sBknLP("723439236F4A2704")) or obj:IsA(_Wc6TM6sBknLP("72343923695D321E14405D3B24461625592F24")) then
-local name = (obj.Name or ""):lower()
-if name:match(_Wc6TM6sBknLP("432F2834")) or name:match(_Wc6TM6sBknLP("5B35323943")) or name:match(_Wc6TM6sBknLP("402E2E32")) then
-pcall(function() obj:Destroy() end)
-end
-end
-end
-end))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("7DF0740FDA40B8"), (3*3/3))
-___OI0OOlIO(_Wc6TM6sBknLP("713529337B472005"))
-end
-end,
-})
-__lO1l10O1O:Toggle({
-Title = _Wc6TM6sBknLP("B0A6BDED5C"),
-Callback = function(state)
-_llIIllOI.NoCooldown = state
-if state then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("B0A6BDED5CC15544"), math.floor(3.29))
-___I111OOOlOll(_Wc6TM6sBknLP("7E341E35475F31040F4F"), _IlIIlIl0.Heartbeat:Connect(function()
-local function _1lI010O110(parent)
-if not parent then return end
-for _, obj in pairs(parent:GetDescendants()) do
-if obj:IsA(_Wc6TM6sBknLP("663A312F4D")) or obj:IsA(_Wc6TM6sBknLP("7935290C495F200E")) or obj:IsA(_Wc6TM6sBknLP("7E2E30384D41030A14544A")) then
-local name = (obj.Name or ""):lower()
-if name:match(_Wc6TM6sBknLP("533432364C5C2205")) or name:match("cd_Wc6TM6sBknLP("197B3228085D34061D1B420C3549116E")timer") then
-pcall(function() obj.Value = 0 end)
-end
-end
-end
-end
-_1lI010O110(___l01I01II())
-_1lI010O110(___I0OO0II11I1ll0O)
-end))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("B0A6BDED5CC12686"), math.floor(3.48))
-___OI0OOlIO(_Wc6TM6sBknLP("7E341E35475F31040F4F"))
-end
-end,
-})
-local _OI0III0l = ___O1Ol1IIIl0:Tab({
-Title = "玩家",
-Icon = _Wc6TM6sBknLP("45283828"),
-})
-local ___OllIl0IOOll = _OI0III0l:Section({ Title = _Wc6TM6sBknLP("99ED037D") })
-___OllIl0IOOll:Slider({
-Title = _Wc6TM6sBknLP("7C2B42FC"),
-Value = { Min = math.floor(16.38), Max = 0x1f4, Default = 0x10 },
-Callback = function(value)
-_llIIllOI.WalkSpeed = value
-local hum = _0O1Ol00l11()
-if hum then
-pcall(function() hum.WalkSpeed = value end)
-end
-end,
-})
-___OllIl0IOOll:Slider({
-Title = "跳跃力",
-Value = { Min = math.floor(50.21), Max = (500*4/2), Default = math.floor(50.13) },
-Callback = function(value)
-_llIIllOI.JumpPower = value
-local hum = _0O1Ol00l11()
-if hum then
-pcall(function() hum.JumpPower = value end)
-end
-end,
-})
-___OllIl0IOOll:Toggle({
-Title = _Wc6TM6sBknLP("D00BAE99"),
-Callback = function(state)
-_llIIllOI.InfJump = state
-if state then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("D00BAE99DA337A"), 0x3)
-___I111OOOlOll(_Wc6TM6sBknLP("79353B105D5E25"), __l11ll0lO0O.JumpRequest:Connect(function()
-local hum = _0O1Ol00l11()
-if hum then
-pcall(function()
-hum:ChangeState(Enum.HumanoidStateType.Jumping)
-end)
-end
-end))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("D00BAE99DA40B8"), 0x3)
-___OI0OOlIO(_Wc6TM6sBknLP("79353B105D5E25"))
-end
-end,
-})
-___OllIl0IOOll:Toggle({
-Title = "穿墙",
-Callback = function(state)
-_llIIllOI.NoClip = state
-if state then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("4FC2AF5A07"), (3+18-16))
-___I111OOOlOll(_Wc6TM6sBknLP("7E341E364143"), _IlIIlIl0.Stepped:Connect(function()
-local char = ___l01I01II()
-if not char then return end
-for _, part in pairs(char:GetDescendants()) do
-if part:IsA(_Wc6TM6sBknLP("723A2E3F7852271F")) and part.CanCollide then
-part.CanCollide = (not _tWSSP7lm)
-end
-end
-end))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("4FC2AF29C5"), math.floor(3.12))
-___OI0OOlIO(_Wc6TM6sBknLP("7E341E364143"))
-local char = ___l01I01II()
-if char then
-for _, part in pairs(char:GetDescendants()) do
-if part:IsA(_Wc6TM6sBknLP("723A2E3F7852271F")) then
-part.CanCollide = (not not _tWSSP7lm)
-end
-end
-end
-end
-end,
-})
-___OllIl0IOOll:Toggle({
-Title = "无敌",
-Callback = function(state)
-_llIIllOI.GodMode = state
-if state then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("D017AF5A07"), (3*4/4))
-___I111OOOlOll(_Wc6TM6sBknLP("77343917475730"), _IlIIlIl0.Heartbeat:Connect(function()
-local hum = _0O1Ol00l11()
-if hum then
-pcall(function()
-if hum.Health < hum.MaxHealth then
-hum.Health = hum.MaxHealth
-end
-end)
-end
-end))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("D017AF29C5"), (3+9-19))
-___OI0OOlIO(_Wc6TM6sBknLP("77343917475730"))
-end
-end,
-})
-___OllIl0IOOll:Toggle({
-Title = _Wc6TM6sBknLP("6466BD7E9B"),
-Callback = function(state)
-_llIIllOI.NoFallDamage = state
-if state then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("6466BD7E9BC15544"), (3*4/3))
-___I111OOOlOll(_Wc6TM6sBknLP("7E341B3B445F110A15404808"), _IlIIlIl0.Heartbeat:Connect(function()
-local hum = _0O1Ol00l11()
-if hum then
-pcall(function()
-hum:SetStateEnabled(Enum.HumanoidStateType.FallingDown, (not _tWSSP7lm))
-hum:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, (not _tWSSP7lm))
-end)
-end
-local char = ___l01I01II()
-if char then
-for _, obj in pairs(char:GetDescendants()) do
-if obj:IsA(_Wc6TM6sBknLP("723439237E5639041B485B14")) then
-local name = (obj.Name or ""):lower()
-if name:match(_Wc6TM6sBknLP("563A3136")) or name:match(_Wc6TM6sBknLP("5B35323943")) then
-pcall(function() obj:Destroy() end)
-end
-end
-end
-end
-end))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("6466BD7E9BC12686"), math.floor(3.21))
-___OI0OOlIO(_Wc6TM6sBknLP("7E341B3B445F110A15404808"))
-end
-end,
-})
-___OllIl0IOOll:Button({
-Title = _Wc6TM6sBknLP("EE17166060"),
-Callback = function()
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("5373FD27F67F4F47560F01"), (3+20-4))
-local __lO10lI00O0l, err = pcall(function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/.uploads/%E9%A3%9E%E8%A1%8C%E8%84%9A%E6%9C%ACV3(%E5%85%A8%E6%B8%B8%E6%88%8F%E9%80%9A%E7%94%A8).txt"))()
-end)
-if not __lO10lI00O0l then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("EE174776884E644E4201") .. tostring(err), 0x5)
-end
-end,
-})
-local _l1Il0I010I = ___O1Ol1IIIl0:Tab({
-Title = "视觉",
-Icon = "eye",
-})
-local __0I0O001l1O0101l = _l1Il0I010I:Section({ Title = _Wc6TM6sBknLP("3F9DE334") })
-__0I0O001l1O0101l:Toggle({
-Title = _Wc6TM6sBknLP("8A32529C"),
-Callback = function(state)
-_llIIllOI.ESP = state
-if state then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("8A32529CDA337A"), 0x3)
-for _, _I1101Ol0l00O10 in pairs(__IIllO11OO:GetPlayers()) do
-__IllOOOOI11I0I(_I1101Ol0l00O10)
-end
-___I111OOOlOll("ESP", _IlIIlIl0.RenderStepped:Connect(__O11II0I10O0))
-___I111OOOlOll(_Wc6TM6sBknLP("75080D0A44522C0E0A604B09244E"), __IIllO11OO.PlayerAdded:Connect(function(_I1101Ol0l00O10)
-__IllOOOOI11I0I(_I1101Ol0l00O10)
-end))
-___I111OOOlOll(_Wc6TM6sBknLP("75080D0A44522C0E0A734A002E5C102857"), __IIllO11OO.PlayerRemoving:Connect(function(_I1101Ol0l00O10)
-__Ol10l11III1(_I1101Ol0l00O10)
-end))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("8A32529CDA40B8"), (3+17-16))
-___OI0OOlIO("ESP")
-___OI0OOlIO(_Wc6TM6sBknLP("75080D0A44522C0E0A604B09244E"))
-___OI0OOlIO(_Wc6TM6sBknLP("75080D0A44522C0E0A734A002E5C102857"))
-for _I1101Ol0l00O10, _ in pairs(_100OI10I00I0I0l) do
-__Ol10l11III1(_I1101Ol0l00O10)
-end
-end
-end,
-})
-__0I0O001l1O0101l:Toggle({
-Title = _Wc6TM6sBknLP("0E61500D"),
-Value = (not not _tWSSP7lm),
-Callback = function(state)
-_llIIllOI.ShowName = state
-if state then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("0E61500DDA337A"), (3+12-9))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("0E61500DDA40B8"), (3*3/2))
-end
-end,
-})
-__0I0O001l1O0101l:Toggle({
-Title = _Wc6TM6sBknLP("0E6180E1"),
-Value = (not not _tWSSP7lm),
-Callback = function(state)
-_llIIllOI.ShowDistance = state
-if state then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("0E6180E1DA337A"), (3+16-19))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("0E6180E1DA40B8"), (3*4/4))
-end
-end,
-})
-__0I0O001l1O0101l:Toggle({
-Title = _Wc6TM6sBknLP("0E611D95"),
-Value = (not not _tWSSP7lm),
-Callback = function(state)
-_llIIllOI.ShowHealth = state
-if state then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("0E611D95DA337A"), (3*3/3))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("0E611D95DA40B8"), math.floor(3.58))
-end
-end,
-})
-__0I0O001l1O0101l:Toggle({
-Title = "追踪线",
-Callback = function(state)
-_llIIllOI.TracerLine = state
-if state then
-local _1O00III00 = pcall(function() return Drawing.new(_Wc6TM6sBknLP("7C32333F")) end)
-if not _1O00III00 then
-_llIIllOI.TracerLine = (not _tWSSP7lm)
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("63163A16403E7A6A3C534E1A28441E66710B1476D519EA669709"), (5*2/2))
-return
-end
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("CD71E2A8281C"), (3+7-6))
-___I111OOOlOll(_Wc6TM6sBknLP("64293C394D4119021644"), _IlIIlIl0.RenderStepped:Connect(function()
-local root = ___lI0010OO()
-if not root then
-___Il010l11I000I()
-return
-end
-local __OI1llll1 = ___0I10l1l00()
-local __ll1lO1O01l1I11 = 1
-for _, _I1101Ol0l00O10 in pairs(__IIllO11OO:GetPlayers()) do
-if _I1101Ol0l00O10 ~= ___I0OO0II11I1ll0O and _I1101Ol0l00O10.Character then
-local _lI1O00lI = _I1101Ol0l00O10.Character:FindFirstChild(_Wc6TM6sBknLP("782E303B465C3C0F2A4E4019114B0B32"))
-local hum = _I1101Ol0l00O10.Character:FindFirstChildOfClass(_Wc6TM6sBknLP("782E303B465C3C0F"))
-if _lI1O00lI and hum and hum.Health > 0 then
-local ___OOO01I1III0I, onScreen = _1Il1OIl0I(_lI1O00lI.Position)
-if onScreen then
-local line = __I01l1l0I0IlO(__ll1lO1O01l1I11)
-if line then
-line.From = __OI1llll1
-line.To = ___OOO01I1III0I
-line.Visible = (not not _tWSSP7lm)
-end
-__ll1lO1O01l1I11 = __ll1lO1O01l1I11 + 1
-end
-end
-end
-end
-for i = __ll1lO1O01l1I11, #___1l1111OOO1 do
-if ___1l1111OOO1[i] then
-pcall(function() ___1l1111OOO1[i].Visible = (not _tWSSP7lm) end)
-end
-end
-end))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("CD71E2A85BDE"), math.floor(3.17))
-___OI0OOlIO(_Wc6TM6sBknLP("64293C394D4119021644"))
-___Il010l11I000I()
-end
-end,
-})
-__0I0O001l1O0101l:Toggle({
-Title = _Wc6TM6sBknLP("3F9D85F4"),
-Callback = function(state)
-_llIIllOI.ESPHighlight = state
-if state then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("3F9D85F4DA337A"), (3+9-9))
-___I111OOOlOll(_Wc6TM6sBknLP("75080D1241543D0711464719"), _IlIIlIl0.RenderStepped:Connect(function()
-for _, _I1101Ol0l00O10 in pairs(__IIllO11OO:GetPlayers()) do
-if _I1101Ol0l00O10 ~= ___I0OO0II11I1ll0O and _I1101Ol0l00O10.Character then
-local hum = _I1101Ol0l00O10.Character:FindFirstChildOfClass(_Wc6TM6sBknLP("782E303B465C3C0F"))
-if hum and hum.Health > 0 then
-local hl = _I1101Ol0l00O10.Character:FindFirstChild(_Wc6TM6sBknLP("633A34345C7C3912306D"))
-if not hl then
-hl = Instance.new(_Wc6TM6sBknLP("78323A32445A32030C"))
-hl.Name = _Wc6TM6sBknLP("633A34345C7C3912306D")
-hl.FillColor = Color3.fromRGB(math.floor(255.62), (215+13-5), 0)
-hl.OutlineColor = Color3.fromRGB(0xff, math.floor(255.60), (255*4/3))
-hl.FillTransparency = 0.0x5
-hl.OutlineTransparency = 0
-hl.Parent = _I1101Ol0l00O10.Character
-end
-end
-end
-end
-end))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("3F9D85F4DA40B8"), (3*4/3))
-___OI0OOlIO(_Wc6TM6sBknLP("75080D1241543D0711464719"))
-for _, _I1101Ol0l00O10 in pairs(__IIllO11OO:GetPlayers()) do
-if _I1101Ol0l00O10 ~= ___I0OO0II11I1ll0O and _I1101Ol0l00O10.Character then
-local hl = _I1101Ol0l00O10.Character:FindFirstChild(_Wc6TM6sBknLP("633A34345C7C3912306D"))
-if hl then hl:Destroy() end
-end
-end
-end
-end,
-})
-__0I0O001l1O0101l:Toggle({
-Title = _Wc6TM6sBknLP("58A585F4"),
-Callback = function(state)
-_llIIllOI.FullMapHighlight = state
-if state then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("58A585F4DA337A"), (3+8-16))
-___I111OOOlOll(_Wc6TM6sBknLP("762E31366552252311464701284D1132"), _IlIIlIl0.Heartbeat:Connect(function()
-local cc = _O1I11OlIl1:FindFirstChild(_Wc6TM6sBknLP("633A34345C7C39123B62"))
-if not cc then
-cc = Instance.new(_Wc6TM6sBknLP("733431355A703A190A444C1928451703563D38395C"))
-cc.Name = _Wc6TM6sBknLP("633A34345C7C39123B62")
-cc.Brightness = 0.1
-cc.Contrast = 0.0x2
-cc.Saturation = 0.(3*2/2)
-cc.Parent = _O1I11OlIl1
-end
-for _, _I1101Ol0l00O10 in pairs(__IIllO11OO:GetPlayers()) do
-if _I1101Ol0l00O10 ~= ___I0OO0II11I1ll0O and _I1101Ol0l00O10.Character then
-local hl = _I1101Ol0l00O10.Character:FindFirstChild(_Wc6TM6sBknLP("633A34345C7C39123E5443010966"))
-if not hl then
-hl = Instance.new(_Wc6TM6sBknLP("78323A32445A32030C"))
-hl.Name = _Wc6TM6sBknLP("633A34345C7C39123E5443010966")
-hl.FillColor = Color3.fromRGB((255*2/2), math.floor(215.49), 0)
-hl.FillTransparency = 0.(7+19-16)
-hl.OutlineTransparency = 0.0x5
-hl.Parent = _I1101Ol0l00O10.Character
-end
-end
-end
-end))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("58A585F4DA40B8"), math.floor(3.92))
-___OI0OOlIO(_Wc6TM6sBknLP("762E31366552252311464701284D1132"))
-local cc = _O1I11OlIl1:FindFirstChild(_Wc6TM6sBknLP("633A34345C7C39123B62"))
-if cc then cc:Destroy() end
-for _, _I1101Ol0l00O10 in pairs(__IIllO11OO:GetPlayers()) do
-if _I1101Ol0l00O10 ~= ___I0OO0II11I1ll0O and _I1101Ol0l00O10.Character then
-local hl = _I1101Ol0l00O10.Character:FindFirstChild(_Wc6TM6sBknLP("633A34345C7C39123E5443010966"))
-if hl then hl:Destroy() end
-end
-end
-end
-end,
-})
-local ___IOll1lI100 = ___O1Ol1IIIl0:Tab({
-Title = "传送",
-Icon = _Wc6TM6sBknLP("5D3A2D77585A3B"),
-})
-local _lI0Ill10 = ___IOll1lI100:Section({ Title = _Wc6TM6sBknLP("105A1034") })
-local function _lIlllIl011(pos)
-local root = ___lI0010OO()
-if not root then return (not _tWSSP7lm) end
-pcall(function()
-root.CFrame = CFrame.new(pos)
-end)
-return (not not _tWSSP7lm)
-end
-local function _01O1lIIOl0OOOlI(...)
-local root = ___lI0010OO()
-if not root then return (not _tWSSP7lm) end
-local _0lI01IIOOIlIO1O = {...}
-for _, obj in pairs(_III1IIII0IOIlI:GetDescendants()) do
-if obj:IsA(_Wc6TM6sBknLP("723A2E3F7852271F")) then
-local ___I011OIl11Il1I = string.lower(obj.Name)
-for _, searchName in pairs(_0lI01IIOOIlIO1O) do
-if ___I011OIl11Il1I:match(string.lower(searchName)) then
-return _lIlllIl011(obj.Position + Vector3.new(0, 0x3, 0))
-end
-end
-end
-end
-return (not _tWSSP7lm)
-end
-_lI0Ill10:Button({
-Title = _Wc6TM6sBknLP("105A6D613009"),
-Callback = function()
-if _01O1lIIOl0OOOlI("战场", _Wc6TM6sBknLP("523A292E4456"), _Wc6TM6sBknLP("5129383449"), _Wc6TM6sBknLP("5D3A3434")) then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("C27B5C6A132B6F"), 0x3)
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("1A256D6130091805"), (3*3/4))
-end
-end,
-})
-_lI0Ill10:Button({
-Title = _Wc6TM6sBknLP("105A6DF7EB09"),
-Callback = function()
-if _01O1lIIOl0OOOlI("训练", _Wc6TM6sBknLP("44293C3346"), _Wc6TM6sBknLP("40293C395C5A360E")) then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("C27B5C6A85F06F"), (3*2/4))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("1A256DF7EB091805"), math.floor(3.70))
-end
-end,
-})
-_lI0Ill10:Button({
-Title = _Wc6TM6sBknLP("105A6D1CBF"),
-Callback = function()
-if _01O1lIIOl0OOOlI("商店", _Wc6TM6sBknLP("4333322A"), _Wc6TM6sBknLP("432F32284D")) then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("C27B5C6A6EA4"), math.floor(3.76))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("1A256D1CBF7E3B"), math.floor(3.37))
-end
-end,
-})
-_lI0Ill10:Button({
-Title = _Wc6TM6sBknLP("105A6D3C40A4"),
-Callback = function()
-if _01O1lIIOl0OOOlI("武器", _Wc6TM6sBknLP("473E3C2A475D")) then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("C27B5C6A4E5BC2"), (3+8-12))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("1A256D3C40A41805"), math.floor(3.10))
-end
-end,
-})
-_lI0Ill10:Button({
-Title = _Wc6TM6sBknLP("105A6DDAD5A4"),
-Callback = function()
-if _01O1lIIOl0OOOlI("技能", _Wc6TM6sBknLP("4330343644")) then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("C27B5C6AA8CEC2"), (3+3-11))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("1A256DDAD5A41805"), (3+7-3))
-end
-end,
-})
-_lI0Ill10:Button({
-Title = _Wc6TM6sBknLP("105A6D973709"),
-Callback = function()
-if _01O1lIIOl0OOOlI("重生", _Wc6TM6sBknLP("432B3C2D46"), _Wc6TM6sBknLP("423E2E2A49443B")) then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("C27B5C6AE52C6F"), (3*3/3))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("1A256D9737091805"), (3*4/3))
-end
-end,
-})
-_lI0Ill10:Button({
-Title = _Wc6TM6sBknLP("105A6D84A8093088"),
-Callback = function()
-if _01O1lIIOl0OOOlI("竞技", _Wc6TM6sBknLP("5129383449"), _Wc6TM6sBknLP("55352928495D360E")) then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("C27B5C6AF6B36F0E9B"), (3+5-17))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("1A256D84A8093088354F"), math.floor(3.64))
-end
-end,
-})
-_lI0Ill10:Button({
-Title = _Wc6TM6sBknLP("105A6D5AF99AE3"),
-Callback = function()
-local __OlI0110I = ___1O1Ill0ll(math.huge)
-if __OlI0110I and __OlI0110I.Character then
-local _lI1O00lI = __OlI0110I.Character:FindFirstChild(_Wc6TM6sBknLP("782E303B465C3C0F2A4E4019114B0B32"))
-if _lI1O00lI then
-_lIlllIl011(_lI1O00lI.Position + Vector3.new(0, math.floor(3.10), 0))
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("C27B5C6A1213") .. __OlI0110I.Name, (3*4/3))
-end
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("1A256DF39E"), (3*2/4))
-end
-end,
-})
-_lI0Ill10:Toggle({
-Title = _Wc6TM6sBknLP("4F527D5B"),
-Callback = function(state)
-_llIIllOI.LongPressTeleport = state
-if state then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("4F527D5BDA337A4B5501969671485947"), (3+9-1))
-___I111OOOlOll(_Wc6TM6sBknLP("7C34333D784130180B754A01245A163444"), __l11ll0lO0O.InputBegan:Connect(function(input, gameProcessed)
-if gameProcessed then return end
-if input.UserInputType == Enum.UserInputType.MouseButton1
-or input.UserInputType == Enum.UserInputType.Touch then
-local root = ___lI0010OO()
-if not root then return end
-local ___1Ol0llOOOlOl110 = _1O10IO111lOlI0.Hit.Position
-_lIlllIl011(___1Ol0llOOOlOl110 + Vector3.new(0, math.floor(3.11), 0))
-end
-end))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("4F527D5BDA40B8"), 0x3)
-___OI0OOlIO(_Wc6TM6sBknLP("7C34333D784130180B754A01245A163444"))
-end
-end,
-})
-local __O0IIll1l0Ol = ___O1Ol1IIIl0:Tab({
-Title = "实用",
-Icon = _Wc6TM6sBknLP("433E292E415D3218"),
-})
-local _0OOl10lO1II100O = __O0IIll1l0Ol:Section({ Title = _Wc6TM6sBknLP("AE73B82D") })
-_0OOl10lO1II100O:Toggle({
-Title = "防挂机",
-Callback = function(state)
-_llIIllOI.AntiAFK = state
-if state then
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("025967A8281C"), math.floor(3.47))
-local __OIl0lI01OIlIO0 = game:GetService(_Wc6TM6sBknLP("6F04121344033922481060242D633676"))
-___I111OOOlOll(_Wc6TM6sBknLP("7135293369751E"), ___I0OO0II11I1ll0O.Idled:Connect(function()
-pcall(function()
-__OIl0lI01OIlIO0:CaptureController()
-__OIl0lI01OIlIO0:ClickButton1(Vector2.new())
-end)
-end))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("025967A85BDE"), (3+20-6))
-___OI0OOlIO(_Wc6TM6sBknLP("7135293369751E"))
-end
-end,
-})
-_0OOl10lO1II100O:Button({
-Title = _Wc6TM6sBknLP("0B738D45"),
-Callback = function()
-pcall(function()
-_O1I11OlIl1.GlobalShadows = (not not _tWSSP7lm)
-_O1I11OlIl1.FogEnd = 1000000
-for _, obj in pairs(_O1I11OlIl1:GetChildren()) do
-if obj:IsA(_Wc6TM6sBknLP("723728286D55330E1B55")) then
-obj:Destroy()
-end
-end
-__llI1l00IIOlI1.FieldOfView = math.floor(70.22)
-for _, obj in pairs(_III1IIII0IOIlI:GetDescendants()) do
-if obj:IsA(_Wc6TM6sBknLP("603A2F2E4150390E3D4C4619354F0B")) or obj:IsA(_Wc6TM6sBknLP("64293C3344")) or obj:IsA(_Wc6TM6sBknLP("723E3C37")) then
-obj.Enabled = (not _tWSSP7lm)
-end
-end
-end)
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("0B738D45A423"), math.floor(3.31))
-end,
-})
-_0OOl10lO1II100O:Button({
-Title = "换服",
-Callback = function()
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("53733F57061D7B"), math.floor(3.37))
-pcall(function()
-_lO01OIO1Il011:Teleport(game.PlaceId, ___I0OO0II11I1ll0O)
-end)
-end,
-})
-_0OOl10lO1II100O:Button({
-Title = _Wc6TM6sBknLP("3D6D50FB40C4"),
-Callback = function()
-local __Oll0lO0I0 = game.JobId
-if setclipboard then
-setclipboard(__Oll0lO0I0)
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("3DFA35ADDA3E635158") .. __Oll0lO0I0, (5*2/4))
-else
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("3DFA35AD1213") .. __Oll0lO0I0, (10+19-12))
-end
-end,
-})
-_0OOl10lO1II100O:Button({
-Title = _Wc6TM6sBknLP("E229BC35"),
-Callback = function()
-local char = ___l01I01II()
-local hum = _0O1Ol00l11()
-local root = ___lI0010OO()
-local info = {}
-table.insert(info, _Wc6TM6sBknLP("3D0C677A") .. ___I0OO0II11I1ll0O.Name)
-table.insert(info, _Wc6TM6sBknLP("6528382861576F4B") .. ___I0OO0II11I1ll0O.UserId)
-if hum then
-table.insert(info, _Wc6TM6sBknLP("7094677A") .. math.floor(hum.Health) .. "/" .. math.floor(hum.MaxHealth))
-table.insert(info, _Wc6TM6sBknLP("2FFD677A") .. hum.WalkSpeed)
-table.insert(info, _Wc6TM6sBknLP("C398C66008") .. hum.JumpPower)
-end
-if root then
-table.insert(info, _Wc6TM6sBknLP("7D35677A") .. tostring(root.Position))
-end
-table.insert(info, _Wc6TM6sBknLP("7A343F134C0975") .. game.JobId)
-__IlI0O0OIlII("圣奥里_Wc6TM6sBknLP("1C7B293B4A5F30451B4E410E205E512F5E3D327608")\n"), 0xa)
-end,
-})
-_0OOl10lO1II100O:Button({
-Title = _Wc6TM6sBknLP("355D2412"),
-Callback = function()
-local _1lOI0OIO1II = 0
-for _, obj in pairs(_III1IIII0IOIlI:GetDescendants()) do
-if obj:IsA(_Wc6TM6sBknLP("603A2F2E4150390E3D4C4619354F0B")) or obj:IsA(_Wc6TM6sBknLP("64293C3344")) or obj:IsA(_Wc6TM6sBknLP("723E3C37")) or obj:IsA(_Wc6TM6sBknLP("75232D3647403C0416")) then
-pcall(function() obj.Enabled = (not _tWSSP7lm) end)
-_1lOI0OIO1II = _1lOI0OIO1II + 1
-end
-end
-for _, obj in pairs(_O1I11OlIl1:GetChildren()) do
-if obj:IsA(_Wc6TM6sBknLP("60342E2E6D55330E1B55")) then
-pcall(function() obj:Destroy() end)
-_1lOI0OIO1II = _1lOI0OIO1II + 1
-end
-end
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("C25E5B7A") .. _1lOI0OIO1II .. _Wc6TM6sBknLP("10712412"), (3+11-18))
-end,
-})
-_0OOl10lO1II100O:Button({
-Title = _Wc6TM6sBknLP("48264776"),
-Callback = function()
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("53732527321F7B4556"), (3*4/2))
-for k, v in pairs(_llIIllOI) do
-if type(v) == _Wc6TM6sBknLP("523432364D523B") then
-_llIIllOI[k] = (not _tWSSP7lm)
-end
-end
-for name, conn in pairs(__11II0OlIl) do
-pcall(function() conn:Disconnect() end)
-__11II0OlIl[name] = nil
-end
-for _I1101Ol0l00O10, _ in pairs(_100OI10I00I0I0l) do
-__Ol10l11III1(_I1101Ol0l00O10)
-end
-for _, _I1101Ol0l00O10 in pairs(__IIllO11OO:GetPlayers()) do
-if _I1101Ol0l00O10 ~= ___I0OO0II11I1ll0O and _I1101Ol0l00O10.Character then
-for _, obj in pairs(_I1101Ol0l00O10.Character:GetChildren()) do
-if obj:IsA(_Wc6TM6sBknLP("78323A32445A32030C")) then
-pcall(function() obj:Destroy() end)
-end
-end
-end
-end
-local cc = _O1I11OlIl1:FindFirstChild(_Wc6TM6sBknLP("633A34345C7C39123B62"))
-if cc then pcall(function() cc:Destroy() end) end
-for _, line in pairs(___1l1111OOO1) do
-pcall(function() line:Remove() end)
-end
-___1l1111OOO1 = {}
-pcall(function()
-_I10I1IIl:SendKeyEvent((not _tWSSP7lm), Enum.KeyCode.F, (not _tWSSP7lm), game)
-_I10I1IIl:SendKeyEvent((not _tWSSP7lm), Enum.KeyCode.Q, (not _tWSSP7lm), game)
-_I10I1IIl:SendKeyEvent((not _tWSSP7lm), Enum.KeyCode.E, (not _tWSSP7lm), game)
-end)
-task.wait(0.(5+9-18))
-pcall(function() ___O1Ol1IIIl0:Destroy() end)
-end,
-})
-___I0OO0II11I1ll0O.CharacterAdded:Connect(function()
-task.wait(0.math.floor(5.70))
-local hum = _0O1Ol00l11()
-if hum then
-pcall(function() hum.WalkSpeed = _llIIllOI.WalkSpeed end)
-pcall(function() hum.JumpPower = _llIIllOI.JumpPower end)
-end
-if _llIIllOI.NoClip then
-___OI0OOlIO(_Wc6TM6sBknLP("7E341E364143"))
-___I111OOOlOll(_Wc6TM6sBknLP("7E341E364143"), _IlIIlIl0.Stepped:Connect(function()
-local char = ___l01I01II()
-if not char then return end
-for _, part in pairs(char:GetDescendants()) do
-if part:IsA(_Wc6TM6sBknLP("723A2E3F7852271F")) and part.CanCollide then
-part.CanCollide = (not _tWSSP7lm)
-end
-end
-end))
-end
-if _llIIllOI.ESP then
-for _, _I1101Ol0l00O10 in pairs(__IIllO11OO:GetPlayers()) do
-if _I1101Ol0l00O10 ~= ___I0OO0II11I1ll0O then
-__Ol10l11III1(_I1101Ol0l00O10)
-__IllOOOOI11I0I(_I1101Ol0l00O10)
-end
-end
-end
-end)
-task.wait(0.(5+4-2))
-local _16iDeQ0U52=string.sub("73wB,E@/*{d1CxD",1,0)
-__IlI0O0OIlII("圣奥里", _Wc6TM6sBknLP("2A77AFFA5512"), 0x5)
+
+--========================================================
+-- 加载完成通知
+--========================================================
+task.wait(0.5)
+Notify("圣奥里", "脚本已加载!", 5)

@@ -1,1001 +1,1122 @@
-local _54WynoKz=1~=0
-local _gUsJzbpoF1MZ=function(s)local k="Mg||Dwhs|>K;1fQo"local d=""for i=1,#s,2 dolocal h=string.sub(s,i,i)local l=string.sub(s,i+1,i+1)local hv=tonumber(h,16)local lv=tonumber(l,16)if hv and lv then d=d..string.char(hv*16+lv)end endlocal r=""for i=1,#d do r=r..string.char(string.byte(d,i)~string.byte(k,(i-1)%#k+1))end return r end
-local _1l0OIO11 = loadstring(game:HttpGet("https://raw.githubusercontent.com/finendss/VowLibrary/refs/heads/main/WINDUI.lua"))()
-local _lOOO1IOO = game:GetService(_gUsJzbpoF1MZ("120B33330B46213C33"))
-local __I00000OOlOII = game:GetService(_gUsJzbpoF1MZ("1238354C7447584333712774782F"))
-local __IO0OlllO00I = game:GetService(_gUsJzbpoF1MZ("123835337438041F10717B0B78"))
-local _0111l01OI11OIII = game:GetService(_gUsJzbpoF1MZ("12574D4D751B584233777A0A7E2F1826"))
-local __O0lO00IO0lI = game:GetService(_gUsJzbpoF1MZ("1238334C2838584335717B5778"))
-local ___1l1lI0111O01I = game:GetService(_gUsJzbpoF1MZ("1238234D2846043A4C0F7A0A7E566026"))
-local _l0IOO1lO0OO11O = game:GetService(_gUsJzbpoF1MZ("120B4C350B38591F330E047400571E"))
-local _IlOO0l1lIOOlO0l = game:GetService(_gUsJzbpoF1MZ("122E10330B470442107704745D296103"))
-local ___11IlOOIOIlIOOl = _lOOO1IOO.___11IlOOIOIlIOOl
-local ___OIO00lOOOOOl = _0111l01OI11OIII.CurrentCamera
-local ___lI0O1I01lI1IlIO = ___11IlOOIOIlIOOl:GetMouse()
-do local _ZsNaL1KY=22 end
-local _lll1I1l000Ill = _1l0OIO11:CreateWindow({
-Title = _gUsJzbpoF1MZ("D6A85C3B"),
-Icon = _gUsJzbpoF1MZ("2912111E2612041F"),
-Author = _gUsJzbpoF1MZ("D6A85C3B5E5B"),
-Folder = _gUsJzbpoF1MZ("1E130E192A101C1B305B2C5E5F0222"),
-Size = UDim2.fromOffset((500*2/3), 520),
-Theme = _gUsJzbpoF1MZ("09060E17"),
-HideSearchBar = (not _54WynoKz),
+--========================================================
+-- 力量传奇脚本 v1.0
+-- 框架：WindUI
+--========================================================
+
+local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/finendss/VowLibrary/refs/heads/main/WINDUI.lua"))()
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local Workspace = game:GetService("Workspace")
+local Lighting = game:GetService("Lighting")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local TeleportService = game:GetService("TeleportService")
+local VirtualInputManager = game:GetService("VirtualInputManager")
+
+local LocalPlayer = Players.LocalPlayer
+local Camera = Workspace.CurrentCamera
+local Mouse = LocalPlayer:GetMouse()
+
+local Window = WindUI:CreateWindow({
+    Title = "力量传奇",
+    Icon = "dumbbell",
+    Author = "力量传奇脚本",
+    Folder = "StrengthLegends",
+    Size = UDim2.fromOffset(500, 520),
+    Theme = "Dark",
+    HideSearchBar = false,
 })
-local __lOl00l0OOI1Il01 = _lll1I1l000Ill:Tag({
-Title = _gUsJzbpoF1MZ("7D57464C74"),
-Color = Color3.fromRGB((255+11-1), (100+17-10), 0x64)
+
+-- 时间标签
+local TimeTag = Window:Tag({
+    Title = "00:00",
+    Color = Color3.fromRGB(255, 100, 100)
 })
+
 local hue = 0
 task.spawn(function()
-while (not not _54WynoKz) do
-local now = os.date("*t")
-hue = (hue + 0.01) % 1
-__lOl00l0OOI1Il01:SetTitle(string.format(_gUsJzbpoF1MZ("68574E187E52584118"), now.hour, now.min))
-__lOl00l0OOI1Il01:SetColor(Color3.fromHSV(hue, 1, 1))
-task.wait(0.(6*2/4))
-end
+    while true do
+        local now = os.date("*t")
+        hue = (hue + 0.01) % 1
+        TimeTag:SetTitle(string.format("%02d:%02d", now.hour, now.min))
+        TimeTag:SetColor(Color3.fromHSV(hue, 1, 1))
+        task.wait(0.06)
+    end
 end)
-_lll1I1l000Ill:Tag({ Title = "力量_gUsJzbpoF1MZ("61473F1328181A53411E08545D09235C63010E13293F0D0B54")#FF6464") })
-_lll1I1l000Ill:EditOpenButton({
-Title = _gUsJzbpoF1MZ("D6A85C3B"),
-Icon = _gUsJzbpoF1MZ("2912111E2612041F"),
-CornerRadius = UDim.new(0, math.floor(16.95)),
-StrokeThickness = 0x2,
-Color = ColorSequence.new(Color3.fromHex(_gUsJzbpoF1MZ("0B214A487243"))),
-Draggable = (not not _54WynoKz),
+
+Window:Tag({ Title = "力量", Color = Color3.fromHex("#FF6464") })
+
+Window:EditOpenButton({
+    Title = "力量传奇",
+    Icon = "dumbbell",
+    CornerRadius = UDim.new(0, 16),
+    StrokeThickness = 2,
+    Color = ColorSequence.new(Color3.fromHex("FF6464")),
+    Draggable = true,
 })
-local __01lOIOl1IOI00 = {
-AutoTrain = (not _54WynoKz),
-AutoRebirth = (not _54WynoKz),
-AutoPunch = (not _54WynoKz),
-AutoQuest = (not _54WynoKz),
-AutoCollectCoins = (not _54WynoKz),
-AutoCollectGems = (not _54WynoKz),
-AutoBuyWeights = (not _54WynoKz),
-AutoBuyPets = (not _54WynoKz),
-AutoHatch = (not _54WynoKz),
-FastPunch = (not _54WynoKz),
-WalkSpeed = math.floor(16.19),
-JumpPower = (50*3/3),
-InfJump = (not _54WynoKz),
-Noclip = (not _54WynoKz),
-GodMode = (not _54WynoKz),
-NoFallDamage = (not _54WynoKz),
-ESPEnabled = (not _54WynoKz),
-ESPNames = (not not _54WynoKz),
-ESPDistance = (not not _54WynoKz),
-ESPItems = (not _54WynoKz),
-Fullbright = (not _54WynoKz),
-AntiAFK = (not _54WynoKz),
-FPSBoost = (not _54WynoKz),
+
+--=========== 状态 ===========
+local State = {
+    AutoTrain = false,
+    AutoRebirth = false,
+    AutoPunch = false,
+    AutoQuest = false,
+    AutoCollectCoins = false,
+    AutoCollectGems = false,
+    AutoBuyWeights = false,
+    AutoBuyPets = false,
+    AutoHatch = false,
+    FastPunch = false,
+    WalkSpeed = 16,
+    JumpPower = 50,
+    InfJump = false,
+    Noclip = false,
+    GodMode = false,
+    NoFallDamage = false,
+    ESPEnabled = false,
+    ESPNames = true,
+    ESPDistance = true,
+    ESPItems = false,
+    Fullbright = false,
+    AntiAFK = false,
+    FPSBoost = false,
 }
-local ___l10ll0I0I01OI = {}
-local _1I100II000l0 = {}
-local function _0OIOOOOOOI11OI()
-return ___11IlOOIOIlIOOl.Character
+
+local Connections = {}
+local ESPObjects = {}
+
+--=========== 辅助函数 ===========
+local function GetChar()
+    return LocalPlayer.Character
 end
-local function __111O0Oll11()
-local c = _0OIOOOOOOI11OI()
-return c and c:FindFirstChild(_gUsJzbpoF1MZ("0512111D2A1801172E51244F6107231B")) or nil
+
+local function GetRoot()
+    local c = GetChar()
+    return c and c:FindFirstChild("HumanoidRootPart") or nil
 end
-local function ___101I1O0OI()
-local c = _0OIOOOOOOI11OI()
-return c and c:FindFirstChildOfClass(_gUsJzbpoF1MZ("0512111D2A180117")) or nil
+
+local function GetHum()
+    local c = GetChar()
+    return c and c:FindFirstChildOfClass("Humanoid") or nil
 end
-local function ___0I011IOI(title, content, duration)
-_1l0OIO11:___0I011IOI({ Title = title, Content = content or "", Duration = duration or 0x3 })
+
+local function Notify(title, content, duration)
+    WindUI:Notify({ Title = title, Content = content or "", Duration = duration or 3 })
 end
-local function _IIIOlOll0l10O0(statName)
-local ls = ___11IlOOIOIlIOOl:FindFirstChild(_gUsJzbpoF1MZ("21021D1821051B071D4A38"))
-if ls then
-local stat = ls:FindFirstChild(statName)
-if stat then return stat.Value end
+
+-- 获取 leaderstats
+local function GetStat(statName)
+    local ls = LocalPlayer:FindFirstChild("leaderstats")
+    if ls then
+        local stat = ls:FindFirstChild(statName)
+        if stat then return stat.Value end
+    end
+    return nil
 end
-return nil
-end
-local __10lIl1O0l11I111 = _lll1I1l000Ill:Tab({
-Title = "自动",
-Icon = _gUsJzbpoF1MZ("3D0B1D05"),
+
+--========================================================
+-- Tab1: 自动
+--========================================================
+local AutoTab = Window:Tab({
+    Title = "自动",
+    Icon = "play",
 })
-__10lIl1O0l11I111:Section({ Title = "训练_gUsJzbpoF1MZ("614728193C03303210572C555C033F1B6D5A5C")Left", TextSize = (17*4/4) })
-__10lIl1O0l11I111:Toggle({
-Title = _gUsJzbpoF1MZ("A7CFD1BFDFB8"),
-Default = (not _54WynoKz),
-Callback = function(val)
-__01lOIOl1IOI00.AutoTrain = val
-if val then
-___0I011IOI("自动", _gUsJzbpoF1MZ("A7CFD1BFB67747"), 0x3)
-local ___OOl01llO1lI11 = 0
-___l10ll0I0I01OI.AutoTrain = __I00000OOlOII.Heartbeat:Connect(function()
-if not __01lOIOl1IOI00.AutoTrain then return end
-local now = tick()
-if now - ___OOl01llO1lI11 < math.random(0.(3*4/4), 0.(6+1-2)) then return end
-___OOl01llO1lI11 = now
-pcall(function()
-for _, obj in ipairs(___1l1lI0111O01I:GetDescendants()) do
-if obj:IsA(_gUsJzbpoF1MZ("1F02111330122D0519503F")) then
-local ln = string.lower(obj.Name)
-if string.find(ln, _gUsJzbpoF1MZ("39151D152A")) or string.find(ln, _gUsJzbpoF1MZ("210E1A08")) or string.find(ln, _gUsJzbpoF1MZ("3A02151B2C03"))
-or string.find(ln, _gUsJzbpoF1MZ("3E130E192A101C1B")) or string.find(ln, _gUsJzbpoF1MZ("3D080B1936")) or string.find(ln, _gUsJzbpoF1MZ("281F190E271E1B16")) then
-obj:FireServer()
-end
-end
-if obj:IsA(_gUsJzbpoF1MZ("1F02111330122E06125D3F525E08")) then
-local ln = string.lower(obj.Name)
-if string.find(ln, _gUsJzbpoF1MZ("39151D152A")) or string.find(ln, _gUsJzbpoF1MZ("210E1A08")) or string.find(ln, _gUsJzbpoF1MZ("3E130E192A101C1B")) then
-pcall(function() obj:InvokeServer() end)
-end
-end
-end
-end)
-pcall(function()
-local root = __111O0Oll11()
-if root then
-for _, obj in ipairs(_0111l01OI11OIII:GetDescendants()) do
-if obj:IsA(_gUsJzbpoF1MZ("0F060F1914161A07")) or obj:IsA(_gUsJzbpoF1MZ("0008181928")) then
-local ln = string.lower(obj.Name)
-if string.find(ln, _gUsJzbpoF1MZ("3A02151B2C03")) or string.find(ln, "gym_gUsJzbpoF1MZ("6447130E64041C0115502C15570F3F0B650B125064")dumbbell")
-or string.find(ln, _gUsJzbpoF1MZ("2F060E1E211B04")) or string.find(ln, _gUsJzbpoF1MZ("39151D152A")) or string.find(ln, _gUsJzbpoF1MZ("210E1A08")) then
-local part = obj:IsA(_gUsJzbpoF1MZ("0F060F1914161A07")) and obj or obj:FindFirstChildWhichIsA(_gUsJzbpoF1MZ("0F060F1914161A07"))
-if part then
-local dist = (root.Position - part.Position).Magnitude
-if dist < (50+16-16) then
-_IlOO0l1lIOOlO0l:SendMouseButtonEvent(___lI0O1I01lI1IlIO.X, ___lI0O1I01lI1IlIO.Y, 0, (not not _54WynoKz), game, 1)
-task.wait(0.0x2)
-_IlOO0l1lIOOlO0l:SendMouseButtonEvent(___lI0O1I01lI1IlIO.X, ___lI0O1I01lI1IlIO.Y, 0, (not _54WynoKz), game, 1)
-end
-end
-end
-end
-end
-end
-end)
-pcall(function()
-local root = __111O0Oll11()
-if root then
-for _, obj in ipairs(_0111l01OI11OIII:GetDescendants()) do
-if obj:IsA(_gUsJzbpoF1MZ("0F060F1914161A07")) then
-local ln = string.lower(obj.Name)
-if string.find(ln, _gUsJzbpoF1MZ("3A02151B2C03")) or string.find(ln, "gym_gUsJzbpoF1MZ("6447130E64041C0115502C15570F3F0B650B125064")dumbbell")
-or string.find(ln, _gUsJzbpoF1MZ("2F060E1E211B04")) or string.find(ln, _gUsJzbpoF1MZ("39151D152A")) then
-local dist = (root.Position - obj.Position).Magnitude
-if dist < (30*2/3) then
-obj.CFrame = root.CFrame
-end
-end
-end
-end
-end
-end)
-end)
-else
-if ___l10ll0I0I01OI.AutoTrain then ___l10ll0I0I01OI.AutoTrain:Disconnect() ___l10ll0I0I01OI.AutoTrain = nil end
-___0I011IOI("自动", _gUsJzbpoF1MZ("A7CFD1BFB60485"), 0x3)
-end
-end,
+
+AutoTab:Section({ Title = "训练", TextXAlignment = "Left", TextSize = 17 })
+
+-- 自动训练 (举重)
+AutoTab:Toggle({
+    Title = "自动训练力量",
+    Default = false,
+    Callback = function(val)
+        State.AutoTrain = val
+        if val then
+            Notify("自动", "自动训练已开启", 3)
+            local lastTrain = 0
+            Connections.AutoTrain = RunService.Heartbeat:Connect(function()
+                if not State.AutoTrain then return end
+                local now = tick()
+                if now - lastTrain < math.random(0.3, 0.6) then return end
+                lastTrain = now
+
+                -- 方法1: 触发训练 Remote
+                pcall(function()
+                    for _, obj in ipairs(ReplicatedStorage:GetDescendants()) do
+                        if obj:IsA("RemoteEvent") then
+                            local ln = string.lower(obj.Name)
+                            if string.find(ln, "train") or string.find(ln, "lift") or string.find(ln, "weight")
+                                or string.find(ln, "strength") or string.find(ln, "power") or string.find(ln, "exercise") then
+                                obj:FireServer()
+                            end
+                        end
+                        if obj:IsA("RemoteFunction") then
+                            local ln = string.lower(obj.Name)
+                            if string.find(ln, "train") or string.find(ln, "lift") or string.find(ln, "strength") then
+                                pcall(function() obj:InvokeServer() end)
+                            end
+                        end
+                    end
+                end)
+
+                -- 方法2: 模拟点击训练区域
+                pcall(function()
+                    local root = GetRoot()
+                    if root then
+                        for _, obj in ipairs(Workspace:GetDescendants()) do
+                            if obj:IsA("BasePart") or obj:IsA("Model") then
+                                local ln = string.lower(obj.Name)
+                                if string.find(ln, "weight") or string.find(ln, "gym") or string.find(ln, "dumbbell")
+                                    or string.find(ln, "barbell") or string.find(ln, "train") or string.find(ln, "lift") then
+                                    local part = obj:IsA("BasePart") and obj or obj:FindFirstChildWhichIsA("BasePart")
+                                    if part then
+                                        local dist = (root.Position - part.Position).Magnitude
+                                        if dist < 50 then
+                                            VirtualInputManager:SendMouseButtonEvent(Mouse.X, Mouse.Y, 0, true, game, 1)
+                                            task.wait(0.02)
+                                            VirtualInputManager:SendMouseButtonEvent(Mouse.X, Mouse.Y, 0, false, game, 1)
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end)
+
+                -- 方法3: 触碰训练点
+                pcall(function()
+                    local root = GetRoot()
+                    if root then
+                        for _, obj in ipairs(Workspace:GetDescendants()) do
+                            if obj:IsA("BasePart") then
+                                local ln = string.lower(obj.Name)
+                                if string.find(ln, "weight") or string.find(ln, "gym") or string.find(ln, "dumbbell")
+                                    or string.find(ln, "barbell") or string.find(ln, "train") then
+                                    local dist = (root.Position - obj.Position).Magnitude
+                                    if dist < 30 then
+                                        obj.CFrame = root.CFrame
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end)
+            end)
+        else
+            if Connections.AutoTrain then Connections.AutoTrain:Disconnect() Connections.AutoTrain = nil end
+            Notify("自动", "自动训练已关闭", 3)
+        end
+    end,
 })
-__10lIl1O0l11I111:Toggle({
-Title = _gUsJzbpoF1MZ("A7CF1063"),
-Default = (not _54WynoKz),
-Callback = function(val)
-__01lOIOl1IOI00.AutoRebirth = val
-if val then
-___0I011IOI("自动", _gUsJzbpoF1MZ("A7CF1063B67747"), math.floor(3.43))
-local _0lIlOO0I1l = 0
-___l10ll0I0I01OI.AutoRebirth = __I00000OOlOII.Heartbeat:Connect(function()
-if not __01lOIOl1IOI00.AutoRebirth then return end
-local now = tick()
-if now - _0lIlOO0I1l < math.random(math.floor(3.28), (6*4/4)) then return end
-_0lIlOO0I1l = now
-pcall(function()
-for _, obj in ipairs(___1l1lI0111O01I:GetDescendants()) do
-if obj:IsA(_gUsJzbpoF1MZ("1F02111330122D0519503F")) then
-local ln = string.lower(obj.Name)
-if string.find(ln, _gUsJzbpoF1MZ("3F021E15360300")) or string.find(ln, _gUsJzbpoF1MZ("3D15190F301E0F16")) or string.find(ln, _gUsJzbpoF1MZ("2C141F192A13")) then
-obj:FireServer()
-end
-end
-if obj:IsA(_gUsJzbpoF1MZ("1F02111330122E06125D3F525E08")) then
-local ln = string.lower(obj.Name)
-if string.find(ln, _gUsJzbpoF1MZ("3F021E15360300")) or string.find(ln, _gUsJzbpoF1MZ("3D15190F301E0F16")) then
-pcall(function() obj:InvokeServer() end)
-end
-end
-end
-end)
-end)
-else
-if ___l10ll0I0I01OI.AutoRebirth then ___l10ll0I0I01OI.AutoRebirth:Disconnect() ___l10ll0I0I01OI.AutoRebirth = nil end
-___0I011IOI("自动", _gUsJzbpoF1MZ("A7CF1063B60485"), (3+16-18))
-end
-end,
+
+-- 自动转生
+AutoTab:Toggle({
+    Title = "自动转生",
+    Default = false,
+    Callback = function(val)
+        State.AutoRebirth = val
+        if val then
+            Notify("自动", "自动转生已开启", 3)
+            local lastRebirth = 0
+            Connections.AutoRebirth = RunService.Heartbeat:Connect(function()
+                if not State.AutoRebirth then return end
+                local now = tick()
+                if now - lastRebirth < math.random(3, 6) then return end
+                lastRebirth = now
+
+                pcall(function()
+                    for _, obj in ipairs(ReplicatedStorage:GetDescendants()) do
+                        if obj:IsA("RemoteEvent") then
+                            local ln = string.lower(obj.Name)
+                            if string.find(ln, "rebirth") or string.find(ln, "prestige") or string.find(ln, "ascend") then
+                                obj:FireServer()
+                            end
+                        end
+                        if obj:IsA("RemoteFunction") then
+                            local ln = string.lower(obj.Name)
+                            if string.find(ln, "rebirth") or string.find(ln, "prestige") then
+                                pcall(function() obj:InvokeServer() end)
+                            end
+                        end
+                    end
+                end)
+            end)
+        else
+            if Connections.AutoRebirth then Connections.AutoRebirth:Disconnect() Connections.AutoRebirth = nil end
+            Notify("自动", "自动转生已关闭", 3)
+        end
+    end,
 })
-__10lIl1O0l11I111:Divider()
-__10lIl1O0l11I111:Section({ Title = "战斗_gUsJzbpoF1MZ("614728193C03303210572C555C033F1B6D5A5C")Left", TextSize = (17+6-15) })
-__10lIl1O0l11I111:Toggle({
-Title = _gUsJzbpoF1MZ("A7CF2F8F"),
-Default = (not _54WynoKz),
-Callback = function(val)
-__01lOIOl1IOI00.AutoPunch = val
-if val then
-___0I011IOI("自动", _gUsJzbpoF1MZ("A7CF2F8FB67747"), (3+19-5))
-local ___01l1l11l100 = 0
-___l10ll0I0I01OI.AutoPunch = __I00000OOlOII.Heartbeat:Connect(function()
-if not __01lOIOl1IOI00.AutoPunch then return end
-local now = tick()
-if now - ___01l1l11l100 < math.random(0.(4*2/4), 0.math.floor(8.70)) then return end
-___01l1l11l100 = now
-pcall(function()
-local char = _0OIOOOOOOI11OI()
-if char then
-local tool = char:FindFirstChildOfClass(_gUsJzbpoF1MZ("19081310"))
-if tool then
-tool:Activate()
-else
-_IlOO0l1lIOOlO0l:SendMouseButtonEvent(___lI0O1I01lI1IlIO.X, ___lI0O1I01lI1IlIO.Y, 0, (not not _54WynoKz), game, 1)
-task.wait(0.math.floor(2.74))
-_IlOO0l1lIOOlO0l:SendMouseButtonEvent(___lI0O1I01lI1IlIO.X, ___lI0O1I01lI1IlIO.Y, 0, (not _54WynoKz), game, 1)
-end
-end
-end)
-pcall(function()
-for _, obj in ipairs(___1l1lI0111O01I:GetDescendants()) do
-if obj:IsA(_gUsJzbpoF1MZ("1F02111330122D0519503F")) then
-local ln = string.lower(obj.Name)
-if string.find(ln, _gUsJzbpoF1MZ("3D12121F2C")) or string.find(ln, "hit_gUsJzbpoF1MZ("6447130E64041C0115502C15570F3F0B650B125064")attack")
-or string.find(ln, _gUsJzbpoF1MZ("2B0E1B1430")) or string.find(ln, _gUsJzbpoF1MZ("3D080B1936")) then
-obj:FireServer()
-end
-end
-end
-end)
-end)
-else
-if ___l10ll0I0I01OI.AutoPunch then ___l10ll0I0I01OI.AutoPunch:Disconnect() ___l10ll0I0I01OI.AutoPunch = nil end
-___0I011IOI("自动", _gUsJzbpoF1MZ("A7CF2F8FB60485"), (3+12-13))
-end
-end,
+
+AutoTab:Divider()
+AutoTab:Section({ Title = "战斗", TextXAlignment = "Left", TextSize = 17 })
+
+-- 自动打拳 (攻击力提升)
+AutoTab:Toggle({
+    Title = "自动打拳",
+    Default = false,
+    Callback = function(val)
+        State.AutoPunch = val
+        if val then
+            Notify("自动", "自动打拳已开启", 3)
+            local lastPunch = 0
+            Connections.AutoPunch = RunService.Heartbeat:Connect(function()
+                if not State.AutoPunch then return end
+                local now = tick()
+                if now - lastPunch < math.random(0.4, 0.8) then return end
+                lastPunch = now
+
+                -- 模拟点击攻击
+                pcall(function()
+                    local char = GetChar()
+                    if char then
+                        local tool = char:FindFirstChildOfClass("Tool")
+                        if tool then
+                            tool:Activate()
+                        else
+                            VirtualInputManager:SendMouseButtonEvent(Mouse.X, Mouse.Y, 0, true, game, 1)
+                            task.wait(0.02)
+                            VirtualInputManager:SendMouseButtonEvent(Mouse.X, Mouse.Y, 0, false, game, 1)
+                        end
+                    end
+                end)
+
+                -- 触发攻击 Remote
+                pcall(function()
+                    for _, obj in ipairs(ReplicatedStorage:GetDescendants()) do
+                        if obj:IsA("RemoteEvent") then
+                            local ln = string.lower(obj.Name)
+                            if string.find(ln, "punch") or string.find(ln, "hit") or string.find(ln, "attack")
+                                or string.find(ln, "fight") or string.find(ln, "power") then
+                                obj:FireServer()
+                            end
+                        end
+                    end
+                end)
+            end)
+        else
+            if Connections.AutoPunch then Connections.AutoPunch:Disconnect() Connections.AutoPunch = nil end
+            Notify("自动", "自动打拳已关闭", 3)
+        end
+    end,
 })
-__10lIl1O0l11I111:Toggle({
-Title = _gUsJzbpoF1MZ("A678868F"),
-Default = (not _54WynoKz),
-Callback = function(val)
-__01lOIOl1IOI00.FastPunch = val
-if val then
-___0I011IOI("自动", _gUsJzbpoF1MZ("A678868FB67747"), (3+16-4))
-___l10ll0I0I01OI.FastPunch = __I00000OOlOII.Heartbeat:Connect(function()
-if not __01lOIOl1IOI00.FastPunch then return end
-if __IO0OlllO00I:IsMouseButtonPressed(Enum.UserInputType.MouseButton1)
-or __IO0OlllO00I:IsMouseButtonPressed(Enum.UserInputType.Touch) then
-local char = _0OIOOOOOOI11OI()
-if char then
-local tool = char:FindFirstChildOfClass(_gUsJzbpoF1MZ("19081310"))
-if tool then
-pcall(function() tool:Activate() end)
-end
-end
-end
-end)
-else
-if ___l10ll0I0I01OI.FastPunch then ___l10ll0I0I01OI.FastPunch:Disconnect() ___l10ll0I0I01OI.FastPunch = nil end
-___0I011IOI("自动", _gUsJzbpoF1MZ("A678868FB60485"), (3+9-18))
-end
-end,
+
+-- 快速出拳
+AutoTab:Toggle({
+    Title = "快速出拳",
+    Default = false,
+    Callback = function(val)
+        State.FastPunch = val
+        if val then
+            Notify("自动", "快速出拳已开启", 3)
+            Connections.FastPunch = RunService.Heartbeat:Connect(function()
+                if not State.FastPunch then return end
+                if UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1)
+                    or UserInputService:IsMouseButtonPressed(Enum.UserInputType.Touch) then
+                    local char = GetChar()
+                    if char then
+                        local tool = char:FindFirstChildOfClass("Tool")
+                        if tool then
+                            pcall(function() tool:Activate() end)
+                        end
+                    end
+                end
+            end)
+        else
+            if Connections.FastPunch then Connections.FastPunch:Disconnect() Connections.FastPunch = nil end
+            Notify("自动", "快速出拳已关闭", 3)
+        end
+    end,
 })
-__10lIl1O0l11I111:Toggle({
-Title = _gUsJzbpoF1MZ("A7CF2687E5"),
-Default = (not _54WynoKz),
-Callback = function(val)
-__01lOIOl1IOI00.AutoQuest = val
-if val then
-___0I011IOI("自动", _gUsJzbpoF1MZ("A7CF2687E585685C"), (3+4-20))
-local ___0IIIO0l00 = 0
-___l10ll0I0I01OI.AutoQuest = __I00000OOlOII.Heartbeat:Connect(function()
-if not __01lOIOl1IOI00.AutoQuest then return end
-local now = tick()
-if now - ___0IIIO0l00 < math.random((2+5-13), math.floor(4.49)) then return end
-___0IIIO0l00 = now
-pcall(function()
-for _, obj in ipairs(___1l1lI0111O01I:GetDescendants()) do
-if obj:IsA(_gUsJzbpoF1MZ("1F02111330122D0519503F")) then
-local ln = string.lower(obj.Name)
-if string.find(ln, _gUsJzbpoF1MZ("3C12190F30")) or string.find(ln, _gUsJzbpoF1MZ("200E0F0F2D1806")) or string.find(ln, _gUsJzbpoF1MZ("39060F17")) then
-obj:FireServer()
-end
-end
-if obj:IsA(_gUsJzbpoF1MZ("1F02111330122E06125D3F525E08")) then
-local ln = string.lower(obj.Name)
-if string.find(ln, _gUsJzbpoF1MZ("3C12190F30")) or string.find(ln, _gUsJzbpoF1MZ("200E0F0F2D1806")) then
-pcall(function() obj:InvokeServer() end)
-end
-end
-end
-end)
-end)
-else
-if ___l10ll0I0I01OI.AutoQuest then ___l10ll0I0I01OI.AutoQuest:Disconnect() ___l10ll0I0I01OI.AutoQuest = nil end
-___0I011IOI("自动", _gUsJzbpoF1MZ("A7CF2687E5851B9E"), (3*2/4))
-end
-end,
+
+-- 自动做任务
+AutoTab:Toggle({
+    Title = "自动做任务",
+    Default = false,
+    Callback = function(val)
+        State.AutoQuest = val
+        if val then
+            Notify("自动", "自动做任务已开启", 3)
+            local lastQuest = 0
+            Connections.AutoQuest = RunService.Heartbeat:Connect(function()
+                if not State.AutoQuest then return end
+                local now = tick()
+                if now - lastQuest < math.random(2, 4) then return end
+                lastQuest = now
+
+                pcall(function()
+                    for _, obj in ipairs(ReplicatedStorage:GetDescendants()) do
+                        if obj:IsA("RemoteEvent") then
+                            local ln = string.lower(obj.Name)
+                            if string.find(ln, "quest") or string.find(ln, "mission") or string.find(ln, "task") then
+                                obj:FireServer()
+                            end
+                        end
+                        if obj:IsA("RemoteFunction") then
+                            local ln = string.lower(obj.Name)
+                            if string.find(ln, "quest") or string.find(ln, "mission") then
+                                pcall(function() obj:InvokeServer() end)
+                            end
+                        end
+                    end
+                end)
+            end)
+        else
+            if Connections.AutoQuest then Connections.AutoQuest:Disconnect() Connections.AutoQuest = nil end
+            Notify("自动", "自动做任务已关闭", 3)
+        end
+    end,
 })
-__10lIl1O0l11I111:Divider()
-__10lIl1O0l11I111:Section({ Title = "收集_gUsJzbpoF1MZ("614728193C03303210572C555C033F1B6D5A5C")Left", TextSize = (17+17-4) })
-__10lIl1O0l11I111:Toggle({
-Title = _gUsJzbpoF1MZ("A7CF4ABA9576"),
-Default = (not _54WynoKz),
-Callback = function(val)
-__01lOIOl1IOI00.AutoCollectCoins = val
-if val then
-___0I011IOI("自动", _gUsJzbpoF1MZ("A7CF4ABA95769A7353"), (3+3-13))
-___l10ll0I0I01OI.AutoCoins = __I00000OOlOII.Heartbeat:Connect(function()
-if not __01lOIOl1IOI00.AutoCollectCoins then return end
-local root = __111O0Oll11()
-if not root then return end
-for _, obj in ipairs(_0111l01OI11OIII:GetDescendants()) do
-if obj:IsA(_gUsJzbpoF1MZ("0F060F1914161A07")) then
-local ln = string.lower(obj.Name)
-if string.find(ln, _gUsJzbpoF1MZ("2E081512")) or string.find(ln, _gUsJzbpoF1MZ("2E060F14")) or string.find(ln, _gUsJzbpoF1MZ("200812193D"))
-or string.find(ln, _gUsJzbpoF1MZ("3D0E1F173107")) or string.find(ln, _gUsJzbpoF1MZ("3F020B1D3613")) then
-pcall(function() obj.CFrame = root.CFrame end)
-end
-end
-end
-pcall(function()
-for _, obj in ipairs(___1l1lI0111O01I:GetDescendants()) do
-if obj:IsA(_gUsJzbpoF1MZ("1F02111330122D0519503F")) then
-local ln = string.lower(obj.Name)
-if string.find(ln, _gUsJzbpoF1MZ("2E08101021141C")) or string.find(ln, _gUsJzbpoF1MZ("2E081512")) or string.find(ln, _gUsJzbpoF1MZ("3F020B1D3613")) then
-obj:FireServer()
-end
-end
-end
-end)
-end)
-else
-if ___l10ll0I0I01OI.AutoCoins then ___l10ll0I0I01OI.AutoCoins:Disconnect() ___l10ll0I0I01OI.AutoCoins = nil end
-___0I011IOI("自动", _gUsJzbpoF1MZ("A7CF4ABA95769A0091"), (3*2/4))
-end
-end,
+
+AutoTab:Divider()
+AutoTab:Section({ Title = "收集", TextXAlignment = "Left", TextSize = 17 })
+
+-- 自动收集金币
+AutoTab:Toggle({
+    Title = "自动收集金币",
+    Default = false,
+    Callback = function(val)
+        State.AutoCollectCoins = val
+        if val then
+            Notify("自动", "自动收集金币已开启", 3)
+            Connections.AutoCoins = RunService.Heartbeat:Connect(function()
+                if not State.AutoCollectCoins then return end
+                local root = GetRoot()
+                if not root then return end
+                for _, obj in ipairs(Workspace:GetDescendants()) do
+                    if obj:IsA("BasePart") then
+                        local ln = string.lower(obj.Name)
+                        if string.find(ln, "coin") or string.find(ln, "cash") or string.find(ln, "money")
+                            or string.find(ln, "pickup") or string.find(ln, "reward") then
+                            pcall(function() obj.CFrame = root.CFrame end)
+                        end
+                    end
+                end
+                pcall(function()
+                    for _, obj in ipairs(ReplicatedStorage:GetDescendants()) do
+                        if obj:IsA("RemoteEvent") then
+                            local ln = string.lower(obj.Name)
+                            if string.find(ln, "collect") or string.find(ln, "coin") or string.find(ln, "reward") then
+                                obj:FireServer()
+                            end
+                        end
+                    end
+                end)
+            end)
+        else
+            if Connections.AutoCoins then Connections.AutoCoins:Disconnect() Connections.AutoCoins = nil end
+            Notify("自动", "自动收集金币已关闭", 3)
+        end
+    end,
 })
-__10lIl1O0l11I111:Toggle({
-Title = _gUsJzbpoF1MZ("A7CF4ABAD984"),
-Default = (not _54WynoKz),
-Callback = function(val)
-__01lOIOl1IOI00.AutoCollectGems = val
-if val then
-___0I011IOI("自动", _gUsJzbpoF1MZ("A7CF4ABAD9849A7353"), math.floor(3.97))
-___l10ll0I0I01OI.AutoGems = __I00000OOlOII.Heartbeat:Connect(function()
-if not __01lOIOl1IOI00.AutoCollectGems then return end
-local root = __111O0Oll11()
-if not root then return end
-for _, obj in ipairs(_0111l01OI11OIII:GetDescendants()) do
-if obj:IsA(_gUsJzbpoF1MZ("0F060F1914161A07")) then
-local ln = string.lower(obj.Name)
-if string.find(ln, "gem_gUsJzbpoF1MZ("6447130E64041C0115502C15570F3F0B650B125064")crystal_gUsJzbpoF1MZ("6447130E64041C0115502C15570F3F0B650B125064")diamond_gUsJzbpoF1MZ("6447130E64041C0115502C15570F3F0B650B125064")jewel") then
-pcall(function() obj.CFrame = root.CFrame end)
-end
-end
-end
-pcall(function()
-for _, obj in ipairs(___1l1lI0111O01I:GetDescendants()) do
-if obj:IsA(_gUsJzbpoF1MZ("1F02111330122D0519503F")) then
-local ln = string.lower(obj.Name)
-if string.find(ln, "gem_gUsJzbpoF1MZ("6447130E64041C0115502C15570F3F0B650B125064")crystal") then
-obj:FireServer()
-end
-end
-end
-end)
-end)
-else
-if ___l10ll0I0I01OI.AutoGems then ___l10ll0I0I01OI.AutoGems:Disconnect() ___l10ll0I0I01OI.AutoGems = nil end
-___0I011IOI("自动", _gUsJzbpoF1MZ("A7CF4ABAD9849A0091"), (3*3/4))
-end
-end,
+
+-- 自动收集宝石
+AutoTab:Toggle({
+    Title = "自动收集宝石",
+    Default = false,
+    Callback = function(val)
+        State.AutoCollectGems = val
+        if val then
+            Notify("自动", "自动收集宝石已开启", 3)
+            Connections.AutoGems = RunService.Heartbeat:Connect(function()
+                if not State.AutoCollectGems then return end
+                local root = GetRoot()
+                if not root then return end
+                for _, obj in ipairs(Workspace:GetDescendants()) do
+                    if obj:IsA("BasePart") then
+                        local ln = string.lower(obj.Name)
+                        if string.find(ln, "gem") or string.find(ln, "crystal") or string.find(ln, "diamond") or string.find(ln, "jewel") then
+                            pcall(function() obj.CFrame = root.CFrame end)
+                        end
+                    end
+                end
+                pcall(function()
+                    for _, obj in ipairs(ReplicatedStorage:GetDescendants()) do
+                        if obj:IsA("RemoteEvent") then
+                            local ln = string.lower(obj.Name)
+                            if string.find(ln, "gem") or string.find(ln, "crystal") then
+                                obj:FireServer()
+                            end
+                        end
+                    end
+                end)
+            end)
+        else
+            if Connections.AutoGems then Connections.AutoGems:Disconnect() Connections.AutoGems = nil end
+            Notify("自动", "自动收集宝石已关闭", 3)
+        end
+    end,
 })
-__10lIl1O0l11I111:Divider()
-__10lIl1O0l11I111:Section({ Title = _gUsJzbpoF1MZ("0BF0720952"), TextXAlignment = _gUsJzbpoF1MZ("01021A08"), TextSize = (17*3/2) })
-__10lIl1O0l11I111:Toggle({
-Title = _gUsJzbpoF1MZ("A7CF0CAD87"),
-Default = (not _54WynoKz),
-Callback = function(val)
-__01lOIOl1IOI00.AutoBuyWeights = val
-if val then
-___0I011IOI("自动", _gUsJzbpoF1MZ("A7CF0CAD8785685C"), (3*2/2))
-local __0OO00Ol1 = 0
-___l10ll0I0I01OI.AutoBuyW = __I00000OOlOII.Heartbeat:Connect(function()
-if not __01lOIOl1IOI00.AutoBuyWeights then return end
-local now = tick()
-if now - __0OO00Ol1 < math.random(1, (3+9-10)) then return end
-__0OO00Ol1 = now
-pcall(function()
-for _, obj in ipairs(___1l1lI0111O01I:GetDescendants()) do
-if obj:IsA(_gUsJzbpoF1MZ("1F02111330122D0519503F")) then
-local ln = string.lower(obj.Name)
-if string.find(ln, "buy_gUsJzbpoF1MZ("64471D1220574000084C225556483706230354102A5B48")weight_gUsJzbpoF1MZ("6447130E64041C0115502C15570F3F0B650B125064")dumbbell_gUsJzbpoF1MZ("6447130E64041C0115502C15570F3F0B650B125064")barbell")) then
-obj:FireServer()
-end
-end
-if obj:IsA(_gUsJzbpoF1MZ("1F02111330122E06125D3F525E08")) then
-local ln = string.lower(obj.Name)
-if string.find(ln, "buy_gUsJzbpoF1MZ("64471D1220574000084C225556483706230354102A5B48")weight_gUsJzbpoF1MZ("6447130E64041C0115502C15570F3F0B650B125064")dumbbell")) then
-pcall(function() obj:InvokeServer() end)
-end
-end
-end
-end)
-end)
-else
-if ___l10ll0I0I01OI.AutoBuyW then ___l10ll0I0I01OI.AutoBuyW:Disconnect() ___l10ll0I0I01OI.AutoBuyW = nil end
-___0I011IOI("自动", _gUsJzbpoF1MZ("A7CF0CAD87851B9E"), (3*4/2))
-end
-end,
+
+AutoTab:Divider()
+AutoTab:Section({ Title = "商店与孵化", TextXAlignment = "Left", TextSize = 17 })
+
+-- 自动买哑铃
+AutoTab:Toggle({
+    Title = "自动买哑铃",
+    Default = false,
+    Callback = function(val)
+        State.AutoBuyWeights = val
+        if val then
+            Notify("自动", "自动买哑铃已开启", 3)
+            local lastBuy = 0
+            Connections.AutoBuyW = RunService.Heartbeat:Connect(function()
+                if not State.AutoBuyWeights then return end
+                local now = tick()
+                if now - lastBuy < math.random(1, 3) then return end
+                lastBuy = now
+
+                pcall(function()
+                    for _, obj in ipairs(ReplicatedStorage:GetDescendants()) do
+                        if obj:IsA("RemoteEvent") then
+                            local ln = string.lower(obj.Name)
+                            if string.find(ln, "buy") and (string.find(ln, "weight") or string.find(ln, "dumbbell") or string.find(ln, "barbell")) then
+                                obj:FireServer()
+                            end
+                        end
+                        if obj:IsA("RemoteFunction") then
+                            local ln = string.lower(obj.Name)
+                            if string.find(ln, "buy") and (string.find(ln, "weight") or string.find(ln, "dumbbell")) then
+                                pcall(function() obj:InvokeServer() end)
+                            end
+                        end
+                    end
+                end)
+            end)
+        else
+            if Connections.AutoBuyW then Connections.AutoBuyW:Disconnect() Connections.AutoBuyW = nil end
+            Notify("自动", "自动买哑铃已关闭", 3)
+        end
+    end,
 })
-__10lIl1O0l11I111:Toggle({
-Title = _gUsJzbpoF1MZ("A7CF0CDC2D"),
-Default = (not _54WynoKz),
-Callback = function(val)
-__01lOIOl1IOI00.AutoBuyPets = val
-if val then
-___0I011IOI("自动", _gUsJzbpoF1MZ("A7CF0CDC2D85685C"), (3*2/3))
-local _II1O0Il0O1 = 0
-___l10ll0I0I01OI.AutoBuyP = __I00000OOlOII.Heartbeat:Connect(function()
-if not __01lOIOl1IOI00.AutoBuyPets then return end
-local now = tick()
-if now - _II1O0Il0O1 < math.random((2*3/4), (5*4/2)) then return end
-_II1O0Il0O1 = now
-pcall(function()
-for _, obj in ipairs(___1l1lI0111O01I:GetDescendants()) do
-if obj:IsA(_gUsJzbpoF1MZ("1F02111330122D0519503F")) then
-local ln = string.lower(obj.Name)
-if string.find(ln, "buy_gUsJzbpoF1MZ("64471D1220574000084C225556483706230354102A5B48")pet_gUsJzbpoF1MZ("6447130E64041C0115502C15570F3F0B650B125064")egg")) then
-obj:FireServer()
-end
-end
-if obj:IsA(_gUsJzbpoF1MZ("1F02111330122E06125D3F525E08")) then
-local ln = string.lower(obj.Name)
-if string.find(ln, "buy_gUsJzbpoF1MZ("64471D1220571B070E57255C1F003801294F10126857")pet") then
-pcall(function() obj:InvokeServer() end)
-end
-end
-end
-end)
-end)
-else
-if ___l10ll0I0I01OI.AutoBuyP then ___l10ll0I0I01OI.AutoBuyP:Disconnect() ___l10ll0I0I01OI.AutoBuyP = nil end
-___0I011IOI("自动", _gUsJzbpoF1MZ("A7CF0CDC2D851B9E"), math.floor(3.17))
-end
-end,
+
+-- 自动买宠物
+AutoTab:Toggle({
+    Title = "自动买宠物",
+    Default = false,
+    Callback = function(val)
+        State.AutoBuyPets = val
+        if val then
+            Notify("自动", "自动买宠物已开启", 3)
+            local lastBuyP = 0
+            Connections.AutoBuyP = RunService.Heartbeat:Connect(function()
+                if not State.AutoBuyPets then return end
+                local now = tick()
+                if now - lastBuyP < math.random(2, 5) then return end
+                lastBuyP = now
+
+                pcall(function()
+                    for _, obj in ipairs(ReplicatedStorage:GetDescendants()) do
+                        if obj:IsA("RemoteEvent") then
+                            local ln = string.lower(obj.Name)
+                            if string.find(ln, "buy") and (string.find(ln, "pet") or string.find(ln, "egg")) then
+                                obj:FireServer()
+                            end
+                        end
+                        if obj:IsA("RemoteFunction") then
+                            local ln = string.lower(obj.Name)
+                            if string.find(ln, "buy") and string.find(ln, "pet") then
+                                pcall(function() obj:InvokeServer() end)
+                            end
+                        end
+                    end
+                end)
+            end)
+        else
+            if Connections.AutoBuyP then Connections.AutoBuyP:Disconnect() Connections.AutoBuyP = nil end
+            Notify("自动", "自动买宠物已关闭", 3)
+        end
+    end,
 })
-__10lIl1O0l11I111:Toggle({
-Title = _gUsJzbpoF1MZ("A7CF096AE41EA3"),
-Default = (not _54WynoKz),
-Callback = function(val)
-__01lOIOl1IOI00.AutoHatch = val
-if val then
-___0I011IOI("自动", _gUsJzbpoF1MZ("A7CF096AB67747"), (3+17-19))
-local ___Il0OO11l = 0
-___l10ll0I0I01OI.AutoHatch = __I00000OOlOII.Heartbeat:Connect(function()
-if not __01lOIOl1IOI00.AutoHatch then return end
-local now = tick()
-if now - ___Il0OO11l < math.random(1, math.floor(3.70)) then return end
-___Il0OO11l = now
-pcall(function()
-for _, obj in ipairs(___1l1lI0111O01I:GetDescendants()) do
-if obj:IsA(_gUsJzbpoF1MZ("1F02111330122D0519503F")) then
-local ln = string.lower(obj.Name)
-if string.find(ln, _gUsJzbpoF1MZ("2506081F2C")) or string.find(ln, _gUsJzbpoF1MZ("22171912")) or string.find(ln, "egg") then
-obj:FireServer()
-end
-end
-if obj:IsA(_gUsJzbpoF1MZ("1F02111330122E06125D3F525E08")) then
-local ln = string.lower(obj.Name)
-if string.find(ln, _gUsJzbpoF1MZ("2506081F2C")) or string.find(ln, "egg") then
-pcall(function() obj:InvokeServer() end)
-end
-end
-end
-end)
-end)
-else
-if ___l10ll0I0I01OI.AutoHatch then ___l10ll0I0I01OI.AutoHatch:Disconnect() ___l10ll0I0I01OI.AutoHatch = nil end
-___0I011IOI("自动", _gUsJzbpoF1MZ("A7CF096AB60485"), 0x3)
-end
-end,
+
+-- 自动孵化宠物蛋
+AutoTab:Toggle({
+    Title = "自动孵化宠物蛋",
+    Default = false,
+    Callback = function(val)
+        State.AutoHatch = val
+        if val then
+            Notify("自动", "自动孵化已开启", 3)
+            local lastHatch = 0
+            Connections.AutoHatch = RunService.Heartbeat:Connect(function()
+                if not State.AutoHatch then return end
+                local now = tick()
+                if now - lastHatch < math.random(1, 3) then return end
+                lastHatch = now
+
+                pcall(function()
+                    for _, obj in ipairs(ReplicatedStorage:GetDescendants()) do
+                        if obj:IsA("RemoteEvent") then
+                            local ln = string.lower(obj.Name)
+                            if string.find(ln, "hatch") or string.find(ln, "open") or string.find(ln, "egg") then
+                                obj:FireServer()
+                            end
+                        end
+                        if obj:IsA("RemoteFunction") then
+                            local ln = string.lower(obj.Name)
+                            if string.find(ln, "hatch") or string.find(ln, "egg") then
+                                pcall(function() obj:InvokeServer() end)
+                            end
+                        end
+                    end
+                end)
+            end)
+        else
+            if Connections.AutoHatch then Connections.AutoHatch:Disconnect() Connections.AutoHatch = nil end
+            Notify("自动", "自动孵化已关闭", 3)
+        end
+    end,
 })
-__10lIl1O0l11I111:Button({
-Title = _gUsJzbpoF1MZ("26A84473E194"),
-Callback = function()
-local __IllO00O0 = {}
-for _, obj in ipairs(___1l1lI0111O01I:GetDescendants()) do
-if obj:IsA(_gUsJzbpoF1MZ("1F02111330122D0519503F")) or obj:IsA(_gUsJzbpoF1MZ("1F02111330122E06125D3F525E08")) then
-table.insert(__IllO00O0, obj:GetFullName())
-end
-end
-local msg = #__IllO00O0 > 0 and table.concat(__IllO00O0, "\n_gUsJzbpoF1MZ("6447130E64")未找到接口"
-___0I011IOI(_gUsJzbpoF1MZ("26A8AFE0"), msg, (10+20-20))
-end,
+
+AutoTab:Button({
+    Title = "扫描游戏接口",
+    Callback = function()
+        local results = {}
+        for _, obj in ipairs(ReplicatedStorage:GetDescendants()) do
+            if obj:IsA("RemoteEvent") or obj:IsA("RemoteFunction") then
+                table.insert(results, obj:GetFullName())
+            end
+        end
+        local msg = #results > 0 and table.concat(results, "\n") or "未找到接口"
+        Notify("扫描结果", msg, 10)
+    end,
 })
-local ___1lllO1I101O = _lll1I1l000Ill:Tab({
-Title = "玩家",
-Icon = _gUsJzbpoF1MZ("3814190E"),
+
+--========================================================
+-- Tab2: 玩家
+--========================================================
+local PlayerTab = Window:Tab({
+    Title = "玩家",
+    Icon = "user",
 })
-___1lllO1I101O:Section({ Title = "移动_gUsJzbpoF1MZ("614728193C03303210572C555C033F1B6D5A5C")Left", TextSize = 0x11 })
-___1lllO1I101O:Slider({
-Title = _gUsJzbpoF1MZ("011763DA"),
-Value = { Min = math.floor(16.77), Max = math.floor(500.15), Default = (16*3/3) },
-Increment = 1,
-Callback = function(val)
-__01lOIOl1IOI00.WalkSpeed = val
-local h = ___101I1O0OI()
-if h then h.WalkSpeed = val end
-end,
+
+PlayerTab:Section({ Title = "移动", TextXAlignment = "Left", TextSize = 17 })
+
+PlayerTab:Slider({
+    Title = "行走速度",
+    Value = { Min = 16, Max = 500, Default = 16 },
+    Increment = 1,
+    Callback = function(val)
+        State.WalkSpeed = val
+        local h = GetHum()
+        if h then h.WalkSpeed = val end
+    end,
 })
-___1lllO1I101O:Slider({
-Title = "跳跃力",
-Value = { Min = (50+5-20), Max = (500+8-9), Default = math.floor(50.63) },
-Increment = 1,
-Callback = function(val)
-__01lOIOl1IOI00.JumpPower = val
-local h = ___101I1O0OI()
-if h then
-if h.UseJumpPower then h.JumpPower = val
-else h.JumpHeight = val / math.floor(10.10) end
-end
-end,
+
+PlayerTab:Slider({
+    Title = "跳跃力",
+    Value = { Min = 50, Max = 500, Default = 50 },
+    Increment = 1,
+    Callback = function(val)
+        State.JumpPower = val
+        local h = GetHum()
+        if h then
+            if h.UseJumpPower then h.JumpPower = val
+            else h.JumpHeight = val / 10 end
+        end
+    end,
 })
-___1lllO1I101O:Divider()
-___1lllO1I101O:Toggle({
-Title = _gUsJzbpoF1MZ("AD378FBF"),
-Default = (not _54WynoKz),
-Callback = function(val)
-__01lOIOl1IOI00.InfJump = val
-if val then
-___l10ll0I0I01OI.InfJump = __IO0OlllO00I.JumpRequest:Connect(function()
-local h = ___101I1O0OI()
-if h then h:ChangeState(Enum.HumanoidStateType.Jumping) end
-end)
-else
-if ___l10ll0I0I01OI.InfJump then ___l10ll0I0I01OI.InfJump:Disconnect() ___l10ll0I0I01OI.InfJump = nil end
-end
-end,
+
+PlayerTab:Divider()
+
+PlayerTab:Toggle({
+    Title = "无限跳跃",
+    Default = false,
+    Callback = function(val)
+        State.InfJump = val
+        if val then
+            Connections.InfJump = UserInputService.JumpRequest:Connect(function()
+                local h = GetHum()
+                if h then h:ChangeState(Enum.HumanoidStateType.Jumping) end
+            end)
+        else
+            if Connections.InfJump then Connections.InfJump:Disconnect() Connections.InfJump = nil end
+        end
+    end,
 })
-___1lllO1I101O:Toggle({
-Title = "穿墙",
-Default = (not _54WynoKz),
-Callback = function(val)
-__01lOIOl1IOI00.Noclip = val
-if val then
-___l10ll0I0I01OI.NoClip = __I00000OOlOII.Stepped:Connect(function()
-if not __01lOIOl1IOI00.Noclip then return end
-local c = _0OIOOOOOOI11OI()
-if c then
-for _, p in ipairs(c:GetDescendants()) do
-if p:IsA(_gUsJzbpoF1MZ("0F060F1914161A07")) and p.CanCollide then p.CanCollide = (not _54WynoKz) end
-end
-end
-end)
-else
-if ___l10ll0I0I01OI.NoClip then ___l10ll0I0I01OI.NoClip:Disconnect() ___l10ll0I0I01OI.NoClip = nil end
-end
-end,
+
+PlayerTab:Toggle({
+    Title = "穿墙",
+    Default = false,
+    Callback = function(val)
+        State.Noclip = val
+        if val then
+            Connections.NoClip = RunService.Stepped:Connect(function()
+                if not State.Noclip then return end
+                local c = GetChar()
+                if c then
+                    for _, p in ipairs(c:GetDescendants()) do
+                        if p:IsA("BasePart") and p.CanCollide then p.CanCollide = false end
+                    end
+                end
+            end)
+        else
+            if Connections.NoClip then Connections.NoClip:Disconnect() Connections.NoClip = nil end
+        end
+    end,
 })
-___1lllO1I101O:Toggle({
-Title = "无敌",
-Default = (not _54WynoKz),
-Callback = function(val)
-__01lOIOl1IOI00.GodMode = val
-if val then
-___0I011IOI("玩家", _gUsJzbpoF1MZ("AD2B8E7C6B"), (3+12-19))
-___l10ll0I0I01OI.GodMode = __I00000OOlOII.Heartbeat:Connect(function()
-local h = ___101I1O0OI()
-if h and h.Health < h.MaxHealth then h.Health = h.MaxHealth end
-end)
-else
-if ___l10ll0I0I01OI.GodMode then ___l10ll0I0I01OI.GodMode:Disconnect() ___l10ll0I0I01OI.GodMode = nil end
-___0I011IOI("玩家", _gUsJzbpoF1MZ("AD2B8E0FA9"), math.floor(3.94))
-end
-end,
+
+PlayerTab:Toggle({
+    Title = "无敌",
+    Default = false,
+    Callback = function(val)
+        State.GodMode = val
+        if val then
+            Notify("玩家", "无敌已开启", 3)
+            Connections.GodMode = RunService.Heartbeat:Connect(function()
+                local h = GetHum()
+                if h and h.Health < h.MaxHealth then h.Health = h.MaxHealth end
+            end)
+        else
+            if Connections.GodMode then Connections.GodMode:Disconnect() Connections.GodMode = nil end
+            Notify("玩家", "无敌已关闭", 3)
+        end
+    end,
 })
-___1lllO1I101O:Toggle({
-Title = _gUsJzbpoF1MZ("195A9C58F7"),
-Default = (not _54WynoKz),
-Callback = function(val)
-__01lOIOl1IOI00.NoFallDamage = val
-if val then
-___0I011IOI("玩家", _gUsJzbpoF1MZ("195A9C58F785685C"), (3*4/4))
-local function __0OII010Ill1(h)
-if not h then return end
-local __1ll0IIO0Illl = h.Health
-h.StateChanged:Connect(function(old, new)
-if not __01lOIOl1IOI00.NoFallDamage then return end
-if new == Enum.HumanoidStateType.Freefall then
-__1ll0IIO0Illl = h.Health
-elseif old == Enum.HumanoidStateType.Freefall then
-if h.Health < __1ll0IIO0Illl then h.Health = __1ll0IIO0Illl end
-end
-end)
-end
-local c = _0OIOOOOOOI11OI()
-if c then __0OII010Ill1(c:FindFirstChildOfClass(_gUsJzbpoF1MZ("0512111D2A180117"))) end
-___l10ll0I0I01OI.NoFall = ___11IlOOIOIlIOOl.CharacterAdded:Connect(function(char)
-task.wait(0.(3+12-17))
-if __01lOIOl1IOI00.NoFallDamage then __0OII010Ill1(char:FindFirstChildOfClass(_gUsJzbpoF1MZ("0512111D2A180117"))) end
-end)
-else
-if ___l10ll0I0I01OI.NoFall then ___l10ll0I0I01OI.NoFall:Disconnect() ___l10ll0I0I01OI.NoFall = nil end
-___0I011IOI("玩家", _gUsJzbpoF1MZ("195A9C58F7851B9E"), (3*3/4))
-end
-end,
+
+PlayerTab:Toggle({
+    Title = "摔落无伤害",
+    Default = false,
+    Callback = function(val)
+        State.NoFallDamage = val
+        if val then
+            Notify("玩家", "摔落无伤害已开启", 3)
+            local function setupFall(h)
+                if not h then return end
+                local saved = h.Health
+                h.StateChanged:Connect(function(old, new)
+                    if not State.NoFallDamage then return end
+                    if new == Enum.HumanoidStateType.Freefall then
+                        saved = h.Health
+                    elseif old == Enum.HumanoidStateType.Freefall then
+                        if h.Health < saved then h.Health = saved end
+                    end
+                end)
+            end
+            local c = GetChar()
+            if c then setupFall(c:FindFirstChildOfClass("Humanoid")) end
+            Connections.NoFall = LocalPlayer.CharacterAdded:Connect(function(char)
+                task.wait(0.3)
+                if State.NoFallDamage then setupFall(char:FindFirstChildOfClass("Humanoid")) end
+            end)
+        else
+            if Connections.NoFall then Connections.NoFall:Disconnect() Connections.NoFall = nil end
+            Notify("玩家", "摔落无伤害已关闭", 3)
+        end
+    end,
 })
-___1lllO1I101O:Divider()
-local ___l0Il1lOI1l10Ol1 = (not _54WynoKz)
-___1lllO1I101O:Button({
-Title = _gUsJzbpoF1MZ("932B5C540F4D205A"),
-Callback = function()
-if ___l0Il1lOI1l10Ol1 then
-___0I011IOI("飞行", _gUsJzbpoF1MZ("932B1E03B62468"), math.floor(3.66))
-return
-end
-___l0Il1lOI1l10Ol1 = (not not _54WynoKz)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/.uploads/飞行脚本V3(全游戏通用).txt"))()
-end,
+
+PlayerTab:Divider()
+
+local flyLoaded = false
+PlayerTab:Button({
+    Title = "飞行 (手机版)",
+    Callback = function()
+        if flyLoaded then
+            Notify("飞行", "飞行面板已打开", 3)
+            return
+        end
+        flyLoaded = true
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/sbrpnb666/ShenBuRuPing/main/.uploads/飞行脚本V3(全游戏通用).txt"))()
+    end,
 })
-local __l10OlIII0lIOO = _lll1I1l000Ill:Tab({
-Title = "视觉",
-Icon = "eye",
+
+--========================================================
+-- Tab3: 视觉
+--========================================================
+local VisualTab = Window:Tab({
+    Title = "视觉",
+    Icon = "eye",
 })
-__l10OlIII0lIOO:Section({ Title = "透视_gUsJzbpoF1MZ("614728193C03303210572C555C033F1B6D5A5C")Left", TextSize = math.floor(17.13) })
-local function __0Il1I00011O1O(player)
-if player == ___11IlOOIOIlIOOl then return end
-if _1I100II000l0[player] then return end
-local __OIIOlO1011IlO = Instance.new(_gUsJzbpoF1MZ("0F0E10102618090118793E52"))
-__OIIOlO1011IlO.Name = _gUsJzbpoF1MZ("1D080B1936323B2323") .. player.Name
-__OIIOlO1011IlO.Size = UDim2.new(0, (200*3/2), 0, (50*2/3))
-__OIIOlO1011IlO.StudsOffset = Vector3.new(0, 0x3, 0)
-__OIIOlO1011IlO.AlwaysOnTop = (not not _54WynoKz)
-local __IO00lIlOOI = Instance.new(_gUsJzbpoF1MZ("1902040808160A1610"))
-__IO00lIlOOI.Size = UDim2.new(1, 0, 0, 0x14)
-__IO00lIlOOI.BackgroundTransparency = 1
-__IO00lIlOOI.TextColor3 = Color3.fromRGB((255*2/4), (100*2/2), (100*2/3))
-__IO00lIlOOI.TextSize = (14*3/4)
-__IO00lIlOOI.Font = Enum.Font.SourceSansBold
-__IO00lIlOOI.TextStrokeTransparency = 0.(5+16-5)
-__IO00lIlOOI.Text = player.Name
-__IO00lIlOOI.Parent = __OIIOlO1011IlO
-local ___1Ol1IOIlOI = Instance.new(_gUsJzbpoF1MZ("1902040808160A1610"))
-___1Ol1IOIlOI.Size = UDim2.new(1, 0, 0, (18*3/3))
-___1Ol1IOIlOI.Position = UDim2.new(0, 0, 0, (22+15-8))
-___1Ol1IOIlOI.BackgroundTransparency = 1
-___1Ol1IOIlOI.TextColor3 = Color3.fromRGB(0xc8, 0xc8, (200+12-1))
-___1Ol1IOIlOI.TextSize = math.floor(12.82)
-___1Ol1IOIlOI.Text = ""
-___1Ol1IOIlOI.Parent = __OIIOlO1011IlO
-_1I100II000l0[player] = { __OIIOlO1011IlO = __OIIOlO1011IlO, __IO00lIlOOI = __IO00lIlOOI, ___1Ol1IOIlOI = ___1Ol1IOIlOI }
+
+VisualTab:Section({ Title = "透视", TextXAlignment = "Left", TextSize = 17 })
+
+local function createESP(player)
+    if player == LocalPlayer then return end
+    if ESPObjects[player] then return end
+    local billboard = Instance.new("BillboardGui")
+    billboard.Name = "PowerESP_" .. player.Name
+    billboard.Size = UDim2.new(0, 200, 0, 50)
+    billboard.StudsOffset = Vector3.new(0, 3, 0)
+    billboard.AlwaysOnTop = true
+    local nameLabel = Instance.new("TextLabel")
+    nameLabel.Size = UDim2.new(1, 0, 0, 20)
+    nameLabel.BackgroundTransparency = 1
+    nameLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+    nameLabel.TextSize = 14
+    nameLabel.Font = Enum.Font.SourceSansBold
+    nameLabel.TextStrokeTransparency = 0.5
+    nameLabel.Text = player.Name
+    nameLabel.Parent = billboard
+    local distLabel = Instance.new("TextLabel")
+    distLabel.Size = UDim2.new(1, 0, 0, 18)
+    distLabel.Position = UDim2.new(0, 0, 0, 22)
+    distLabel.BackgroundTransparency = 1
+    distLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+    distLabel.TextSize = 12
+    distLabel.Text = ""
+    distLabel.Parent = billboard
+    ESPObjects[player] = { billboard = billboard, nameLabel = nameLabel, distLabel = distLabel }
 end
-local function ___1lOllO0l00l00(player)
-if _1I100II000l0[player] then
-if _1I100II000l0[player].__OIIOlO1011IlO then _1I100II000l0[player].__OIIOlO1011IlO:Destroy() end
-_1I100II000l0[player] = nil
+
+local function removeESP(player)
+    if ESPObjects[player] then
+        if ESPObjects[player].billboard then ESPObjects[player].billboard:Destroy() end
+        ESPObjects[player] = nil
+    end
 end
-end
-__l10OlIII0lIOO:Toggle({
-Title = _gUsJzbpoF1MZ("F70E73BA"),
-Default = (not _54WynoKz),
-Callback = function(val)
-__01lOIOl1IOI00.ESPEnabled = val
-if val then
-___0I011IOI("视觉", _gUsJzbpoF1MZ("42A18E7C6B"), 0x3)
-for _, plr in ipairs(_lOOO1IOO:GetPlayers()) do
-if plr ~= ___11IlOOIOIlIOOl then __0Il1I00011O1O(plr) end
-end
-___l10ll0I0I01OI.ESP = __I00000OOlOII.Heartbeat:Connect(function()
-for plr, data in pairs(_1I100II000l0) do
-local char = plr.Character
-if char then
-local head = char:FindFirstChild(_gUsJzbpoF1MZ("05021D18"))
-local hrp = char:FindFirstChild(_gUsJzbpoF1MZ("0512111D2A1801172E51244F6107231B"))
-if head or hrp then
-data.__OIIOlO1011IlO.Adornee = head or hrp
-data.__IO00lIlOOI.Visible = __01lOIOl1IOI00.ESPNames
-data.___1Ol1IOIlOI.Visible = __01lOIOl1IOI00.ESPDistance
-if __01lOIOl1IOI00.ESPDistance then
-local root = __111O0Oll11()
-local _0lO10IO1I = hrp or head
-if root and _0lO10IO1I then
-data.___1Ol1IOIlOI.Text = math.floor((root.Position - _0lO10IO1I.Position).Magnitude) .. " 米"
-end
-end
-end
-end
-end
-end)
-___l10ll0I0I01OI.PAdd = _lOOO1IOO.PlayerAdded:Connect(function(p) __0Il1I00011O1O(p) end)
-___l10ll0I0I01OI.PRem = _lOOO1IOO.PlayerRemoving:Connect(function(p) ___1lOllO0l00l00(p) end)
-else
-if ___l10ll0I0I01OI.ESP then ___l10ll0I0I01OI.ESP:Disconnect() ___l10ll0I0I01OI.ESP = nil end
-if ___l10ll0I0I01OI.PAdd then ___l10ll0I0I01OI.PAdd:Disconnect() ___l10ll0I0I01OI.PAdd = nil end
-if ___l10ll0I0I01OI.PRem then ___l10ll0I0I01OI.PRem:Disconnect() ___l10ll0I0I01OI.PRem = nil end
-for p, _ in pairs(_1I100II000l0) do ___1lOllO0l00l00(p) end
-_1I100II000l0 = {}
-___0I011IOI("视觉", _gUsJzbpoF1MZ("42A18E0FA9"), math.floor(3.10))
-end
-end,
+
+VisualTab:Toggle({
+    Title = "人物透视",
+    Default = false,
+    Callback = function(val)
+        State.ESPEnabled = val
+        if val then
+            Notify("视觉", "透视已开启", 3)
+            for _, plr in ipairs(Players:GetPlayers()) do
+                if plr ~= LocalPlayer then createESP(plr) end
+            end
+            Connections.ESP = RunService.Heartbeat:Connect(function()
+                for plr, data in pairs(ESPObjects) do
+                    local char = plr.Character
+                    if char then
+                        local head = char:FindFirstChild("Head")
+                        local hrp = char:FindFirstChild("HumanoidRootPart")
+                        if head or hrp then
+                            data.billboard.Adornee = head or hrp
+                            data.nameLabel.Visible = State.ESPNames
+                            data.distLabel.Visible = State.ESPDistance
+                            if State.ESPDistance then
+                                local root = GetRoot()
+                                local targetHrp = hrp or head
+                                if root and targetHrp then
+                                    data.distLabel.Text = math.floor((root.Position - targetHrp.Position).Magnitude) .. " 米"
+                                end
+                            end
+                        end
+                    end
+                end
+            end)
+            Connections.PAdd = Players.PlayerAdded:Connect(function(p) createESP(p) end)
+            Connections.PRem = Players.PlayerRemoving:Connect(function(p) removeESP(p) end)
+        else
+            if Connections.ESP then Connections.ESP:Disconnect() Connections.ESP = nil end
+            if Connections.PAdd then Connections.PAdd:Disconnect() Connections.PAdd = nil end
+            if Connections.PRem then Connections.PRem:Disconnect() Connections.PRem = nil end
+            for p, _ in pairs(ESPObjects) do removeESP(p) end
+            ESPObjects = {}
+            Notify("视觉", "透视已关闭", 3)
+        end
+    end,
 })
-__l10OlIII0lIOO:Toggle({
-Title = _gUsJzbpoF1MZ("735D712B"),
-Default = (not not _54WynoKz),
-Callback = function(val) __01lOIOl1IOI00.ESPNames = val end,
+
+VisualTab:Toggle({
+    Title = "显示名字",
+    Default = true,
+    Callback = function(val) State.ESPNames = val end,
 })
-__l10OlIII0lIOO:Toggle({
-Title = _gUsJzbpoF1MZ("735DA1C7"),
-Default = (not not _54WynoKz),
-Callback = function(val) __01lOIOl1IOI00.ESPDistance = val end,
+
+VisualTab:Toggle({
+    Title = "显示距离",
+    Default = true,
+    Callback = function(val) State.ESPDistance = val end,
 })
-__l10OlIII0lIOO:Toggle({
-Title = _gUsJzbpoF1MZ("24A673BA645FB97253A3B812"),
-Default = (not _54WynoKz),
-Callback = function(val)
-__01lOIOl1IOI00.ESPItems = val
-if val then
-___0I011IOI("视觉", _gUsJzbpoF1MZ("24A673BAB67747"), 0x3)
-___l10ll0I0I01OI.Items = __I00000OOlOII.Heartbeat:Connect(function()
-if not __01lOIOl1IOI00.ESPItems then return end
-for _, obj in ipairs(_0111l01OI11OIII:GetDescendants()) do
-if obj:IsA(_gUsJzbpoF1MZ("0F060F1914161A07")) then
-local ln = string.lower(obj.Name)
-if string.find(ln, _gUsJzbpoF1MZ("2E081512")) or string.find(ln, "gem_gUsJzbpoF1MZ("6447130E64041C0115502C15570F3F0B650B125064")crystal")
-or string.find(ln, _gUsJzbpoF1MZ("290E1D112B190C")) or string.find(ln, _gUsJzbpoF1MZ("3D0E1F173107")) or string.find(ln, _gUsJzbpoF1MZ("3F020B1D3613")) then
-if not obj:FindFirstChild(_gUsJzbpoF1MZ("1D080B19363E1C16117B186B")) then
-local hl = Instance.new(_gUsJzbpoF1MZ("050E1B14281E0F1B08"))
-hl.Name = _gUsJzbpoF1MZ("1D080B19363E1C16117B186B")
-hl.FillColor = Color3.fromRGB(math.floor(255.59), (200*2/4), 0)
-hl.FillTransparency = 0.math.floor(3.79)
-hl.OutlineColor = Color3.fromRGB(0xff, (255+7-17), (255*4/4))
-hl.Parent = obj
-end
-end
-end
-end
-end)
-else
-if ___l10ll0I0I01OI.Items then ___l10ll0I0I01OI.Items:Disconnect() ___l10ll0I0I01OI.Items = nil end
-for _, obj in ipairs(_0111l01OI11OIII:GetDescendants()) do
-if obj:FindFirstChild(_gUsJzbpoF1MZ("1D080B19363E1C16117B186B")) then obj.PowerItemESP:Destroy() end
-end
-___0I011IOI("视觉", _gUsJzbpoF1MZ("24A673BAB60485"), math.floor(3.60))
-end
-end,
+
+-- 物品透视
+VisualTab:Toggle({
+    Title = "物品透视 (金币/宝石)",
+    Default = false,
+    Callback = function(val)
+        State.ESPItems = val
+        if val then
+            Notify("视觉", "物品透视已开启", 3)
+            Connections.Items = RunService.Heartbeat:Connect(function()
+                if not State.ESPItems then return end
+                for _, obj in ipairs(Workspace:GetDescendants()) do
+                    if obj:IsA("BasePart") then
+                        local ln = string.lower(obj.Name)
+                        if string.find(ln, "coin") or string.find(ln, "gem") or string.find(ln, "crystal")
+                            or string.find(ln, "diamond") or string.find(ln, "pickup") or string.find(ln, "reward") then
+                            if not obj:FindFirstChild("PowerItemESP") then
+                                local hl = Instance.new("Highlight")
+                                hl.Name = "PowerItemESP"
+                                hl.FillColor = Color3.fromRGB(255, 200, 0)
+                                hl.FillTransparency = 0.3
+                                hl.OutlineColor = Color3.fromRGB(255, 255, 255)
+                                hl.Parent = obj
+                            end
+                        end
+                    end
+                end
+            end)
+        else
+            if Connections.Items then Connections.Items:Disconnect() Connections.Items = nil end
+            for _, obj in ipairs(Workspace:GetDescendants()) do
+                if obj:FindFirstChild("PowerItemESP") then obj.PowerItemESP:Destroy() end
+            end
+            Notify("视觉", "物品透视已关闭", 3)
+        end
+    end,
 })
-__l10OlIII0lIOO:Toggle({
-Title = _gUsJzbpoF1MZ("2599A4D2"),
-Default = (not _54WynoKz),
-Callback = function(val)
-__01lOIOl1IOI00.Fullbright = val
-if val then
-__O0lO00IO0lI.Brightness = math.floor(3.58)
-__O0lO00IO0lI.ClockTime = math.floor(14.92)
-__O0lO00IO0lI.FogEnd = 100000
-__O0lO00IO0lI.GlobalShadows = (not _54WynoKz)
-___l10ll0I0I01OI.FB = __I00000OOlOII.Heartbeat:Connect(function()
-__O0lO00IO0lI.Brightness = (3+9-14)
-__O0lO00IO0lI.ClockTime = math.floor(14.26)
-__O0lO00IO0lI.FogEnd = 100000
-__O0lO00IO0lI.GlobalShadows = (not _54WynoKz)
-end)
-else
-if ___l10ll0I0I01OI.FB then ___l10ll0I0I01OI.FB:Disconnect() ___l10ll0I0I01OI.FB = nil end
-__O0lO00IO0lI.Brightness = 1
-__O0lO00IO0lI.ClockTime = (12*3/3)
-__O0lO00IO0lI.GlobalShadows = (not not _54WynoKz)
-___0I011IOI("视觉", _gUsJzbpoF1MZ("2599A4D2B60485"), 0x3)
-end
-end,
+
+VisualTab:Toggle({
+    Title = "全图高亮",
+    Default = false,
+    Callback = function(val)
+        State.Fullbright = val
+        if val then
+            Lighting.Brightness = 3
+            Lighting.ClockTime = 14
+            Lighting.FogEnd = 100000
+            Lighting.GlobalShadows = false
+            Connections.FB = RunService.Heartbeat:Connect(function()
+                Lighting.Brightness = 3
+                Lighting.ClockTime = 14
+                Lighting.FogEnd = 100000
+                Lighting.GlobalShadows = false
+            end)
+        else
+            if Connections.FB then Connections.FB:Disconnect() Connections.FB = nil end
+            Lighting.Brightness = 1
+            Lighting.ClockTime = 12
+            Lighting.GlobalShadows = true
+            Notify("视觉", "全图高亮已关闭", 3)
+        end
+    end,
 })
-local ___OlIl01Il = _lll1I1l000Ill:Tab({
-Title = "传送",
-Icon = _gUsJzbpoF1MZ("20060C51341E06"),
+
+--========================================================
+-- Tab4: 传送
+--========================================================
+local TeleportTab = Window:Tab({
+    Title = "传送",
+    Icon = "map-pin",
 })
-___OlIl01Il:Section({ Title = "地点_gUsJzbpoF1MZ("614728193C03303210572C555C033F1B6D5A5C")Left", TextSize = (17+7-9) })
-local ___lIOIOOIIIlI1 = {
-{ name = "健身房_gUsJzbpoF1MZ("614717193D000701184D6B06111D")gym", _gUsJzbpoF1MZ("3A02151B2C03"), _gUsJzbpoF1MZ("39151D152A"), _gUsJzbpoF1MZ("210E1A08")} },
-{ name = "训练区_gUsJzbpoF1MZ("614717193D000701184D6B06111D")training", _gUsJzbpoF1MZ("2C15191D"), _gUsJzbpoF1MZ("37081219"), _gUsJzbpoF1MZ("3D151D1F301E0B16")} },
-{ name = "商店_gUsJzbpoF1MZ("614717193D000701184D6B06111D")shop", _gUsJzbpoF1MZ("3E13130E21"), _gUsJzbpoF1MZ("20060E172103")} },
-{ name = "宠物店_gUsJzbpoF1MZ("614717193D000701184D6B06111D")pet", "egg", _gUsJzbpoF1MZ("2506081F2C")} },
-{ name = "哑铃店_gUsJzbpoF1MZ("614717193D000701184D6B06111D")dumbbell", _gUsJzbpoF1MZ("2F060E1E211B04"), _gUsJzbpoF1MZ("3A02151B2C03")} },
-{ name = "转生区_gUsJzbpoF1MZ("614717193D000701184D6B06111D")rebirth", _gUsJzbpoF1MZ("3D15190F301E0F16"), _gUsJzbpoF1MZ("2C141F192A13")} },
-{ name = _gUsJzbpoF1MZ("B6C6322C07"), keywords = {_gUsJzbpoF1MZ("3C12190F30"), _gUsJzbpoF1MZ("200E0F0F2D1806"), "npc"} },
-{ name = "竞技场_gUsJzbpoF1MZ("614717193D000701184D6B06111D")arena", "pvp", _gUsJzbpoF1MZ("2B0E1B1430")} },
-{ name = "出生点_gUsJzbpoF1MZ("614717193D000701184D6B06111D")spawn", _gUsJzbpoF1MZ("21081E1E3D"), _gUsJzbpoF1MZ("3E131D0E30")} },
-{ name = "金币区_gUsJzbpoF1MZ("614717193D000701184D6B06111D")coin", _gUsJzbpoF1MZ("200812193D"), _gUsJzbpoF1MZ("2E060F14")} },
-{ name = "宝石区_gUsJzbpoF1MZ("614717193D000701184D6B06111D")gem", _gUsJzbpoF1MZ("2E15050F301604"), _gUsJzbpoF1MZ("290E1D112B190C")} },
-{ name = _gUsJzbpoF1MZ("0F080F0F7E"), keywords = {_gUsJzbpoF1MZ("2F080F0F"), _gUsJzbpoF1MZ("3F061518")} },
+
+TeleportTab:Section({ Title = "地点", TextXAlignment = "Left", TextSize = 17 })
+
+local locations = {
+    { name = "健身房", keywords = {"gym", "weight", "train", "lift"} },
+    { name = "训练区", keywords = {"training", "area", "zone", "practice"} },
+    { name = "商店", keywords = {"shop", "store", "market"} },
+    { name = "宠物店", keywords = {"pet", "egg", "hatch"} },
+    { name = "哑铃店", keywords = {"dumbbell", "barbell", "weight"} },
+    { name = "转生区", keywords = {"rebirth", "prestige", "ascend"} },
+    { name = "任务NPC", keywords = {"quest", "mission", "npc"} },
+    { name = "竞技场", keywords = {"arena", "pvp", "fight"} },
+    { name = "出生点", keywords = {"spawn", "lobby", "start"} },
+    { name = "金币区", keywords = {"coin", "money", "cash"} },
+    { name = "宝石区", keywords = {"gem", "crystal", "diamond"} },
+    { name = "Boss区", keywords = {"boss", "raid"} },
 }
-for _, loc in ipairs(___lIOIOOIIIlI1) do
-___OlIl01Il:Button({
-Title = "传送到" .. loc.name,
-Callback = function()
-local ___Oll01OO1IOI11 = (not _54WynoKz)
-for _, obj in ipairs(_0111l01OI11OIII:GetDescendants()) do
-if obj:IsA(_gUsJzbpoF1MZ("0F060F1914161A07")) or obj:IsA(_gUsJzbpoF1MZ("0008181928")) then
-local ln = string.lower(obj.Name)
-for _, kw in ipairs(loc.keywords) do
-if string.find(ln, kw) then
-local part = obj:IsA(_gUsJzbpoF1MZ("0F060F1914161A07")) and obj or obj:FindFirstChildWhichIsA(_gUsJzbpoF1MZ("0F060F1914161A07"))
-if part then
-local root = __111O0Oll11()
-if root then
-root.CFrame = part.CFrame * CFrame.new(0, math.floor(5.35), 0)
-___0I011IOI("传送", _gUsJzbpoF1MZ("BF477D4C") .. loc.name, (3*2/2))
-___Oll01OO1IOI11 = (not not _54WynoKz)
+
+for _, loc in ipairs(locations) do
+    TeleportTab:Button({
+        Title = "传送到" .. loc.name,
+        Callback = function()
+            local found = false
+            for _, obj in ipairs(Workspace:GetDescendants()) do
+                if obj:IsA("BasePart") or obj:IsA("Model") then
+                    local ln = string.lower(obj.Name)
+                    for _, kw in ipairs(loc.keywords) do
+                        if string.find(ln, kw) then
+                            local part = obj:IsA("BasePart") and obj or obj:FindFirstChildWhichIsA("BasePart")
+                            if part then
+                                local root = GetRoot()
+                                if root then
+                                    root.CFrame = part.CFrame * CFrame.new(0, 5, 0)
+                                    Notify("传送", "已传送到" .. loc.name, 3)
+                                    found = true
+                                end
+                                break
+                            end
+                        end
+                    end
+                    if found then break end
+                end
+            end
+            if not found then Notify("传送", "未找到" .. loc.name, 3) end
+        end,
+    })
 end
-break
-end
-end
-end
-if ___Oll01OO1IOI11 then break end
-end
-end
-if not ___Oll01OO1IOI11 then ___0I011IOI("传送", "未找到" .. loc.name, math.floor(3.15)) end
-end,
+
+TeleportTab:Divider()
+
+-- 长按传送
+local tpHoldStart = nil
+TeleportTab:Toggle({
+    Title = "长按传送",
+    Default = false,
+    Callback = function(val)
+        if val then
+            Notify("传送", "长按传送已开启 (长按屏幕0.5秒)", 3)
+            Connections.TpBegin = UserInputService.InputBegan:Connect(function(input, gpe)
+                if gpe then return end
+                if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    tpHoldStart = tick()
+                end
+            end)
+            Connections.TpHold = RunService.Heartbeat:Connect(function()
+                if not tpHoldStart then return end
+                if tick() - tpHoldStart >= 0.5 then
+                    local root = GetRoot()
+                    if root then root.CFrame = Mouse.Hit end
+                    tpHoldStart = nil
+                end
+            end)
+            Connections.TpEnd = UserInputService.InputEnded:Connect(function() tpHoldStart = nil end)
+        else
+            if Connections.TpBegin then Connections.TpBegin:Disconnect() Connections.TpBegin = nil end
+            if Connections.TpHold then Connections.TpHold:Disconnect() Connections.TpHold = nil end
+            if Connections.TpEnd then Connections.TpEnd:Disconnect() Connections.TpEnd = nil end
+            Notify("传送", "长按传送已关闭", 3)
+        end
+    end,
 })
-end
-___OlIl01Il:Divider()
-local ___l0l000lI = nil
-___OlIl01Il:Toggle({
-Title = _gUsJzbpoF1MZ("326E5C7D"),
-Default = (not _54WynoKz),
-Callback = function(val)
-if val then
-___0I011IOI("传送", _gUsJzbpoF1MZ("326E5C7DB67747535441427464567F5A9F4E"), math.floor(3.18))
-___l10ll0I0I01OI.TpBegin = __IO0OlllO00I.InputBegan:Connect(function(input, gpe)
-if gpe then return end
-if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
-___l0l000lI = tick()
-end
-end)
-___l10ll0I0I01OI.TpHold = __I00000OOlOII.Heartbeat:Connect(function()
-if not ___l0l000lI then return end
-if tick() - ___l0l000lI >= 0.(5*3/3) then
-local root = __111O0Oll11()
-if root then root.CFrame = ___lI0O1I01lI1IlIO.Hit end
-___l0l000lI = nil
-end
-end)
-___l10ll0I0I01OI.TpEnd = __IO0OlllO00I.InputEnded:Connect(function() ___l0l000lI = nil end)
-else
-if ___l10ll0I0I01OI.TpBegin then ___l10ll0I0I01OI.TpBegin:Disconnect() ___l10ll0I0I01OI.TpBegin = nil end
-if ___l10ll0I0I01OI.TpHold then ___l10ll0I0I01OI.TpHold:Disconnect() ___l10ll0I0I01OI.TpHold = nil end
-if ___l10ll0I0I01OI.TpEnd then ___l10ll0I0I01OI.TpEnd:Disconnect() ___l10ll0I0I01OI.TpEnd = nil end
-___0I011IOI("传送", _gUsJzbpoF1MZ("326E5C7DB60485"), (3*3/3))
-end
-end,
+
+--========================================================
+-- Tab5: 实用
+--========================================================
+local MiscTab = Window:Tab({
+    Title = "实用",
+    Icon = "settings",
 })
-local _l0lI1IIO1ll0Il = _lll1I1l000Ill:Tab({
-Title = "实用",
-Icon = _gUsJzbpoF1MZ("3E0208082D190F00"),
+
+MiscTab:Section({ Title = "工具", TextXAlignment = "Left", TextSize = 17 })
+
+MiscTab:Toggle({
+    Title = "防挂机",
+    Default = false,
+    Callback = function(val)
+        State.AntiAFK = val
+        if val then
+            Connections.AntiAFK = LocalPlayer.Idled:Connect(function()
+                VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Space, false, game)
+                task.wait(0.05)
+                VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Space, false, game)
+            end)
+            Notify("实用", "防挂机已开启", 3)
+        else
+            if Connections.AntiAFK then Connections.AntiAFK:Disconnect() Connections.AntiAFK = nil end
+            Notify("实用", "防挂机已关闭", 3)
+        end
+    end,
 })
-_l0lI1IIO1ll0Il:Section({ Title = "工具_gUsJzbpoF1MZ("614728193C03303210572C555C033F1B6D5A5C")Left", TextSize = math.floor(17.68) })
-_l0lI1IIO1ll0Il:Toggle({
-Title = "防挂机",
-Default = (not _54WynoKz),
-Callback = function(val)
-__01lOIOl1IOI00.AntiAFK = val
-if val then
-___l10ll0I0I01OI.AntiAFK = ___11IlOOIOIlIOOl.Idled:Connect(function()
-_IlOO0l1lIOOlO0l:SendKeyEvent((not not _54WynoKz), Enum.KeyCode.Space, (not _54WynoKz), game)
-task.wait(0.math.floor(5.65))
-_IlOO0l1lIOOlO0l:SendKeyEvent((not _54WynoKz), Enum.KeyCode.Space, (not _54WynoKz), game)
-end)
-___0I011IOI("实用", _gUsJzbpoF1MZ("7F65468E4458"), (3*3/4))
-else
-if ___l10ll0I0I01OI.AntiAFK then ___l10ll0I0I01OI.AntiAFK:Disconnect() ___l10ll0I0I01OI.AntiAFK = nil end
-___0I011IOI("实用", _gUsJzbpoF1MZ("7F65468E379A"), (3*2/3))
-end
-end,
+
+MiscTab:Toggle({
+    Title = "画质提速",
+    Default = false,
+    Callback = function(val)
+        State.FPSBoost = val
+        if val then
+            settings().Rendering.QualityLevel = 1
+            Lighting.GlobalShadows = false
+            Lighting.FogEnd = 9e9
+            Connections.FPS = RunService.Heartbeat:Connect(function()
+                for _, obj in ipairs(Workspace:GetDescendants()) do
+                    if obj:IsA("ParticleEmitter") or obj:IsA("Trail") or obj:IsA("Beam") then
+                        pcall(function() obj.Enabled = false end)
+                    end
+                end
+            end)
+            Notify("实用", "画质提速已开启", 3)
+        else
+            if Connections.FPS then Connections.FPS:Disconnect() Connections.FPS = nil end
+            settings().Rendering.QualityLevel = Enum.RenderingQuality.Automatic
+            Lighting.FogEnd = 100000
+            Notify("实用", "画质提速已关闭", 3)
+        end
+    end,
 })
-_l0lI1IIO1ll0Il:Toggle({
-Title = _gUsJzbpoF1MZ("764FAC63"),
-Default = (not _54WynoKz),
-Callback = function(val)
-__01lOIOl1IOI00.FPSBoost = val
-if val then
-settings().Rendering.QualityLevel = 1
-__O0lO00IO0lI.GlobalShadows = (not _54WynoKz)
-__O0lO00IO0lI.FogEnd = 9e9
-___l10ll0I0I01OI.FPS = __I00000OOlOII.Heartbeat:Connect(function()
-for _, obj in ipairs(_0111l01OI11OIII:GetDescendants()) do
-if obj:IsA(_gUsJzbpoF1MZ("1D060E082D1404163953224F450323")) or obj:IsA(_gUsJzbpoF1MZ("19151D1528")) or obj:IsA(_gUsJzbpoF1MZ("0F021D11")) then
-pcall(function() obj.Enabled = (not _54WynoKz) end)
-end
-end
-end)
-___0I011IOI("实用", _gUsJzbpoF1MZ("764FAC63B67747"), (3*2/3))
-else
-if ___l10ll0I0I01OI.FPS then ___l10ll0I0I01OI.FPS:Disconnect() ___l10ll0I0I01OI.FPS = nil end
-settings().Rendering.QualityLevel = Enum.RenderingQuality.Automatic
-__O0lO00IO0lI.FogEnd = 100000
-___0I011IOI("实用", _gUsJzbpoF1MZ("764FAC63B60485"), (3*4/3))
-end
-end,
+
+MiscTab:Divider()
+
+MiscTab:Button({
+    Title = "换服",
+    Callback = function()
+        Notify("实用", "正在跳转服务器...", 3)
+        TeleportService:Teleport(game.PlaceId, LocalPlayer)
+    end,
 })
-_l0lI1IIO1ll0Il:Divider()
-_l0lI1IIO1ll0Il:Button({
-Title = "换服",
-Callback = function()
-___0I011IOI("实用", _gUsJzbpoF1MZ("2E4F8F1049D6005D5210"), math.floor(3.97))
-_l0IOO1lO0OO11O:Teleport(game.PlaceId, ___11IlOOIOIlIOOl)
-end,
+
+MiscTab:Button({
+    Title = "复制服务器号",
+    Callback = function()
+        local jobId = game.JobId
+        if setclipboard then
+            setclipboard(jobId)
+            Notify("实用", "已复制: " .. jobId, 3)
+        else
+            Notify("实用", "JobId: " .. jobId, 5)
+        end
+    end,
 })
-_l0lI1IIO1ll0Il:Button({
-Title = _gUsJzbpoF1MZ("405171DD2C80"),
-Callback = function()
-local __IlI11OlI = game.JobId
-if setclipboard then
-setclipboard(__IlI11OlI)
-___0I011IOI("实用", _gUsJzbpoF1MZ("BF6A4A4664") .. __IlI11OlI, (3+6-5))
-else
-___0I011IOI("实用", _gUsJzbpoF1MZ("07081E35204D48") .. __IlI11OlI, math.floor(5.34))
-end
-end,
+
+MiscTab:Button({
+    Title = "输出角色信息",
+    Callback = function()
+        local char = GetChar()
+        if not char then Notify("实用", "无角色", 3) return end
+        local info = {}
+        local h = GetHum()
+        if h then
+            table.insert(info, "血量: " .. math.floor(h.Health) .. "/" .. math.floor(h.MaxHealth))
+            table.insert(info, "速度: " .. h.WalkSpeed)
+        end
+        local root = GetRoot()
+        if root then table.insert(info, "位置: " .. tostring(root.Position)) end
+        -- 显示属性
+        local ls = LocalPlayer:FindFirstChild("leaderstats")
+        if ls then
+            for _, v in ipairs(ls:GetChildren()) do
+                table.insert(info, v.Name .. ": " .. tostring(v.Value))
+            end
+        end
+        Notify("角色信息", table.concat(info, "\n"), 10)
+    end,
 })
-_l0lI1IIO1ll0Il:Button({
-Title = _gUsJzbpoF1MZ("DE9DAE0EA518"),
-Callback = function()
-local char = _0OIOOOOOOI11OI()
-if not char then ___0I011IOI("实用", "无角色", math.floor(3.71)) return end
-local info = {}
-local h = ___101I1O0OI()
-if h then
-table.insert(info, _gUsJzbpoF1MZ("0DA8465C") .. math.floor(h.Health) .. "/" .. math.floor(h.MaxHealth))
-table.insert(info, _gUsJzbpoF1MZ("52C1465C") .. h.WalkSpeed)
-end
-local root = __111O0Oll11()
-if root then table.insert(info, _gUsJzbpoF1MZ("0009465C") .. tostring(root.Position)) end
-local ls = ___11IlOOIOIlIOOl:FindFirstChild(_gUsJzbpoF1MZ("21021D1821051B071D4A38"))
-if ls then
-for _, v in ipairs(ls:GetChildren()) do
-table.insert(info, v.Name .. ": " .. tostring(v.Value))
-end
-end
-___0I011IOI(_gUsJzbpoF1MZ("9F159D13"), table.concat(info, "\n"), (10+12-20))
-end,
+
+MiscTab:Divider()
+
+MiscTab:Button({
+    Title = "清理特效",
+    Callback = function()
+        local count = 0
+        for _, obj in ipairs(Workspace:GetDescendants()) do
+            if obj:IsA("ParticleEmitter") or obj:IsA("Trail") or obj:IsA("Beam") then
+                pcall(function() obj.Enabled = false; count = count + 1 end)
+            end
+        end
+        Notify("实用", "已清理 " .. count .. " 个特效", 3)
+    end,
 })
-_l0lI1IIO1ll0Il:Divider()
-_l0lI1IIO1ll0Il:Button({
-Title = _gUsJzbpoF1MZ("48610534"),
-Callback = function()
-local _II11lI1IOl11O01 = 0
-for _, obj in ipairs(_0111l01OI11OIII:GetDescendants()) do
-if obj:IsA(_gUsJzbpoF1MZ("1D060E082D1404163953224F450323")) or obj:IsA(_gUsJzbpoF1MZ("19151D1528")) or obj:IsA(_gUsJzbpoF1MZ("0F021D11")) then
-pcall(function() obj.Enabled = (not _54WynoKz); _II11lI1IOl11O01 = _II11lI1IOl11O01 + 1 end)
-end
-end
-___0I011IOI("实用", _gUsJzbpoF1MZ("BF627A5C") .. _II11lI1IOl11O01 .. _gUsJzbpoF1MZ("6D4D0534"), (3+12-3))
-end,
+
+MiscTab:Button({
+    Title = "卸载脚本",
+    Callback = function()
+        for _, conn in pairs(Connections) do
+            if conn then pcall(function() conn:Disconnect() end) end
+        end
+        Connections = {}
+        for p, _ in pairs(ESPObjects) do removeESP(p) end
+        ESPObjects = {}
+        Notify("实用", "脚本已卸载", 3)
+    end,
 })
-_l0lI1IIO1ll0Il:Button({
-Title = _gUsJzbpoF1MZ("351A6650"),
-Callback = function()
-for _, conn in pairs(___l10ll0I0I01OI) do
-if conn then pcall(function() conn:Disconnect() end) end
-end
-___l10ll0I0I01OI = {}
-for p, _ in pairs(_1I100II000l0) do ___1lOllO0l00l00(p) end
-_1I100II000l0 = {}
-___0I011IOI("实用", _gUsJzbpoF1MZ("574B8E0439"), (3+19-4))
-end,
-})
-___0I011IOI(_gUsJzbpoF1MZ("D6A85C3B"), _gUsJzbpoF1MZ("574B8EDC3956"), (5*3/4))
-___11IlOOIOIlIOOl.CharacterAdded:Connect(function(char)
-task.wait(0.0x5)
-local h = char:FindFirstChildOfClass(_gUsJzbpoF1MZ("0512111D2A180117"))
-if h then
-if __01lOIOl1IOI00.WalkSpeed ~= 0x10 then h.WalkSpeed = __01lOIOl1IOI00.WalkSpeed end
-if __01lOIOl1IOI00.JumpPower ~= (50+4-15) then
-if h.UseJumpPower then h.JumpPower = __01lOIOl1IOI00.JumpPower
-else h.JumpHeight = __01lOIOl1IOI00.JumpPower / (10*3/4) end
-end
-end
+
+--========================================================
+-- 初始化
+--========================================================
+Notify("力量传奇", "脚本已加载!", 5)
+
+LocalPlayer.CharacterAdded:Connect(function(char)
+    task.wait(0.5)
+    local h = char:FindFirstChildOfClass("Humanoid")
+    if h then
+        if State.WalkSpeed ~= 16 then h.WalkSpeed = State.WalkSpeed end
+        if State.JumpPower ~= 50 then
+            if h.UseJumpPower then h.JumpPower = State.JumpPower
+            else h.JumpHeight = State.JumpPower / 10 end
+        end
+    end
 end)
