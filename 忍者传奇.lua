@@ -451,16 +451,16 @@ Window:EditOpenButton({
 --==================================================
 -- 标签页 1: 自动
 --==================================================
-local Tab1 = Window:CreateTab({
+local Tab1 = Window:Tab({
     Title = "自动",
     Icon = "play"
 })
 
 ------ Section: 训练 ----
-local Section1 = Tab1:CreateSection({ Title = "训练" })
+local Section1 = Tab1:Section({ Title = "训练" })
 
 -- 自动挥刀训练
-Tab1:CreateToggle({
+Tab1:Toggle({
     Title = "自动挥刀训练",
     Default = false,
     Callback = function(state)
@@ -482,7 +482,7 @@ Tab1:CreateToggle({
 })
 
 -- 自动转生
-Tab1:CreateToggle({
+Tab1:Toggle({
     Title = "自动转生",
     Default = false,
     Callback = function(state)
@@ -504,10 +504,10 @@ Tab1:CreateToggle({
 })
 
 ------ Section: 商店 ----
-Tab1:CreateSection({ Title = "商店" })
+Tab1:Section({ Title = "商店" })
 
 -- 自动买剑
-Tab1:CreateToggle({
+Tab1:Toggle({
     Title = "自动买剑",
     Default = false,
     Callback = function(state)
@@ -529,7 +529,7 @@ Tab1:CreateToggle({
 })
 
 -- 自动买腰带
-Tab1:CreateToggle({
+Tab1:Toggle({
     Title = "自动买腰带",
     Default = false,
     Callback = function(state)
@@ -551,7 +551,7 @@ Tab1:CreateToggle({
 })
 
 -- 自动卖
-Tab1:CreateToggle({
+Tab1:Toggle({
     Title = "自动卖",
     Default = false,
     Callback = function(state)
@@ -573,7 +573,7 @@ Tab1:CreateToggle({
 })
 
 -- 自动买宠物
-Tab1:CreateToggle({
+Tab1:Toggle({
     Title = "自动买宠物",
     Default = false,
     Callback = function(state)
@@ -595,7 +595,7 @@ Tab1:CreateToggle({
 })
 
 -- 自动孵化
-Tab1:CreateToggle({
+Tab1:Toggle({
     Title = "自动孵化",
     Default = false,
     Callback = function(state)
@@ -617,10 +617,10 @@ Tab1:CreateToggle({
 })
 
 ------ Section: 收集 ----
-Tab1:CreateSection({ Title = "收集" })
+Tab1:Section({ Title = "收集" })
 
 -- 自动收集金币
-Tab1:CreateToggle({
+Tab1:Toggle({
     Title = "自动收集金币",
     Default = false,
     Callback = function(state)
@@ -649,7 +649,7 @@ Tab1:CreateToggle({
 })
 
 -- 自动收集灵魂
-Tab1:CreateToggle({
+Tab1:Toggle({
     Title = "自动收集灵魂",
     Default = false,
     Callback = function(state)
@@ -680,16 +680,16 @@ Tab1:CreateToggle({
 --==================================================
 -- 标签页 2: 玩家
 --==================================================
-local Tab2 = Window:CreateTab({
+local Tab2 = Window:Tab({
     Title = "玩家",
     Icon = "user"
 })
 
 ------ Section: 移动 ----
-Tab2:CreateSection({ Title = "移动" })
+Tab2:Section({ Title = "移动" })
 
 -- 行走速度
-Tab2:CreateSlider({
+Tab2:Slider({
     Title = "行走速度",
     Value = { Min = 16, Max = 500, Default = 16 },
     Increment = 1,
@@ -703,7 +703,7 @@ Tab2:CreateSlider({
 })
 
 -- 跳跃力
-Tab2:CreateSlider({
+Tab2:Slider({
     Title = "跳跃力",
     Value = { Min = 50, Max = 500, Default = 50 },
     Increment = 1,
@@ -721,7 +721,7 @@ Tab2:CreateSlider({
 Tab2:Divider()
 
 -- 无限跳跃
-Tab2:CreateToggle({
+Tab2:Toggle({
     Title = "无限跳跃",
     Default = false,
     Callback = function(state)
@@ -742,7 +742,7 @@ Tab2:CreateToggle({
 })
 
 -- 穿墙
-Tab2:CreateToggle({
+Tab2:Toggle({
     Title = "穿墙",
     Default = false,
     Callback = function(state)
@@ -767,7 +767,7 @@ Tab2:CreateToggle({
 })
 
 -- 无敌
-Tab2:CreateToggle({
+Tab2:Toggle({
     Title = "无敌",
     Default = false,
     Callback = function(state)
@@ -788,7 +788,7 @@ Tab2:CreateToggle({
 })
 
 -- 摔落无伤害
-Tab2:CreateToggle({
+Tab2:Toggle({
     Title = "摔落无伤害",
     Default = false,
     Callback = function(state)
@@ -807,7 +807,7 @@ Tab2:CreateToggle({
 Tab2:Divider()
 
 -- 飞行手机版
-Tab2:CreateButton({
+Tab2:Button({
     Title = "飞行手机版",
     Callback = function()
         Notify("忍者传奇", "正在加载飞行脚本...", 3)
@@ -820,16 +820,16 @@ Tab2:CreateButton({
 --==================================================
 -- 标签页 3: 视觉
 --==================================================
-local Tab3 = Window:CreateTab({
+local Tab3 = Window:Tab({
     Title = "视觉",
     Icon = "eye"
 })
 
 ------ Section: 透视 ----
-Tab3:CreateSection({ Title = "透视" })
+Tab3:Section({ Title = "透视" })
 
 -- 人物透视
-Tab3:CreateToggle({
+Tab3:Toggle({
     Title = "人物透视",
     Default = false,
     Callback = function(state)
@@ -860,7 +860,7 @@ Tab3:CreateToggle({
 })
 
 -- 显示名字
-Tab3:CreateToggle({
+Tab3:Toggle({
     Title = "显示名字",
     Default = true,
     Callback = function(state)
@@ -874,7 +874,7 @@ Tab3:CreateToggle({
 })
 
 -- 显示距离
-Tab3:CreateToggle({
+Tab3:Toggle({
     Title = "显示距离",
     Default = true,
     Callback = function(state)
@@ -888,7 +888,7 @@ Tab3:CreateToggle({
 })
 
 -- 物品透视
-Tab3:CreateToggle({
+Tab3:Toggle({
     Title = "物品透视",
     Default = false,
     Callback = function(state)
@@ -917,7 +917,7 @@ Tab3:CreateToggle({
 })
 
 -- 全图高亮
-Tab3:CreateToggle({
+Tab3:Toggle({
     Title = "全图高亮",
     Default = false,
     Callback = function(state)
@@ -952,16 +952,16 @@ Tab3:CreateToggle({
 --==================================================
 -- 标签页 4: 传送
 --==================================================
-local Tab4 = Window:CreateTab({
+local Tab4 = Window:Tab({
     Title = "传送",
     Icon = "map-pin"
 })
 
 ------ Section: 地点 ----
-Tab4:CreateSection({ Title = "地点" })
+Tab4:Section({ Title = "地点" })
 
 -- 训练区
-Tab4:CreateButton({
+Tab4:Button({
     Title = "训练区",
     Callback = function()
         TeleportToLocation({"train", "training", "practice"}, "训练区")
@@ -969,7 +969,7 @@ Tab4:CreateButton({
 })
 
 -- 商店
-Tab4:CreateButton({
+Tab4:Button({
     Title = "商店",
     Callback = function()
         TeleportToLocation({"shop", "store", "buy"}, "商店")
@@ -977,7 +977,7 @@ Tab4:CreateButton({
 })
 
 -- 武器店
-Tab4:CreateButton({
+Tab4:Button({
     Title = "武器店",
     Callback = function()
         TeleportToLocation({"weapon", "sword", "blade"}, "武器店")
@@ -985,7 +985,7 @@ Tab4:CreateButton({
 })
 
 -- 腰带店
-Tab4:CreateButton({
+Tab4:Button({
     Title = "腰带店",
     Callback = function()
         TeleportToLocation({"belt"}, "腰带店")
@@ -993,7 +993,7 @@ Tab4:CreateButton({
 })
 
 -- 宠物店
-Tab4:CreateButton({
+Tab4:Button({
     Title = "宠物店",
     Callback = function()
         TeleportToLocation({"pet", "egg"}, "宠物店")
@@ -1001,7 +1001,7 @@ Tab4:CreateButton({
 })
 
 -- 转生区
-Tab4:CreateButton({
+Tab4:Button({
     Title = "转生区",
     Callback = function()
         TeleportToLocation({"rebirth", "prestige", "ascend"}, "转生区")
@@ -1009,7 +1009,7 @@ Tab4:CreateButton({
 })
 
 -- 出生点
-Tab4:CreateButton({
+Tab4:Button({
     Title = "出生点",
     Callback = function()
         TeleportToLocation({"spawn", "lobby", "start"}, "出生点")
@@ -1017,7 +1017,7 @@ Tab4:CreateButton({
 })
 
 -- 岛屿
-Tab4:CreateButton({
+Tab4:Button({
     Title = "岛屿",
     Callback = function()
         TeleportToLocation({"island", "zone", "area"}, "岛屿")
@@ -1028,7 +1028,7 @@ Tab4:CreateButton({
 Tab4:Divider()
 
 -- 长按传送
-Tab4:CreateToggle({
+Tab4:Toggle({
     Title = "长按传送",
     Default = false,
     Callback = function(state)
@@ -1067,16 +1067,16 @@ Tab4:CreateToggle({
 --==================================================
 -- 标签页 5: 实用
 --==================================================
-local Tab5 = Window:CreateTab({
+local Tab5 = Window:Tab({
     Title = "实用",
     Icon = "settings"
 })
 
 ------ Section: 工具 ----
-Tab5:CreateSection({ Title = "工具" })
+Tab5:Section({ Title = "工具" })
 
 -- 防挂机
-Tab5:CreateToggle({
+Tab5:Toggle({
     Title = "防挂机",
     Default = false,
     Callback = function(state)
@@ -1098,7 +1098,7 @@ Tab5:CreateToggle({
 })
 
 -- 画质提速
-Tab5:CreateToggle({
+Tab5:Toggle({
     Title = "画质提速",
     Default = false,
     Callback = function(state)
@@ -1136,7 +1136,7 @@ Tab5:CreateToggle({
 Tab5:Divider()
 
 -- 换服
-Tab5:CreateButton({
+Tab5:Button({
     Title = "换服",
     Callback = function()
         Notify("忍者传奇", "正在换服...", 3)
@@ -1147,7 +1147,7 @@ Tab5:CreateButton({
 })
 
 -- 复制服务器号
-Tab5:CreateButton({
+Tab5:Button({
     Title = "复制服务器号",
     Callback = function()
         local jobId = game.JobId
@@ -1160,7 +1160,7 @@ Tab5:CreateButton({
 })
 
 -- 角色信息
-Tab5:CreateButton({
+Tab5:Button({
     Title = "角色信息",
     Callback = function()
         local hum = GetHum()
@@ -1179,7 +1179,7 @@ Tab5:CreateButton({
 })
 
 -- 清理特效
-Tab5:CreateButton({
+Tab5:Button({
     Title = "清理特效",
     Callback = function()
         local count = 0
@@ -1194,7 +1194,7 @@ Tab5:CreateButton({
 })
 
 -- 卸载脚本
-Tab5:CreateButton({
+Tab5:Button({
     Title = "卸载脚本",
     Callback = function()
         Notify("忍者传奇", "正在卸载脚本...", 3)
