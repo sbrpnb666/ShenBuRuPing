@@ -1117,18 +1117,6 @@ TeleportSection:Button({
     end,
 })
 
--- 传送到Boss区
-TeleportSection:Button({
-    Title = "传送到Boss区",
-    Callback = function()
-        if FindAndTeleport("boss", "魔王", "Boss") then
-            Notify("圣奥里", "已传送到Boss区", 3)
-        else
-            Notify("圣奥里", "未找到Boss区位置", 3)
-        end
-    end,
-})
-
 -- 传送到最近玩家
 TeleportSection:Button({
     Title = "传送到最近玩家",
