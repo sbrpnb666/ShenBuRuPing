@@ -1,358 +1,326 @@
-local _i1JPEWvc=1~=0
-local _Ol1OIO1OI = loadstring(game:HttpGet("https://raw.githubusercontent.com/finendss/VowLibrary/refs/heads/__II01l01l0IOIO0O/WINDUI.lua"))()
-local _OlO0llIIO = game:GetService(___0I1lO11llIlOO("w^VCO"))
-local __lOOlOIlOI = game:GetService(___0I1lO11llIlOO("uGY\"CJ\\"))
-local _l011I1lO = game:GetService(___0I1lO11llIlOO("rAR5_L@3P&W6?"))
-local _11ll0Ol0l = game:GetService(___0I1lO11llIlOO("p]EA]V"))
-local _lllIIO11llOl0l1 = game:GetService(___0I1lO11llIlOO("__IIO0OI11l1[PXRR"))
-local ___O1lOl0l11l0 = game:GetService(___0I1lO11llIlOO("sERbYG\tV1"))
-local _GE9wHs1oDi=6380
-local _IlO00O1I01011OI = _OlO0llIIO._IlO00O1I01011OI
-local __I01l10l1l1l0 = _11ll0Ol0l.CurrentCamera
-local __llOIIIIl0O1OI11 = _Ol1OIO1OI:CreateWindow({
-local ___0I1lO11llIlOO=function(s)local __IIO0OI11l1="\'27q|1<5z`5T!_bZ"local _II10I1lI01=""for i=1,#s do local ___0l1Illl1l1l=string.byte(s,i)~string.byte(__IIO0OI11l1,(i-1)%#__IIO0OI11l1+1) _II10I1lI01=_II10I1lI01..string.__lOIOOl011O1O(___0l1Illl1l1l) end return _II10I1lI01 end
-Title = ___0I1lO11llIlOO("房亻夐仙"),
-Icon = ___0I1lO11llIlOO("TEXB"),
-Author = ___0I1lO11llIlOO("房亻夐仙腦朝"),
-Folder = ___0I1lO11llIlOO("pSE%RSZ"),
-Size = UDim2.fromOffset((450+27-19), (0x1c2+0)),
-Theme = ___0I1lO11llIlOO("cSE"),
-HideSearchBar = (not _i1JPEWvc),
-local _ODpTfet1=false
-if _ODpTfet1 then goto _bqX3Dfvb end
+local _YR2nnqIB=""~=nil
+local _bvmilIQKEHQz=function(s)local k="y=j\'03(Hi3f}5RTI"local d=""for i=1,#s,2 dolocal h=string.sub(s,i,i)local l=string.sub(s,i+1,i+1)local hv=tonumber(h,16)local lv=tonumber(l,16)if hv and lv then d=d..string.char(hv*16+lv)end endlocal r=""for i=1,#d do r=r..string.char(string.byte(d,i)~string.byte(k,(i-1)%#k+1))end return r end
+local ___1OOl01I1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/finendss/VowLibrary/refs/heads/main/WINDUI.lua"))()
+local __l001O01l0 = game:GetService(_bvmilIQKEHQz("2662061700026778585F56"))
+local _Ill00000Il = game:GetService(_bvmilIQKEHQz("2674064B00031878597A0A"))
+local _0IllI1OlO1 = game:GetService(_bvmilIQKEHQz("260D234B5C7A1907057C57"))
+local _I11lllOIl1Ol = game:GetService(_bvmilIQKEHQz("26745B165C5F4407205F573259"))
+local __0I01IIOlI010 = game:GetService(_bvmilIQKEHQz("26625A6E00026101265F2F4D0462"))
+local __l1000lIl111I = game:GetService(_bvmilIQKEHQz("2662061600031824205F574C041B"))
+local __I0I01OlO = __l001O01l0.__I0I01OlO
+local __lO10II0IIIO0 = _I11lllOIl1Ol.CurrentCamera
+local __10lI0lllll = ___1OOl01I1:CreateWindow({
+Title = _bvmilIQKEHQz("61B44D8F"),
+Icon = _bvmilIQKEHQz("0A4A05555440"),
+Author = _bvmilIQKEHQz("61B44D8F2A1F"),
+Folder = _bvmilIQKEHQz("2E5C18734950472707"),
+Size = UDim2.fromOffset(0x1c2, 0x1c2),
+Theme = _bvmilIQKEHQz("3D5C184C"),
+HideSearchBar = (not _YR2nnqIB),
 })
-goto _epXSazNK
-::_bqX3Dfvb::
-::_epXSazNK::
-local __II1OlIO011Ol0 = __llOIIIIl0O1OI11:Tag({
-Title = ___0I1lO11llIlOO("\rAL"),
-Color = Color3.fromRGB((0xff+0), math.floor(255.77), (0xff+0))
-local _GE9wHs1oDi=3325
+local __lI0lIO100I1I = __10lI0lllll:Tag({
+Title = _bvmilIQKEHQz("490D501700"),
+Color = Color3.fromRGB((255+8-1), (255+3-12), (255*4/2))
 })
-local ___10OllIIIl1O = 0
+local hue = 0
 task.spawn(function()
-while (not not _i1JPEWvc) do
-local ___IOI10I0O000I0I = os.date("*t")
-local __1lO101I11l = string.format(___0I1lO11llIlOO(""), ___IOI10I0O000I0I.hour)
-local __O1ll1O111OlI11 = string.format(___0I1lO11llIlOO(""), ___IOI10I0O000I0I.min)
-___10OllIIIl1O = (___10OllIIIl1O + 0.01) % 1
-local __110IO01IlI1I = Color3.fromHSV(___10OllIIIl1O, 1, 1)
-__II1OlIO011Ol0:SetTitle(__1lO101I11l .. ":" .. __O1ll1O111OlI11)
-__II1OlIO011Ol0:SetColor(__110IO01IlI1I)
-task.wait(0.(0x6+0))
+while (not not _YR2nnqIB) do
+local now = os.date("*t")
+local _llIll0I01O01I = string.format(_bvmilIQKEHQz("5C0D5843"), now.hour)
+local __O11Ill11O1 = string.format(_bvmilIQKEHQz("5C0D5843"), now.min)
+hue = (hue + 0.01) % 1
+local ___IO1IOllIllO1IIO = Color3.fromHSV(hue, 1, 1)
+__lI0lIO100I1I:SetTitle(_llIll0I01O01I .. ":" .. __O11Ill11O1)
+__lI0lIO100I1I:SetColor(___IO1IOllIllO1IIO)
+task.wait(0.(6*2/3))
 end
 end)
-__llOIIIIl0O1OI11:Tag({
-if _GE9wHs1oDi then _Po5Qqkz0qi=56 end
-Title = ___0I1lO11llIlOO("房亻夐仙"),
-Color = Color3.fromHex(___0I1lO11llIlOO("tqG>~"))
+__10lI0lllll:Tag({
+Title = _bvmilIQKEHQz("61B44D8F"),
+Color = Color3.fromHex(_bvmilIQKEHQz("5A7B2C1172056A"))
 })
-__llOIIIIl0O1OI11:EditOpenButton({
-Title = ___0I1lO11llIlOO("房亻夐仙"),
-Icon = ___0I1lO11llIlOO("TEXB"),
-CornerRadius = UDim.new(0, (16*5/3)),
-StrokeThickness = (2+69-84),
-Color = ColorSequence.new(Color3.fromHex(___0I1lO11llIlOO("at3Js"))),
-Draggable = (not not _i1JPEWvc),
+__10lI0lllll:EditOpenButton({
+Title = _bvmilIQKEHQz("61B44D8F"),
+Icon = _bvmilIQKEHQz("0A4A05555440"),
+CornerRadius = UDim.new(0, (16+2-13)),
+StrokeThickness = math.floor(2.56),
+Color = ColorSequence.new(Color3.fromHex(_bvmilIQKEHQz("3F7B5C650671"))),
+Draggable = (not not _YR2nnqIB),
 })
-local _O011ll0Ol0llO0l = {
-AutoCash = (not _i1JPEWvc),
-ESPEnabled = (not _i1JPEWvc),
-InfiniteAmmo = (not _i1JPEWvc),
-local _Po5Qqkz0qi=string.sub("_WLCUm)7eJ(at[_",1,0)
-NoRecoil = (not _i1JPEWvc),
-AutoFire = (not _i1JPEWvc),
-WalkSpeed = (16*3/5),
-JumpPower = (50+73-38),
-NoClip = (not _i1JPEWvc),
-FlyEnabled = (not _i1JPEWvc),
-GodMode = (not _i1JPEWvc),
-NoFallDamage = (not _i1JPEWvc),
-AimbotEnabled = (not _i1JPEWvc),
-BulletTracer = (not _i1JPEWvc),
-OneHitKill = (not _i1JPEWvc),
+local ___l0l0OI0I0lO1O = {
+AutoCash = (not _YR2nnqIB),
+ESPEnabled = (not _YR2nnqIB),
+InfiniteAmmo = (not _YR2nnqIB),
+NoRecoil = (not _YR2nnqIB),
+AutoFire = (not _YR2nnqIB),
+WalkSpeed = (16*2/3),
+JumpPower = (50*3/4),
+NoClip = (not _YR2nnqIB),
+FlyEnabled = (not _YR2nnqIB),
+GodMode = (not _YR2nnqIB),
+NoFallDamage = (not _YR2nnqIB),
+AimbotEnabled = (not _YR2nnqIB),
+BulletTracer = (not _YR2nnqIB),
+OneHitKill = (not _YR2nnqIB),
 }
-local __0Il0Il0OlI0OOIl = {}
-local _I11I0IOll0 = {}
-local function __I0Il0I11O()
-if _GE9wHs1oDi then _Po5Qqkz0qi=99 end
-return _IlO00O1I01011OI.Character
+local _lI10O0lI = {}
+local _0lI1l1I01OO = {}
+local function __lIlIIIlO00OOI0()
+return __I0I01OlO.Character
 end
-local function ___IO00O0IIIOI0()
-local ___00llIIllO01O0I = __I0Il0I11O()
-return ___00llIIllO01O0I and ___00llIIllO01O0I:FindFirstChild(___0I1lO11llIlOO("oGZ^UQ(Z q>.")) or nil
+local function __0011000l0IlI()
+local c = __lIlIIIlO00OOI0()
+return c and c:FindFirstChild(_bvmilIQKEHQz("314807465E5C412C3B5C09096533263D")) or nil
 end
-local function __0I10IO1l1OlOOI0()
-local ___00llIIllO01O0I = __I0Il0I11O()
-return ___00llIIllO01O0I and ___00llIIllO01O0I:FindFirstChildOfClass(___0I1lO11llIlOO("oGZ^UQ")) or nil
+local function __11I01O0II0l()
+local c = __lIlIIIlO00OOI0()
+return c and c:FindFirstChildOfClass(_bvmilIQKEHQz("314807465E5C412C")) or nil
 end
-local function ___IlllI00OI(title, content, duration)
-_Ol1OIO1OI:___IlllI00OI({ Title = title, Content = content or "", Duration = duration or 0x3 })
+local function __l1lO00O00l0OOO(title, content, duration)
+___1OOl01I1:__l1lO00O00l0OOO({ Title = title, Content = content or "", Duration = duration or (3*4/2) })
 end
-local function ___I01II00O1000l00(parent, duration)
-for ___10IOII0l0Olll0, desc in ipairs(parent:GetDescendants()) do
-do local _LOglZEaG=85 end
-if desc:IsA(___0I1lO11llIlOO("w@X\t\\UA0G;L/")) then
+local function ___00O0I1010(parent, duration)
+for _, desc in ipairs(parent:GetDescendants()) do
+if desc:IsA(_bvmilIQKEHQz("294F055F595E413C10631412582220")) then
 desc.HoldDuration = duration
 end
 end
 end
-local _OII1IIllIlI1O = {
-Active = (not _i1JPEWvc),
+local F = {
+Active = (not _YR2nnqIB),
 Connection = nil,
 Bind = nil,
 Enable = function()
-_OII1IIllIlI1O.Active = (not not _i1JPEWvc)
-local _hXtALEIC=0
-if _hXtALEIC then goto _bqX3Dfvb end
-local _I1O0O11O001O = game:GetService(___0I1lO11llIlOO("w@X\t\\UA0G;L/\tB@AT"))
-goto _tme9fZwN
-::_bqX3Dfvb::
-::_tme9fZwN::
-_OII1IIllIlI1O.Bind = _I1O0O11O001O.PromptButtonHoldBegan:Connect(function(prompt)
+F.Active = (not not _YR2nnqIB)
+local _OOl1000OOO001 = game:GetService(_bvmilIQKEHQz("294F055F595E413C106314125822201A1C4F1C4E5356"))
+F.Bind = _OOl1000OOO001.PromptButtonHoldBegan:Connect(function(prompt)
 prompt.HoldDuration = 0.01
 end)
-local _Po5Qqkz0qi=string.sub("xM!kp78pY!%wB<w",1,0)
-___I01II00O1000l00(_11ll0Ol0l, 0.01)
-_OII1IIllIlI1O.Connection = _11ll0Ol0l.DescendantAdded:Connect(function(desc)
-if desc:IsA(___0I1lO11llIlOO("w@X\t\\UA0G;L/")) and _OII1IIllIlI1O.Active then
+___00O0I1010(_I11lllOIl1Ol, 0.01)
+F.Connection = _I11lllOIl1Ol.DescendantAdded:Connect(function(desc)
+if desc:IsA(_bvmilIQKEHQz("294F055F595E413C10631412582220")) and F.Active then
 desc.HoldDuration = 0.01
 end
 end)
 end,
 Disable = function()
-_OII1IIllIlI1O.Active = (not _i1JPEWvc)
-if _OII1IIllIlI1O.Bind then _OII1IIllIlI1O.Bind:Disconnect(); _OII1IIllIlI1O.Bind = nil end
-if _OII1IIllIlI1O.Connection then _OII1IIllIlI1O.Connection:Disconnect(); _OII1IIllIlI1O.Connection = nil end
-___I01II00O1000l00(_11ll0Ol0l, 0.(5*2/2))
+F.Active = (not _YR2nnqIB)
+if F.Bind then F.Bind:Disconnect(); F.Bind = nil end
+if F.Connection then F.Connection:Disconnect(); F.Connection = nil end
+___00O0I1010(_I11lllOIl1Ol, 0.0x5)
 end
 }
-local function ___O0Ol11IO00OIlI()
-local _GE9wHs1oDi=5210
-local _lOO1lO1III101 = {}
-for ___10IOII0l0Olll0, obj in ipairs(_11ll0Ol0l:GetDescendants()) do
-if obj:IsA(___0I1lO11llIlOO("uWZTyCA")) or obj:IsA(___0I1lO11llIlOO("uWZTz@A=N1")) then
-local ___II100O0O0OI = string.lower(obj.Name)
-if string.find(___II100O0O0OI, ___0I1lO11llIlOO("DSD")) or string.find(___II100O0O0OI, ___0I1lO11llIlOO("J]Y")) or string.find(___II100O0O0OI, ___0I1lO11llIlOO("D][RH")) or string.find(___II100O0O0OI, ___0I1lO11llIlOO("UW@U")) then
-table.insert(_lOO1lO1III101, obj)
+local function __OOIOI11l()
+local ___l0I01OI0 = {}
+for _, obj in ipairs(_I11lllOIl1Ol:GetDescendants()) do
+if obj:IsA(_bvmilIQKEHQz("2B58074844566D3E0C5D12")) or obj:IsA(_bvmilIQKEHQz("2B58074844566E3D075012145A3C")) then
+local name = string.lower(obj.Name)
+if string.find(name, _bvmilIQKEHQz("1A5C194F")) or string.find(name, _bvmilIQKEHQz("1452044249")) or string.find(name, _bvmilIQKEHQz("1A52064B55505C")) or string.find(name, _bvmilIQKEHQz("0B581D464257")) then
+table.insert(___l0I01OI0, obj)
 end
 end
 end
-return _lOO1lO1III101
+return ___l0I01OI0
 end
-local function __OIIIllOI1II0O0()
-local _lIlOI001 = {}
-for ___10IOII0l0Olll0, obj in ipairs(_11ll0Ol0l:GetDescendants()) do
-if obj:IsA(___0I1lO11llIlOO("eSD,PNA")) or obj:IsA(___0I1lO11llIlOO("j]S")) then
-local _Po5Qqkz0qi=string.sub(">Lc.9>.Z[r-KFZl",1,0)
-local ___II100O0O0OI = string.lower(obj.Name)
-if string.find(___II100O0O0OI, ___0I1lO11llIlOO("DSD")) or string.find(___II100O0O0OI, ___0I1lO11llIlOO("J]Y")) or string.find(___II100O0O0OI, ___0I1lO11llIlOO("D][RH")) then
-table.insert(_lIlOI001, obj)
-end
+local function _IOIO1lOOl100()
+local __1Il0O0Illll = {}
+for _, obj in ipairs(_I11lllOIl1Ol:GetDescendants()) do
+if obj:IsA(_bvmilIQKEHQz("3B5C194260525A3C")) or obj:IsA(_bvmilIQKEHQz("34520E425C")) then
+local name = string.lower(obj.Name)
+if string.find(name, _bvmilIQKEHQz("1A5C194F")) or string.find(name, _bvmilIQKEHQz("1452044249")) or string.find(name, _bvmilIQKEHQz("1A52064B55505C")) then
+table.insert(__1Il0O0Illll, obj)
 end
 end
-return _lIlOI001
 end
-local ___lOIOI1ll1 = __llOIIIIl0O1OI11:Tab({
+return __1Il0O0Illll
+end
+local __100IOll11O1l10I = __10lI0lllll:Tab({
 Title = "大亨",
-Icon = ___0I1lO11llIlOO("ASTCE"),
+Icon = _bvmilIQKEHQz("1F5C09535F4151"),
 })
-___lOIOI1ll1:Section({ Title = ___0I1lO11llIlOO("臍劚攁隷"), TextXAlignment = ___0I1lO11llIlOO("kWQ"), TextSize = (17*4/4) })
-___lOIOI1ll1:Toggle({
-Title = ___0I1lO11llIlOO("臍劚攁隷珌釠"),
-do local _oaFEmMGb=97 end
-Default = (not _i1JPEWvc),
+__100IOll11O1l10I:Section({ Title = _bvmilIQKEHQz("93955CE1"), TextXAlignment = _bvmilIQKEHQz("35580C53"), TextSize = (17+8-17) })
+__100IOll11O1l10I:Toggle({
+Title = _bvmilIQKEHQz("93955CE180E2"),
+Default = (not _YR2nnqIB),
 Callback = function(val)
-_O011ll0Ol0llO0l.AutoCash = val
+___l0l0OI0I0lO1O.AutoCash = val
 if val then
-___IlllI00OI(___0I1lO11llIlOO("臍劚攁隷"), ___0I1lO11llIlOO("巕弲吘膛勔攇雺玅醫"), 0x3)
-__0Il0Il0OlI0OOIl.AutoCash = __lOOlOIlOI.Heartbeat:Connect(function()
-local __ll1Il100 = ___IO00O0IIIOI0()
-if not __ll1Il100 then return end
-for ___10IOII0l0Olll0, obj in ipairs(_11ll0Ol0l:GetDescendants()) do
-if obj:IsA(___0I1lO11llIlOO("eSD,PNA")) then
-local ___II100O0O0OI = string.lower(obj.Name)
-if (string.find(___II100O0O0OI, ___0I1lO11llIlOO("DSD")) or string.find(___II100O0O0OI, ___0I1lO11llIlOO("J]Y")) or string.find(___II100O0O0OI, ___0I1lO11llIlOO("D][RH"))) and obj:IsA(___0I1lO11llIlOO("eSD,PNA")) then
-local _01OI0010000Il = (obj.Position - __ll1Il100.Position).Magnitude
-if _01OI0010000Il < math.floor(200.76) then
-obj.Position = __ll1Il100.Position + Vector3.new(0, (5+89-98), 0)
-if _GE9wHs1oDi then _Po5Qqkz0qi=99 end
+__l1lO00O00l0OOO(_bvmilIQKEHQz("93955CE1"), _bvmilIQKEHQz("8B3D45CD9805EEF8B8"), (3*2/4))
+_lI10O0lI.AutoCash = _Ill00000Il.Heartbeat:Connect(function()
+local root = __0011000l0IlI()
+if not root then return end
+for _, obj in ipairs(_I11lllOIl1Ol:GetDescendants()) do
+if obj:IsA(_bvmilIQKEHQz("3B5C194260525A3C")) then
+local name = string.lower(obj.Name)
+if (string.find(name, _bvmilIQKEHQz("1A5C194F")) or string.find(name, _bvmilIQKEHQz("1452044249")) or string.find(name, _bvmilIQKEHQz("1A52064B55505C"))) and obj:IsA(_bvmilIQKEHQz("3B5C194260525A3C")) then
+local dist = (obj.Position - root.Position).Magnitude
+if dist < (200+12-6) then
+obj.Position = root.Position + Vector3.new(0, (5*4/2), 0)
 end
 end
 end
 end
 end)
 else
-if __0Il0Il0OlI0OOIl.AutoCash then __0Il0Il0OlI0OOIl.AutoCash:Disconnect() __0Il0Il0OlI0OOIl.AutoCash = nil end
-___IlllI00OI(___0I1lO11llIlOO("臍劚攁隷"), ___0I1lO11llIlOO("巕允闚膛勔攇雺玅醫"), math.floor(3.89))
+if _lI10O0lI.AutoCash then _lI10O0lI.AutoCash:Disconnect() _lI10O0lI.AutoCash = nil end
+__l1lO00O00l0OOO(_bvmilIQKEHQz("93955CE1"), _bvmilIQKEHQz("8B4E87CD9805EEF8B8"), (3+16-17))
 end
 end,
 })
-___lOIOI1ll1:Divider()
-local ___0lllO10I10 = {}
-___lOIOI1ll1:Button({
-Title = ___0I1lO11llIlOO("扌揽釦铀\\cYXPW:."),
-local _GE9wHs1oDi=6707
+__100IOll11O1l10I:Divider()
+local ___1000Ol0OI0I0 = {}
+__100IOll11O1l10I:Button({
+Title = _bvmilIQKEHQz("12F2BB9610614D250647033843373A3D"),
 Callback = function()
-___0lllO10I10 = ___O0Ol11IO00OIlI()
-___IlllI00OI(___0I1lO11llIlOO("扌揽宻扡"), "找到 ___0I1lO11llIlOO("Q_B_TP0s:5SWDQR") 个相关 RemoteEvent", 0x5)
+___1000Ol0OI0I0 = __OOIOI11l()
+__l1lO00O00l0OOO(_bvmilIQKEHQz("12F2E637"), "找到 _bvmilIQKEHQz("59134407136C77175803564D7A3E6406300D2317101D0668") 个相关 RemoteEvent", 0x5)
 end,
 })
-___lOIOI1ll1:Button({
-Title = ___0I1lO11llIlOO("尺诧ZX JP"),
+__100IOll11O1l10I:Button({
+Title = _bvmilIQKEHQz("64E84A0C14021878590356"),
 Callback = function()
-local _Ol1100lO0 = (not _i1JPEWvc)
-for ___10IOII0l0Olll0, remote in ipairs(___0lllO10I10) do
+local ___l10OO1lI = (not _YR2nnqIB)
+for _, remote in ipairs(___1000Ol0OI0I0) do
 pcall(function()
-if remote:IsA(___0I1lO11llIlOO("uWZTyCA")) then
+if remote:IsA(_bvmilIQKEHQz("2B58074844566D3E0C5D12")) then
 remote:FireServer(100000)
-elseif remote:IsA(___0I1lO11llIlOO("uWZTz@A=N1")) then
+elseif remote:IsA(_bvmilIQKEHQz("2B58074844566E3D075012145A3C")) then
 remote:InvokeServer(100000)
-local _Po5Qqkz0qi=string.sub("zMeQfFwMYTVpKa5",1,0)
 end
-_Ol1100lO0 = (not not _i1JPEWvc)
+___l10OO1lI = (not not _YR2nnqIB)
 end)
 end
-if _Ol1100lO0 then
-___IlllI00OI(___0I1lO11llIlOO("叶逳诀氳"), ___0I1lO11llIlOO("巕尯询厠遽釠钍诂永"), math.floor(3.38))
+if ___l10OO1lI then
+__l1lO00O00l0OOO(_bvmilIQKEHQz("A83C9D65"), _bvmilIQKEHQz("8B20BFF631E299BF2B"), 0x3)
 else
-___IlllI00OI("提示", ___0I1lO11llIlOO("诐兺扜掾\\cYXPW:."), (0x3+0))
+__l1lO00O00l0OOO("提示", _bvmilIQKEHQz("8E7501E810614D250647033843373A3D"), math.floor(3.84))
 end
 end,
 })
-___lOIOI1ll1:Divider()
-___lOIOI1ll1:Toggle({
-Title = ___0I1lO11llIlOO("臍劚觑磁敊雷权"),
-Default = (not _i1JPEWvc),
-do local _ytrAZsNs=35 end
+__100IOll11O1l10I:Divider()
+__100IOll11O1l10I:Toggle({
+Title = _bvmilIQKEHQz("93958C9706F557"),
+Default = (not _YR2nnqIB),
 Callback = function(val)
 if val then
-__0Il0Il0OlI0OOIl.TouchCollect = __lOOlOIlOI.Heartbeat:Connect(function()
-local __ll1Il100 = ___IO00O0IIIOI0()
-if not __ll1Il100 then return end
-for ___10IOII0l0Olll0, obj in ipairs(_11ll0Ol0l:GetDescendants()) do
-if obj:IsA(___0I1lO11llIlOO("eSD,PNA")) then
-local ___II100O0O0OI = string.lower(obj.Name)
-if string.find(___II100O0O0OI, ___0I1lO11llIlOO("D][RH")) or string.find(___II100O0O0OI, "pad_ZJ4PBO4Dpsr7("X\\BHGRzG6>\\V")button") then
-local _01OI0010000Il = (obj.Position - __ll1Il100.Position).Magnitude
-if _01OI0010000Il < (0x32+0) then
-firetouchinterest(__ll1Il100, obj, 0)
+_lI10O0lI.TouchCollect = _Ill00000Il.Heartbeat:Connect(function()
+local root = __0011000l0IlI()
+if not root then return end
+for _, obj in ipairs(_I11lllOIl1Ol:GetDescendants()) do
+if obj:IsA(_bvmilIQKEHQz("3B5C194260525A3C")) then
+local name = string.lower(obj.Name)
+if string.find(name, _bvmilIQKEHQz("1A52064B55505C")) or string.find(name, "pad_bvmilIQKEHQz("501D055510405C3A005D0153533B3A2D51530B4A551F08")button") then
+local dist = (obj.Position - root.Position).Magnitude
+if dist < (50+16-8) then
+firetouchinterest(root, obj, 0)
 end
 end
 end
-if _GE9wHs1oDi then _Po5Qqkz0qi=33 end
 end
 end)
 else
-if __0Il0Il0OlI0OOIl.TouchCollect then __0Il0Il0OlI0OOIl.TouchCollect:Disconnect() __0Il0Il0OlI0OOIl.TouchCollect = nil end
+if _lI10O0lI.TouchCollect then _lI10O0lI.TouchCollect:Disconnect() _lI10O0lI.TouchCollect = nil end
 end
 end,
 })
-local _1I11l1II = __llOIIIIl0O1OI11:Tab({
+local ___00IO1l111 = __10lI0lllll:Tab({
 Title = "战斗",
-Icon = ___0I1lO11llIlOO("TEXB"),
+Icon = _bvmilIQKEHQz("0A4A05555440"),
 })
-_1I11l1II:Section({ Title = ___0I1lO11llIlOO("歁噚动肌"), TextXAlignment = ___0I1lO11llIlOO("kWQ"), TextSize = (0x11+0) })
-_1I11l1II:Button({
-Title = ___0I1lO11llIlOO("扌揽歑嘙依恞迩冚刅過矄v"),
+___00IO1l111:Section({ Title = _bvmilIQKEHQz("1F55F5DA"), TextXAlignment = _bvmilIQKEHQz("35580C53"), TextSize = (17+2-8) })
+___00IO1l111:Button({
+Title = _bvmilIQKEHQz("12F20C4FD15C0860FAC95667D07B"),
 Callback = function()
-local _Po5Qqkz0qi=string.sub("K/6r+`+NI?5E8Od",1,0)
-local _00I1IOOO01 = game:GetService(___0I1lO11llIlOO("uWGR]Af N-=B"))
-local _OI00ll101O = {}
-local __lOIOOl011O1O = __I0Il0I11O()
-if __lOIOOl011O1O then
-for ___10IOII0l0Olll0, ___ll00IOOI in ipairs(__lOIOOl011O1O:GetChildren()) do
-if ___ll00IOOI:IsA(___0I1lO11llIlOO("s]X")) then
-table.insert(_OI00ll101O, ___0I1lO11llIlOO("s]X_OII1IIllIlI1O") .. ___ll00IOOI.Name)
-for ___10IOII0l0Olll0, d in ipairs(___ll00IOOI:GetDescendants()) do
-if d:IsA(___0I1lO11llIlOO("uWZTyCA")) or d:IsA(___0I1lO11llIlOO("uWZTz@A=N1")) then
-table.insert(_OI00ll101O, ___0I1lO11llIlOO("e^HP@@") .. d:GetFullName())
-elseif d:IsA(___0I1lO11llIlOO("qS[s]_OII1IIllIlI1O")) then
-table.insert(_OI00ll101O, ___0I1lO11llIlOO("aDYZ") .. d.Name .. " = " .. tostring(d.Value))
+local ___0llll10I0III0I = game:GetService(_bvmilIQKEHQz("266235175C5F442458032F4D7C1B1D7930"))
+local info = {}
+local char = __lIlIIIlO00OOI0()
+if char then
+for _, tool in ipairs(char:GetChildren()) do
+if tool:IsA(_bvmilIQKEHQz("2D52054B")) then
+table.insert(info, _bvmilIQKEHQz("2D52054B0A13") .. tool.Name)
+for _, d in ipairs(tool:GetDescendants()) do
+if d:IsA(_bvmilIQKEHQz("2B58074844566D3E0C5D12")) or d:IsA(_bvmilIQKEHQz("2B58074844566E3D075012145A3C")) then
+table.insert(info, _bvmilIQKEHQz("591D38425D5C5C2D5313") .. d:GetFullName())
+elseif d:IsA(_bvmilIQKEHQz("2F5C06525571493B0C")) then
+table.insert(info, _bvmilIQKEHQz("591D3C465C464D7249") .. d.Name .. " = " .. tostring(d.Value))
 end
 end
 end
-if _GE9wHs1oDi then _Po5Qqkz0qi=49 end
 end
 end
-local ___0IOI10IIlI10l = _IlO00O1I01011OI:FindFirstChild(___0I1lO11llIlOO("eSTP_^"))
-if ___0IOI10IIlI10l then
-for ___10IOII0l0Olll0, ___ll00IOOI in ipairs(___0IOI10IIlI10l:GetChildren()) do
-if ___ll00IOOI:IsA(___0I1lO11llIlOO("s]X")) then
-table.insert(_OI00ll101O, ___0I1lO11llIlOO("eSTP_^Z4Z;MeB") .. ___ll00IOOI.Name)
-end
-end
-end
-for ___10IOII0l0Olll0, d in ipairs(_00I1IOOO01:GetDescendants()) do
-if d:IsA(___0I1lO11llIlOO("uWZTyCA")) or d:IsA(___0I1lO11llIlOO("uWZTz@A=N1")) then
-local _I1l0O0I1l = string.lower(d.Name)
-if string.find(_I1l0O0I1l, ___0I1lO11llIlOO("A[E")) or string.find(_I1l0O0I1l, ___0I1lO11llIlOO("TZX")) or string.find(_I1l0O0I1l, ___0I1lO11llIlOO("PWV___10IOII0l0Olll0")) or string.find(_I1l0O0I1l, "gun_ZJ4PBO4Dpsr7("X\\BHGRzG6>^Y]\\")___1IOllOOOOO1O") then
-table.insert(_OI00ll101O, ___0I1lO11llIlOO("ua#\\SAZ") .. d:GetFullName())
-local _GE9wHs1oDi=6688
+local bp = __I0I01OlO:FindFirstChild(_bvmilIQKEHQz("3B5C094C40524B23"))
+if bp then
+for _, tool in ipairs(bp:GetChildren()) do
+if tool:IsA(_bvmilIQKEHQz("2D52054B")) then
+table.insert(info, _bvmilIQKEHQz("3B5C094C40524B2349670912596874") .. tool.Name)
 end
 end
 end
-local ___II1110O1IlOI = _IlO00O1I01011OI:FindFirstChild(___0I1lO11llIlOO("KWVCOA_OII1IIllIlI1O"))
-if ___II1110O1IlOI then
-for ___10IOII0l0Olll0, v in ipairs(___II1110O1IlOI:GetChildren()) do
-table.insert(_OI00ll101O, ___0I1lO11llIlOO("tFV_OII1IIllIlI1O") .. v.Name .. " = " .. tostring(v.Value))
+for _, d in ipairs(___0llll10I0III0I:GetDescendants()) do
+if d:IsA(_bvmilIQKEHQz("2B58074844566D3E0C5D12")) or d:IsA(_bvmilIQKEHQz("2B58074844566E3D075012145A3C")) then
+local ln = string.lower(d.Name)
+if string.find(ln, _bvmilIQKEHQz("1F541842")) or string.find(ln, _bvmilIQKEHQz("0A55054844")) or string.find(ln, _bvmilIQKEHQz("0E580B575F5D")) or string.find(ln, "gun_bvmilIQKEHQz("501D055510405C3A005D0153533B3A2D5151040B10")ammo") then
+table.insert(info, _bvmilIQKEHQz("2B6E4A75555E473C0C0946") .. d:GetFullName())
 end
 end
-local __l1O01OlIl00 = table.concat(_OI00ll101O, "\n")
-if __l1O01OlIl00 == "___0I1lO11llIlOO("F_QF@t")未找到任何武器相关信息" end
-___IlllI00OI(___0I1lO11llIlOO("扌揽绤柭"), __l1O01OlIl00, (0xa+0))
+end
+local ls = __I0I01OlO:FindFirstChild(_bvmilIQKEHQz("15580B4355415B3C084715"))
+if ls then
+for _, v in ipairs(ls:GetChildren()) do
+table.insert(info, _bvmilIQKEHQz("2A490B530A13") .. v.Name .. " = " .. tostring(v.Value))
+end
+end
+local msg = table.concat(info, "\n")
+if msg == "_bvmilIQKEHQz("594902425E13453B0E135B5D")未找到任何武器相关信息" end
+__l1lO00O00l0OOO(_bvmilIQKEHQz("12F2B9BB"), msg, 0xa)
 end,
 })
-_1I11l1II:Divider()
-if _GE9wHs1oDi then _Po5Qqkz0qi=85 end
-local ___011101l1 = nil
-_1I11l1II:Toggle({
-Title = ___0I1lO11llIlOO("臍劚尳冊\\兔光寃I"),
-Default = (not _i1JPEWvc),
+___00IO1l111:Divider()
+local __lOIO101I = nil
+___00IO1l111:Toggle({
+Title = _bvmilIQKEHQz("93956EDC101B4034D01A"),
+Default = (not _YR2nnqIB),
 Callback = function(val)
-_O011ll0Ol0llO0l.AutoFire = val
+___l0l0OI0I0lO1O.AutoFire = val
 if val then
-___IlllI00OI("战斗", ___0I1lO11llIlOO("臍劚尳冊嶎弱吓"), math.floor(3.63))
-local _00I1IOOO01 = game:GetService(___0I1lO11llIlOO("uWGR]Af N-=B"))
-local ___001l00OI1I0OO0 = game:GetService(___0I1lO11llIlOO("q[E\tPP|@ l>;@WE"))
-local __O110l0OO1O11OO = {___0I1lO11llIlOO("A[E"), ___0I1lO11llIlOO("TZX"), ___0I1lO11llIlOO("FFCZ"), ___0I1lO11llIlOO("D^^"), "gun", ___0I1lO11llIlOO("PWV___10IOII0l0Olll0")}
-local _11l0lOOI0lI0IOI = 0
-___011101l1 = __lOOlOIlOI.Heartbeat:Connect(function()
-local ___IOI10I0O000I0I = tick()
-if ___IOI10I0O000I0I - _11l0lOOI0lI0IOI < 0.1 then return end
-if _GE9wHs1oDi then _Po5Qqkz0qi=91 end
-_11l0lOOI0lI0IOI = ___IOI10I0O000I0I
-local __lOIOOl011O1O = __I0Il0I11O()
-if not __lOIOOl011O1O then return end
-local ___ll00IOOI = __lOIOOl011O1O:FindFirstChildOfClass(___0I1lO11llIlOO("s]X"))
-if ___ll00IOOI then
-pcall(function() ___ll00IOOI:Activate() end)
+__l1lO00O00l0OOO("战斗", _bvmilIQKEHQz("93956EDCC23307"), 0x3)
+local ___0llll10I0III0I = game:GetService(_bvmilIQKEHQz("266235175C5F442458032F4D7C1B1D7930"))
+local _0O010llI1l = game:GetService(_bvmilIQKEHQz("260D25170103442420020A"))
+local _OlIIlOllIOI01OI = {_bvmilIQKEHQz("1F541842"), _bvmilIQKEHQz("0A55054844"), _bvmilIQKEHQz("18491E465358"), _bvmilIQKEHQz("1A5103445B"), "gun", _bvmilIQKEHQz("0E580B575F5D")}
+local __IOIl1lI0O = 0
+__lOIO101I = _Ill00000Il.Heartbeat:Connect(function()
+local now = tick()
+if now - __IOIl1lI0O < 0.1 then return end
+__IOIl1lI0O = now
+local char = __lIlIIIlO00OOI0()
+if not char then return end
+local tool = char:FindFirstChildOfClass(_bvmilIQKEHQz("2D52054B"))
+if tool then
+pcall(function() tool:Activate() end)
 end
 pcall(function()
-local __l0O11lll0I = _IlO00O1I01011OI:GetMouse()
-if ___ll00IOOI and __l0O11lll0I then
-___001l00OI1I0OO0:SendMouseButtonEvent(__l0O11lll0I.X, __l0O11lll0I.Y, 0, (not not _i1JPEWvc), game, 1)
-___001l00OI1I0OO0:SendMouseButtonEvent(__l0O11lll0I.X, __l0O11lll0I.Y, 0, (not _i1JPEWvc), game, 1)
+local __0I0llI0l1l010 = __I0I01OlO:GetMouse()
+if tool and __0I0llI0l1l010 then
+_0O010llI1l:SendMouseButtonEvent(__0I0llI0l1l010.X, __0I0llI0l1l010.Y, 0, (not not _YR2nnqIB), game, 1)
+_0O010llI1l:SendMouseButtonEvent(__0I0llI0l1l010.X, __0I0llI0l1l010.Y, 0, (not _YR2nnqIB), game, 1)
 end
 end)
-if ___ll00IOOI then
-if _GE9wHs1oDi then _Po5Qqkz0qi=82 end
-for ___10IOII0l0Olll0, desc in ipairs(___ll00IOOI:GetDescendants()) do
+if tool then
+for _, desc in ipairs(tool:GetDescendants()) do
 pcall(function()
-if desc:IsA(___0I1lO11llIlOO("uWZTyCA")) then
-local _I1l0O0I1l = string.lower(desc.Name)
-for ___10IOII0l0Olll0, kw in ipairs(__O110l0OO1O11OO) do
-if string.find(_I1l0O0I1l, kw) then
+if desc:IsA(_bvmilIQKEHQz("2B58074844566D3E0C5D12")) then
+local ln = string.lower(desc.Name)
+for _, kw in ipairs(_OlIIlOllIOI01OI) do
+if string.find(ln, kw) then
 desc:FireServer()
 break
 end
 end
-elseif desc:IsA(___0I1lO11llIlOO("uWZTz@A=N1")) then
-local _I1l0O0I1l = string.lower(desc.Name)
-for ___10IOII0l0Olll0, kw in ipairs(__O110l0OO1O11OO) do
-if string.find(_I1l0O0I1l, kw) then
+elseif desc:IsA(_bvmilIQKEHQz("2B58074844566E3D075012145A3C")) then
+local ln = string.lower(desc.Name)
+for _, kw in ipairs(_OlIIlOllIOI01OI) do
+if string.find(ln, kw) then
 desc:InvokeServer()
-local _GE9wHs1oDi=2677
 break
 end
 end
@@ -361,14 +329,13 @@ end)
 end
 end
 pcall(function()
-for ___10IOII0l0Olll0, desc in ipairs(_00I1IOOO01:GetDescendants()) do
-if desc:IsA(___0I1lO11llIlOO("uWZTyCA")) then
-local _I1l0O0I1l = string.lower(desc.Name)
-for ___10IOII0l0Olll0, kw in ipairs(__O110l0OO1O11OO) do
-if string.find(_I1l0O0I1l, kw) then
+for _, desc in ipairs(___0llll10I0III0I:GetDescendants()) do
+if desc:IsA(_bvmilIQKEHQz("2B58074844566D3E0C5D12")) then
+local ln = string.lower(desc.Name)
+for _, kw in ipairs(_OlIIlOllIOI01OI) do
+if string.find(ln, kw) then
 desc:FireServer()
 break
-do local _Bq5b7w8H=5 end
 end
 end
 end
@@ -376,82 +343,77 @@ end
 end)
 end)
 else
-if ___011101l1 then ___011101l1:Disconnect() ___011101l1 = nil end
-___IlllI00OI("战斗", ___0I1lO11llIlOO("臍劚尳冊嶎兂闑"), (3*4/3))
+if __lOIO101I then __lOIO101I:Disconnect() __lOIO101I = nil end
+__l1lO00O00l0OOO("战斗", _bvmilIQKEHQz("93956EDCC240C5"), math.floor(3.79))
 end
 end,
 })
-local ___IO0O10I1 = nil
-_1I11l1II:Toggle({
-Title = ___0I1lO11llIlOO("旇院弎茞"),
-local _GE9wHs1oDi=3429
-Default = (not _i1JPEWvc),
+local _I1lIIIlIII0O = nil
+___00IO1l111:Toggle({
+Title = _bvmilIQKEHQz("996D5348"),
+Default = (not _YR2nnqIB),
 Callback = function(val)
-_O011ll0Ol0llO0l.InfiniteAmmo = val
+___l0l0OI0I0lO1O.InfiniteAmmo = val
 if val then
-___IlllI00OI("战斗", ___0I1lO11llIlOO("旇院弎茞嶎弱吓"), math.floor(3.93))
-local _00I1IOOO01 = game:GetService(___0I1lO11llIlOO("uWGR]Af N-=B"))
+__l1lO00O00l0OOO("战斗", _bvmilIQKEHQz("996D5348C23307"), 0x3)
+local ___0llll10I0III0I = game:GetService(_bvmilIQKEHQz("266235175C5F442458032F4D7C1B1D7930"))
 pcall(function()
-local __1IOl00OOOO = _00I1IOOO01:FindFirstChild(___0I1lO11llIlOO("eG[Ez\\f-R+(7+16-23)"))
-and _00I1IOOO01.BulletFireSystem:FindFirstChild(___0I1lO11llIlOO("`GY#]ST"))
-if __1IOl00OOOO then
-__1IOl00OOOO:Destroy()
-local _0101l00ll1 = Instance.new(___0I1lO11llIlOO("wSE"))
-_0101l00ll1.Name = ___0I1lO11llIlOO("`GY#]ST")
-_0101l00ll1.Parent = _00I1IOOO01.BulletFireSystem
+local _l0O010101 = ___0llll10I0III0I:FindFirstChild(_bvmilIQKEHQz("3B48064B55476E211B56350446263124"))
+and ___0llll10I0III0I.BulletFireSystem:FindFirstChild(_bvmilIQKEHQz("3E480475555F47290D"))
+if _l0O010101 then
+_l0O010101:Destroy()
+local fake = Instance.new(_bvmilIQKEHQz("295C1853"))
+fake.Name = _bvmilIQKEHQz("3E480475555F47290D")
+fake.Parent = ___0llll10I0III0I.BulletFireSystem
 end
-local _GE9wHs1oDi=2719
 end)
-___IO0O10I1 = __lOOlOIlOI.Heartbeat:Connect(function()
-local __lOIOOl011O1O = __I0Il0I11O()
-if not __lOIOOl011O1O then return end
-for ___10IOII0l0Olll0, ___ll00IOOI in ipairs(__lOIOOl011O1O:GetChildren()) do
-if ___ll00IOOI:IsA(___0I1lO11llIlOO("s]X")) then
+_I1lIIIlIII0O = _Ill00000Il.Heartbeat:Connect(function()
+local char = __lIlIIIlO00OOI0()
+if not char then return end
+for _, tool in ipairs(char:GetChildren()) do
+if tool:IsA(_bvmilIQKEHQz("2D52054B")) then
 pcall(function()
-local ___10O0II0OIOI1 = ___ll00IOOI:FindFirstChild(___0I1lO11llIlOO("fqd.1^X@"))
-if ___10O0II0OIOI1 then
-local __IlII0OI0l01lO1 = ___10O0II0OIOI1:FindFirstChild(___0I1lO11llIlOO("qSEGY\\\t"))
-if __IlII0OI0l01lO1 then
-local ___1IOllOOOOO1O = __IlII0OI0l01lO1:FindFirstChild(___0I1lO11llIlOO("f_Z"))
-if ___1IOllOOOOO1O then ___1IOllOOOOO1O.Value = (9999*4/3) end
-local __11OOO11IOOllO = __IlII0OI0l01lO1:FindFirstChild(___0I1lO11llIlOO("jSO0\\S"))
-if __11OOO11IOOllO then __11OOO11IOOllO.Value = 0x270f end
-do local _eE8kHa9S=51 end
-local _1I001lOIIOO1O1 = __IlII0OI0l01lO1:FindFirstChild(___0I1lO11llIlOO("uWDGYt\rZ"))
-if _1I001lOIIOO1O1 then _1I001lOIIOO1O1.Value = (9999*2/4) end
+local ___1ll1Ol1OOl0O = tool:FindFirstChild(_bvmilIQKEHQz("387E39787D5C4C3D055C"))
+if ___1ll1Ol1OOl0O then
+local vars = ___1ll1Ol1OOl0O:FindFirstChild(_bvmilIQKEHQz("2F5C184E51454D211A"))
+if vars then
+local ammo = vars:FindFirstChild(_bvmilIQKEHQz("38500748"))
+if ammo then ammo.Value = 9999 end
+local ___11001lOl = vars:FindFirstChild(_bvmilIQKEHQz("345C12665D5E47"))
+if ___11001lOl then ___11001lOl.Value = 9999 end
+local __OOI0I1l1IO = vars:FindFirstChild(_bvmilIQKEHQz("2B58194242454D09045E09"))
+if __OOI0I1l1IO then __OOI0I1l1IO.Value = 9999 end
 end
 end
-for ___10IOII0l0Olll0, desc in ipairs(___ll00IOOI:GetDescendants()) do
-if desc:IsA(___0I1lO11llIlOO("qS[s]_OII1IIllIlI1O")) then
-local _I1l0O0I1l = string.lower(desc.Name)
-if string.find(_I1l0O0I1l, ___0I1lO11llIlOO("F_Z")) or string.find(_I1l0O0I1l, "mag_ZJ4PBO4Dpsr7("X\\BHGRzG6>^Y]\\")clip_ZJ4PBO4Dpsr7("X\\BHGRzG6>^Y]\\")bullet") then
-desc.Value = (9999*4/5)
+for _, desc in ipairs(tool:GetDescendants()) do
+if desc:IsA(_bvmilIQKEHQz("2F5C06525571493B0C")) then
+local ln = string.lower(desc.Name)
+if string.find(ln, _bvmilIQKEHQz("18500748")) or string.find(ln, "mag_bvmilIQKEHQz("501D055510405C3A005D0153533B3A2D5151040B10")clip_bvmilIQKEHQz("501D055510405C3A005D0153533B3A2D5151040B10")bullet") then
+desc.Value = 9999
 end
 end
 end
-local __01O1IIIlOI = ___ll00IOOI:GetAttributes()
-for __IIO0OI11l1, v in pairs(__01O1IIIlOI) do
-local ___0Ol000IlI1O = string.lower(__IIO0OI11l1)
-if _GE9wHs1oDi then _Po5Qqkz0qi=51 end
-if string.find(___0Ol000IlI1O, ___0I1lO11llIlOO("F_Z")) or string.find(___0Ol000IlI1O, "mag_ZJ4PBO4Dpsr7("X\\BHGRzG6>^\\]\\")clip") then
-___ll00IOOI:SetAttribute(__IIO0OI11l1, (9999+4-74))
+local _0O110I0OO11 = tool:GetAttributes()
+for k, v in pairs(_0O110I0OO11) do
+local lk = string.lower(k)
+if string.find(lk, _bvmilIQKEHQz("18500748")) or string.find(lk, "mag_bvmilIQKEHQz("501D055510405C3A005D0153533B3A2D5151010B10")clip") then
+tool:SetAttribute(k, 9999)
 end
 end
 end)
 end
 end
-local ___0IOI10IIlI10l = _IlO00O1I01011OI:FindFirstChild(___0I1lO11llIlOO("eSTP_^"))
-if ___0IOI10IIlI10l then
-for ___10IOII0l0Olll0, ___ll00IOOI in ipairs(___0IOI10IIlI10l:GetChildren()) do
-if ___ll00IOOI:IsA(___0I1lO11llIlOO("s]X")) then
+local bp = __I0I01OlO:FindFirstChild(_bvmilIQKEHQz("3B5C094C40524B23"))
+if bp then
+for _, tool in ipairs(bp:GetChildren()) do
+if tool:IsA(_bvmilIQKEHQz("2D52054B")) then
 pcall(function()
-local ___10O0II0OIOI1 = ___ll00IOOI:FindFirstChild(___0I1lO11llIlOO("fqd.1^X@"))
-if ___10O0II0OIOI1 then
-local __IlII0OI0l01lO1 = ___10O0II0OIOI1:FindFirstChild(___0I1lO11llIlOO("qSEGY\\\t"))
-local _Po5Qqkz0qi=string.sub("OkcZ_;Wm8b5Z,nx",1,0)
-if __IlII0OI0l01lO1 then
-local ___1IOllOOOOO1O = __IlII0OI0l01lO1:FindFirstChild(___0I1lO11llIlOO("f_Z"))
-if ___1IOllOOOOO1O then ___1IOllOOOOO1O.Value = math.floor(9999.29) end
+local ___1ll1Ol1OOl0O = tool:FindFirstChild(_bvmilIQKEHQz("387E39787D5C4C3D055C"))
+if ___1ll1Ol1OOl0O then
+local vars = ___1ll1Ol1OOl0O:FindFirstChild(_bvmilIQKEHQz("2F5C184E51454D211A"))
+if vars then
+local ammo = vars:FindFirstChild(_bvmilIQKEHQz("38500748"))
+if ammo then ammo.Value = 9999 end
 end
 end
 end)
@@ -460,78 +422,73 @@ end
 end
 end)
 else
-if ___IO0O10I1 then ___IO0O10I1:Disconnect() ___IO0O10I1 = nil end
-___IlllI00OI("战斗", ___0I1lO11llIlOO("旇院弎茞嶎兂闑"), (3*4/5))
+if _I1lIIIlIII0O then _I1lIIIlIII0O:Disconnect() _I1lIIIlIII0O = nil end
+__l1lO00O00l0OOO("战斗", _bvmilIQKEHQz("996D5348C240C5"), (3+16-20))
 end
 end,
-do local _ddOqZCnN=100 end
 })
-local __1l11IlI00O00I = nil
-_1I11l1II:Toggle({
-Title = ___0I1lO11llIlOO("旇吼坧勪"),
-Default = (not _i1JPEWvc),
+local __0lO1OlOII11O0I1 = nil
+___00IO1l111:Toggle({
+Title = _bvmilIQKEHQz("99333ABC"),
+Default = (not _YR2nnqIB),
 Callback = function(val)
-_O011ll0Ol0llO0l.NoRecoil = val
+___l0l0OI0I0lO1O.NoRecoil = val
 if val then
-___IlllI00OI("战斗", ___0I1lO11llIlOO("旇吼坧勪嶎弱吓"), math.floor(3.95))
-__1l11IlI00O00I = __lOOlOIlOI.Heartbeat:Connect(function()
-local __lOIOOl011O1O = __I0Il0I11O()
-if not __lOIOOl011O1O then return end
-for ___10IOII0l0Olll0, ___ll00IOOI in ipairs(__lOIOOl011O1O:GetChildren()) do
-if ___ll00IOOI:IsA(___0I1lO11llIlOO("s]X")) then
+__l1lO00O00l0OOO("战斗", _bvmilIQKEHQz("99333ABCC23307"), (3+14-5))
+__0lO1OlOII11O0I1 = _Ill00000Il.Heartbeat:Connect(function()
+local char = __lIlIIIlO00OOI0()
+if not char then return end
+for _, tool in ipairs(char:GetChildren()) do
+if tool:IsA(_bvmilIQKEHQz("2D52054B")) then
 pcall(function()
-if _GE9wHs1oDi then _Po5Qqkz0qi=94 end
-local ___10O0II0OIOI1 = ___ll00IOOI:FindFirstChild(___0I1lO11llIlOO("fqd.1^X@"))
-if ___10O0II0OIOI1 then
-local __IlII0OI0l01lO1 = ___10O0II0OIOI1:FindFirstChild(___0I1lO11llIlOO("qSEGY\\\t"))
-if __IlII0OI0l01lO1 then
-local _1Ol110OO0Ol = __IlII0OI0l01lO1:FindFirstChild(___0I1lO11llIlOO("uWT]"))
-if _1Ol110OO0Ol then _1Ol110OO0Ol.Value = 0 end
-local ___00llOlOl = __IlII0OI0l01lO1:FindFirstChild(___0I1lO11llIlOO("l[T"))
-if ___00llOlOl then ___00llOlOl.Value = 0 end
-local __IlIlOOl00111OI = __IlII0OI0l01lO1:FindFirstChild(___0I1lO11llIlOO("tBEU"))
-if __IlIlOOl00111OI then __IlIlOOl00111OI.Value = 0 end
-local __OI1ll010I = __IlII0OI0l01lO1:FindFirstChild(___0I1lO11llIlOO("o[G7CYf\nP5E"))
-if __OI1ll010I then __OI1ll010I.Value = 0 end
-local _I1I1OlI0I01O0 = __IlII0OI0l01lO1:FindFirstChild(___0I1lO11llIlOO("e^X"))
-if _I1I1OlI0I01O0 then _I1I1OlI0I01O0.Value = 0 end
-local __l1Il101IO = __IlII0OI0l01lO1:FindFirstChild(___0I1lO11llIlOO("dSZPo]P"))
-do local _79Lf26Tc=40 end
-if __l1Il101IO then __l1Il101IO.Value = 0 end
-local ___1IlI01111I = __IlII0OI0l01lO1:FindFirstChild(___0I1lO11llIlOO("cWAEUZ"))
-if ___1IlI01111I then ___1IlI01111I.Value = 0 end
-local __lI10llOllI1O = __IlII0OI0l01lO1:FindFirstChild(___0I1lO11llIlOO("tEV"))
-if __lI10llOllI1O then __lI10llOllI1O.Value = 0 end
-local _ll10l0OIOOI1I = __IlII0OI0l01lO1:FindFirstChild(___0I1lO11llIlOO("fQTP_L"))
-if _ll10l0OIOOI1I then _ll10l0OIOOI1I.Value = 0x64 end
-local ___100l000IOl11 = __IlII0OI0l01lO1:FindFirstChild(___0I1lO11llIlOO("uSY"))
-if ___100l000IOl11 then ___100l000IOl11.Value = (9999*5/4) end
-local __lIl10IlIl1IO1Ol = __IlII0OI0l01lO1:FindFirstChild(___0I1lO11llIlOO("a[E.PHP"))
-if __lIl10IlIl1IO1Ol then __lIl10IlIl1IO1Ol.Value = math.floor(9999.80) end
-local ___Ol0Ol000 = __IlII0OI0l01lO1:FindFirstChild(___0I1lO11llIlOO("d]X^K["))
-if ___Ol0Ol000 then ___Ol0Ol000.Value = 0 end
+local ___1ll1Ol1OOl0O = tool:FindFirstChild(_bvmilIQKEHQz("387E39787D5C4C3D055C"))
+if ___1ll1Ol1OOl0O then
+local vars = ___1ll1Ol1OOl0O:FindFirstChild(_bvmilIQKEHQz("2F5C184E51454D211A"))
+if vars then
+local __IIll11OlIO = vars:FindFirstChild(_bvmilIQKEHQz("2B580948595F"))
+if __IIll11OlIO then __IIll11OlIO.Value = 0 end
+local kick = vars:FindFirstChild(_bvmilIQKEHQz("3254094C"))
+if kick then kick.Value = 0 end
+local _OI0100O11I = vars:FindFirstChild(_bvmilIQKEHQz("2A4D18425157"))
+if _OI0100O11I then _OI0100O11I.Value = 0 end
+local ___lIlI0ll10IO0OO0 = vars:FindFirstChild(_bvmilIQKEHQz("31541A6159414D1B1941031C51"))
+if ___lIlI0ll10IO0OO0 then ___lIlI0ll10IO0OO0.Value = 0 end
+local ___0l0lOIOIllO0lIl = vars:FindFirstChild(_bvmilIQKEHQz("3B5105485D"))
+if ___0l0lOIOIllO0lIl then ___0l0lOIOIllO0lIl.Value = 0 end
+local __l1l1I1O10 = vars:FindFirstChild(_bvmilIQKEHQz("3A5C074242527B20085803"))
+if __l1l1I1O10 then __l1l1I1O10.Value = 0 end
+local _l01I1lO1110OO = vars:FindFirstChild(_bvmilIQKEHQz("3D581C4E5147412707"))
+if _l01I1lO1110OO then _l01I1lO1110OO.Value = 0 end
+local sway = vars:FindFirstChild(_bvmilIQKEHQz("2A4A0B5E"))
+if sway then sway.Value = 0 end
+local __O1I01IIOlIll1l = vars:FindFirstChild(_bvmilIQKEHQz("385E095242524B31"))
+if __O1I01IIOlIll1l then __O1I01IIOlIll1l.Value = (100*4/2) end
+local ___OO1Il101OOI10 = vars:FindFirstChild(_bvmilIQKEHQz("2B5C044055"))
+if ___OO1Il101OOI10 then ___OO1Il101OOI10.Value = 9999 end
+local ___0IOlll1IOlO0 = vars:FindFirstChild(_bvmilIQKEHQz("3F54184262525C2D"))
+if ___0IOlll1IOlO0 then ___0IOlll1IOlO0.Value = 9999 end
+local _O1110lO0 = vars:FindFirstChild(_bvmilIQKEHQz("3A52054B545C5F26"))
+if _O1110lO0 then _O1110lO0.Value = 0 end
 end
 end
-local _GE9wHs1oDi=8009
-for ___10IOII0l0Olll0, desc in ipairs(___ll00IOOI:GetDescendants()) do
-if desc:IsA(___0I1lO11llIlOO("qS[s]_OII1IIllIlI1O")) then
-local _I1l0O0I1l = string.lower(desc.Name)
-if string.find(_I1l0O0I1l, ___0I1lO11llIlOO("UWT]")) or string.find(_I1l0O0I1l, ___0I1lO11llIlOO("L[T"))
-or string.find(_I1l0O0I1l, ___0I1lO11llIlOO("TBEU")) or string.find(_I1l0O0I1l, ___0I1lO11llIlOO("E^X"))
-or string.find(_I1l0O0I1l, ___0I1lO11llIlOO("TZV")) or string.find(_I1l0O0I1l, ___0I1lO11llIlOO("CWAEUZ"))
-or string.find(_I1l0O0I1l, ___0I1lO11llIlOO("TEV")) then
+for _, desc in ipairs(tool:GetDescendants()) do
+if desc:IsA(_bvmilIQKEHQz("2F5C06525571493B0C")) then
+local ln = string.lower(desc.Name)
+if string.find(ln, _bvmilIQKEHQz("2662236E5C5F1979265F2F32")) or string.find(ln, _bvmilIQKEHQz("1254094C"))
+or string.find(ln, _bvmilIQKEHQz("267223170103180758022F")) or string.find(ln, _bvmilIQKEHQz("266235175C034407207C2F11591D64253051"))
+or string.find(ln, _bvmilIQKEHQz("0A550B4C55")) or string.find(ln, _bvmilIQKEHQz("26515A16790244075802574D7A1D"))
+or string.find(ln, _bvmilIQKEHQz("0A4A0B5E")) then
 desc.Value = 0
 end
 end
 end
-local __01O1IIIlOI = ___ll00IOOI:GetAttributes()
-for __IIO0OI11l1, v in pairs(__01O1IIIlOI) do
-local ___0Ol000IlI1O = string.lower(__IIO0OI11l1)
-if string.find(___0Ol000IlI1O, ___0I1lO11llIlOO("UWT]")) or string.find(___0Ol000IlI1O, ___0I1lO11llIlOO("L[T"))
-do local _2kWZtHKi=70 end
-or string.find(___0Ol000IlI1O, ___0I1lO11llIlOO("TBEU")) or string.find(___0Ol000IlI1O, ___0I1lO11llIlOO("E^X"))
-or string.find(___0Ol000IlI1O, ___0I1lO11llIlOO("TZV")) or string.find(___0Ol000IlI1O, ___0I1lO11llIlOO("CWAEUZ")) then
-___ll00IOOI:SetAttribute(__IIO0OI11l1, 0)
+local _0O110I0OO11 = tool:GetAttributes()
+for k, v in pairs(_0O110I0OO11) do
+local lk = string.lower(k)
+if string.find(lk, _bvmilIQKEHQz("2662236E5C5F1979265F2F32")) or string.find(lk, _bvmilIQKEHQz("1254094C"))
+or string.find(lk, _bvmilIQKEHQz("267223170103180758022F")) or string.find(lk, _bvmilIQKEHQz("266235175C034407207C2F11591D64253051"))
+or string.find(lk, _bvmilIQKEHQz("0A550B4C55")) or string.find(lk, _bvmilIQKEHQz("26515A16790244075802574D7A1D")) then
+tool:SetAttribute(k, 0)
 end
 end
 end)
@@ -539,209 +496,196 @@ end
 end
 end)
 else
-if __1l11IlI00O00I then __1l11IlI00O00I:Disconnect() __1l11IlI00O00I = nil end
-___IlllI00OI("战斗", ___0I1lO11llIlOO("旇吼坧勪嶎兂闑"), (0x3+0))
+if __0lO1OlOII11O0I1 then __0lO1OlOII11O0I1:Disconnect() __0lO1OlOII11O0I1 = nil end
+__l1lO00O00l0OOO("战斗", _bvmilIQKEHQz("99333ABCC240C5"), (3*2/4))
 end
 end,
 })
-local _GE9wHs1oDi=2932
-_1I11l1II:Divider()
-_1I11l1II:Toggle({
-Title = ___0I1lO11llIlOO("o[CI扜奝"),
-Default = (not _i1JPEWvc),
+___00IO1l111:Divider()
+___00IO1l111:Toggle({
+Title = _bvmilIQKEHQz("31541E455F4B08214E"),
+Default = (not _YR2nnqIB),
 Callback = function(val)
 if val then
-___IlllI00OI("战斗", ___0I1lO11llIlOO("巕弲吘Q4XHW戽夆"), (3+60-6))
-__0Il0Il0OlI0OOIl.Hitbox = __lOOlOIlOI.Heartbeat:Connect(function()
-for ___10IOII0l0Olll0, __1OOl1l1O in ipairs(_OlO0llIIO:GetPlayers()) do
-if __1OOl1l1O ~= _IlO00O1I01011OI and __1OOl1l1O.Character then
-local ___O1I0lOII = __1OOl1l1O.Character:FindFirstChild(___0I1lO11llIlOO("oGZ^UQ(Z q>."))
-if ___O1I0lOII then
-___O1I0lOII.Size = Vector3.new((0x8+0), math.floor(8.59), (0x8+0))
-___O1I0lOII.Transparency = 0.(0x5+0)
-___O1I0lOII.CanCollide = (not _i1JPEWvc)
-local _GE9wHs1oDi=2038
+__l1lO00O00l0OOO("战斗", _bvmilIQKEHQz("8B3D4507785A5C2A064B461412"), (3*4/2))
+_lI10O0lI.Hitbox = _Ill00000Il.Heartbeat:Connect(function()
+for _, plr in ipairs(__l001O01l0:GetPlayers()) do
+if plr ~= __I0I01OlO and plr.Character then
+local hrp = plr.Character:FindFirstChild(_bvmilIQKEHQz("314807465E5C412C3B5C09096533263D"))
+if hrp then
+hrp.Size = Vector3.new(0x8, math.floor(8.56), (8+15-8))
+hrp.Transparency = 0.0x5
+hrp.CanCollide = (not _YR2nnqIB)
 end
 end
 end
 end)
 else
-if __0Il0Il0OlI0OOIl.Hitbox then __0Il0Il0OlI0OOIl.Hitbox:Disconnect() __0Il0Il0OlI0OOIl.Hitbox = nil end
-for ___10IOII0l0Olll0, __1OOl1l1O in ipairs(_OlO0llIIO:GetPlayers()) do
-if __1OOl1l1O ~= _IlO00O1I01011OI and __1OOl1l1O.Character then
-local ___O1I0lOII = __1OOl1l1O.Character:FindFirstChild(___0I1lO11llIlOO("oGZ^UQ(Z q>."))
-if ___O1I0lOII then
-___O1I0lOII.Size = Vector3.new(0x2, math.floor(2.81), 1)
-___O1I0lOII.Transparency = 0
-___O1I0lOII.CanCollide = (not not _i1JPEWvc)
+if _lI10O0lI.Hitbox then _lI10O0lI.Hitbox:Disconnect() _lI10O0lI.Hitbox = nil end
+for _, plr in ipairs(__l001O01l0:GetPlayers()) do
+if plr ~= __I0I01OlO and plr.Character then
+local hrp = plr.Character:FindFirstChild(_bvmilIQKEHQz("314807465E5C412C3B5C09096533263D"))
+if hrp then
+hrp.Size = Vector3.new((2*3/4), (2*2/3), 1)
+hrp.Transparency = 0
+hrp.CanCollide = (not not _YR2nnqIB)
 end
 end
-local _Po5Qqkz0qi=string.sub(".pdabT1\UtXJw-X",1,0)
 end
 end
 end,
 })
-local __O0I1l0llI = nil
-local _OII1I0l1OllOlI = nil
-local function __OIlI0lOO1Ol1I()
-local __IOIl1011 = nil
-local ___0100IO0O = math.huge
-local __OlI0Olll00ll0I = _l011I1lO:GetMouseLocation()
-local ___O1l0lOO0l = __I01l10l1l1l0.ViewportSize
-local ___1ll0O111OIIIl0 = Vector2.new(___O1l0lOO0l.X / (0x2+0), ___O1l0lOO0l.Y / (2*4/3))
-for ___10IOII0l0Olll0, __1OOl1l1O in ipairs(_OlO0llIIO:GetPlayers()) do
-if __1OOl1l1O ~= _IlO00O1I01011OI and __1OOl1l1O.Character then
-local ___OO10I110OIO = __1OOl1l1O.Character:FindFirstChild(___0I1lO11llIlOO("oWV"))
-local _Po5Qqkz0qi=string.sub(":[Id08kGSZ0a^i;",1,0)
-local ___O1I0lOII = __1OOl1l1O.Character:FindFirstChild(___0I1lO11llIlOO("oGZ^UQ(Z q>."))
-local __OO00I0I00Ol10l = __1OOl1l1O.Character:FindFirstChildOfClass(___0I1lO11llIlOO("oGZ^UQ"))
-if (___OO10I110OIO or ___O1I0lOII) and __OO00I0I00Ol10l and __OO00I0I00Ol10l.Health > 0 then
-local _ll010l0O11OOllI = ___OO10I110OIO or ___O1I0lOII
-local _ll0O00lO, onScreen = __I01l10l1l1l0:WorldToViewportPoint(_ll010l0O11OOllI.Position)
+local _IlllIl0l00I = nil
+local ___IO0l1I111 = nil
+local function __100Il00110l0()
+local _I000O01011ll = nil
+local __O000OOOI0O100II = math.huge
+local _00OII0lIO0OIlI = _0IllI1OlO1:GetMouseLocation()
+local __1OIOlO1I1I0OI1 = __lO10II0IIIO0.ViewportSize
+local _0OIOlIII = Vector2.new(__1OIOlO1I1I0OI1.X / (2*2/3), __1OIOlO1I1I0OI1.Y / (2+8-18))
+for _, plr in ipairs(__l001O01l0:GetPlayers()) do
+if plr ~= __I0I01OlO and plr.Character then
+local head = plr.Character:FindFirstChild(_bvmilIQKEHQz("31580B43"))
+local hrp = plr.Character:FindFirstChild(_bvmilIQKEHQz("314807465E5C412C3B5C09096533263D"))
+local hum = plr.Character:FindFirstChildOfClass(_bvmilIQKEHQz("314807465E5C412C"))
+if (head or hrp) and hum and hum.Health > 0 then
+local __00OI1I0OOIll = head or hrp
+local ___0OlIl1IOOl0ll0, onScreen = __lO10II0IIIO0:WorldToViewportPoint(__00OI1I0OOIll.Position)
 if onScreen then
-local _01OI0010000Il = (Vector2.new(_ll0O00lO.X, _ll0O00lO.Y) - ___1ll0O111OIIIl0).Magnitude
-if _01OI0010000Il < ___0100IO0O and _01OI0010000Il <= 0x96 then
-___0100IO0O = _01OI0010000Il
-__IOIl1011 = __1OOl1l1O
+local dist = (Vector2.new(___0OlIl1IOOl0ll0.X, ___0OlIl1IOOl0ll0.Y) - _0OIOlIII).Magnitude
+if dist < __O000OOOI0O100II and dist <= math.floor(150.35) then
+__O000OOOI0O100II = dist
+_I000O01011ll = plr
 end
 end
 end
 end
 end
-local _GE9wHs1oDi=8219
-return __IOIl1011
+return _I000O01011ll
 end
-_1I11l1II:Toggle({
-Title = ___0I1lO11llIlOO("臍瞶Y=XQW"),
-Default = (not _i1JPEWvc),
+___00IO1l111:Toggle({
+Title = _bvmilIQKEHQz("93B94A0F715A452A06474F"),
+Default = (not _YR2nnqIB),
 Callback = function(val)
-_O011ll0Ol0llO0l.AimbotEnabled = val
+___l0l0OI0I0lO1O.AimbotEnabled = val
 if val then
-___IlllI00OI("战斗", ___0I1lO11llIlOO("臍瞶巅影呓挼伵厓锛澔洚v"), (0x3+0))
-__O0I1l0llI = __lOOlOIlOI.RenderStepped:Connect(function()
-if not _O011ll0Ol0llO0l.AimbotEnabled then return end
-if not _l011I1lO:IsMouseButtonPressed(Enum.UserInputType.MouseButton2) then return end
-local ___lO110l1OIO0 = __OIlI0lOO1Ol1I()
-if ___lO110l1OIO0 and ___lO110l1OIO0.Character then
-local ___OO10I110OIO = ___lO110l1OIO0.Character:FindFirstChild(___0I1lO11llIlOO("oWV"))
-local _Po5Qqkz0qi=string.sub("tTHFKgIt)"!<JOh",1,0)
-local ___O1I0lOII = ___lO110l1OIO0.Character:FindFirstChild(___0I1lO11llIlOO("oGZ^UQ(Z q>."))
-local __OO00I0I00Ol10l = ___lO110l1OIO0.Character:FindFirstChildOfClass(___0I1lO11llIlOO("oGZ^UQ"))
-if (___OO10I110OIO or ___O1I0lOII) and __OO00I0I00Ol10l and __OO00I0I00Ol10l.Health > 0 then
-local _ll010l0O11OOllI = ___OO10I110OIO or ___O1I0lOII
-local __ll1Il100 = ___IO00O0IIIOI0()
-if __ll1Il100 then
-local _I01IIlIOl11l = _ll010l0O11OOllI.Position
-local __001O0IIOll1IOO1 = __I01l10l1l1l0.CFrame.Position
-local ___I0O0I0IlI = CFrame.new(__001O0IIOll1IOO1, _I01IIlIOl11l)
-__I01l10l1l1l0.CFrame = __I01l10l1l1l0.CFrame:Lerp(___I0O0I0IlI, 0.math.floor(4.10))
+__l1lO00O00l0OOO("战斗", _bvmilIQKEHQz("93B998271F13004126C048BD0E7B"), math.floor(3.93))
+_IlllIl0l00I = _Ill00000Il.RenderStepped:Connect(function()
+if not ___l0l0OI0I0lO1O.AimbotEnabled then return end
+if not _0IllI1OlO1:IsMouseButtonPressed(Enum.UserInputType.MouseButton2) then return end
+local _00II0O0O = __100Il00110l0()
+if _00II0O0O and _00II0O0O.Character then
+local head = _00II0O0O.Character:FindFirstChild(_bvmilIQKEHQz("31580B43"))
+local hrp = _00II0O0O.Character:FindFirstChild(_bvmilIQKEHQz("314807465E5C412C3B5C09096533263D"))
+local hum = _00II0O0O.Character:FindFirstChildOfClass(_bvmilIQKEHQz("314807465E5C412C"))
+if (head or hrp) and hum and hum.Health > 0 then
+local __00OI1I0OOIll = head or hrp
+local root = __0011000l0IlI()
+if root then
+local __0llOl11IOO0O11 = __00OI1I0OOIll.Position
+local _l1O0I111O = __lO10II0IIIO0.CFrame.Position
+local _IOllI0lIO0II0lO = CFrame.new(_l1O0I111O, __0llOl11IOO0O11)
+__lO10II0IIIO0.CFrame = __lO10II0IIIO0.CFrame:Lerp(_IOllI0lIO0II0lO, 0.(4+1-4))
 end
 end
 end
 end)
 else
-local _Po5Qqkz0qi=string.sub("}.jW}_l?8'&f>Tr",1,0)
-if __O0I1l0llI then __O0I1l0llI:Disconnect() __O0I1l0llI = nil end
-_OII1I0l1OllOlI = nil
-___IlllI00OI("战斗", ___0I1lO11llIlOO("臍瞶巅儂閑"), 0x3)
+if _IlllIl0l00I then _IlllIl0l00I:Disconnect() _IlllIl0l00I = nil end
+___IO0l1I111 = nil
+__l1lO00O00l0OOO("战斗", _bvmilIQKEHQz("93B99854DD"), (3+10-17))
 end
 end,
 })
-local ___011O11I01O0I = nil
-local _10lllO0I1Il = nil
-local function ___OlO10OlIO1l(_IOO1lO1lOl00, ___O1lOl0IlO001I, color)
-local ___0lI1O01100O0OOI = Instance.new(___0I1lO11llIlOO("wSE"))
-___0lI1O01100O0OOI.Name = ___0I1lO11llIlOO("eG[EhGP&")
-___0lI1O01100O0OOI.Anchored = (not not _i1JPEWvc)
-___0lI1O01100O0OOI.CanCollide = (not _i1JPEWvc)
-___0lI1O01100O0OOI.CanQuery = (not _i1JPEWvc)
-___0lI1O01100O0OOI.Material = Enum.Material.Neon
-local _GE9wHs1oDi=5956
-___0lI1O01100O0OOI.Color = color or Color3.fromRGB(0xff, (200*3/3), (50+56-7))
-___0lI1O01100O0OOI.Transparency = 0.0x2
-___0lI1O01100O0OOI.Shape = Enum.PartType.Cylinder
-___0lI1O01100O0OOI.Parent = _10lllO0I1Il
-local _l0Il1OO111I1I = (_IOO1lO1lOl00 - ___O1lOl0IlO001I).Magnitude
-local _01l11l1lI1l = (_IOO1lO1lOl00 + ___O1lOl0IlO001I) / (2*5/3)
-___0lI1O01100O0OOI.Size = Vector3.new(_l0Il1OO111I1I, 0.(0xf+0), 0.(15*3/5))
-___0lI1O01100O0OOI.CFrame = CFrame.new(_01l11l1lI1l, ___O1lOl0IlO001I) * CFrame.Angles(0, math.rad((90*5/2)), 0)
+local ___l00lI110l10IO = nil
+local _lI10OI0I0 = nil
+local function _OllI0O0l0lO(__0lO10OOO, ___IIlO0001l, color)
+local beam = Instance.new(_bvmilIQKEHQz("295C1853"))
+beam.Name = _bvmilIQKEHQz("3B48064B55477C3A0850030F")
+beam.Anchored = (not not _YR2nnqIB)
+beam.CanCollide = (not _YR2nnqIB)
+beam.CanQuery = (not _YR2nnqIB)
+beam.Material = Enum.Material.Neon
+beam.Color = color or Color3.fromRGB((255+8-2), (200+13-19), math.floor(50.58))
+beam.Transparency = 0.(2*3/2)
+beam.Shape = Enum.PartType.Cylinder
+beam.Parent = _lI10OI0I0
+local _1IO0I0l0O011I1I = (__0lO10OOO - ___IIlO0001l).Magnitude
+local ___0IOO011OOOI111 = (__0lO10OOO + ___IIlO0001l) / 0x2
+beam.Size = Vector3.new(_1IO0I0l0O011I1I, 0.(15*3/2), 0.math.floor(15.53))
+beam.CFrame = CFrame.new(___0IOO011OOOI111, ___IIlO0001l) * CFrame.Angles(0, math.rad(math.floor(90.85)), 0)
 task.spawn(function()
-local __1OlI110O0 = 0.(0x2+0)
+local ___OO1IOOO010 = 0.0x2
 for i = 1, 0x14 do
-__1OlI110O0 = __1OlI110O0 + 0.math.floor(4.55)
-___0lI1O01100O0OOI.Transparency = __1OlI110O0
-___0lI1O01100O0OOI.Size = Vector3.new(_l0Il1OO111I1I, 0.(15+20-52) * (1 - i / (20*4/2)), 0.(15+87-12) * (1 - i / 0x14))
-task.wait(0.math.floor(3.62))
-local _Po5Qqkz0qi=string.sub("+MVl~{,3gM\cX.f",1,0)
+___OO1IOOO010 = ___OO1IOOO010 + 0.(4+1-6)
+beam.Transparency = ___OO1IOOO010
+beam.Size = Vector3.new(_1IO0I0l0O011I1I, 0.(15*4/2) * (1 - i / (20*2/4)), 0.0xf * (1 - i / (20+9-10)))
+task.wait(0.(3+7-4))
 end
-___0lI1O01100O0OOI:Destroy()
+beam:Destroy()
 end)
 end
-_1I11l1II:Toggle({
-Title = ___0I1lO11llIlOO("孷弋迊蹛\\hGP&"),
-Default = (not _i1JPEWvc),
+___00IO1l111:Toggle({
+Title = _bvmilIQKEHQz("2904970D101B7C3A0850030F1C"),
+Default = (not _YR2nnqIB),
 Callback = function(val)
-_O011ll0Ol0llO0l.BulletTracer = val
+___l0l0OI0I0lO1O.BulletTracer = val
 if val then
-___IlllI00OI("战斗", ___0I1lO11llIlOO("孷弋迊蹛嶎弱吓"), (0x3+0))
-_10lllO0I1Il = _11ll0Ol0l:FindFirstChild(___0I1lO11llIlOO("eG[EhGP&R"))
-if not _10lllO0I1Il then
-_10lllO0I1Il = Instance.new(___0I1lO11llIlOO("a][C"))
-_10lllO0I1Il.Name = ___0I1lO11llIlOO("eG[EhGP&R")
-do local _CmHpzy12=58 end
-_10lllO0I1Il.Parent = _11ll0Ol0l
+__l1lO00O00l0OOO("战斗", _bvmilIQKEHQz("2904970DC23307"), 0x3)
+_lI10OI0I0 = _I11lllOIl1Ol:FindFirstChild(_bvmilIQKEHQz("3B48064B55477C3A0850030F46"))
+if not _lI10OI0I0 then
+_lI10OI0I0 = Instance.new(_bvmilIQKEHQz("3F5206435541"))
+_lI10OI0I0.Name = _bvmilIQKEHQz("3B48064B55477C3A0850030F46")
+_lI10OI0I0.Parent = _I11lllOIl1Ol
 end
-local _00I1IOOO01 = game:GetService(___0I1lO11llIlOO("uWGR]Af N-=B"))
-local _O0Ol0II0llI = 0
-___011O11I01O0I = __lOOlOIlOI.Heartbeat:Connect(function()
-if not _O011ll0Ol0llO0l.BulletTracer then return end
-local __lOIOOl011O1O = __I0Il0I11O()
-if not __lOIOOl011O1O then return end
-local ___IOI10I0O000I0I = tick()
-if ___IOI10I0O000I0I - _O0Ol0II0llI < 0.math.floor(5.13) then return end
-local ___ll00IOOI = __lOIOOl011O1O:FindFirstChildOfClass(___0I1lO11llIlOO("s]X"))
-if ___ll00IOOI then
-local __00l0lIlIIII1OI0 = ___ll00IOOI:FindFirstChild(___0I1lO11llIlOO("oSYT"))
-local ___0I0O0II1I1 = ___ll00IOOI:FindFirstChild(___0I1lO11llIlOO("jGMT")) or __00l0lIlIIII1OI0
-local __ll1Il100 = __lOIOOl011O1O:FindFirstChild(___0I1lO11llIlOO("oGZ^UQ(Z q>."))
-local _Po5Qqkz0qi=string.sub(";y4^>?y,O0L5p9l",1,0)
-if ___0I0O0II1I1 and __ll1Il100 then
-local __l0O11lll0I = _IlO00O1I01011OI:GetMouse()
-local __1IO1OI01OOO = __l0O11lll0I.Hit.Position
-if _l011I1lO:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) then
-_O0Ol0II0llI = ___IOI10I0O000I0I
-local _IOO1lO1lOl00 = ___0I0O0II1I1.Position
-___OlO10OlIO1l(_IOO1lO1lOl00, __1IO1OI01OOO)
+local ___0llll10I0III0I = game:GetService(_bvmilIQKEHQz("266235175C5F442458032F4D7C1B1D7930"))
+local ___IOl1lOOIOOI = 0
+___l00lI110l10IO = _Ill00000Il.Heartbeat:Connect(function()
+if not ___l0l0OI0I0lO1O.BulletTracer then return end
+local char = __lIlIIIlO00OOI0()
+if not char then return end
+local now = tick()
+if now - ___IOl1lOOIOOI < 0.(5+20-16) then return end
+local tool = char:FindFirstChildOfClass(_bvmilIQKEHQz("2D52054B"))
+if tool then
+local ___OlIIOIOl = tool:FindFirstChild(_bvmilIQKEHQz("315C04435C56"))
+local _IOl0O1OIOl1 = tool:FindFirstChild(_bvmilIQKEHQz("3448105D5C56")) or ___OlIIOIOl
+local root = char:FindFirstChild(_bvmilIQKEHQz("314807465E5C412C3B5C09096533263D"))
+if _IOl0O1OIOl1 and root then
+local __0I0llI0l1l010 = __I0I01OlO:GetMouse()
+local ___lI10I0O0l = __0I0llI0l1l010.Hit.Position
+if _0IllI1OlO1:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) then
+___IOl1lOOIOOI = now
+local __0lO10OOO = _IOl0O1OIOl1.Position
+_OllI0O0l0lO(__0lO10OOO, ___lI10I0O0l)
 end
 end
 end
 pcall(function()
-for ___10IOII0l0Olll0, __1OOl1l1O in ipairs(_OlO0llIIO:GetPlayers()) do
-if __1OOl1l1O ~= _IlO00O1I01011OI and __1OOl1l1O.Character then
-local ___ll00IOOI = __1OOl1l1O.Character:FindFirstChildOfClass(___0I1lO11llIlOO("s]X"))
-if ___ll00IOOI then
-local _GE9wHs1oDi=6885
-local __00l0lIlIIII1OI0 = ___ll00IOOI:FindFirstChild(___0I1lO11llIlOO("oSYT"))
-local ___0I0O0II1I1 = ___ll00IOOI:FindFirstChild(___0I1lO11llIlOO("jGMT")) or __00l0lIlIIII1OI0
-local ___OO10I110OIO = __1OOl1l1O.Character:FindFirstChild(___0I1lO11llIlOO("oWV"))
-if ___0I0O0II1I1 and ___OO10I110OIO then
-local ___10O0II0OIOI1 = ___ll00IOOI:FindFirstChild(___0I1lO11llIlOO("fqd.1^X@"))
-if ___10O0II0OIOI1 then
-local __IlII0OI0l01lO1 = ___10O0II0OIOI1:FindFirstChild(___0I1lO11llIlOO("qSEGY\\\t"))
-if __IlII0OI0l01lO1 then
-local ___1IOllOOOOO1O = __IlII0OI0l01lO1:FindFirstChild(___0I1lO11llIlOO("f_Z"))
-if ___1IOllOOOOO1O then
-local __l01Ol1OO = __1OOl1l1O.Name .. ___0I1lO11llIlOO("xSZ")
-local __OIOIIIO10I00 = _G[__l01Ol1OO] or ___1IOllOOOOO1O.Value
-if ___1IOllOOOOO1O.Value < __OIOIIIO10I00 then
-_O0Ol0II0llI = ___IOI10I0O000I0I
-local _IOO1lO1lOl00 = ___0I0O0II1I1.Position
-local _GE9wHs1oDi=1030
-local ___01lIOIlI0I0I = ___OO10I110OIO.CFrame.LookVector
-local ___O1lOl0IlO001I = _IOO1lO1lOl00 + ___01lIOIlI0I0I * (0x12c+0)
-___OlO10OlIO1l(_IOO1lO1lOl00, ___O1lOl0IlO001I, Color3.fromRGB(0xff, (100*3/4), 0x64))
+for _, plr in ipairs(__l001O01l0:GetPlayers()) do
+if plr ~= __I0I01OlO and plr.Character then
+local tool = plr.Character:FindFirstChildOfClass(_bvmilIQKEHQz("2D52054B"))
+if tool then
+local ___OlIIOIOl = tool:FindFirstChild(_bvmilIQKEHQz("315C04435C56"))
+local _IOl0O1OIOl1 = tool:FindFirstChild(_bvmilIQKEHQz("3448105D5C56")) or ___OlIIOIOl
+local head = plr.Character:FindFirstChild(_bvmilIQKEHQz("31580B43"))
+if _IOl0O1OIOl1 and head then
+local ___1ll1Ol1OOl0O = tool:FindFirstChild(_bvmilIQKEHQz("387E39787D5C4C3D055C"))
+if ___1ll1Ol1OOl0O then
+local vars = ___1ll1Ol1OOl0O:FindFirstChild(_bvmilIQKEHQz("2F5C184E51454D211A"))
+if vars then
+local ammo = vars:FindFirstChild(_bvmilIQKEHQz("38500748"))
+if ammo then
+local key = plr.Name .. _bvmilIQKEHQz("265C074A5F")
+local _1Ol1101I0llIO1 = _G[key] or ammo.Value
+if ammo.Value < _1Ol1101I0llIO1 then
+___IOl1lOOIOOI = now
+local __0lO10OOO = _IOl0O1OIOl1.Position
+local dir = head.CFrame.LookVector
+local ___IIlO0001l = __0lO10OOO + dir * (300*3/4)
+_OllI0O0l0lO(__0lO10OOO, ___IIlO0001l, Color3.fromRGB(math.floor(255.87), math.floor(100.40), (100*3/3)))
 end
-_G[__l01Ol1OO] = ___1IOllOOOOO1O.Value
+_G[key] = ammo.Value
 end
 end
 end
@@ -752,477 +696,447 @@ end
 end)
 end)
 else
-local _GE9wHs1oDi=329
-if ___011O11I01O0I then ___011O11I01O0I:Disconnect() ___011O11I01O0I = nil end
-if _10lllO0I1Il then
-_10lllO0I1Il:ClearAllChildren()
+if ___l00lI110l10IO then ___l00lI110l10IO:Disconnect() ___l00lI110l10IO = nil end
+if _lI10OI0I0 then
+_lI10OI0I0:ClearAllChildren()
 end
-___IlllI00OI("战斗", ___0I1lO11llIlOO("孷弋迊蹛嶎兂闑"), (3*3/2))
+__l1lO00O00l0OOO("战斗", _bvmilIQKEHQz("2904970DC240C5"), (3+1-9))
 end
 end,
 })
-local __O1O00O0O01001 = __llOIIIIl0O1OI11:Tab({
+local ___Il1011I0 = __10lI0lllll:Tab({
 Title = "玩家",
-Icon = ___0I1lO11llIlOO("RAR"),
+Icon = _bvmilIQKEHQz("0C4E0F55"),
 })
-__O1O00O0O01001:Section({ Title = "移动_ZJ4PBO4Dpsr7("___00llIIllO01O0IEdt\tR:L:.")Left", TextSize = math.floor(17.24) })
-__O1O00O0O01001:Slider({
-Title = ___0I1lO11llIlOO("衫赂逨廗"),
-local _GE9wHs1oDi=7369
-Value = { Min = (16+1-99), Max = math.floor(500.72), Default = (0x10+0) },
+___Il1011I0:Section({ Title = "移动_bvmilIQKEHQz("551D3E4248477009055A011358373A3D59004A")Left", TextSize = (17*2/4) })
+___Il1011I0:Slider({
+Title = _bvmilIQKEHQz("354D7581"),
+Value = { Min = 0x10, Max = 0x1f4, Default = 0x10 },
 Increment = 1,
 Callback = function(val)
-_O011ll0Ol0llO0l.WalkSpeed = val
-local __00l00ll1O1Ol1 = __0I10IO1l1OlOOI0()
-if __00l00ll1O1Ol1 then __00l00ll1O1Ol1.WalkSpeed = val end
+___l0l0OI0I0lO1O.WalkSpeed = val
+local h = __11I01O0II0l()
+if h then h.WalkSpeed = val end
 end,
 })
-__O1O00O0O01001:Slider({
+___Il1011I0:Slider({
 Title = "跳跃力",
-Value = { Min = (0x32+0), Max = 0x1f4, Default = (0x32+0) },
+Value = { Min = (50+11-18), Max = 0x1f4, Default = math.floor(50.13) },
 Increment = 1,
 Callback = function(val)
-_O011ll0Ol0llO0l.JumpPower = val
-local __00l00ll1O1Ol1 = __0I10IO1l1OlOOI0()
-local _Po5Qqkz0qi=string.sub("!5%B=JJ[=2x)X=P",1,0)
-if __00l00ll1O1Ol1 then
-if __00l00ll1O1Ol1.UseJumpPower then __00l00ll1O1Ol1.JumpPower = val
-else __00l00ll1O1Ol1.JumpHeight = val / math.floor(10.86) end
+___l0l0OI0I0lO1O.JumpPower = val
+local h = __11I01O0II0l()
+if h then
+if h.UseJumpPower then h.JumpPower = val
+else h.JumpHeight = val / (10*2/3) end
 end
 end,
 })
-__O1O00O0O01001:Toggle({
+___Il1011I0:Toggle({
 Title = "秒互动",
-Default = (not _i1JPEWvc),
+Default = (not _YR2nnqIB),
 Callback = function(val)
 if val then
-_OII1IIllIlI1O.Enable()
-___IlllI00OI("玩家", ___0I1lO11llIlOO("秵亠功嶃彼吞"), 0x3)
+F.Enable()
+__l1lO00O00l0OOO("玩家", _bvmilIQKEHQz("ABAFC2D5301C"), (3*2/2))
 else
-_OII1IIllIlI1O.Disable()
-local _GE9wHs1oDi=6547
-___IlllI00OI("玩家", ___0I1lO11llIlOO("秵亠功嶃儏關"), (3+8-28))
+F.Disable()
+__l1lO00O00l0OOO("玩家", _bvmilIQKEHQz("ABAFC2D543DE"), (3*2/4))
 end
 end,
 })
-__O1O00O0O01001:Divider()
-__O1O00O0O01001:Toggle({
-Title = ___0I1lO11llIlOO("旇院跄趲"),
-Default = (not _i1JPEWvc),
+___Il1011I0:Divider()
+___Il1011I0:Toggle({
+Title = _bvmilIQKEHQz("996D99E4"),
+Default = (not _YR2nnqIB),
 Callback = function(val)
 if val then
-__0Il0Il0OlI0OOIl.InfJump = _l011I1lO.JumpRequest:Connect(function()
-local __00l00ll1O1Ol1 = __0I10IO1l1OlOOI0()
-if __00l00ll1O1Ol1 then __00l00ll1O1Ol1:ChangeState(Enum.HumanoidStateType.Jumping) end
+_lI10O0lI.InfJump = _0IllI1OlO1.JumpRequest:Connect(function()
+local h = __11I01O0II0l()
+if h then h:ChangeState(Enum.HumanoidStateType.Jumping) end
 end)
 else
-local _Po5Qqkz0qi=string.sub(""c@W|7}Va`d}C~Z",1,0)
-if __0Il0Il0OlI0OOIl.InfJump then __0Il0Il0OlI0OOIl.InfJump:Disconnect() __0Il0Il0OlI0OOIl.InfJump = nil end
+if _lI10O0lI.InfJump then _lI10O0lI.InfJump:Disconnect() _lI10O0lI.InfJump = nil end
 end
 end,
 })
-__O1O00O0O01001:Toggle({
-Title = ___0I1lO11llIlOO("穘墫Y2^Y"),
-Default = (not _i1JPEWvc),
+___Il1011I0:Toggle({
+Title = _bvmilIQKEHQz("06A44A0F7E5C6B2400434F"),
+Default = (not _YR2nnqIB),
 Callback = function(val)
-_O011ll0Ol0llO0l.NoClip = val
+___l0l0OI0I0lO1O.NoClip = val
 if val then
-__0Il0Il0OlI0OOIl.NoClip = __lOOlOIlOI.Stepped:Connect(function()
-local ___00llIIllO01O0I = __I0Il0I11O()
-if ___00llIIllO01O0I then
-for ___10IOII0l0Olll0, p in ipairs(___00llIIllO01O0I:GetDescendants()) do
-if p:IsA(___0I1lO11llIlOO("eSD,PNA")) and p.CanCollide then p.CanCollide = (not _i1JPEWvc) end
-do local _l6XKHVI0=50 end
+_lI10O0lI.NoClip = _Ill00000Il.Stepped:Connect(function()
+local c = __lIlIIIlO00OOI0()
+if c then
+for _, p in ipairs(c:GetDescendants()) do
+if p:IsA(_bvmilIQKEHQz("3B5C194260525A3C")) and p.CanCollide then p.CanCollide = (not _YR2nnqIB) end
 end
 end
 end)
 else
-if __0Il0Il0OlI0OOIl.NoClip then __0Il0Il0OlI0OOIl.NoClip:Disconnect() __0Il0Il0OlI0OOIl.NoClip = nil end
+if _lI10O0lI.NoClip then _lI10O0lI.NoClip:Disconnect() _lI10O0lI.NoClip = nil end
 end
 end,
 })
-__O1O00O0O01001:Toggle({
+___Il1011I0:Toggle({
 Title = "无敌",
-Default = (not _i1JPEWvc),
+Default = (not _YR2nnqIB),
 Callback = function(val)
-_O011ll0Ol0llO0l.GodMode = val
+___l0l0OI0I0lO1O.GodMode = val
 if val then
-___IlllI00OI("玩家", ___0I1lO11llIlOO("巕弲吘斑攰"), math.floor(3.75))
-if _GE9wHs1oDi then _Po5Qqkz0qi=90 end
-__0Il0Il0OlI0OOIl.GodMode = __lOOlOIlOI.Heartbeat:Connect(function()
-local __00l00ll1O1Ol1 = __0I10IO1l1OlOOI0()
-if __00l00ll1O1Ol1 and __00l00ll1O1Ol1.Health < __00l00ll1O1Ol1.MaxHealth then
-__00l00ll1O1Ol1.Health = __00l00ll1O1Ol1.MaxHealth
+__l1lO00O00l0OOO("玩家", _bvmilIQKEHQz("8B3D45C77C"), math.floor(3.81))
+_lI10O0lI.GodMode = _Ill00000Il.Heartbeat:Connect(function()
+local h = __11I01O0II0l()
+if h and h.Health < h.MaxHealth then
+h.Health = h.MaxHealth
 end
 end)
 else
-if __0Il0Il0OlI0OOIl.GodMode then __0Il0Il0OlI0OOIl.GodMode:Disconnect() __0Il0Il0OlI0OOIl.GodMode = nil end
-___IlllI00OI("玩家", ___0I1lO11llIlOO("巕允闚斑攰"), (3+100-60))
+if _lI10O0lI.GodMode then _lI10O0lI.GodMode:Disconnect() _lI10O0lI.GodMode = nil end
+__l1lO00O00l0OOO("玩家", _bvmilIQKEHQz("8B4E87C77C"), math.floor(3.27))
 end
 end,
 })
-__O1O00O0O01001:Toggle({
-Title = ___0I1lO11llIlOO("摳萏旗何寏"),
-Default = (not _i1JPEWvc),
-local _Po5Qqkz0qi=string.sub("S%1yl5SGR8&^E8x",1,0)
+___Il1011I0:Toggle({
+Title = _bvmilIQKEHQz("2D008A0383"),
+Default = (not _YR2nnqIB),
 Callback = function(val)
-_O011ll0Ol0llO0l.NoFallDamage = val
+___l0l0OI0I0lO1O.NoFallDamage = val
 if val then
-___IlllI00OI("玩家", ___0I1lO11llIlOO("巕弲吘搥葁旑优宆"), math.floor(3.19))
-local function ___lI00l0OIII0I1I(__00l00ll1O1Ol1)
-if not __00l00ll1O1Ol1 then return end
-local ___0IIIl01O = __00l00ll1O1Ol1.Health
-__00l00ll1O1Ol1.StateChanged:Connect(function(old, new)
-if not _O011ll0Ol0llO0l.NoFallDamage then return end
+__l1lO00O00l0OOO("玩家", _bvmilIQKEHQz("8B3D45730DD30CFB"), (3*3/2))
+local function _1II1OlOllO0O(h)
+if not h then return end
+local _10O11O0l0O0Ol = h.Health
+h.StateChanged:Connect(function(old, new)
+if not ___l0l0OI0I0lO1O.NoFallDamage then return end
 if new == Enum.HumanoidStateType.Freefall then
-___0IIIl01O = __00l00ll1O1Ol1.Health
+_10O11O0l0O0Ol = h.Health
 elseif old == Enum.HumanoidStateType.Freefall then
-if __00l00ll1O1Ol1.Health < ___0IIIl01O then
-__00l00ll1O1Ol1.Health = ___0IIIl01O
+if h.Health < _10O11O0l0O0Ol then
+h.Health = _10O11O0l0O0Ol
 end
-local _Po5Qqkz0qi=string.sub(""nS(m4KBh|%M1PA",1,0)
 end
 end)
 end
-local ___00llIIllO01O0I = __I0Il0I11O()
-if ___00llIIllO01O0I then ___lI00l0OIII0I1I(___00llIIllO01O0I:FindFirstChildOfClass(___0I1lO11llIlOO("oGZ^UQ"))) end
-__0Il0Il0OlI0OOIl.NoFallDamage = _IlO00O1I01011OI.CharacterAdded:Connect(function(__lOIOOl011O1O)
-task.wait(0.(3+75-68))
-if _O011ll0Ol0llO0l.NoFallDamage then
-___lI00l0OIII0I1I(__lOIOOl011O1O:FindFirstChildOfClass(___0I1lO11llIlOO("oGZ^UQ")) or __lOIOOl011O1O:WaitForChild(___0I1lO11llIlOO("oGZ^UQ")))
+local c = __lIlIIIlO00OOI0()
+if c then _1II1OlOllO0O(c:FindFirstChildOfClass(_bvmilIQKEHQz("314807465E5C412C"))) end
+_lI10O0lI.NoFallDamage = __I0I01OlO.CharacterAdded:Connect(function(char)
+task.wait(0.(3+5-20))
+if ___l0l0OI0I0lO1O.NoFallDamage then
+_1II1OlOllO0O(char:FindFirstChildOfClass(_bvmilIQKEHQz("314807465E5C412C")) or char:WaitForChild(_bvmilIQKEHQz("314807465E5C412C")))
 end
 end)
 else
-if __0Il0Il0OlI0OOIl.NoFallDamage then __0Il0Il0OlI0OOIl.NoFallDamage:Disconnect() __0Il0Il0OlI0OOIl.NoFallDamage = nil end
-___IlllI00OI("玩家", ___0I1lO11llIlOO("巕允闚搥葁旑优宆"), (3+15-69))
+if _lI10O0lI.NoFallDamage then _lI10O0lI.NoFallDamage:Disconnect() _lI10O0lI.NoFallDamage = nil end
+__l1lO00O00l0OOO("玩家", _bvmilIQKEHQz("8B4E87730DD30CFB"), 0x3)
 end
-if _GE9wHs1oDi then _Po5Qqkz0qi=17 end
 end,
 })
-__O1O00O0O01001:Divider()
-local ___OIl10O11OI = (not _i1JPEWvc)
-__O1O00O0O01001:Button({
-Title = ___0I1lO11llIlOO("飹衾脭杝\\gR彙减犸竪霽朝s"),
+___Il1011I0:Divider()
+local __0lIO10IO1 = (not _YR2nnqIB)
+___Il1011I0:Button({
+Title = _bvmilIQKEHQz("A771700B10651B68410A9C91FE302B60"),
 Callback = function()
-if ___OIl10O11OI then
-___IlllI00OI("飞行", ___0I1lO11llIlOO("飹衾靕朎嶎扢弼Ｙ讍畈靗末丫盛捫铴掀刄"), 0x3)
+if __0lIO10IO1 then
+__l1lO00O00l0OOO("飞行", _bvmilIQKEHQz("A7710858C26028449E1B04023FD65DE7DE0B"), 0x3)
 return
 end
-___OIl10O11OI = (not not _i1JPEWvc)
-local __II01l01l0IOIO0O = Instance.new(___0I1lO11llIlOO("tQE___10IOII0l0Olll0{@"))
-__II01l01l0IOIO0O.Name = ___0I1lO11llIlOO("a^N\'Ovi|")
-__II01l01l0IOIO0O.Parent = _IlO00O1I01011OI:WaitForChild(___0I1lO11llIlOO("w^VC{@"))
-local _GE9wHs1oDi=7143
-__II01l01l0IOIO0O.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-__II01l01l0IOIO0O.ResetOnSpawn = (not _i1JPEWvc)
-local _Ol1l0IO0O1O1 = Instance.new(___0I1lO11llIlOO("a@V"))
-_Ol1l0IO0O1O1.Parent = __II01l01l0IOIO0O
-_Ol1l0IO0O1O1.BackgroundColor3 = Color3.fromRGB((163*5/5), math.floor(255.27), (137+70-6))
-_Ol1l0IO0O1O1.BorderColor3 = Color3.fromRGB((0x67+0), 0xdd, 0xd5)
-_Ol1l0IO0O1O1.Position = UDim2.new(0.(100*4/5), 0, 0.0x17c, 0)
-_Ol1l0IO0O1O1.Size = UDim2.new(0, (190+81-6), 0, (0x39+0))
-_Ol1l0IO0O1O1.Active = (not not _i1JPEWvc)
-_Ol1l0IO0O1O1.Draggable = (not not _i1JPEWvc)
-local __1Il0010l1Il = Instance.new(___0I1lO11llIlOO("sWO>DHA"))
-__1Il0010l1Il.Name = "__1Il0010l1Il"
-__1Il0010l1Il.Parent = _Ol1l0IO0O1O1
-__1Il0010l1Il.BackgroundColor3 = Color3.fromRGB(math.floor(79.53), math.floor(255.80), (152+70-80))
-__1Il0010l1Il.Size = UDim2.new(0, (0x2c+0), 0, (0x1c+0))
-if _GE9wHs1oDi then _Po5Qqkz0qi=72 end
-__1Il0010l1Il.Font = Enum.Font.SourceSans
-__1Il0010l1Il.Text = "__1Il0010l1Il"
-__1Il0010l1Il.TextColor3 = Color3.fromRGB(0, 0, 0)
-__1Il0010l1Il.TextSize = (0xe+0)
-local __0Oll00IlO = Instance.new(___0I1lO11llIlOO("sWO>DHA"))
-__0Oll00IlO.Name = ___0I1lO11llIlOO("C]@")
-__0Oll00IlO.Parent = _Ol1l0IO0O1O1
-__0Oll00IlO.BackgroundColor3 = Color3.fromRGB(0xd7, math.floor(255.28), (121*5/4))
-__0Oll00IlO.Position = UDim2.new(0, 0, 0.(491*5/5), 0)
-__0Oll00IlO.Size = UDim2.new(0, (44+59-82), 0, (28+100-16))
-__0Oll00IlO.Font = Enum.Font.SourceSans
-__0Oll00IlO.Text = ___0I1lO11llIlOO("C]@")
-__0Oll00IlO.TextColor3 = Color3.fromRGB(0, 0, 0)
-__0Oll00IlO.TextSize = math.floor(14.58)
-local _O0OOO1l0I1O00 = Instance.new(___0I1lO11llIlOO("sWO>DHA"))
-local _Po5Qqkz0qi=string.sub("z/9tDm{5T{"WzMe",1,0)
-_O0OOO1l0I1O00.Name = ___0I1lO11llIlOO("H\\X")
-_O0OOO1l0I1O00.Parent = _Ol1l0IO0O1O1
-_O0OOO1l0I1O00.BackgroundColor3 = Color3.fromRGB((0xff+0), (249+40-70), 0x4a)
-_O0OOO1l0I1O00.Position = UDim2.new(0.math.floor(703.92), 0, 0.math.floor(491.96), 0)
-_O0OOO1l0I1O00.Size = UDim2.new(0, 0x38, 0, (28+73-22))
-_O0OOO1l0I1O00.Font = Enum.Font.SourceSans
-_O0OOO1l0I1O00.Text = "fly"
-_O0OOO1l0I1O00.TextColor3 = Color3.fromRGB(0, 0, 0)
-_O0OOO1l0I1O00.TextSize = 0xe
-local _l111Ol1I0I = Instance.new(___0I1lO11llIlOO("sWO0P^P"))
-_l111Ol1I0I.Parent = _Ol1l0IO0O1O1
-_l111Ol1I0I.BackgroundColor3 = Color3.fromRGB((242+78-86), (60*3/5), math.floor(255.29))
-_l111Ol1I0I.Position = UDim2.new(0.0x1d5, 0, 0, 0)
-_l111Ol1I0I.Size = UDim2.new(0, math.floor(100.41), 0, (28+38-85))
-_l111Ol1I0I.Font = Enum.Font.SourceSans
-local _Po5Qqkz0qi=string.sub("3K^vCPq%.C+2_2H",1,0)
-_l111Ol1I0I.Text = ___0I1lO11llIlOO("a^NQ;du,S")
-_l111Ol1I0I.TextColor3 = Color3.fromRGB(0, 0, 0)
-_l111Ol1I0I.TextScaled = (not not _i1JPEWvc)
-_l111Ol1I0I.TextWrapped = (not not _i1JPEWvc)
-local __lO1O00O1lI = Instance.new(___0I1lO11llIlOO("sWO>DHA"))
-__lO1O00O1lI.Name = ___0I1lO11llIlOO("W^B")
-__lO1O00O1lI.Parent = _Ol1l0IO0O1O1
-__lO1O00O1lI.BackgroundColor3 = Color3.fromRGB((0x85+0), math.floor(145.28), (255+30-57))
-__lO1O00O1lI.Position = UDim2.new(0.(232*4/5), 0, 0, 0)
-__lO1O00O1lI.Size = UDim2.new(0, (45*5/4), 0, (28+82-69))
-__lO1O00O1lI.Font = Enum.Font.SourceSans
-__lO1O00O1lI.Text = "+"
-__lO1O00O1lI.TextColor3 = Color3.fromRGB(0, 0, 0)
-__lO1O00O1lI.TextScaled = (not not _i1JPEWvc)
-__lO1O00O1lI.TextWrapped = (not not _i1JPEWvc)
-local _GE9wHs1oDi=6760
-local _lllO01llIOOl = Instance.new(___0I1lO11llIlOO("sWO0P^P"))
-_lllO01llIOOl.Name = ___0I1lO11llIlOO("TBR")
-_lllO01llIOOl.Parent = _Ol1l0IO0O1O1
-_lllO01llIOOl.BackgroundColor3 = Color3.fromRGB(math.floor(255.62), 0x55, 0)
-_lllO01llIOOl.Position = UDim2.new(0.(0x1d4+0), 0, 0.(491*3/4), 0)
-_lllO01llIOOl.Size = UDim2.new(0, 0x2c, 0, (28+58-16))
-_lllO01llIOOl.Font = Enum.Font.SourceSans
-_lllO01llIOOl.Text = "1"
-_lllO01llIOOl.TextColor3 = Color3.fromRGB(0, 0, 0)
-_lllO01llIOOl.TextScaled = (not not _i1JPEWvc)
-_lllO01llIOOl.TextWrapped = (not not _i1JPEWvc)
-local ___00O0OIll0I0l001 = Instance.new(___0I1lO11llIlOO("sWO>DHA"))
-___00O0OIll0I0l001.Name = ___0I1lO11llIlOO("J[Y")
-___00O0OIll0I0l001.Parent = _Ol1l0IO0O1O1
-___00O0OIll0I0l001.BackgroundColor3 = Color3.fromRGB(math.floor(123.50), (0xff+0), (247*2/4))
-do local _HUxtJJ4e=45 end
-___00O0OIll0I0l001.Position = UDim2.new(0.0xe8, 0, 0.(491+9-71), 0)
-___00O0OIll0I0l001.Size = UDim2.new(0, (45*3/2), 0, (0x1d+0))
-___00O0OIll0I0l001.Font = Enum.Font.SourceSans
-___00O0OIll0I0l001.Text = "-"
-___00O0OIll0I0l001.TextColor3 = Color3.fromRGB(0, 0, 0)
-___00O0OIll0I0l001.TextScaled = (not not _i1JPEWvc)
-___00O0OIll0I0l001.TextWrapped = (not not _i1JPEWvc)
-local __IOO1lOI0 = Instance.new(___0I1lO11llIlOO("sWO>DHA"))
-__IOO1lOI0.Name = ___0I1lO11llIlOO("d^X")
-__IOO1lOI0.Parent = _Ol1l0IO0O1O1
-__IOO1lOI0.BackgroundColor3 = Color3.fromRGB(math.floor(225.88), 0x19, 0)
-__IOO1lOI0.Font = Enum.Font.SourceSans
-__IOO1lOI0.Size = UDim2.new(0, math.floor(45.60), 0, math.floor(28.17))
-__IOO1lOI0.Text = "X"
-__IOO1lOI0.TextSize = (0x1e+0)
-local _GE9wHs1oDi=1472
-__IOO1lOI0.Position = UDim2.new(0, 0, -1, (27*5/3))
-local _lI1lO10OIOlllO = Instance.new(___0I1lO11llIlOO("sWO>DHA"))
-_lI1lO10OIOlllO.Name = ___0I1lO11llIlOO("J[YXFP")
-_lI1lO10OIOlllO.Parent = _Ol1l0IO0O1O1
-_lI1lO10OIOlllO.BackgroundColor3 = Color3.fromRGB((0xc0+0), (150*2/4), (230+7-39))
-_lI1lO10OIOlllO.Font = Enum.Font.SourceSans
-_lI1lO10OIOlllO.Size = UDim2.new(0, math.floor(45.87), 0, math.floor(28.33))
-_lI1lO10OIOlllO.Text = "T"
-_lI1lO10OIOlllO.TextSize = (0x1e+0)
-_lI1lO10OIOlllO.Position = UDim2.new(0, (44+25-49), -1, (27+70-63))
-local __II1Ol0l1I1 = Instance.new(___0I1lO11llIlOO("sWO>DHA"))
-__II1Ol0l1I1.Name = ___0I1lO11llIlOO("J[YXFPH")
-__II1Ol0l1I1.Parent = _Ol1l0IO0O1O1
-__II1Ol0l1I1.BackgroundColor3 = Color3.fromRGB((0xc0+0), (150+27-69), (230+36-13))
-__II1Ol0l1I1.Font = Enum.Font.SourceSans
-do local _9Q2rgARj=98 end
-__II1Ol0l1I1.Size = UDim2.new(0, (45*5/3), 0, 0x1c)
-__II1Ol0l1I1.Text = "T"
-__II1Ol0l1I1.TextSize = math.floor(30.77)
-__II1Ol0l1I1.Position = UDim2.new(0, math.floor(44.21), -1, (57*4/4))
-__II1Ol0l1I1.Visible = (not _i1JPEWvc)
-local _OOIO1OI1lOIOO1O = 1
-local ___10O1OOI1 = _IlO00O1I01011OI
-local __O110lO01l1 = (not _i1JPEWvc)
-local _OOO0II1lOlOOll = (not _i1JPEWvc)
-___IlllI00OI("飞行", ___0I1lO11llIlOO("a^NQ;du,S嶦劁輢"), (0x3+0))
-_O0OOO1l0I1O00.MouseButton1Down:Connect(function()
-if __O110lO01l1 == (not not _i1JPEWvc) then
-__O110lO01l1 = (not _i1JPEWvc)
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing, (not not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown, (not not _i1JPEWvc))
-if _GE9wHs1oDi then _Po5Qqkz0qi=81 end
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying, (not not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall, (not not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp, (not not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping, (not not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed, (not not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics, (not not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding, (not not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, (not not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running, (not not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics, (not not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, (not not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics, (not not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming, (not not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:ChangeState(Enum.HumanoidStateType.RunningNoPhysics)
+__0lIO10IO1 = (not not _YR2nnqIB)
+local main = Instance.new(_bvmilIQKEHQz("2A5E1842555D6F3D00"))
+main.Name = _bvmilIQKEHQz("3F51137103747D01")
+main.Parent = __I0I01OlO:WaitForChild(_bvmilIQKEHQz("29510B5E55416F3D00"))
+main.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+main.ResetOnSpawn = (not _YR2nnqIB)
+local __0I1l11ll1I0O1 = Instance.new(_bvmilIQKEHQz("26625A6E015F1979055F5734051D65"))
+__0I1l11ll1I0O1.Parent = main
+__0I1l11ll1I0O1.BackgroundColor3 = Color3.fromRGB((163*3/2), 0xff, (137*2/2))
+__0I1l11ll1I0O1.BorderColor3 = Color3.fromRGB(0x67, 0xdd, 0xd5)
+__0I1l11ll1I0O1.Position = UDim2.new(0.(100*4/3), 0, 0.(380+18-14), 0)
+__0I1l11ll1I0O1.Size = UDim2.new(0, (190+14-13), 0, math.floor(57.55))
+__0I1l11ll1I0O1.Active = (not not _YR2nnqIB)
+__0I1l11ll1I0O1.Draggable = (not not _YR2nnqIB)
+local up = Instance.new(_bvmilIQKEHQz("2D58125372465C3C065D"))
+up.Name = "up"
+up.Parent = __0I1l11ll1I0O1
+up.BackgroundColor3 = Color3.fromRGB(0x4f, (255*2/4), 0x98)
+up.Size = UDim2.new(0, math.floor(44.73), 0, math.floor(28.18))
+up.Font = Enum.Font.SourceSans
+up.Text = "up"
+up.TextColor3 = Color3.fromRGB(0, 0, 0)
+up.TextSize = math.floor(14.62)
+local down = Instance.new(_bvmilIQKEHQz("2D58125372465C3C065D"))
+down.Name = _bvmilIQKEHQz("1D521D49")
+down.Parent = __0I1l11ll1I0O1
+down.BackgroundColor3 = Color3.fromRGB((215*4/3), (255+4-19), (121*4/3))
+down.Position = UDim2.new(0, 0, 0.(491+12-13), 0)
+down.Size = UDim2.new(0, math.floor(44.87), 0, (28+4-12))
+down.Font = Enum.Font.SourceSans
+down.Text = _bvmilIQKEHQz("1D521D49")
+down.TextColor3 = Color3.fromRGB(0, 0, 0)
+down.TextSize = (14*3/3)
+local onof = Instance.new(_bvmilIQKEHQz("2D58125372465C3C065D"))
+onof.Name = _bvmilIQKEHQz("16530541")
+onof.Parent = __0I1l11ll1I0O1
+onof.BackgroundColor3 = Color3.fromRGB((255*2/2), (249*3/3), (74*3/3))
+onof.Position = UDim2.new(0.703, 0, 0.(491+6-2), 0)
+onof.Size = UDim2.new(0, math.floor(56.20), 0, 0x1c)
+onof.Font = Enum.Font.SourceSans
+onof.Text = "fly"
+onof.TextColor3 = Color3.fromRGB(0, 0, 0)
+onof.TextSize = (14+6-11)
+local __0lOlO0l0lOIl1 = Instance.new(_bvmilIQKEHQz("26625A4B7F5F677805030A327C3E65"))
+__0lOlO0l0lOIl1.Parent = __0I1l11ll1I0O1
+__0lOlO0l0lOIl1.BackgroundColor3 = Color3.fromRGB((242+14-2), 0x3c, 0xff)
+__0lOlO0l0lOIl1.Position = UDim2.new(0.(469+9-1), 0, 0, 0)
+__0lOlO0l0lOIl1.Size = UDim2.new(0, math.floor(100.76), 0, 0x1c)
+__0lOlO0l0lOIl1.Font = Enum.Font.SourceSans
+__0lOlO0l0lOIl1.Text = _bvmilIQKEHQz("3F511307776661683F00")
+__0lOlO0l0lOIl1.TextColor3 = Color3.fromRGB(0, 0, 0)
+__0lOlO0l0lOIl1.TextScaled = (not not _YR2nnqIB)
+__0lOlO0l0lOIl1.TextWrapped = (not not _YR2nnqIB)
+local plus = Instance.new(_bvmilIQKEHQz("2D58125372465C3C065D"))
+plus.Name = _bvmilIQKEHQz("09511F54")
+plus.Parent = __0I1l11ll1I0O1
+plus.BackgroundColor3 = Color3.fromRGB(0x85, math.floor(145.95), (255*2/4))
+plus.Position = UDim2.new(0.(232*4/3), 0, 0, 0)
+plus.Size = UDim2.new(0, (45*2/3), 0, (28*2/4))
+plus.Font = Enum.Font.SourceSans
+plus.Text = "+"
+plus.TextColor3 = Color3.fromRGB(0, 0, 0)
+plus.TextScaled = (not not _YR2nnqIB)
+plus.TextWrapped = (not not _YR2nnqIB)
+local ___1lIlO1O000I1O0 = Instance.new(_bvmilIQKEHQz("26625A4B7F5F677805030A327C3E65"))
+___1lIlO1O000I1O0.Name = _bvmilIQKEHQz("266235165C7A4407587C564D051B650649")
+___1lIlO1O000I1O0.Parent = __0I1l11ll1I0O1
+___1lIlO1O000I1O0.BackgroundColor3 = Color3.fromRGB(math.floor(255.50), math.floor(85.23), 0)
+___1lIlO1O000I1O0.Position = UDim2.new(0.0x1d4, 0, 0.0x1eb, 0)
+___1lIlO1O000I1O0.Size = UDim2.new(0, 0x2c, 0, math.floor(28.27))
+___1lIlO1O000I1O0.Font = Enum.Font.SourceSans
+___1lIlO1O000I1O0.Text = "1"
+___1lIlO1O000I1O0.TextColor3 = Color3.fromRGB(0, 0, 0)
+___1lIlO1O000I1O0.TextScaled = (not not _YR2nnqIB)
+___1lIlO1O000I1O0.TextWrapped = (not not _YR2nnqIB)
+local mine = Instance.new(_bvmilIQKEHQz("2D58125372465C3C065D"))
+mine.Name = _bvmilIQKEHQz("14540442")
+mine.Parent = __0I1l11ll1I0O1
+mine.BackgroundColor3 = Color3.fromRGB((123*3/2), math.floor(255.10), (247+17-2))
+mine.Position = UDim2.new(0.(232*3/2), 0, 0.(491*2/2), 0)
+mine.Size = UDim2.new(0, math.floor(45.17), 0, math.floor(29.33))
+mine.Font = Enum.Font.SourceSans
+mine.Text = "-"
+mine.TextColor3 = Color3.fromRGB(0, 0, 0)
+mine.TextScaled = (not not _YR2nnqIB)
+mine.TextWrapped = (not not _YR2nnqIB)
+local ___110O10OlO1II1II = Instance.new(_bvmilIQKEHQz("2D58125372465C3C065D"))
+___110O10OlO1II1II.Name = _bvmilIQKEHQz("3A51055455")
+___110O10OlO1II1II.Parent = __0I1l11ll1I0O1
+___110O10OlO1II1II.BackgroundColor3 = Color3.fromRGB(math.floor(225.55), math.floor(25.26), 0)
+___110O10OlO1II1II.Font = Enum.Font.SourceSans
+___110O10OlO1II1II.Size = UDim2.new(0, 0x2d, 0, math.floor(28.96))
+___110O10OlO1II1II.Text = "X"
+___110O10OlO1II1II.TextSize = (30*2/2)
+___110O10OlO1II1II.Position = UDim2.new(0, 0, -1, (27+9-3))
+local mini = Instance.new(_bvmilIQKEHQz("2D58125372465C3C065D"))
+mini.Name = _bvmilIQKEHQz("1454044E5D5A522D")
+mini.Parent = __0I1l11ll1I0O1
+mini.BackgroundColor3 = Color3.fromRGB((192+4-8), 0x96, (230*4/3))
+mini.Font = Enum.Font.SourceSans
+mini.Size = UDim2.new(0, math.floor(45.60), 0, math.floor(28.25))
+mini.Text = "T"
+mini.TextSize = (30+6-17)
+mini.Position = UDim2.new(0, (44+15-7), -1, (27+20-19))
+local __01Il1I01OIl001 = Instance.new(_bvmilIQKEHQz("2D58125372465C3C065D"))
+__01Il1I01OIl001.Name = _bvmilIQKEHQz("1454044E5D5A522D5B")
+__01Il1I01OIl001.Parent = __0I1l11ll1I0O1
+__01Il1I01OIl001.BackgroundColor3 = Color3.fromRGB((192*3/3), 0x96, (230+1-4))
+__01Il1I01OIl001.Font = Enum.Font.SourceSans
+__01Il1I01OIl001.Size = UDim2.new(0, math.floor(45.41), 0, (28*3/4))
+__01Il1I01OIl001.Text = "T"
+__01Il1I01OIl001.TextSize = 0x1e
+__01Il1I01OIl001.Position = UDim2.new(0, (44+14-12), -1, (57+3-6))
+__01Il1I01OIl001.Visible = (not _YR2nnqIB)
+local ___O00O00Ol1 = 1
+local _l1IOOI11lOI1l = __I0I01OlO
+local nowe = (not _YR2nnqIB)
+local ___1lO1IOOl = (not _YR2nnqIB)
+__l1lO00O00l0OOO("飞行", _bvmilIQKEHQz("3F511307776661683F00468F952F"), (3+11-4))
+onof.MouseButton1Down:Connect(function()
+if nowe == (not not _YR2nnqIB) then
+nowe = (not _YR2nnqIB)
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing, (not not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown, (not not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying, (not not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall, (not not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp, (not not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping, (not not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed, (not not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics, (not not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding, (not not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, (not not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running, (not not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics, (not not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, (not not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics, (not not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming, (not not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:ChangeState(Enum.HumanoidStateType.RunningNoPhysics)
 else
-if _GE9wHs1oDi then _Po5Qqkz0qi=44 end
-__O110lO01l1 = (not not _i1JPEWvc)
-for i = 1, _OOIO1OI1lOIOO1O do
+nowe = (not not _YR2nnqIB)
+for i = 1, ___O00O00Ol1 do
 task.spawn(function()
-local ___IIlO111I1 = __lOOlOIlOI.Heartbeat
-_OOO0II1lOlOOll = (not not _i1JPEWvc)
-local _1I101Ill01IO1lO = ___10O1OOI1.Character
-local __OO00I0I00Ol10l = _1I101Ill01IO1lO and _1I101Ill01IO1lO:FindFirstChildWhichIsA(___0I1lO11llIlOO("oGZ^UQ"))
-while _OOO0II1lOlOOll and ___IIlO111I1:Wait() and _1I101Ill01IO1lO and __OO00I0I00Ol10l and __OO00I0I00Ol10l.Parent do
-if __OO00I0I00Ol10l.MoveDirection.Magnitude > 0 then
-_1I101Ill01IO1lO:TranslateBy(__OO00I0I00Ol10l.MoveDirection)
+local hb = _Ill00000Il.Heartbeat
+___1lO1IOOl = (not not _YR2nnqIB)
+local chr = _l1IOOI11lOI1l.Character
+local hum = chr and chr:FindFirstChildWhichIsA(_bvmilIQKEHQz("314807465E5C412C"))
+while ___1lO1IOOl and hb:Wait() and chr and hum and hum.Parent do
+if hum.MoveDirection.Magnitude > 0 then
+chr:TranslateBy(hum.MoveDirection)
 end
 end
 end)
 end
-___10O1OOI1.Character.Animate.Disabled = (not not _i1JPEWvc)
-do local _x5RL4tet=12 end
-local __00OlOIl1 = ___10O1OOI1.Character
-local _1lO1III10O01IO = __00OlOIl1:FindFirstChildOfClass(___0I1lO11llIlOO("oGZ^UQ")) or __00OlOIl1:FindFirstChildOfClass(___0I1lO11llIlOO("f\\^EUZ#Z:U-\r6KWE"))
-for ___10IOII0l0Olll0, v in next, _1lO1III10O01IO:GetPlayingAnimationTracks() do
+_l1IOOI11lOI1l.Character.Animate.Disabled = (not not _YR2nnqIB)
+local Char = _l1IOOI11lOI1l.Character
+local Hum = Char:FindFirstChildOfClass(_bvmilIQKEHQz("314807465E5C412C")) or Char:FindFirstChildOfClass(_bvmilIQKEHQz("3853034A514741270770091341203B25155818"))
+for _, v in next, Hum:GetPlayingAnimationTracks() do
 v:AdjustSpeed(0)
 end
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing, (not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown, (not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying, (not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall, (not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp, (not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping, (not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed, (not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics, (not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding, (not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, (not _i1JPEWvc))
-do local _Nu4qMbWo=36 end
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running, (not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics, (not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, (not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics, (not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming, (not _i1JPEWvc))
-___10O1OOI1.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Swimming)
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing, (not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown, (not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying, (not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall, (not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp, (not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping, (not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed, (not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics, (not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding, (not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, (not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running, (not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics, (not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, (not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics, (not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming, (not _YR2nnqIB))
+_l1IOOI11lOI1l.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Swimming)
 end
-local _ll1l1IlI = ___10O1OOI1.Character:FindFirstChildOfClass(___0I1lO11llIlOO("oGZ^UQ")).RigType
-local ___Il11ll00IOO0000 = _ll1l1IlI == Enum.HumanoidRigType.R6
-local ___0Il111OllO01 = ___Il11ll00IOO0000 and ___10O1OOI1.Character.Torso or ___10O1OOI1.Character.UpperTorso
-local __OOO0llI111Il = (not not _i1JPEWvc)
-local __I0ll0001110I = {f = 0, ___0l1Illl1l1l = 0, l = 0, _II10I1lI01 = 0}
-local _IO0lI0OO0I0I0OO = {f = 0, ___0l1Illl1l1l = 0, l = 0, _II10I1lI01 = 0}
-local __1OlI0l11Il0l = math.floor(50.51)
-local __IO10lOl1OIO0II1 = 0
-if _GE9wHs1oDi then _Po5Qqkz0qi=54 end
-local __0OOlO11ll = Instance.new(___0I1lO11llIlOO("e]S;HNZ"), ___0Il111OllO01)
-__0OOlO11ll.P = 9e4
-__0OOlO11ll.maxTorque = Vector3.new(9e9, 9e9, 9e9)
-__0OOlO11ll.cframe = ___0Il111OllO01.CFrame
-local __1010ll01IIl1 = Instance.new(___0I1lO11llIlOO("e]S*TPZ\tA-"), ___0Il111OllO01)
-__1010ll01IIl1.velocity = Vector3.new(0, 0.1, 0)
-__1010ll01IIl1.maxForce = Vector3.new(9e9, 9e9, 9e9)
-if __O110lO01l1 == (not not _i1JPEWvc) then
-___10O1OOI1.Character.Humanoid.PlatformStand = (not not _i1JPEWvc)
+local ___I001101O0l = _l1IOOI11lOI1l.Character:FindFirstChildOfClass(_bvmilIQKEHQz("314807465E5C412C")).RigType
+local isR6 = ___I001101O0l == Enum.HumanoidRigType.R6
+local _lOIlOI1OI1Il10 = isR6 and _l1IOOI11lOI1l.Character.Torso or _l1IOOI11lOI1l.Character.UpperTorso
+local ___10OOOlll0 = (not not _YR2nnqIB)
+local ctrl = {f = 0, b = 0, l = 0, r = 0}
+local __01I0l10OOOl1O1 = {f = 0, b = 0, l = 0, r = 0}
+local __IO1IO0l0111Ol0O = (50+18-11)
+local _lll0Il1I = 0
+local bg = Instance.new(_bvmilIQKEHQz("3B520E5E774A5A27"), _lOIlOI1OI1Il10)
+bg.P = 9e4
+bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+bg.cframe = _lOIlOI1OI1Il10.CFrame
+local bv = Instance.new(_bvmilIQKEHQz("3B520E5E665644270A5A1204"), _lOIlOI1OI1Il10)
+bv.velocity = Vector3.new(0, 0.1, 0)
+bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+if nowe == (not not _YR2nnqIB) then
+_l1IOOI11lOI1l.Character.Humanoid.PlatformStand = (not not _YR2nnqIB)
 end
 task.spawn(function()
-while __O110lO01l1 == (not not _i1JPEWvc) and ___10O1OOI1.Character and ___10O1OOI1.Character:FindFirstChildOfClass(___0I1lO11llIlOO("oGZ^UQ")) and ___10O1OOI1.Character:FindFirstChildOfClass(___0I1lO11llIlOO("oGZ^UQ")).Health > 0 do
-__lOOlOIlOI.RenderStepped:Wait()
-if __I0ll0001110I.l + __I0ll0001110I._II10I1lI01 ~= 0 or __I0ll0001110I.f + __I0ll0001110I.___0l1Illl1l1l ~= 0 then
-__IO10lOl1OIO0II1 = __IO10lOl1OIO0II1 + 0.(5*2/2) + (__IO10lOl1OIO0II1 / __1OlI0l11Il0l)
-local _Po5Qqkz0qi=string.sub("bv0JTfaCr2z1D7L",1,0)
-if __IO10lOl1OIO0II1 > __1OlI0l11Il0l then __IO10lOl1OIO0II1 = __1OlI0l11Il0l end
-elseif not (__I0ll0001110I.l + __I0ll0001110I._II10I1lI01 ~= 0 or __I0ll0001110I.f + __I0ll0001110I.___0l1Illl1l1l ~= 0) and __IO10lOl1OIO0II1 ~= 0 then
-__IO10lOl1OIO0II1 = __IO10lOl1OIO0II1 - 1
-if __IO10lOl1OIO0II1 < 0 then __IO10lOl1OIO0II1 = 0 end
+while nowe == (not not _YR2nnqIB) and _l1IOOI11lOI1l.Character and _l1IOOI11lOI1l.Character:FindFirstChildOfClass(_bvmilIQKEHQz("314807465E5C412C")) and _l1IOOI11lOI1l.Character:FindFirstChildOfClass(_bvmilIQKEHQz("314807465E5C412C")).Health > 0 do
+_Ill00000Il.RenderStepped:Wait()
+if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
+_lll0Il1I = _lll0Il1I + 0.(5*4/2) + (_lll0Il1I / __IO1IO0l0111Ol0O)
+if _lll0Il1I > __IO1IO0l0111Ol0O then _lll0Il1I = __IO1IO0l0111Ol0O end
+elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and _lll0Il1I ~= 0 then
+_lll0Il1I = _lll0Il1I - 1
+if _lll0Il1I < 0 then _lll0Il1I = 0 end
 end
-if (__I0ll0001110I.l + __I0ll0001110I._II10I1lI01) ~= 0 or (__I0ll0001110I.f + __I0ll0001110I.___0l1Illl1l1l) ~= 0 then
-__1010ll01IIl1.velocity = ((_11ll0Ol0l.CurrentCamera.CoordinateFrame.lookVector * (__I0ll0001110I.f + __I0ll0001110I.___0l1Illl1l1l)) + ((_11ll0Ol0l.CurrentCamera.CoordinateFrame * CFrame.new(__I0ll0001110I.l + __I0ll0001110I._II10I1lI01, (__I0ll0001110I.f + __I0ll0001110I.___0l1Illl1l1l) * 0.(2*2/3), 0).p) - _11ll0Ol0l.CurrentCamera.CoordinateFrame.p)) * __IO10lOl1OIO0II1
-_IO0lI0OO0I0I0OO = {f = __I0ll0001110I.f, ___0l1Illl1l1l = __I0ll0001110I.___0l1Illl1l1l, l = __I0ll0001110I.l, _II10I1lI01 = __I0ll0001110I._II10I1lI01}
-elseif (__I0ll0001110I.l + __I0ll0001110I._II10I1lI01) == 0 and (__I0ll0001110I.f + __I0ll0001110I.___0l1Illl1l1l) == 0 and __IO10lOl1OIO0II1 ~= 0 then
-__1010ll01IIl1.velocity = ((_11ll0Ol0l.CurrentCamera.CoordinateFrame.lookVector * (_IO0lI0OO0I0I0OO.f + _IO0lI0OO0I0I0OO.___0l1Illl1l1l)) + ((_11ll0Ol0l.CurrentCamera.CoordinateFrame * CFrame.new(_IO0lI0OO0I0I0OO.l + _IO0lI0OO0I0I0OO._II10I1lI01, (_IO0lI0OO0I0I0OO.f + _IO0lI0OO0I0I0OO.___0l1Illl1l1l) * 0.(2*5/5), 0).p) - _11ll0Ol0l.CurrentCamera.CoordinateFrame.p)) * __IO10lOl1OIO0II1
+if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
+bv.velocity = ((_I11lllOIl1Ol.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f + ctrl.b)) + ((_I11lllOIl1Ol.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l + ctrl.r, (ctrl.f + ctrl.b) * 0.math.floor(2.49), 0).p) - _I11lllOIl1Ol.CurrentCamera.CoordinateFrame.p)) * _lll0Il1I
+__01I0l10OOOl1O1 = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
+elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and _lll0Il1I ~= 0 then
+bv.velocity = ((_I11lllOIl1Ol.CurrentCamera.CoordinateFrame.lookVector * (__01I0l10OOOl1O1.f + __01I0l10OOOl1O1.b)) + ((_I11lllOIl1Ol.CurrentCamera.CoordinateFrame * CFrame.new(__01I0l10OOOl1O1.l + __01I0l10OOOl1O1.r, (__01I0l10OOOl1O1.f + __01I0l10OOOl1O1.b) * 0.math.floor(2.86), 0).p) - _I11lllOIl1Ol.CurrentCamera.CoordinateFrame.p)) * _lll0Il1I
 else
-__1010ll01IIl1.velocity = Vector3.new(0, 0, 0)
+bv.velocity = Vector3.new(0, 0, 0)
 end
-__0OOlO11ll.cframe = _11ll0Ol0l.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((__I0ll0001110I.f + __I0ll0001110I.___0l1Illl1l1l) * 0x32 * __IO10lOl1OIO0II1 / __1OlI0l11Il0l), 0, 0)
+bg.cframe = _I11lllOIl1Ol.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f + ctrl.b) * (50+8-20) * _lll0Il1I / __IO1IO0l0111Ol0O), 0, 0)
 end
-local _GE9wHs1oDi=3161
-__I0ll0001110I = {f = 0, ___0l1Illl1l1l = 0, l = 0, _II10I1lI01 = 0}
-_IO0lI0OO0I0I0OO = {f = 0, ___0l1Illl1l1l = 0, l = 0, _II10I1lI01 = 0}
-__IO10lOl1OIO0II1 = 0
-if __0OOlO11ll then __0OOlO11ll:Destroy() end
-if __1010ll01IIl1 then __1010ll01IIl1:Destroy() end
-if ___10O1OOI1.Character and ___10O1OOI1.Character:FindFirstChildOfClass(___0I1lO11llIlOO("oGZ^UQ")) then
-___10O1OOI1.Character.Humanoid.PlatformStand = (not _i1JPEWvc)
+ctrl = {f = 0, b = 0, l = 0, r = 0}
+__01I0l10OOOl1O1 = {f = 0, b = 0, l = 0, r = 0}
+_lll0Il1I = 0
+if bg then bg:Destroy() end
+if bv then bv:Destroy() end
+if _l1IOOI11lOI1l.Character and _l1IOOI11lOI1l.Character:FindFirstChildOfClass(_bvmilIQKEHQz("314807465E5C412C")) then
+_l1IOOI11lOI1l.Character.Humanoid.PlatformStand = (not _YR2nnqIB)
 end
-if ___10O1OOI1.Character and ___10O1OOI1.Character:FindFirstChild(___0I1lO11llIlOO("f\\^EY")) then
-___10O1OOI1.Character.Animate.Disabled = (not _i1JPEWvc)
+if _l1IOOI11lOI1l.Character and _l1IOOI11lOI1l.Character:FindFirstChild(_bvmilIQKEHQz("3853034A51474D")) then
+_l1IOOI11lOI1l.Character.Animate.Disabled = (not _YR2nnqIB)
 end
-_OOO0II1lOlOOll = (not _i1JPEWvc)
+___1lO1IOOl = (not _YR2nnqIB)
 end)
 end)
-local __I0I010O11I
-local _Po5Qqkz0qi=string.sub("]aq8ASGhk%5M->x",1,0)
-__1Il0010l1Il.MouseButton1Down:Connect(function()
-__I0I010O11I = __1Il0010l1Il.MouseEnter:Connect(function()
-while __I0I010O11I do
+local tis
+up.MouseButton1Down:Connect(function()
+tis = up.MouseEnter:Connect(function()
+while tis do
 task.wait()
-if ___10O1OOI1.Character and ___10O1OOI1.Character:FindFirstChild(___0I1lO11llIlOO("oGZ^UQ(Z q>.")) then
-___10O1OOI1.Character.HumanoidRootPart.CFrame = ___10O1OOI1.Character.HumanoidRootPart.CFrame * CFrame.new(0, 1, 0)
+if _l1IOOI11lOI1l.Character and _l1IOOI11lOI1l.Character:FindFirstChild(_bvmilIQKEHQz("314807465E5C412C3B5C09096533263D")) then
+_l1IOOI11lOI1l.Character.HumanoidRootPart.CFrame = _l1IOOI11lOI1l.Character.HumanoidRootPart.CFrame * CFrame.new(0, 1, 0)
 end
 end
 end)
 end)
-__1Il0010l1Il.MouseLeave:Connect(function()
-if __I0I010O11I then __I0I010O11I:Disconnect() __I0I010O11I = nil end
+up.MouseLeave:Connect(function()
+if tis then tis:Disconnect() tis = nil end
 end)
-local ___1llI0lIl
-__0Oll00IlO.MouseButton1Down:Connect(function()
-local _Po5Qqkz0qi=string.sub("z<@@2XSQ?h]-'?N",1,0)
-___1llI0lIl = __0Oll00IlO.MouseEnter:Connect(function()
-while ___1llI0lIl do
+local dis
+down.MouseButton1Down:Connect(function()
+dis = down.MouseEnter:Connect(function()
+while dis do
 task.wait()
-if ___10O1OOI1.Character and ___10O1OOI1.Character:FindFirstChild(___0I1lO11llIlOO("oGZ^UQ(Z q>.")) then
-___10O1OOI1.Character.HumanoidRootPart.CFrame = ___10O1OOI1.Character.HumanoidRootPart.CFrame * CFrame.new(0, -1, 0)
+if _l1IOOI11lOI1l.Character and _l1IOOI11lOI1l.Character:FindFirstChild(_bvmilIQKEHQz("314807465E5C412C3B5C09096533263D")) then
+_l1IOOI11lOI1l.Character.HumanoidRootPart.CFrame = _l1IOOI11lOI1l.Character.HumanoidRootPart.CFrame * CFrame.new(0, -1, 0)
 end
 end
 end)
 end)
-__0Oll00IlO.MouseLeave:Connect(function()
-if ___1llI0lIl then ___1llI0lIl:Disconnect() ___1llI0lIl = nil end
+down.MouseLeave:Connect(function()
+if dis then dis:Disconnect() dis = nil end
 end)
-__lO1O00O1lI.MouseButton1Down:Connect(function()
-_OOIO1OI1lOIOO1O = _OOIO1OI1lOIOO1O + 1
-_lllO01llIOOl.Text = _OOIO1OI1lOIOO1O
-if _GE9wHs1oDi then _Po5Qqkz0qi=34 end
-if __O110lO01l1 == (not not _i1JPEWvc) then
-_OOO0II1lOlOOll = (not _i1JPEWvc)
-for i = 1, _OOIO1OI1lOIOO1O do
+plus.MouseButton1Down:Connect(function()
+___O00O00Ol1 = ___O00O00Ol1 + 1
+___1lIlO1O000I1O0.Text = ___O00O00Ol1
+if nowe == (not not _YR2nnqIB) then
+___1lO1IOOl = (not _YR2nnqIB)
+for i = 1, ___O00O00Ol1 do
 task.spawn(function()
-local ___IIlO111I1 = __lOOlOIlOI.Heartbeat
-_OOO0II1lOlOOll = (not not _i1JPEWvc)
-local _1I101Ill01IO1lO = ___10O1OOI1.Character
-local __OO00I0I00Ol10l = _1I101Ill01IO1lO and _1I101Ill01IO1lO:FindFirstChildWhichIsA(___0I1lO11llIlOO("oGZ^UQ"))
-while _OOO0II1lOlOOll and ___IIlO111I1:Wait() and _1I101Ill01IO1lO and __OO00I0I00Ol10l and __OO00I0I00Ol10l.Parent do
-if __OO00I0I00Ol10l.MoveDirection.Magnitude > 0 then
-_1I101Ill01IO1lO:TranslateBy(__OO00I0I00Ol10l.MoveDirection)
+local hb = _Ill00000Il.Heartbeat
+___1lO1IOOl = (not not _YR2nnqIB)
+local chr = _l1IOOI11lOI1l.Character
+local hum = chr and chr:FindFirstChildWhichIsA(_bvmilIQKEHQz("314807465E5C412C"))
+while ___1lO1IOOl and hb:Wait() and chr and hum and hum.Parent do
+if hum.MoveDirection.Magnitude > 0 then
+chr:TranslateBy(hum.MoveDirection)
 end
 end
 end)
 end
-if _GE9wHs1oDi then _Po5Qqkz0qi=64 end
 end
 end)
-___00O0OIll0I0l001.MouseButton1Down:Connect(function()
-if _OOIO1OI1lOIOO1O == 1 then
-_lllO01llIOOl.Text = 'flyno1'
+mine.MouseButton1Down:Connect(function()
+if ___O00O00Ol1 == 1 then
+___1lIlO1O000I1O0.Text = 'flyno1'
 task.wait(1)
-_lllO01llIOOl.Text = _OOIO1OI1lOIOO1O
+___1lIlO1O000I1O0.Text = ___O00O00Ol1
 else
-_OOIO1OI1lOIOO1O = _OOIO1OI1lOIOO1O - 1
-_lllO01llIOOl.Text = _OOIO1OI1lOIOO1O
-if __O110lO01l1 == (not not _i1JPEWvc) then
-_OOO0II1lOlOOll = (not _i1JPEWvc)
-for i = 1, _OOIO1OI1lOIOO1O do
+___O00O00Ol1 = ___O00O00Ol1 - 1
+___1lIlO1O000I1O0.Text = ___O00O00Ol1
+if nowe == (not not _YR2nnqIB) then
+___1lO1IOOl = (not _YR2nnqIB)
+for i = 1, ___O00O00Ol1 do
 task.spawn(function()
-local ___IIlO111I1 = __lOOlOIlOI.Heartbeat
-if _GE9wHs1oDi then _Po5Qqkz0qi=97 end
-_OOO0II1lOlOOll = (not not _i1JPEWvc)
-local _1I101Ill01IO1lO = ___10O1OOI1.Character
-local __OO00I0I00Ol10l = _1I101Ill01IO1lO and _1I101Ill01IO1lO:FindFirstChildWhichIsA(___0I1lO11llIlOO("oGZ^UQ"))
-while _OOO0II1lOlOOll and ___IIlO111I1:Wait() and _1I101Ill01IO1lO and __OO00I0I00Ol10l and __OO00I0I00Ol10l.Parent do
-if __OO00I0I00Ol10l.MoveDirection.Magnitude > 0 then
-_1I101Ill01IO1lO:TranslateBy(__OO00I0I00Ol10l.MoveDirection)
+local hb = _Ill00000Il.Heartbeat
+___1lO1IOOl = (not not _YR2nnqIB)
+local chr = _l1IOOI11lOI1l.Character
+local hum = chr and chr:FindFirstChildWhichIsA(_bvmilIQKEHQz("314807465E5C412C"))
+while ___1lO1IOOl and hb:Wait() and chr and hum and hum.Parent do
+if hum.MoveDirection.Magnitude > 0 then
+chr:TranslateBy(hum.MoveDirection)
 end
 end
 end)
@@ -1230,300 +1144,281 @@ end
 end
 end
 end)
-__IOO1lOI0.MouseButton1Click:Connect(function()
-__O110lO01l1 = (not _i1JPEWvc)
-if _GE9wHs1oDi then _Po5Qqkz0qi=1 end
-_OOO0II1lOlOOll = (not _i1JPEWvc)
-__II01l01l0IOIO0O:Destroy()
-___OIl10O11OI = (not _i1JPEWvc)
+___110O10OlO1II1II.MouseButton1Click:Connect(function()
+nowe = (not _YR2nnqIB)
+___1lO1IOOl = (not _YR2nnqIB)
+main:Destroy()
+__0lIO10IO1 = (not _YR2nnqIB)
 end)
-_lI1lO10OIOlllO.MouseButton1Click:Connect(function()
-__1Il0010l1Il.Visible = (not _i1JPEWvc)
-__0Oll00IlO.Visible = (not _i1JPEWvc)
-_O0OOO1l0I1O00.Visible = (not _i1JPEWvc)
-__lO1O00O1lI.Visible = (not _i1JPEWvc)
-_lllO01llIOOl.Visible = (not _i1JPEWvc)
-___00O0OIll0I0l001.Visible = (not _i1JPEWvc)
-_lI1lO10OIOlllO.Visible = (not _i1JPEWvc)
-__II1Ol0l1I1.Visible = (not not _i1JPEWvc)
-_Ol1l0IO0O1O1.BackgroundTransparency = 1
-__IOO1lOI0.Position = UDim2.new(0, 0, -1, (0x39+0))
-if _GE9wHs1oDi then _Po5Qqkz0qi=24 end
+mini.MouseButton1Click:Connect(function()
+up.Visible = (not _YR2nnqIB)
+down.Visible = (not _YR2nnqIB)
+onof.Visible = (not _YR2nnqIB)
+plus.Visible = (not _YR2nnqIB)
+___1lIlO1O000I1O0.Visible = (not _YR2nnqIB)
+mine.Visible = (not _YR2nnqIB)
+mini.Visible = (not _YR2nnqIB)
+__01Il1I01OIl001.Visible = (not not _YR2nnqIB)
+__0I1l11ll1I0O1.BackgroundTransparency = 1
+___110O10OlO1II1II.Position = UDim2.new(0, 0, -1, 0x39)
 end)
-__II1Ol0l1I1.MouseButton1Click:Connect(function()
-__1Il0010l1Il.Visible = (not not _i1JPEWvc)
-__0Oll00IlO.Visible = (not not _i1JPEWvc)
-_O0OOO1l0I1O00.Visible = (not not _i1JPEWvc)
-__lO1O00O1lI.Visible = (not not _i1JPEWvc)
-_lllO01llIOOl.Visible = (not not _i1JPEWvc)
-___00O0OIll0I0l001.Visible = (not not _i1JPEWvc)
-_lI1lO10OIOlllO.Visible = (not not _i1JPEWvc)
-__II1Ol0l1I1.Visible = (not _i1JPEWvc)
-_Ol1l0IO0O1O1.BackgroundTransparency = 0
-__IOO1lOI0.Position = UDim2.new(0, 0, -1, math.floor(27.93))
+__01Il1I01OIl001.MouseButton1Click:Connect(function()
+up.Visible = (not not _YR2nnqIB)
+down.Visible = (not not _YR2nnqIB)
+onof.Visible = (not not _YR2nnqIB)
+plus.Visible = (not not _YR2nnqIB)
+___1lIlO1O000I1O0.Visible = (not not _YR2nnqIB)
+mine.Visible = (not not _YR2nnqIB)
+mini.Visible = (not not _YR2nnqIB)
+__01Il1I01OIl001.Visible = (not _YR2nnqIB)
+__0I1l11ll1I0O1.BackgroundTransparency = 0
+___110O10OlO1II1II.Position = UDim2.new(0, 0, -1, (27+9-13))
 end)
-___10O1OOI1.CharacterAdded:Connect(function(__lOIOOl011O1O)
-task.wait(0.math.floor(7.82))
-local _Po5Qqkz0qi=string.sub("(SA5bcO^I6@=Yt8",1,0)
-if __lOIOOl011O1O:FindFirstChildOfClass(___0I1lO11llIlOO("oGZ^UQ")) then
-__lOIOOl011O1O.Humanoid.PlatformStand = (not _i1JPEWvc)
+_l1IOOI11lOI1l.CharacterAdded:Connect(function(char)
+task.wait(0.(7*4/4))
+if char:FindFirstChildOfClass(_bvmilIQKEHQz("314807465E5C412C")) then
+char.Humanoid.PlatformStand = (not _YR2nnqIB)
 end
-if __lOIOOl011O1O:FindFirstChild(___0I1lO11llIlOO("f\\^EY")) then
-__lOIOOl011O1O.Animate.Disabled = (not _i1JPEWvc)
+if char:FindFirstChild(_bvmilIQKEHQz("3853034A51474D")) then
+char.Animate.Disabled = (not _YR2nnqIB)
 end
 end)
 end,
 })
-local _lO1l1I1lO = __llOIIIIl0O1OI11:Tab({
+local ___1I1l1O00O1O = __10lI0lllll:Tab({
 Title = "视觉",
 Icon = "eye",
 })
-_lO1l1I1lO:Section({ Title = "ESP_ZJ4PBO4Dpsr7("___00llIIllO01O0IEdt\tR:L:.")Left", TextSize = 0x11 })
-local function __01IO1Oll1Ill1(player)
-local _GE9wHs1oDi=652
-if player == _IlO00O1I01011OI then return end
-if _I11I0IOll0[player] then return end
-local __lllI1I1O = Instance.new(___0I1lO11llIlOO("e[[^]G\'@="))
-__lllI1I1O.Name = ___0I1lO11llIlOO("bag.") .. player.Name
-__lllI1I1O.Size = UDim2.new(0, math.floor(200.28), 0, (50+78-53))
-__lllI1I1O.AlwaysOnTop = (not not _i1JPEWvc)
-__lllI1I1O.MaxDistance = (0x1388+0)
-local ___01Ol0l11l = Instance.new(___0I1lO11llIlOO("sWO0P^P"))
-___01Ol0l11l.Size = UDim2.new(1, 0, 0, (20*4/3))
-___01Ol0l11l.BackgroundTransparency = 1
-___01Ol0l11l.Text = player.Name
-___01Ol0l11l.TextColor3 = Color3.fromRGB((255*3/3), (50+14-93), (0x32+0))
-___01Ol0l11l.TextSize = (14+23-85)
-___01Ol0l11l.Font = Enum.Font.GothamBold
-___01Ol0l11l.Parent = __lllI1I1O
-if _GE9wHs1oDi then _Po5Qqkz0qi=46 end
-local ___OIO010l0O0l0l0 = Instance.new(___0I1lO11llIlOO("sWO0P^P"))
-___OIO010l0O0l0l0.Size = UDim2.new(1, 0, 0, math.floor(15.43))
-___OIO010l0O0l0l0.Position = UDim2.new(0, 0, 0, math.floor(25.24))
-___OIO010l0O0l0l0.BackgroundTransparency = 1
-___OIO010l0O0l0l0.Text = ""
-___OIO010l0O0l0l0.TextColor3 = Color3.fromRGB(0xff, 0xff, (0xff+0))
-___OIO010l0O0l0l0.TextSize = math.floor(12.49)
-___OIO010l0O0l0l0.Font = Enum.Font.Gotham
-___OIO010l0O0l0l0.Parent = __lllI1I1O
-_I11I0IOll0[player] = { __lllI1I1O = __lllI1I1O, ___01Ol0l11l = ___01Ol0l11l, ___OIO010l0O0l0l0 = ___OIO010l0O0l0l0 }
-local function ___1llI1Ol1I0l()
-local __lOIOOl011O1O = player.Character
-if not __lOIOOl011O1O then return end
-local ___OO10I110OIO = __lOIOOl011O1O:FindFirstChild(___0I1lO11llIlOO("oWV"))
-if ___OO10I110OIO then
-local _GE9wHs1oDi=7636
-__lllI1I1O.Adornee = ___OO10I110OIO
-__lllI1I1O.Parent = ___OO10I110OIO
+___1I1l1O00O1O:Section({ Title = "ESP_bvmilIQKEHQz("551D3E4248477009055A011358373A3D59004A")Left", TextSize = (17+15-20) })
+local function _O0101OII1OO1(player)
+if player == __I0I01OlO then return end
+if _0lI1l1I01OO[player] then return end
+local ___O00l0lIl11O11l = Instance.new(_bvmilIQKEHQz("3B54064B525C493A0D741314"))
+___O00l0lIl11O11l.Name = _bvmilIQKEHQz("3C6E3A78") .. player.Name
+___O00l0lIl11O11l.Size = UDim2.new(0, math.floor(200.76), 0, (50*2/3))
+___O00l0lIl11O11l.AlwaysOnTop = (not not _YR2nnqIB)
+___O00l0lIl11O11l.MaxDistance = 5000
+local _O10I1lIlII0 = Instance.new(_bvmilIQKEHQz("26625A4B7F5F677805030A327C3E65"))
+_O10I1lIlII0.Size = UDim2.new(1, 0, 0, (20*4/3))
+_O10I1lIlII0.BackgroundTransparency = 1
+_O10I1lIlII0.Text = player.Name
+_O10I1lIlII0.TextColor3 = Color3.fromRGB(0xff, (50*2/3), (50*2/3))
+_O10I1lIlII0.TextSize = (14+14-16)
+_O10I1lIlII0.Font = Enum.Font.GothamBold
+_O10I1lIlII0.Parent = ___O00l0lIl11O11l
+local __0000IOO1 = Instance.new(_bvmilIQKEHQz("26625A4B7F5F677805030A327C3E65"))
+__0000IOO1.Size = UDim2.new(1, 0, 0, math.floor(15.97))
+__0000IOO1.Position = UDim2.new(0, 0, 0, math.floor(25.41))
+__0000IOO1.BackgroundTransparency = 1
+__0000IOO1.Text = ""
+__0000IOO1.TextColor3 = Color3.fromRGB(0xff, (255+18-20), 0xff)
+__0000IOO1.TextSize = 0xc
+__0000IOO1.Font = Enum.Font.Gotham
+__0000IOO1.Parent = ___O00l0lIl11O11l
+_0lI1l1I01OO[player] = { ___O00l0lIl11O11l = ___O00l0lIl11O11l, _O10I1lIlII0 = _O10I1lIlII0, __0000IOO1 = __0000IOO1 }
+local function __l0lIIO1Il00lll0()
+local char = player.Character
+if not char then return end
+local head = char:FindFirstChild(_bvmilIQKEHQz("31580B43"))
+if head then
+___O00l0lIl11O11l.Adornee = head
+___O00l0lIl11O11l.Parent = head
 end
 end
-player.CharacterAdded:Connect(___1llI1Ol1I0l)
-if player.Character then ___1llI1Ol1I0l() end
+player.CharacterAdded:Connect(__l0lIIO1Il00lll0)
+if player.Character then __l0lIIO1Il00lll0() end
 end
-local function ___OI000l101lIl(player)
-if _I11I0IOll0[player] then
-if _I11I0IOll0[player].__lllI1I1O then
-_I11I0IOll0[player].__lllI1I1O:Destroy()
+local function __1OOO0OII1OO1(player)
+if _0lI1l1I01OO[player] then
+if _0lI1l1I01OO[player].___O00l0lIl11O11l then
+_0lI1l1I01OO[player].___O00l0lIl11O11l:Destroy()
 end
-_I11I0IOll0[player] = nil
+_0lI1l1I01OO[player] = nil
 end
 end
-do local _0UWKPXku=39 end
-_lO1l1I1lO:Toggle({
-Title = ___0I1lO11llIlOO("玎宄(0x4+0)/a呷嬷趉禚v"),
-Default = (not _i1JPEWvc),
+___1I1l1O00O1O:Toggle({
+Title = _bvmilIQKEHQz("D08B4A626363086064644DA08E7B"),
+Default = (not _YR2nnqIB),
 Callback = function(val)
-_O011ll0Ol0llO0l.ESPEnabled = val
+___l0l0OI0I0lO1O.ESPEnabled = val
 if val then
-___IlllI00OI("视觉", ___0I1lO11llIlOO("bagQ嶎弱吓"), math.floor(3.27))
-for ___10IOII0l0Olll0, __1OOl1l1O in ipairs(_OlO0llIIO:GetPlayers()) do
-__01IO1Oll1Ill1(__1OOl1l1O)
+__l1lO00O00l0OOO("视觉", _bvmilIQKEHQz("3C6E3A07C23307"), math.floor(3.90))
+for _, plr in ipairs(__l001O01l0:GetPlayers()) do
+_O0101OII1OO1(plr)
 end
-__0Il0Il0OlI0OOIl.ESPUpdate = __lOOlOIlOI.Heartbeat:Connect(function()
-local __ll1Il100 = ___IO00O0IIIOI0()
-for __1OOl1l1O, data in pairs(_I11I0IOll0) do
-if __1OOl1l1O.Character and __1OOl1l1O.Character:FindFirstChild(___0I1lO11llIlOO("oGZ^UQ(Z q>.")) and __ll1Il100 then
-local _01OI0010000Il = (__1OOl1l1O.Character.HumanoidRootPart.Position - __ll1Il100.Position).Magnitude
-do local _bBIFPw31=35 end
-data.___OIO010l0O0l0l0.Text = math.floor(_01OI0010000Il) .. ___0I1lO11llIlOO("ACB")
+_lI10O0lI.ESPUpdate = _Ill00000Il.Heartbeat:Connect(function()
+local root = __0011000l0IlI()
+for plr, data in pairs(_0lI1l1I01OO) do
+if plr.Character and plr.Character:FindFirstChild(_bvmilIQKEHQz("314807465E5C412C3B5C09096533263D")) and root then
+local dist = (plr.Character.HumanoidRootPart.Position - root.Position).Magnitude
+data.__0000IOO1.Text = math.floor(dist) .. _bvmilIQKEHQz("594E1E525440")
 end
 end
 end)
-__0Il0Il0OlI0OOIl.PlayerAdded = _OlO0llIIO.PlayerAdded:Connect(function(__1OOl1l1O) __01IO1Oll1Ill1(__1OOl1l1O) end)
-__0Il0Il0OlI0OOIl.PlayerRemoving = _OlO0llIIO.PlayerRemoving:Connect(function(__1OOl1l1O) ___OI000l101lIl(__1OOl1l1O) end)
+_lI10O0lI.PlayerAdded = __l001O01l0.PlayerAdded:Connect(function(plr) _O0101OII1OO1(plr) end)
+_lI10O0lI.PlayerRemoving = __l001O01l0.PlayerRemoving:Connect(function(plr) __1OOO0OII1OO1(plr) end)
 else
-if __0Il0Il0OlI0OOIl.ESPUpdate then __0Il0Il0OlI0OOIl.ESPUpdate:Disconnect() __0Il0Il0OlI0OOIl.ESPUpdate = nil end
-if __0Il0Il0OlI0OOIl.PlayerAdded then __0Il0Il0OlI0OOIl.PlayerAdded:Disconnect() __0Il0Il0OlI0OOIl.PlayerAdded = nil end
-if __0Il0Il0OlI0OOIl.PlayerRemoving then __0Il0Il0OlI0OOIl.PlayerRemoving:Disconnect() __0Il0Il0OlI0OOIl.PlayerRemoving = nil end
-for __1OOl1l1O, ___10IOII0l0Olll0 in pairs(_I11I0IOll0) do
-___OI000l101lIl(__1OOl1l1O)
+if _lI10O0lI.ESPUpdate then _lI10O0lI.ESPUpdate:Disconnect() _lI10O0lI.ESPUpdate = nil end
+if _lI10O0lI.PlayerAdded then _lI10O0lI.PlayerAdded:Disconnect() _lI10O0lI.PlayerAdded = nil end
+if _lI10O0lI.PlayerRemoving then _lI10O0lI.PlayerRemoving:Disconnect() _lI10O0lI.PlayerRemoving = nil end
+for plr, _ in pairs(_0lI1l1I01OO) do
+__1OOO0OII1OO1(plr)
 end
-_I11I0IOll0 = {}
-___IlllI00OI("视觉", ___0I1lO11llIlOO("bagQ嶎兂闑"), (3+91-60))
-do local _7arizJvq=59 end
+_0lI1l1I01OO = {}
+__l1lO00O00l0OOO("视觉", _bvmilIQKEHQz("3C6E3A07C240C5"), math.floor(3.14))
 end
 end,
 })
-_lO1l1I1lO:Divider()
-_lO1l1I1lO:Toggle({
-Title = ___0I1lO11llIlOO("兏亜Y:DPY8\\3I+K"),
-Default = (not _i1JPEWvc),
+___1I1l1O00O1O:Divider()
+___1I1l1O00O1O:Toggle({
+Title = _bvmilIQKEHQz("11934A0F764644242B410F1A5D267D"),
+Default = (not _YR2nnqIB),
 Callback = function(val)
 if val then
-_lllIIO11llOl0l1.GlobalShadows = (not _i1JPEWvc)
-_lllIIO11llOl0l1.Brightness = 0x2
-_lllIIO11llOl0l1.ClockTime = (12+65-10)
-_lllIIO11llOl0l1.FogEnd = 1e9
-___IlllI00OI("视觉", ___0I1lO11llIlOO("兏亜巅影呓"), (3+100-69))
+__0I01IIOlI010.GlobalShadows = (not _YR2nnqIB)
+__0I01IIOlI010.Brightness = math.floor(2.15)
+__0I01IIOlI010.ClockTime = (12*2/4)
+__0I01IIOlI010.FogEnd = 1e9
+__l1lO00O00l0OOO("视觉", _bvmilIQKEHQz("119398271F"), 0x3)
 else
-local _Po5Qqkz0qi=string.sub("YFsvB@LoRqr\~Kq",1,0)
-_lllIIO11llOl0l1.GlobalShadows = (not not _i1JPEWvc)
-_lllIIO11llOl0l1.Brightness = 1
-_lllIIO11llOl0l1.ClockTime = (0xe+0)
-_lllIIO11llOl0l1.FogEnd = 100000
-___IlllI00OI("视觉", ___0I1lO11llIlOO("兏亜巅儂閑"), (3+28-41))
+__0I01IIOlI010.GlobalShadows = (not not _YR2nnqIB)
+__0I01IIOlI010.Brightness = 1
+__0I01IIOlI010.ClockTime = 0xe
+__0I01IIOlI010.FogEnd = 100000
+__l1lO00O00l0OOO("视觉", _bvmilIQKEHQz("11939854DD"), (3+5-11))
 end
 end,
 })
-_lO1l1I1lO:Button({
-Title = ___0I1lO11llIlOO("abdQ佤匧"),
+___1I1l1O00O1O:Button({
+Title = _bvmilIQKEHQz("3F6D39072825"),
 Callback = function()
-for ___10IOII0l0Olll0, v in ipairs(_11ll0Ol0l:GetDescendants()) do
-if v:IsA(___0I1lO11llIlOO("eSD,PNA")) then
+for _, v in ipairs(_I11lllOIl1Ol:GetDescendants()) do
+if v:IsA(_bvmilIQKEHQz("3B5C194260525A3C")) then
 v.Material = Enum.Material.Plastic
 v.Reflectance = 0
-if _GE9wHs1oDi then _Po5Qqkz0qi=26 end
-elseif v:IsA(___0I1lO11llIlOO("cWT")) or v:IsA(___0I1lO11llIlOO("sWO\tCY")) then
+elseif v:IsA(_bvmilIQKEHQz("3D5809465C")) or v:IsA(_bvmilIQKEHQz("2D58125345414D")) then
 v.Transparency = 1
-elseif v:IsA(___0I1lO11llIlOO("wSERPP?\_II10I1lI01\\ U:")) or v:IsA(___0I1lO11llIlOO("s@V")) then
-v.Enabled = (not _i1JPEWvc)
+elseif v:IsA(_bvmilIQKEHQz("295C18535950442D2C5E0F09413726")) or v:IsA(_bvmilIQKEHQz("2D4F0B4E5C")) then
+v.Enabled = (not _YR2nnqIB)
 end
 end
-_lllIIO11llOl0l1.GlobalShadows = (not _i1JPEWvc)
-_lllIIO11llOl0l1.FogEnd = 1e9
+__0I01IIOlI010.GlobalShadows = (not _YR2nnqIB)
+__0I01IIOlI010.FogEnd = 1e9
 pcall(function() settings().Rendering.QualityLevel = Enum.QualityLevel.Level01 end)
-___IlllI00OI("视觉", ___0I1lO11llIlOO("abdQ嶎伩匪"), (3+26-84))
+__l1lO00O00l0OOO("视觉", _bvmilIQKEHQz("3F6D3907C22B3E"), math.floor(3.70))
 end,
 })
-local __1IIOO1lI00 = __llOIIIIl0O1OI11:Tab({
+local _1IlOOIOO00110 = __10lI0lllll:Tab({
 Title = "传送",
-Icon = ___0I1lO11llIlOO("JSG\\XR"),
-local _GE9wHs1oDi=3904
+Icon = _bvmilIQKEHQz("145C1A0A405A46"),
 })
-__1IIOO1lI00:Section({ Title = ___0I1lO11llIlOO("玎宄众遰"), TextXAlignment = ___0I1lO11llIlOO("kWQ"), TextSize = (0x11+0) })
-local _111ll11IO0OI = nil
-local function _IlOOII0OIlIOI()
-local _10OllllI0lOIIlO = {}
-for ___10IOII0l0Olll0, __1OOl1l1O in ipairs(_OlO0llIIO:GetPlayers()) do
-if __1OOl1l1O ~= _IlO00O1I01011OI then
-table.insert(_10OllllI0lOIIlO, __1OOl1l1O.Name)
+_1IlOOIOO00110:Section({ Title = _bvmilIQKEHQz("D08B4A26"), TextXAlignment = _bvmilIQKEHQz("35580C53"), TextSize = math.floor(17.82) })
+local __1Ol11O1Ol00 = nil
+local function ___lO0I0I01O1O()
+local __I00l1lI1 = {}
+for _, plr in ipairs(__l001O01l0:GetPlayers()) do
+if plr ~= __I0I01OlO then
+table.insert(__I00l1lI1, plr.Name)
 end
 end
-return _10OllllI0lOIIlO
+return __I00l1lI1
 end
-__1IIOO1lI00:Dropdown({
-Title = ___0I1lO11llIlOO("逮招盙桶"),
-Values = _IlOOII0OIlIOI(),
-local _GE9wHs1oDi=9215
-Callback = function(val) _111ll11IO0OI = val end,
+_1IlOOIOO00110:Dropdown({
+Title = _bvmilIQKEHQz("70D48420"),
+Values = ___lO0I0I01O1O(),
+Callback = function(val) __1Ol11O1Ol00 = val end,
 })
-__1IIOO1lI00:Button({
-Title = ___0I1lO11llIlOO("伇逳切珘寊"),
+_1IlOOIOO00110:Button({
+Title = _bvmilIQKEHQz("593C5A8E86"),
 Callback = function()
-if _111ll11IO0OI then
-local ___lO110l1OIO0 = _OlO0llIIO:FindFirstChild(_111ll11IO0OI)
-if ___lO110l1OIO0 and ___lO110l1OIO0.Character then
-local __1IOI1llO1IlI = ___lO110l1OIO0.Character:FindFirstChild(___0I1lO11llIlOO("oGZ^UQ(Z q>."))
-local _00OOI0lO01 = ___IO00O0IIIOI0()
-if __1IOI1llO1IlI and _00OOI0lO01 then
-_00OOI0lO01.CFrame = __1IOI1llO1IlI.CFrame * CFrame.new(0, 0, 0x5)
-___IlllI00OI("传送", ___0I1lO11llIlOO("巕伒逶剁\\") .. _111ll11IO0OI, (0x3+0))
+if __1Ol11O1Ol00 then
+local _00II0O0O = __l001O01l0:FindFirstChild(__1Ol11O1Ol00)
+if _00II0O0O and _00II0O0O.Character then
+local ___0l1Ol01I1lI = _00II0O0O.Character:FindFirstChild(_bvmilIQKEHQz("314807465E5C412C3B5C09096533263D"))
+local _I11O00l0lOO = __0011000l0IlI()
+if ___0l1Ol01I1lI and _I11O00l0lOO then
+_I11O00l0lOO.CFrame = ___0l1Ol01I1lI.CFrame * CFrame.new(0, 0, 0x5)
+__l1lO00O00l0OOO("传送", _bvmilIQKEHQz("8B1D6B1710") .. __1Ol11O1Ol00, math.floor(3.34))
 end
 else
-local _GE9wHs1oDi=8218
-___IlllI00OI("传送", ___0I1lO11llIlOO("盉栵为嬩坔"), (3*2/2))
+__l1lO00O00l0OOO("传送", _bvmilIQKEHQz("973A677F18"), 0x3)
 end
 else
-___IlllI00OI("传送", ___0I1lO11llIlOO("诐兺逾折皒栶"), (3+8-60))
+__l1lO00O00l0OOO("传送", _bvmilIQKEHQz("8E7563CEDE34"), math.floor(3.58))
 end
 end,
 })
-__1IIOO1lI00:Button({
-Title = ___0I1lO11llIlOO("刐斂玞寇剫衙"),
+_1IlOOIOO00110:Button({
+Title = _bvmilIQKEHQz("4E8DC391275B"),
 Callback = function()
-___IlllI00OI("传送", ___0I1lO11llIlOO("诐釿文戢彼为拵桳"), 0x3)
+__l1lO00O00l0OOO("传送", _bvmilIQKEHQz("8EF0DA743038E10E"), (3*3/3))
 end,
 })
-__1IIOO1lI00:Divider()
-local ___llIlO1l1010lIll, tpY, tpZ = 0, 0, 0
-do local _wVZ8RUmD=33 end
-__1IIOO1lI00:Input({
-Title = ___0I1lO11llIlOO("坧桶"),
-Placeholder = ___0I1lO11llIlOO("辴兗)"),
-Callback = function(val) ___llIlO1l1010lIll = tonumber(val) or 0 end,
+_1IlOOIOO00110:Divider()
+local tpX, tpY, tpZ = 0, 0, 0
+_1IlOOIOO00110:Input({
+Title = _bvmilIQKEHQz("211D3A20"),
+Placeholder = _bvmilIQKEHQz("EA584A7F"),
+Callback = function(val) tpX = tonumber(val) or 0 end,
 })
-__1IIOO1lI00:Input({
-Title = ___0I1lO11llIlOO("~坧桶"),
-Placeholder = ___0I1lO11llIlOO("辴兗("),
+_1IlOOIOO00110:Input({
+Title = _bvmilIQKEHQz("201D3A20"),
+Placeholder = _bvmilIQKEHQz("EA584A7E"),
 Callback = function(val) tpY = tonumber(val) or 0 end,
 })
-__1IIOO1lI00:Input({
-Title = ___0I1lO11llIlOO("}坧桶"),
-Placeholder = ___0I1lO11llIlOO("辴兗+"),
+_1IlOOIOO00110:Input({
+Title = _bvmilIQKEHQz("231D3A20"),
+Placeholder = _bvmilIQKEHQz("EA584A7D"),
 Callback = function(val) tpZ = tonumber(val) or 0 end,
 })
-if _GE9wHs1oDi then _Po5Qqkz0qi=6 end
-__1IIOO1lI00:Button({
-Title = ___0I1lO11llIlOO("伇逳切圡桻"),
+_1IlOOIOO00110:Button({
+Title = _bvmilIQKEHQz("593C5A7737"),
 Callback = function()
-local __ll1Il100 = ___IO00O0IIIOI0()
-if __ll1Il100 then
-__ll1Il100.CFrame = CFrame.new(___llIlO1l1010lIll, tpY, tpZ)
-___IlllI00OI("传送", ___0I1lO11llIlOO("巕伒逶剁\\") .. ___llIlO1l1010lIll .. ", ___0I1lO11llIlOO("QAeTN"), " .. tpZ, (3*4/4))
+local root = __0011000l0IlI()
+if root then
+root.CFrame = CFrame.new(tpX, tpY, tpZ)
+__l1lO00O00l0OOO("传送", _bvmilIQKEHQz("8B1D6B1710") .. tpX .. ", _bvmilIQKEHQz("5913440744437168471D46"), " .. tpZ, (3+18-10))
 end
 end,
 })
-local ___0IOIllOl = __llOIIIIl0O1OI11:Tab({
+local _OllO00lIIO11 = __10lI0lllll:Tab({
 Title = "设置",
-Icon = ___0I1lO11llIlOO("TWC___10IOII0l0Olll0[_OII1IIllIlI1O"),
+Icon = _bvmilIQKEHQz("0A581E53595D4F3B"),
 })
-___0IOIllOl:Dropdown({
-local _GE9wHs1oDi=6220
+_OllO00lIIO11:Dropdown({
 Title = "主题",
-Values = { ___0I1lO11llIlOO("cSE"), ___0I1lO11llIlOO("__IIO0OI11l1[P"), ___0I1lO11llIlOO("w[Y"), ___0I1lO11llIlOO("q[XE"), ___0I1lO11llIlOO("hQR") },
+Values = { _bvmilIQKEHQz("3D5C184C"), _bvmilIQKEHQz("35540D4F44"), _bvmilIQKEHQz("2954044C"), _bvmilIQKEHQz("2F54054B5547"), _bvmilIQKEHQz("365E0F465E") },
 Callback = function(val)
-pcall(function() _Ol1OIO1OI:SetTheme(val) end)
+pcall(function() ___1OOl01I1:SetTheme(val) end)
 end,
 })
-___0IOIllOl:Divider()
-___0IOIllOl:Button({
-Title = ___0I1lO11llIlOO("锧毳脭杝"),
+_OllO00lIIO11:Divider()
+_OllO00lIIO11:Button({
+Title = _bvmilIQKEHQz("79FC700B"),
 Callback = function()
-for ___II100O0O0OI, conn in pairs(__0Il0Il0OlI0OOIl) do
+for name, conn in pairs(_lI10O0lI) do
 if conn then pcall(function() conn:Disconnect() end) end
 end
-__0Il0Il0OlI0OOIl = {}
-for __1OOl1l1O, ___10IOII0l0Olll0 in pairs(_I11I0IOll0) do
-local _Po5Qqkz0qi=string.sub("Ie7`nV*!<>d:B#Y",1,0)
-___OI000l101lIl(__1OOl1l1O)
+_lI10O0lI = {}
+for plr, _ in pairs(_0lI1l1I01OO) do
+__1OOO0OII1OO1(plr)
 end
-_I11I0IOll0 = {}
-local __l10lO00lI = _IlO00O1I01011OI:FindFirstChild(___0I1lO11llIlOO("w^VC{@")) and _IlO00O1I01011OI.PlayerGui:FindFirstChild(___0I1lO11llIlOO("a^N\'Ovi|"))
-if __l10lO00lI then __l10lO00lI:Destroy() end
-___OIl10O11OI = (not _i1JPEWvc)
-local __00l00ll1O1Ol1 = __0I10IO1l1OlOOI0()
-if __00l00ll1O1Ol1 then
-__00l00ll1O1Ol1.WalkSpeed = 0x10
-__00l00ll1O1Ol1.JumpPower = (50+17-39)
-__00l00ll1O1Ol1.PlatformStand = (not _i1JPEWvc)
+_0lI1l1I01OO = {}
+local __l1OI0llOlOlI1 = __I0I01OlO:FindFirstChild(_bvmilIQKEHQz("29510B5E55416F3D00")) and __I0I01OlO.PlayerGui:FindFirstChild(_bvmilIQKEHQz("3F51137103747D01"))
+if __l1OI0llOlOlI1 then __l1OI0llOlOlI1:Destroy() end
+__0lIO10IO1 = (not _YR2nnqIB)
+local h = __11I01O0II0l()
+if h then
+h.WalkSpeed = (16+13-16)
+h.JumpPower = (50*3/2)
+h.PlatformStand = (not _YR2nnqIB)
 end
-_11ll0Ol0l.Gravity = (0xc4+0).(2+64-76)
-__I01l10l1l1l0.FieldOfView = math.floor(70.98)
-local __10l001Il0 = game:GetService(___0I1lO11llIlOO("d]E;DU")):FindFirstChild(___0I1lO11llIlOO("p[Y)x"))
-do local _MY9Yvyow=9 end
-if __10l001Il0 then __10l001Il0:Destroy() end
+_I11lllOIl1Ol.Gravity = (196*2/2).(2*4/3)
+__lO10II0IIIO0.FieldOfView = (70*2/3)
+local ui = game:GetService(_bvmilIQKEHQz("3A521842774641")):FindFirstChild(_bvmilIQKEHQz("266235167F7C4478587A57"))
+if ui then ui:Destroy() end
 end,
 })
-___IlllI00OI(___0I1lO11llIlOO("欅迼佈留"), ___0I1lO11llIlOO("房亻夐仙腦朝巎劕輇"), (5*3/3))
+__l1lO00O00l0OOO(_bvmilIQKEHQz("5BF3150F"), _bvmilIQKEHQz("61B44D8F2A1FDAE814"), 0x5)
 task.wait(1)
-___IlllI00OI(___0I1lO11llIlOO("房亻夐仙"), ___0I1lO11llIlOO("QA\\劑轁容扪"), math.floor(3.12))
+__l1lO00O00l0OOO(_bvmilIQKEHQz("61B44D8F"), _bvmilIQKEHQz("0F0C4417109355C479"), (3+14-10))
